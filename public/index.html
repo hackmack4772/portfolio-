@@ -119,7 +119,7 @@
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div class="wrapper">
   <div class="content">
-    <div id="root"></div>
+    <div id="root" class="root"></div>
 
   </div>
   <div class="image-container">
@@ -152,7 +152,7 @@ window.addEventListener("load", () => {
       ease: "power1.inOut"
     })
     .to(
-      ".#root",
+      ".root",
       {
         scale: 1.1,
         transformOrigin: "center center",
