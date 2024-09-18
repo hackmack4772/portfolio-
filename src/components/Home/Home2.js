@@ -25,7 +25,7 @@ function Home2() {
               <br />
               <br />I'm proficient in core languages like
               <i>
-                <b className="purple"> C++, JavaScript, and Go.</b>
+                <b className="purple"> C++, JavaScript, and PhP.</b>
               </i>
               <br />
               <br />
@@ -34,7 +34,7 @@ function Home2() {
                 <b className="purple">Web Technologies and Products</b>
               </i>
               , as well as exploring areas related to{" "}
-              <b className="purple">Blockchain.</b>
+              <b className="purple">A.</b>
               <br />
               <br />
               I am also passionate about developing with <b className="purple">Node.js</b> and
