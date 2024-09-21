@@ -20,7 +20,7 @@ const educationData = [
         year: "2019 - 2022",
         icon: faUserGraduate,
         score: "CGPA: 9.08",
-        image: "https://images.collegedunia.com/public/college_data/images/campusimage/165245050801.00_05_46_42.Still008.jpg",
+        image: "https://image.slidesharecdn.com/rimtuniversityppt-190826071935/85/Introduction-to-RIMT-University-1-320.jpg",
     },
     {
         id: 3,
