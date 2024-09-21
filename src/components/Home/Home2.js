@@ -19,35 +19,34 @@ function Home2() {
               LET ME <span className="purple">INTRODUCE </span> MYSELF
             </h1>
             <p className="home-about-body">
-              Hello! I'm <span className="purple"> Aamir Saleem Lone</span>,
-              a passionate developer with a love for programming. I have gained
-              valuable experience and learned a lot along the way… 🤷‍♂️
-              <br />
-              <br />I'm proficient in core languages like
+              Hi there! I'm <span className="purple">Aamir Saleem Lone</span>,
+              a passionate and driven developer hailing from the picturesque
+              region of Jammu and Kashmir, India. With a keen interest in
+              crafting innovative solutions, I specialize in&nbsp;
               <i>
-                <b className="purple"> C++, JavaScript, and PhP.</b>
+                <b className="purple"> MERN Stack and Laravel development.</b>
               </i>
               <br />
               <br />
-              My interests lie in crafting innovative &nbsp;
+              My journey in tech has equipped me with strong skills in core languages like
               <i>
-                <b className="purple">Web Technologies and Products</b>
+                <b className="purple"> JavaScript, C++, and PHP.</b>
               </i>
-              , as well as exploring areas related to{" "}
-              <b className="purple">A.</b>
               <br />
               <br />
-              I am also passionate about developing with <b className="purple">Node.js</b> and
+              I thrive on building dynamic and responsive web applications that deliver seamless user experiences. 
+              My enthusiasm for&nbsp;
               <i>
-                <b className="purple">
-                  {" "}
-                  Modern JavaScript Libraries and Frameworks
-                </b>
+                <b className="purple"> modern web technologies</b>
               </i>
-              &nbsp; such as
+              &nbsp; drives me to continuously explore and master frameworks like&nbsp;
               <i>
-                <b className="purple"> React.js and Next.js</b>
+                <b className="purple"> React.js and Next.js.</b>
               </i>
+              <br />
+              <br />
+              Beyond coding, I enjoy immersing myself in music, indulging in captivating movies, and hitting the volleyball court. 
+              Let's connect and collaborate on exciting projects!
             </p>
           </Col>
           <Col md={4} className="myAvtar">
@@ -60,7 +59,7 @@ function Home2() {
           <Col md={12} className="home-about-social">
             <h1>FIND ME ON</h1>
             <p>
-              Feel free to <span className="purple">connect</span> with me
+              I’d love to <span className="purple">connect</span> with you!
             </p>
             <ul className="home-about-social-links">
               <li className="social-icons">

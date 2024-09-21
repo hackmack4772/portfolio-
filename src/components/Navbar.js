@@ -15,6 +15,7 @@ import {
 } from "react-icons/ai";
 
 import { CgFileDocument } from "react-icons/cg";
+import { FaGraduationCap } from "react-icons/fa";
 
 function NavBar() {
   const [expand, updateExpanded] = useState(false);
@@ -57,6 +58,17 @@ function NavBar() {
             <Nav.Item>
               <Nav.Link as={Link} to="/" onClick={() => updateExpanded(false)}>
                 <AiOutlineHome style={{ marginBottom: "2px" }} /> Home
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+
+              
+              <Nav.Link
+                as={Link}
+                to="/education"
+                onClick={() => updateExpanded(false)}
+              >
+                <FaGraduationCap style={{ marginBottom: "2px" }} />  Education
               </Nav.Link>
             </Nav.Item>
 

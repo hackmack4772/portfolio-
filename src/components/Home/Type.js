@@ -3,19 +3,23 @@ import Typewriter from "typewriter-effect";
 
 function Type() {
   return (
-    <Typewriter
-      options={{
-        strings: [
-          "Software Developer",
-          "Freelancer",
-          "MERN Stack Developer",
-          "Open Source Contributor",
-        ],
-        autoStart: true,
-        loop: true,
-        deleteSpeed: 50,
-      }}
-    />
+    <div className="typewriter-container">
+      <Typewriter
+        options={{
+          strings: [
+            "Crafting Digital Experiences",
+            "MERN Stack Magician",
+            "Laravel Luminary",
+            "Open Source Advocate",
+            "Building Tomorrow's Solutions",
+          ],
+          autoStart: true,
+          loop: true,
+          deleteSpeed: 50,
+        }}
+      />
+      <span className="cursor">|</span>
+    </div>
   );
 }
 
