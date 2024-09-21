@@ -74,7 +74,7 @@ function Education() {
             </div>
             <div className="info row justify-content-end">
               <div className="col-12 col-sm-6 col-lg-7 px-0">
-                <h1>{edu.title}</h1>
+                <h1  className="title">{edu.title}</h1>
                 <h3>{edu.institution}</h3>
                 <h5>{edu.year}</h5>
                 <h5>{edu.score}</h5>
