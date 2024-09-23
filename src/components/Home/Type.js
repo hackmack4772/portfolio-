@@ -18,7 +18,7 @@ function Type() {
           deleteSpeed: 50,
         }}
       />
-      <span className="cursor">|</span>
+      {/* <span className="cursor">|</span> */}
     </div>
   );
 }

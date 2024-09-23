@@ -18,7 +18,7 @@ const educationData = [
         year: "2019 - 2022",
         icon: <svg width={50}  aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-graduate" class="svg-inline--fa fa-user-graduate " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M219.3 .5c3.1-.6 6.3-.6 9.4 0l200 40C439.9 42.7 448 52.6 448 64s-8.1 21.3-19.3 23.5L352 102.9l0 57.1c0 70.7-57.3 128-128 128s-128-57.3-128-128l0-57.1L48 93.3l0 65.1 15.7 78.4c.9 4.7-.3 9.6-3.3 13.3s-7.6 5.9-12.4 5.9l-32 0c-4.8 0-9.3-2.1-12.4-5.9s-4.3-8.6-3.3-13.3L16 158.4l0-71.8C6.5 83.3 0 74.3 0 64C0 52.6 8.1 42.7 19.3 40.5l200-40zM111.9 327.7c10.5-3.4 21.8 .4 29.4 8.5l71 75.5c6.3 6.7 17 6.7 23.3 0l71-75.5c7.6-8.1 18.9-11.9 29.4-8.5C401 348.6 448 409.4 448 481.3c0 17-13.8 30.7-30.7 30.7L30.7 512C13.8 512 0 498.2 0 481.3c0-71.9 47-132.7 111.9-153.6z"></path></svg>,
         score: "CGPA: 9.08",
-        image: "https://image.slidesharecdn.com/rimtuniversityppt-190826071935/85/Introduction-to-RIMT-University-1-320.jpg",
+        image: "https://content.jdmagicbox.com/comp/fatehgarh-sahib/l6/9999pxxxx.xxxx.100611182107.d1l6/catalogue/rimt-institute-of-engineering-and-technology-mandigobindgarh-fatehgarh-sahib-engineering-colleges-zqg3t7o.jpg",
     },
     {
         id: 3,
@@ -36,7 +36,7 @@ const educationData = [
         year: "2015 - 2016",
         icon: <svg width={50}  aria-hidden="true" focusable="false" data-prefix="fas" data-icon="school" class="svg-inline--fa fa-school " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M337.8 5.4C327-1.8 313-1.8 302.2 5.4L166.3 96 48 96C21.5 96 0 117.5 0 144L0 464c0 26.5 21.5 48 48 48l208 0 0-96c0-35.3 28.7-64 64-64s64 28.7 64 64l0 96 208 0c26.5 0 48-21.5 48-48l0-320c0-26.5-21.5-48-48-48L473.7 96 337.8 5.4zM96 192l32 0c8.8 0 16 7.2 16 16l0 64c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-64c0-8.8 7.2-16 16-16zm400 16c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 64c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-64zM96 320l32 0c8.8 0 16 7.2 16 16l0 64c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-64c0-8.8 7.2-16 16-16zm400 16c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 64c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-64zM232 176a88 88 0 1 1 176 0 88 88 0 1 1 -176 0zm88-48c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-16 0 0-16c0-8.8-7.2-16-16-16z"></path></svg>,
         score: "Percentage: 86.6%",
-        image: "https://asianlite.uk/wp-content/uploads/2022/02/FKCFVQTaUAAPD55-1024x767.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKzyc1JASdv-3qUBIaCthlSpXbTCELIilwIA&s",
     },
     {
         id: 5,
@@ -75,7 +75,7 @@ function Education() {
                                 <h3>{edu.institution}</h3>
                                 <h5>{edu.year}</h5>
                                 <h5>{edu.score}</h5>
-                                <img src={edu.image} alt={`${edu.title} Image`} style={{ width: '100%', borderRadius: '10px' }} />
+                                {/* <img src={edu.image} alt={`${edu.title} Image`} style={{ width: '100%', borderRadius: '10px' }} /> */}
                             </div>
                         </div>
                     </div>

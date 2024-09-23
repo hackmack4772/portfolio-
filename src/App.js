@@ -17,6 +17,7 @@ import "./style.css";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Education from "./components/Education/Eduction";
+import Cursor from "./components/Cursor";
 
 function App() {
   const [load, upadateLoad] = useState(true);
@@ -30,6 +31,9 @@ function App() {
   }, []);
 
   return (
+    <div className="App">
+
+    <Cursor/>
     <Router>
       <Preloader load={load} />
       <div className="App" id={load ? "no-scroll" : "scroll"}>
@@ -46,6 +50,8 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </div>
+
   );
 }
 
