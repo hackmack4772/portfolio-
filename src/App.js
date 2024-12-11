@@ -25,7 +25,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       upadateLoad(false);
-    }, 1200);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -36,7 +36,7 @@ function App() {
     <Cursor/>
     <Router>
       <Preloader load={load} />
-      <div className="App" id={load ? "no-scroll" : "scroll"}>
+     { !load  && <div className="App" id={load ? "no-scroll" : "scroll"}>
         <Navbar />
         <ScrollToTop />
         <Routes>
@@ -48,7 +48,7 @@ function App() {
           <Route path="*" element={<Navigate to="/"/>} />
         </Routes>
         <Footer />
-      </div>
+      </div>}
     </Router>
     </div>
 
