@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 function Pre(props) {
   useEffect(() => {
-    const colors = ["#ff2323", "#ff0056", "#ff008d", "#e200c8", "#942cff"];
+    const colors = ["#35a3a6", "#35a3a6", "#35a3a6", "#35a3a6", "#35a3a6"];
     const max = 10;
     const deg = 360 / max;
 

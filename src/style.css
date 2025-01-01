@@ -759,5 +759,14 @@ button:focus {
 .fork-btn-inner::after {
   display: none !important; /* Prevents any pseudo-element content from showing */
 }
-
+.navbar .navbar-brand {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.navbar-brand span {
+  color: #35a3a6;
+  font-weight: 900;
+  text-transform: capitalize;
+}
 
