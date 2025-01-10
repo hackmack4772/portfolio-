@@ -33,7 +33,6 @@ function Home() {
 
             <Col md={5} style={{ paddingBottom: 20 }}>
             
-            <ContactForm/>
               {/* <img
                 src={homeLogo}
                 alt="home pic"
@@ -44,7 +43,11 @@ function Home() {
           </Row>
         </Container>
       </Container>
+
       <Home2 />
+      <Container fluid className="contact_us">
+        <ContactForm />
+      </Container>
     </section>
   );
 }
