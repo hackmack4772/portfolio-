@@ -54,7 +54,7 @@ function Home() {
       <Container fluid className="contact_us">
         <ContactForm />
         <Row>
-          <Col md={10} className="home-about-social">
+          <Col md={11} className="home-about-social">
             <h1>FIND ME ON</h1>
             <p>
               I’d love to <span className="purple">connect</span> with you!
