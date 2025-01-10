@@ -5,13 +5,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(to right, #121212, #202020);
-  cursor: none;
-
-    /* background-image: var(--image-gradient), url(./Assets/home2.jpeg);
-  background-position: top center;
-  background-repeat: no-repeat;
-  background-size: contain; */
-
 }
 
 
@@ -25,10 +18,7 @@ body {
 }
 
 
-html *,
-body * {
-  cursor: none;
-}
+
 
 #app {
   text-align: center;
