@@ -11,8 +11,19 @@ import {
   AiFillInstagram,
 } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
+import Lottie from "react-lottie";
+import animationData from "./l.json";
+
 
 function Home() {
+  const animationOptions1 = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  };
   return (
     <section>
       <Container fluid className="home-section" id="home">
@@ -39,6 +50,9 @@ function Home() {
 
             <Col md={5} style={{ paddingBottom: 20 }}>
             
+            <Lottie options={animationOptions1} className="img-fluid"
+ />
+
               {/* <img
                 src={homeLogo}
                 alt="home pic"

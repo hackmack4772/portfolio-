@@ -16,7 +16,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import "./style.css";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Education from "./components/Education/Eduction";
+import Education from "./components/Education/Education";
 import Cursor from "./components/Cursor";
 
 function App() {

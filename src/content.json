@@ -1,0 +1,158 @@
+{
+  "home": {
+    "greeting": "Hi There!",
+    "intro": "I'M",
+    "name": "Aamir Saleem Lone",
+    "logo": "../../Assets/home-main.svg"
+  },
+  "home2": {
+    "title": "LET ME INTRODUCE MYSELF",
+    "description": "Hi there! I'm Aamir Saleem Lone, a passionate and driven developer hailing from the picturesque region of Jammu and Kashmir, India. With a keen interest in crafting innovative solutions, I specialize in MERN Stack and Laravel development.",
+    "skills": "My journey in tech has equipped me with strong skills in core languages like JavaScript, C++, and PHP.",
+    "enthusiasm": "I thrive on building dynamic and responsive web applications that deliver seamless user experiences. My enthusiasm for modern web technologies drives me to continuously explore and master frameworks like React.js and Next.js.",
+    "hobbies": "Beyond coding, I enjoy immersing myself in music, indulging in captivating movies, and hitting the volleyball court. Let's connect and collaborate on exciting projects!",
+    "avatar": "../../Assets/avatar.jpeg"
+  },
+  "about": {
+    "title": "Know Who I'M",
+    "professionalSkillset": "Professional Skillset",
+    "tools": "Tools I use"
+  },
+  "socialLinks": {
+    "title": "FIND ME ON",
+    "description": "I’d love to connect with you!",
+    "highlight": "connect",
+    "links": [
+      {
+        "icon": "github",
+        "url": "https://github.com/hackmack4772"
+      },
+      {
+        "icon": "twitter",
+        "url": "https://twitter.com/CRew4772"
+      },
+      {
+        "icon": "linkedin",
+        "url": "https://www.linkedin.com/in/aamir-saleem-lone/"
+      },
+      {
+        "icon": "instagram",
+        "url": "https://www.instagram.com/aamir-saleem-lone"
+      }
+    ]
+  },
+  "typewriterStrings": [
+    "MERN Stack Innovator",
+    "Laravel and Lumen Craftsman",
+    "Architect of Scalable Solutions",
+    "MySQL and MongoDB Maestro",
+    "Building Future-Ready Applications",
+    "Mastering Node.js and Express",
+    "React Native Visionary",
+    "Empowering AI-Powered Interfaces"
+  ],
+  "footer": {
+    "designedBy": "Designed and Developed by Aamir Saleem Lone",
+    "copyright": "Copyright © Hackmack",
+    "socialLinks": [
+      {
+        "icon": "github",
+        "url": "https://github.com/hackmack4772"
+      },
+      {
+        "icon": "twitter",
+        "url": "https://twitter.com/CRew4772"
+      },
+      {
+        "icon": "linkedin",
+        "url": "https://www.linkedin.com/in/aamir-saleem-lone/"
+      },
+      {
+        "icon": "instagram",
+        "url": "https://www.instagram.com/aamir-saleem-lone"
+      }
+    ]
+  },
+  "navbar": {
+    "brand": "Hackmack",
+    "links": [
+      {
+        "name": "Home",
+        "icon": "home",
+        "path": "/"
+      },
+      {
+        "name": "Education",
+        "icon": "graduationCap",
+        "path": "/education"
+      },
+      {
+        "name": "About",
+        "icon": "user",
+        "path": "/about"
+      },
+      {
+        "name": "Resume",
+        "icon": "fileDocument",
+        "path": "/resume"
+      }
+    ],
+    "githubLink": "https://github.com/hackmack4772/Hackmack"
+  },
+  "education": [
+    {
+      "id": 1,
+      "title": "Master of Computer Application (MCA)",
+      "institution": "Swami Vivekanand Institute of Engineering & Technology, Rajpura, Punjab",
+      "year": "2023 - 2025",
+      "icon": "userGraduate",
+      "score": "Expected Completion: July 2025",
+      "image": "https://images.collegedunia.com/public/college_data/images/campusimage/165245050801.00_05_46_42.Still008.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Bachelors of Computer Application (BCA)",
+      "institution": "RIMT University, Mandi Gobindgarh, Punjab",
+      "year": "2019 - 2022",
+      "icon": "userGraduate",
+      "score": "CGPA: 9.08",
+      "image": "https://content.jdmagicbox.com/comp/fatehgarh-sahib/l6/9999pxxxx.xxxx.100611182107.d1l6/catalogue/rimt-institute-of-engineering-and-technology-mandigobindgarh-fatehgarh-sahib-engineering-colleges-zqg3t7o.jpg"
+    },
+    {
+      "id": 3,
+      "title": "12th Standard",
+      "institution": "Government Higher Secondary School, Handwara",
+      "year": "2017 - 2018",
+      "icon": "book",
+      "score": "Percentage: 80.4%",
+      "image": "https://content3.jdmagicbox.com/comp/kupwara/u6/9999p1955.1955.221122221134.x3u6/catalogue/govt-boys-higher-secondary-handwara-kupwara-secondary-schools-9d1de1o7ya.jpg"
+    },
+    {
+      "id": 4,
+      "title": "10th Standard",
+      "institution": "Government High School, Sanzipora",
+      "year": "2015 - 2016",
+      "icon": "school",
+      "score": "Percentage: 86.6%",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKzyc1JASdv-3qUBIaCthlSpXbTCELIilwIA&s"
+    },
+    {
+      "id": 5,
+      "title": "1st to 8th Standard",
+      "institution": "Army Goodwill School, Naugam",
+      "year": "2008 - 2015",
+      "icon": "school",
+      "image": "https://asianlite.uk/wp-content/uploads/2022/02/FKCFVQTaUAAPD55-1024x767.jpg"
+    }
+  ],
+  "tools": [
+    "SiVisualstudiocode",
+    "SiPostman",
+    "SiSlack",
+    "SiVercel",
+    "SiGit",
+    "SiGithub",
+    "SiExpo",
+    "SiFigma"
+  ]
+}
