@@ -13,7 +13,7 @@ import {
 import { FaLinkedinIn } from "react-icons/fa";
 import Lottie from "react-lottie";
 import animationData from "./l.json";
-
+import VisitorCounter from "../VisitorCounter";
 
 function Home() {
   const animationOptions1 = {
@@ -21,8 +21,8 @@ function Home() {
     autoplay: true,
     animationData: animationData,
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice"
-    }
+      preserveAspectRatio: "xMidYMid slice",
+    },
   };
   return (
     <section>
@@ -40,7 +40,7 @@ function Home() {
 
               <h1 className="heading-name">
                 I'M
-                <strong className="main-name">  Aamir Saleem Lone</strong>
+                <strong className="main-name"> Aamir Saleem Lone</strong>
               </h1>
 
               <div style={{ padding: 50, textAlign: "left" }}>
@@ -49,10 +49,8 @@ function Home() {
             </Col>
 
             <Col md={5} style={{ paddingBottom: 20 }}>
-            
-            <Lottie options={animationOptions1} className="img-fluid"
- />
-
+              <Lottie options={animationOptions1} className="img-fluid" />
+              {/* <VisitorCounter /> */}
               {/* <img
                 src={homeLogo}
                 alt="home pic"
@@ -118,7 +116,6 @@ function Home() {
           </Col>
         </Row>
       </Container>
-     
     </section>
   );
 }
