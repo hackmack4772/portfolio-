@@ -57,26 +57,23 @@ function Education() {
 
     return (
         <section className="education" id="education">
-            <div className="cards ms-5">
+            <div className="cards">
                 {educationData.map((edu) => (
                     <div
                         key={edu.id}
                         className={`education-card ${activeCard === edu.id ? "active" : ""}`}
                         onClick={() => handleCardClick(edu.id)}
-                        style={{ backgroundImage: `url(${edu.image})`, backgroundSize: 'cover', borderRadius: '10px' }} // Added background image styling
+                        style={{ backgroundImage: `url(${edu.image})` }}
                     >
                         <div className="label">{edu.id}</div>
                         <div className="icon">
-                            {edu.icon} 
+                            {edu.icon}
                         </div>
-                        <div className="info row justify-content-end">
-                            <div className="col-12 col-sm-6 col-lg-7 px-0">
-                                <h1 className="title">{edu.title}</h1>
-                                <h3>{edu.institution}</h3>
-                                <h5>{edu.year}</h5>
-                                <h5>{edu.score}</h5>
-                                {/* <img src={edu.image} alt={`${edu.title} Image`} style={{ width: '100%', borderRadius: '10px' }} /> */}
-                            </div>
+                        <div className="info">
+                            <h1 className="title">{edu.title}</h1>
+                            <h3>{edu.institution}</h3>
+                            <h5>{edu.year}</h5>
+                            <h5>{edu.score}</h5>
                         </div>
                     </div>
                 ))}
