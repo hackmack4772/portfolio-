@@ -1,59 +1,68 @@
 import React, { useState, useEffect, useRef } from "react";
-import { addDoc, collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { db } from "./config/firebase"; 
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
+import { db } from "./config/firebase";
 import { query, onSnapshot, orderBy } from "firebase/firestore";
-import "react-chat-elements/dist/main.css"; 
+import "react-chat-elements/dist/main.css";
 import { MessageBox, Input, Button } from "react-chat-elements";
 import "react-chat-elements/dist/main.css";
 import "./Chat.css"; // Custom styles for centering and differentiation
 import { FaEdit, FaTrashAlt, FaTrash } from "react-icons/fa";
 
 const Chat = () => {
+  const [isActive, setIsActive] = useState(false);
+  const chatRef = useRef(null);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setIsActive(true);
+    }, 1000);
+
+    const handleKeyDown = (evt) => {
+      if (evt.key === "Escape" || evt.key === "Esc" || evt.keyCode === 27) {
+        setIsActive(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      clearTimeout(timeoutId);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  const handleToggleClick = () => {
+    setIsActive(true);
+  };
+
+  const handleCloseClick = () => {
+    setIsActive(false);
+  };
+
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
   const [senderId, setSenderId] = useState("");
-  const [receiverId, setReceiverId] = useState("");
-  const [seenMessages, setSeenMessages] = useState({});
+  const [receiverId, setReceiverId] = useState("defaultReceiver");
   const [editingMessage, setEditingMessage] = useState(null);
-  const [username, setUsername] = useState("");
-  const [receiverUsername, setReceiverUsername] = useState("");
-  const [showPopup, setShowPopup] = useState(true);
   const chatEndRef = useRef(null);
 
   useEffect(() => {
     const initializeIds = async () => {
-      let localSenderId = localStorage.getItem("senderId");
-      let localReceiverId = localStorage.getItem("receiverId");
-
-      if (!localSenderId) {
-        localSenderId = username || "user123";
-        localStorage.setItem("senderId", localSenderId);
-      }
-
-      const senderDoc = await getDoc(doc(db, "users", localSenderId));
-      if (!senderDoc.exists()) {
-        await setDoc(doc(db, "users", localSenderId), { occupied: true });
-      }
-
-      if (!localReceiverId || localReceiverId === localSenderId) {
-        localReceiverId = receiverUsername || "user456";
-        const receiverDoc = await getDoc(doc(db, "users", localReceiverId));
-        if (receiverDoc.exists() && receiverDoc.data().occupied) {
-          localReceiverId = "user789"; // Assign a different ID if occupied
-        }
-        localStorage.setItem("receiverId", localReceiverId);
-        await setDoc(doc(db, "users", localReceiverId), { occupied: true });
-      }
-
-      setSenderId(localSenderId);
-      setReceiverId(localReceiverId);
+      let localSenderId = localStorage.getItem("ip");
+      const hostname = window.navigator.userAgent;
+      const uniqueUsername = `${hostname}_${localSenderId}`;
+      setSenderId(uniqueUsername);
     };
 
-    if (username && receiverUsername) {
-      initializeIds();
-      setShowPopup(false);
-    }
-  }, [username, receiverUsername]);
+    initializeIds();
+  }, []);
 
   const handleSendMessage = async () => {
     if (message.trim() === "") return;
@@ -81,48 +90,17 @@ const Chat = () => {
     }
   };
 
-  const handleEditMessage = (msg) => {
-    setMessage(msg.message);
-    setEditingMessage(msg);
-  };
-
-  const handleDeleteMessageForMe = async (msg) => {
-    try {
-      await updateDoc(doc(db, "chatMessages", msg.id), {
-        deletedForMe: true,
-      });
-    } catch (error) {
-      console.error("Error deleting message for me: ", error);
-    }
-  };
-
-  const handleDeleteMessageForEveryone = async (msg) => {
-    try {
-      await updateDoc(doc(db, "chatMessages", msg.id), {
-        deletedForEveryone: true,
-      });
-    } catch (error) {
-      console.error("Error deleting message for everyone: ", error);
-    }
-  };
-
   useEffect(() => {
     const messagesQuery = query(
       collection(db, "chatMessages"),
       orderBy("timestamp", "asc")
     );
     const unsubscribe = onSnapshot(messagesQuery, (snapshot) => {
-      const messages = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const messages = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setChatMessages(messages.filter((msg) => !msg.deletedForMe));
-
-      const seen = {};
-      messages.forEach((msg) => {
-        if (msg.receiverId === senderId && !msg.seen) {
-          seen[msg.id] = true;
-          setDoc(doc(db, "chatMessages", msg.id), { seen: true }, { merge: true });
-        }
-      });
-      setSeenMessages(seen);
       chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
     });
 
@@ -134,87 +112,103 @@ const Chat = () => {
       handleSendMessage();
     }
   };
+  const formatTime = (timestamp) => {
+    const date = new Date(timestamp.seconds * 1000); // Convert seconds to milliseconds
 
-  const getStatus = (msg) => {
-    if (msg.senderId === senderId) {
-      return msg.seen ? "seen" : "double-tick";
-    } else {
-      return "single-tick";
-    }
-  };
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const ampm = hours >= 12 ? "PM" : "AM";
 
-  const handleUsernameSubmit = () => {
-    if (username.trim() !== "" && receiverUsername.trim() !== "") {
-      setShowPopup(false);
-    }
+    hours = hours % 12; // Convert to 12-hour format
+    hours = hours ? hours : 12; // If hours is 0 (midnight), set to 12
+
+    return `${hours}:${minutes} ${ampm}`; // Display in HH:MM AM/PM format
   };
 
   return (
-    <div className="chat-box-container">
-      {showPopup && (
-        <div className="username-popup">
-          <div className="username-popup-inner">
-            <h3>Enter your username and the receiver's username</h3>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Your Username"
-            />
-            <input
-              type="text"
-              value={receiverUsername}
-              onChange={(e) => setReceiverUsername(e.target.value)}
-              placeholder="Receiver's Username"
-            />
-            <button onClick={handleUsernameSubmit}>Submit</button>
+    <div
+      id="chat-app"
+      className={`chat-app is-active ${isActive ? "is-active" : ""}`}
+      ref={chatRef}
+    >
+      <div className="chat-app_toggle " onClick={handleSendMessage}>
+        <svg
+          fill="#000000"
+          height="64px"
+          width="30px"
+          version="1.1"
+          id="Layer_1"
+          viewBox="0 0 512.001 512.001"
+        >
+          <g>
+            <g>
+              <g>
+                <path
+                  d="M483.927,212.664L66.967,25.834C30.95,9.695-7.905,42.024,1.398,80.367l21.593,89.001
+				c3.063,12.622,11.283,23.562,22.554,30.014l83.685,47.915c6.723,3.85,6.738,13.546,0,17.405l-83.684,47.915
+				c-11.271,6.452-19.491,17.393-22.554,30.015L1.398,431.633c-9.283,38.257,29.507,70.691,65.569,54.534l416.961-186.83
+				C521.383,282.554,521.333,229.424,483.927,212.664z M468.609,265.151l-416.96,186.83c-7.618,3.417-15.814-3.398-13.845-11.516
+				l21.593-89.001c0.647-2.665,2.383-4.975,4.761-6.337l83.685-47.915c31.857-18.239,31.887-64.167,0-82.423l-83.685-47.916
+				c-2.379-1.362-4.115-3.672-4.761-6.337L37.804,71.535c-1.945-8.016,6.128-14.975,13.845-11.514L468.61,246.85
+				C476.522,250.396,476.542,261.596,468.609,265.151z"
+                />
+                <path
+                  d="M359.268,238.907l-147.519-66.1c-9.444-4.231-20.523-0.005-24.752,9.435c-4.231,9.44-0.006,20.523,9.434,24.752
+				L305.802,256l-109.37,49.006c-9.44,4.231-13.664,15.313-9.434,24.752c4.231,9.443,15.312,13.663,24.752,9.435l147.519-66.101
+				C373.996,266.495,374.006,245.51,359.268,238.907z"
+                />
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div className="chat-app_box">
+        <div className="chat-app_header">
+          {/* <div className="close" onClick={handleCloseClick}></div> */}
+          <div className="branding">
+            <div className="avatar is-online">
+              <img
+                src="https://avatars.githubusercontent.com/u/120358827?v=4&size=64"
+                alt=""
+              />
+            </div>
+            <div className="content">
+              <p className="title">Aamir Saleem lone</p>
+            </div>
           </div>
         </div>
-      )}
-      {!showPopup && (
-        <div className="chat-container">
-          <h3>Chat</h3>
-          <div className="chat-messages">
+
+        <div className="chat-app_content">
+          <div className="messages">
             {chatMessages.map((msg) => (
-              <div key={msg.id} className="message-container">
-                <MessageBox
-                  position={msg.senderId === senderId ? "right" : "left"}
-                  type="text"
-                  text={msg.deletedForEveryone ? "This message was deleted" : msg.message}
-                  date={msg.timestamp.toDate()}
-                  className={
-                    msg.senderId === senderId ? "message-sender" : "message-receiver"
-                  }
-                  status={getStatus(msg)}
-                />
-                {msg.senderId === senderId && !msg.deletedForEveryone && (
-                  <div className="message-actions">
-                    <button onClick={() => handleEditMessage(msg)}><FaEdit /></button>
-                    <button onClick={() => handleDeleteMessageForMe(msg)}><FaTrashAlt /></button>
-                    <button onClick={() => handleDeleteMessageForEveryone(msg)}><FaTrash /></button>
-                  </div>
-                )}
+              <div
+                className={
+                  msg.senderId === senderId ? "message" : "message reply"
+                }
+              >
+                <p className="text">
+                  {msg.deletedForEveryone
+                    ? "This message was deleted"
+                    : msg.message}
+                </p>
+                <div className="timestamp">{formatTime(msg.timestamp)}</div>
               </div>
             ))}
-            <div ref={chatEndRef} />
-          </div>
-          <div className="chat-input">
-            <Input
-              placeholder="Type a message..."
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-              rightButtons={
-                <Button
-                  text={editingMessage ? "Update" : "Send"}
-                  onClick={handleSendMessage}
-                  disabled={!message.trim()}
-                />
-              }
-            />
           </div>
         </div>
-      )}
+
+        <div className="chat-app_footer">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Type a message..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+          />{" "}
+        </div>
+      </div>
     </div>
   );
 };
