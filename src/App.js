@@ -18,6 +18,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Education from "./components/Education/Education";
 import Cursor from "./components/Cursor";
+import Chat from "./Chat.js";
 
 function App() {
   const [load, upadateLoad] = useState(true);
@@ -41,6 +42,7 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="/project" element={<Projects />} />
           <Route path="/about" element={<About />} />
           <Route path="/education" element={<Education />} />
