@@ -10,7 +10,8 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate
+  Navigate,
+  useLocation,
 } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import "./style.css";
@@ -21,24 +22,23 @@ import Cursor from "./components/Cursor";
 import Chat from "./Chat.js";
 
 function App() {
-  const [load, upadateLoad] = useState(true);
+  const [load, updateLoad] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      upadateLoad(false);
+      updateLoad(false);
     }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
 
-  return (
-    <div className="App">
+  const MainContent = () => {
+    const location = useLocation();
+    const isChatRoute = location.pathname === "/chat";
 
-    <Cursor/>
-    <Router>
-      <Preloader load={load} />
-     { !load  && <div className="App" id={load ? "no-scroll" : "scroll"}>
-        <Navbar />
+    return (
+      <>
+        {!isChatRoute && <Navbar />}
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -47,13 +47,25 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/education" element={<Education />} />
           <Route path="/resume" element={<Resume />} />
-          <Route path="*" element={<Navigate to="/"/>} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-        <Footer />
-      </div>}
-    </Router>
-    </div>
+        {!isChatRoute && <Footer />}
+      </>
+    );
+  };
 
+  return (
+    <div className="App">
+      {/* <Cursor /> */}
+      <Router>
+        <Preloader load={load} />
+        {!load && (
+          <div className="App" id={load ? "no-scroll" : "scroll"}>
+            <MainContent />
+          </div>
+        )}
+      </Router>
+    </div>
   );
 }
 
