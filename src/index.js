@@ -6,7 +6,7 @@ import ActivityTracker from "./components/ActivityTracker"; // Adjust the path a
 
 ReactDOM.render(
   <React.StrictMode>
-    <ActivityTracker />
+    {/* <ActivityTracker /> */}
     <App />
   </React.StrictMode>,
   document.getElementById("root")
