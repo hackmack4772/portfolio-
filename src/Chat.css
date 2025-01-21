@@ -111,7 +111,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding: 1.5em 1.5em;
+  padding: 1em 1em;
 }
 .chat-app_header .close {
   height: 1.5em;
@@ -198,11 +198,15 @@ body {
   overflow: auto;
   padding: 0 1em;
   position: absolute;
-  padding-bottmo: 1em;
+  padding-bottom: 1em;
+}
+.text ,.timestamp{
+  text-align: left;
+  font-size: small;
 }
 .chat-app_content .message {
   width: calc(100% - 2em);
-  padding: 0.75em;
+  padding: 0.65em;
   background: white;
   margin-top: 0.25em;
   border-radius: 16px;
@@ -262,7 +266,7 @@ body {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.5em 1.5em;
-  text-align: right;
+  text-align: left;
   display: flex;
   align-items: center;
   justify-content: right;
