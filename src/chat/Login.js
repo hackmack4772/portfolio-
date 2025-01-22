@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "./config/firebase";
+import { db } from "../config/firebase";
 import "./Login.css";
 
 function Login() {
@@ -30,7 +30,7 @@ function Login() {
           localStorage.setItem("token", username);
           navigate("/users");
         } else {
-          setError("Username is already taken with a different IP.");
+          setError("Username is already taken.");
         }
       } else {
         await setDoc(userRef, { username, ip });

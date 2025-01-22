@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore"; // Firebase Firestore utilities
-import { db } from "./config/firebase";
+import { db } from "../config/firebase";
 import "./ListUsers.css"; // Assuming styles are properly named for ListUsers
+import { useNavigate } from "react-router-dom";
 
 export default function ListUsers({ onUserSelect }) {
+  const navigate = useNavigate();
+
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
 
@@ -32,7 +35,7 @@ export default function ListUsers({ onUserSelect }) {
         {users.map((user) => (
           <li
             key={user}
-            onClick={() => onUserSelect(user)}
+            onClick={() => navigate(`/chat/${user}`) }
             className="user-item"
           >
             {user}

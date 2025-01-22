@@ -41,9 +41,9 @@ body {
 .chat-app_toggle {
   z-index: 5;
   position: absolute;
-  bottom: 0.75em;
+  bottom: 1.95em;
   right: 0.75em;
-  height: 64px;
+  height: 77px;
   width: 64px;
   transform: scale(0.83);
   border-radius: 100%;

@@ -19,9 +19,9 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Education from "./components/Education/Education";
 import Cursor from "./components/Cursor";
-import Chat from "./Chat.js";
-import ListUsers from "./ListUsers.js";
-import Login from "./Login.js";
+import Chat from "./chat/Chat";
+import ListUsers from "./chat/ListUsers";
+import Login from "./chat/Login";
 
 function App() {
   const [load, updateLoad] = useState(true);
@@ -36,11 +36,13 @@ function App() {
 
   const MainContent = () => {
     const location = useLocation();
-    const isChatRoute = location.pathname === "/chat";
-
+    const isChatRoute = 
+    location.pathname === "/login" || 
+    location.pathname === "/users" || 
+    location.pathname.startsWith("/chat");
+  
     const PrivateRoute = ({ element: Component, ...rest }) => {
       const token = localStorage.getItem("token");
-      console.log(token, "token");
       return token ? <Component {...rest} /> : <Navigate to="/login" />;
     };
 
@@ -51,7 +53,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/chat" element={<PrivateRoute element={Chat} />} />
+          <Route path="/chat/:usersdata" element={<PrivateRoute element={Chat} />} />
           <Route path="/users" element={<PrivateRoute element={ListUsers} />} />
 
           <Route path="/project" element={<Projects />} />
