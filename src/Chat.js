@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { addDoc, collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "./config/firebase";
 import { query, onSnapshot, orderBy } from "firebase/firestore";
 import "react-chat-elements/dist/main.css";
@@ -9,6 +16,7 @@ import "./Chat.css"; // Custom styles for centering and differentiation
 import { FaEdit, FaTrashAlt, FaTrash } from "react-icons/fa";
 import ListUsers from "./ListUsers";
 import Login from "./Login";
+import { useNavigate } from "react-router-dom";
 
 const Chat = () => {
   const [message, setMessage] = useState("");
@@ -24,42 +32,40 @@ const Chat = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const chatEndRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
-  const chatRef = useRef(null)
+  const chatRef = useRef(null);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   useEffect(() => {
     const initializeIds = async () => {
-      const ip = await fetch('https://api.ipify.org?format=json')
-        .then(res => res.json())
-        .then(data => data.ip);
-      
-      // Generate a random ID (for example using Firebase Auth UID or other means)
-      const randomId = `${Math.random().toString(36).substring(2, 15)}-${Math.random().toString(36).substring(2, 15)}`;
-      
-      // Store username and IP as password (using the randomId as user ID)
-      const uniqueUsername = `${username}_${ip}_${randomId}`;
-      setSenderId(uniqueUsername);
-
-      // Save to localStorage
-      localStorage.setItem('userDetails', JSON.stringify({ username, ip, randomId }));
-
-      // Firebase Document: Check if the document exists, otherwise create it
-      const senderDoc = await getDoc(doc(db, "users", uniqueUsername));
-      if (!senderDoc.exists()) {
-        await setDoc(doc(db, "users", uniqueUsername), { occupied: true });
+      if (!username) {
+        setError("Please enter a username.");
+        return;
       }
 
-      // Listen for changes in the users collection
-      const usersQuery = query(collection(db, "users"));
-      const unsubscribe = onSnapshot(usersQuery, (snapshot) => {
-        const usersList = snapshot.docs.map((doc) => doc.id);
-        setUsers(usersList.filter(user => user !== uniqueUsername));
-      });
+      const ip = await fetch("https://api.ipify.org?format=json")
+        .then((res) => res.json())
+        .then((data) => data.ip);
 
-      return () => unsubscribe();
+      const userRef = doc(db, "users", username);
+      const userDoc = await getDoc(userRef);
+
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        if (userData.ip === ip) {
+          localStorage.setItem("token", username);
+          navigate("/users");
+        } else {
+          setError("Username is already taken with a different IP.");
+        }
+      } else {
+        await setDoc(userRef, { username, ip });
+        localStorage.setItem("token", username);
+        navigate("/users");
+      }
     };
 
     if (username) {
       initializeIds();
-      setShowPopup(false);
     }
   }, [enterClicked]);
 
@@ -121,8 +127,17 @@ const Chat = () => {
         orderBy("timestamp", "asc")
       );
       const unsubscribe = onSnapshot(messagesQuery, (snapshot) => {
-        const messages = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        setChatMessages(messages.filter((msg) => !msg.deletedForMe && (msg.senderId === senderId || msg.receiverId === senderId)));
+        const messages = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setChatMessages(
+          messages.filter(
+            (msg) =>
+              !msg.deletedForMe &&
+              (msg.senderId === senderId || msg.receiverId === senderId)
+          )
+        );
         chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
       });
 
@@ -148,7 +163,7 @@ const Chat = () => {
     if (username.trim() !== "") {
       setShowPopup(false);
     }
-    setEnterClicked(true)
+    setEnterClicked(true);
   };
 
   const handleUserSelect = (user) => {
@@ -170,7 +185,11 @@ const Chat = () => {
   return (
     <div className="chat-box-container">
       {showPopup && (
-        <Login username={username} setUsername={setUsername} handleUsernameSubmit={handleUsernameSubmit} />
+        <Login
+          username={username}
+          setUsername={setUsername}
+          handleUsernameSubmit={handleUsernameSubmit}
+        />
       )}
       {!showPopup && !selectedUser && (
         <ListUsers users={users} handleUserSelect={handleUserSelect} />
@@ -242,7 +261,9 @@ const Chat = () => {
                         ? "This message was deleted"
                         : msg.message}
                     </p>
-                    <span className="timestamp">{formatTime(msg.timestamp)}</span>
+                    <span className="timestamp">
+                      {formatTime(msg.timestamp)}
+                    </span>
                   </div>
                 ))}
               </div>
