@@ -4,13 +4,13 @@ import { db } from "../config/firebase";
 import "./ListUsers.css"; // Assuming styles are properly named for ListUsers
 import { useNavigate } from "react-router-dom";
 
-export default function ListUsers({ onUserSelect }) {
+export default function ListUsers() {
   const navigate = useNavigate();
+  const userName=localStorage.getItem("token");
+
 
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
-
-  // Fetch users from Firestore on component mount
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -33,7 +33,7 @@ export default function ListUsers({ onUserSelect }) {
       {error && <p className="error">{error}</p>}
       <ul>
         {users.map((user) => (
-          <li
+         user !=userName &&  <li
             key={user}
             onClick={() => navigate(`/chat/${user}`) }
             className="user-item"

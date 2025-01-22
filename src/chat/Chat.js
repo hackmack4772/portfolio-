@@ -103,8 +103,7 @@ const Chat = () => {
 
 
   const formatTime = (timestamp) => {
-    const date = new Date(timestamp.seconds * 1000); // Convert seconds to milliseconds
-
+    const date = new Date(timestamp.seconds * 1000);
     let hours = date.getHours();
     const minutes = date.getMinutes().toString().padStart(2, "0");
     const ampm = hours >= 12 ? "PM" : "AM";
@@ -165,7 +164,7 @@ const Chat = () => {
                 />
               </div>
               <div className="content">
-                <p className="title">Aamir Saleem lone</p>
+                <p className="title">{usersdata}</p>
               </div>
             </div>
           </div>

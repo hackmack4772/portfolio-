@@ -35,7 +35,7 @@ function Login() {
       } else {
         await setDoc(userRef, { username, ip });
         localStorage.setItem("token", username);
-        // navigate("/users");
+        navigate("/users");
       }
     } catch (error) {
       console.error("Error during login:", error);
