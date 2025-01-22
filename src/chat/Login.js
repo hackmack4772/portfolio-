@@ -39,7 +39,7 @@ function Login() {
           setUserNameError("Username is already taken.");
         }
       } else {
-        await setDoc(userRef, { username, ip });
+        await setDoc(userRef, { username, ip,name });
         localStorage.setItem("token", username);
         navigate("/users");
       }
