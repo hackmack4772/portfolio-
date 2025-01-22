@@ -55,7 +55,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/chat/:usersdata" element={<PrivateRoute element={Chat} />} />
           <Route path="/users" element={<PrivateRoute element={ListUsers} />} />
-
           <Route path="/project" element={<Projects />} />
           <Route path="/about" element={<About />} />
           <Route path="/education" element={<Education />} />

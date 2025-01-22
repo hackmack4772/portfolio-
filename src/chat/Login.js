@@ -6,12 +6,18 @@ import "./Login.css";
 
 function Login() {
   const [username, setUsername] = useState("");
-  const [error, setError] = useState("");
+  const [name, setName] = useState("");
+  const [userNameError, setUserNameError] = useState("");
+  const [nameError, setNameError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     if (!username.trim()) {
-      setError("Please enter a username.");
+      setUserNameError("Please enter a username.");
+      return;
+    }
+    if (!name.trim()) {
+      setUserNameError("Please enter a name.");
       return;
     }
 
@@ -30,16 +36,16 @@ function Login() {
           localStorage.setItem("token", username);
           navigate("/users");
         } else {
-          setError("Username is already taken.");
+          setUserNameError("Username is already taken.");
         }
       } else {
         await setDoc(userRef, { username, ip });
         localStorage.setItem("token", username);
         navigate("/users");
       }
-    } catch (error) {
-      console.error("Error during login:", error);
-      setError("An error occurred. Please try again later.");
+    } catch (userNameError) {
+      console.userNameError("userNameError during login:", userNameError);
+      setUserNameError("An userNameError occurred. Please try again later.");
     }
   };
 
@@ -58,6 +64,13 @@ function Login() {
         <input
           type="text"
           className="form-control"
+          placeholder="Enter your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          className="form-control"
           placeholder="Enter your username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -65,7 +78,8 @@ function Login() {
         <button type="submit" className="login-submit">
           Login
         </button>
-        {error && <p className="error">{error}</p>}
+        {userNameError && <p className="error">{userNameError}</p>}
+        {nameError && <p className="error">{nameError}</p>}
       </form>
     </div>
   );
