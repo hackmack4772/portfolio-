@@ -1,88 +1,82 @@
-/* Container styling */
-.user-list {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 90%; /* Adjusted for smaller screens */
-  width: 400px;
-  margin: 20px auto; /* Added margin for spacing */
-  text-align: center;
-  animation: fadeIn 1s ease-in-out;
-}
-
-/* Title styling */
-.user-list h3 {
-  margin-bottom: 20px;
-  font-size: 1.5rem; /* Adjusts dynamically for different screen sizes */
-  font-weight: bold;
-  color: #333;
-}
-
-/* List container styling */
-.user-list ul {
-  list-style: none;
-  padding: 0;
+body {
   margin: 0;
+  padding: 0;
+  background-color: #d9dbd4;
 }
-
-/* List item styling */
-.user-list li {
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: #f9f9f9;
+.whatsapp {
+  background: #009688;
+  width: 100%;
+  height: 100px;
+  padding: 30px;
 }
-
-/* Hover effect for list items */
-.user-list li:hover {
-  background: #f0f0f0;
-  transform: translateY(-2px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+.whatsapp_main {
+  width: 90%;
+  background-color: white;
+  height: 450px;
+  margin: 0px auto 30px auto;
+  position: absolute;
+  top: 5%;
+  left: 0;
+  right: 0;
 }
-
-/* Animation for fade-in effect */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.whatsapp_main_sidemenu {
+  background-color: #eee;
+  height: 100%;
+  width: 100%;
 }
-
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-  .user-list {
-    max-width: 95%; /* More compact on smaller screens */
-    padding: 15px;
-  }
-
-  .user-list h3 {
-    font-size: 1.25rem; /* Smaller font for mobile */
-  }
-
-  .user-list li {
-    padding: 12px; /* Reduced padding for smaller screens */
-    font-size: 0.9rem;
-  }
+.whatsapp_main_sidemenu_top .row .avatar {
+  height: 70px;
+  width: 70px;
 }
-
-/* Responsive design for very small screens (like phones) */
-@media (max-width: 480px) {
-  .user-list {
-    max-width: 100%;
-    padding: 10px;
-    box-shadow: none; /* Remove shadow for a cleaner mobile view */
-  }
-
-  .user-list li {
-    padding: 10px;
-    font-size: 0.85rem;
-  }
+.whatsapp_main_sidemenu_top .row .avatar img {
+  height: 62px;
+  width: 62px;
+}
+.whatsapp_main_sidemenu_middle {
+  background-color: #f8f8f8;
+  padding: 10px 16px;
+}
+.whatsapp_main_sidemenu_middle i.fa-search {
+  position: absolute;
+  left: 41px;
+  transform: translate(0%, 100%);
+  font-size: 12px;
+  color: gray;
+}
+.whatsapp_main_sidemenu_middle input {
+  width: 100%;
+  border: none;
+  border-radius: 50px;
+  padding: 5px 30px;
+}
+.whatsapp_main_sidemenu_middle input:focus {
+  outline: none;
+}
+.whatsapp_main_sidemenu_bottom {
+  background-color: #fff;
+}
+.whatsapp_main_sidemenu_bottom_chat {
+  overflow-y: scroll;
+}
+.whatsapp_main_body {
+  background-color: #f7f9fa;
+  width: 100%;
+  height: 100%;
+  margin: 0 -15px;
+  text-align: center;
+}
+.whatsapp_main_body_image {
+  text-align: center;
+}
+.whatsapp_main_body_image img {
+  padding-top: 50px;
+}
+.avatar {
+  height: 49px;
+  width: 49px;
+}
+@media only screen and (max-width: 800px) {
+  .whatsapp_main_body {
+    display: none;
+ }
 }
