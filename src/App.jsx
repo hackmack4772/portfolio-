@@ -23,6 +23,9 @@ import Chat from "./chat/Chat";
 import ListUsers from "./chat/ListUsers";
 import Login from "./chat/Login";
 import { useDarkMode } from "./DarkModeContext";
+import AdminProjects from "./admin/AdminProjects";
+import AdminEducation from "./admin/AdminEducation";
+import AdminHome from "./admin/AdminHome";
 
 function App() {
   const [load, updateLoad] = useState(true);
@@ -63,6 +66,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/education" element={<Education />} />
           <Route path="/resume" element={<Resume />} />
+          <Route path="/admin/edit-projects" element={<AdminProjects />} />
+          <Route path="/admin/edit-education" element={<AdminEducation />} />
+          <Route path="/admin/edit-Home" element={<AdminHome />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         {!isChatRoute && <Footer />}
