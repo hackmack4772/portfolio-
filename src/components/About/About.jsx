@@ -12,6 +12,7 @@ function About() {
     <Container fluid className="about-section">
       <Particle />
       <Container>
+        {/* About Section */}
         <Row style={{ justifyContent: "center", padding: "10px" }}>
           <Col
             md={7}
@@ -34,17 +35,38 @@ function About() {
             <img src={laptopImg} alt="about" className="img-fluid" />
           </Col>
         </Row>
-        <h1 className="project-heading">
-          Professional <strong className="purple">Skillset </strong>
-        </h1>
 
+        {/* Professional Summary */}
+        <h1 className="project-heading">
+          Professional <strong className="purple">Summary</strong>
+        </h1>
+        <p style={{ color: "white" }}>
+          I am a dedicated and innovative <strong>MERN Stack Developer</strong>
+          with hands-on experience in <strong>React.js</strong>,{" "}
+          <strong>Express.js</strong>, <strong>Laravel</strong>,{" "}
+          <strong>Lumen</strong>, and <strong>MongoDB</strong>. I started my
+          journey as a trainee web developer at Shine Dezign Infonet Pvt. Ltd.
+          and transitioned into a full-time role. I specialize in creating
+          scalable systems, efficient APIs, and end-to-end solutions for modern,
+          user-centric web applications.
+        </p>
+
+        {/* Professional Skillset */}
+        <h1 className="project-heading">
+          Professional <strong className="purple">Skillset</strong>
+        </h1>
         <Techstack />
 
+        {/* Tools */}
         <h1 className="project-heading">
           <strong className="purple">Tools</strong> I use
         </h1>
         <Toolstack />
 
+        {/* GitHub Section */}
+        <h1 className="project-heading">
+          My <strong className="purple">GitHub</strong> Stats
+        </h1>
         <Github />
       </Container>
     </Container>

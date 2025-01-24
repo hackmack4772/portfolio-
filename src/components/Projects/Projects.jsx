@@ -2,12 +2,12 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
-import leaf from "../../Assets/Projects/leaf.png";
-import emotion from "../../Assets/Projects/emotion.png";
-import editor from "../../Assets/Projects/codeEditor.png";
-import chatify from "../../Assets/Projects/chatify.png";
-import suicide from "../../Assets/Projects/suicide.png";
 import bitsOfCode from "../../Assets/Projects/blog.png";
+
+// import hcp from "../../Assets/Projects/hcp.png"; // Example image for Healthcare Platform
+// import crm from "../../Assets/Projects/crm.png"; // Example image for CRM
+// import surveyBuilder from "../../Assets/Projects/surveyBuilder.png"; // Example image for Survey Builder
+// import videoCall from "../../Assets/Projects/videoCall.png"; // Example image for Video Call
 
 function Projects() {
   return (
@@ -15,76 +15,57 @@ function Projects() {
       <Particle />
       <Container>
         <h1 className="project-heading">
-          My Recent <strong className="purple">Works </strong>
+          My Recent <strong className="purple">Works</strong>
         </h1>
         <p style={{ color: "white" }}>
-          Here are a few projects I've worked on recently.
+          Here are a few notable projects I have worked on.
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={chatify}
-              isBlog={false}
-              title="Chatify"
-              description="Personal Chat Room or Workspace to share resources and hangout with friends build with react.js, Material-UI, and Firebase. Have features which allows user for realtime messaging, image sharing as well as supports reactions on messages."
-              ghLink="https://github.com/hackmack4772/Chatify"
-              demoLink="https://chatify-49.web.app/"
-            />
-          </Col>
-
+          {/* Healthcare Platform */}
           <Col md={4} className="project-card">
             <ProjectCard
               imgPath={bitsOfCode}
               isBlog={false}
-              title="Bits-0f-C0de"
-              description="My personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js. Supports dark mode and easy to write blogs using markdown."
-              ghLink="https://github.com/hackmack4772/Bits-0f-C0de"
-              demoLink="https://blogs.soumya-jit.tech/"
+              title="Healthcare Platform"
+              description="Developed an integrated platform for healthcare professionals (HCPs) featuring content engagement tracking, live webinars, dynamic surveys, and an educational resource library. Used React.js, Redux, and MySQL for efficient performance and data management."
+              ghLink="#"
+              demoLink="#"
             />
           </Col>
 
+          {/* CRM Platform */}
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={editor}
+              imgPath={bitsOfCode}
               isBlog={false}
-              title="Editor.io"
-              description="Online code and markdown editor build with react.js. Online Editor which supports html, css, and js code with instant view of website. Online markdown editor for building README file which supports GFM, Custom Html tags with toolbar and instant preview.Both the editor supports auto save of work using Local Storage"
-              ghLink="https://github.com/hackmack4772/Editor.io"
-              demoLink="https://editor.soumya-jit.tech/"              
+              title="CRM Platform"
+              description="Built a CRM platform with advanced features like campaign management, user tracking, and customizable templates. Visualized complex data using Highcharts to enhance user insights. Developed using React.js, Redux, and MongoDB."
+              ghLink="#"
+              demoLink="#"
             />
           </Col>
 
+          {/* Survey Builder */}
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={leaf}
+              imgPath={bitsOfCode}
               isBlog={false}
-              title="Plant AI"
-              description="Used the plant disease dataset from Kaggle and trained a image classifer model using 'PyTorch' framework using CNN and Transfer Learning with 38 classes of various plant leaves. The model was successfully able to detect diseased and healthy leaves of 14 unique plants. I was able to achieve an accuracy of 98% by using Resnet34 pretrained model."
-              ghLink="https://github.com/hackmack4772/Plant_AI"
-              demoLink="https://plant49-ai.herokuapp.com/"
+              title="Survey Builder"
+              description="Designed and implemented a dynamic survey builder with drag-and-drop functionality using React.js and Redux. Enabled real-time analytics and easy distribution via QR codes."
+              ghLink="#"
+              demoLink="#"
             />
           </Col>
 
+          {/* Real-Time Video Call */}
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={suicide}
+              imgPath={bitsOfCode}
               isBlog={false}
-              title="Ai For Social Good"
-              description="Using 'Natural Launguage Processing' for the detection of suicide-related posts and user's suicide ideation in cyberspace  and thus helping in sucide prevention."
-              ghLink="https://github.com/hackmack4772/AI_For_Social_Good"
-              // demoLink="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" <--------Please include a demo link here
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={emotion}
-              isBlog={false}
-              title="Face Recognition and Emotion Detection"
-              description="Trained a CNN classifier using 'FER-2013 dataset' with Keras and tensorflow backened. The classifier sucessfully predicted the various types of emotions of human. And the highest accuracy obtained with the model was 60.1%.
-              Then used Open-CV to detect the face in an image and then pass the face to the classifer to predict the emotion of a person."
-              ghLink="https://github.com/hackmack4772/Face_And_Emotion_Detection"
-              // demoLink="https://blogs.soumya-jit.tech/"      <--------Please include a demo link here 
+              title="Real-Time Video Call"
+              description="Built a real-time video call solution integrating WebRTC, HLS streaming via Nginx, and Zoom Web SDK for seamless video conferencing. Enhanced user engagement with polls and interactive tools."
+              ghLink="#"
+              demoLink="#"
             />
           </Col>
         </Row>

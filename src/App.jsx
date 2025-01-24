@@ -22,6 +22,7 @@ import Cursor from "./components/Cursor";
 import Chat from "./chat/Chat";
 import ListUsers from "./chat/ListUsers";
 import Login from "./chat/Login";
+import { useDarkMode } from "./DarkModeContext";
 
 function App() {
   const [load, updateLoad] = useState(true);
@@ -36,11 +37,11 @@ function App() {
 
   const MainContent = () => {
     const location = useLocation();
-    const isChatRoute = 
-    location.pathname === "/login" || 
-    location.pathname === "/users" || 
-    location.pathname.startsWith("/chat");
-  
+    const isChatRoute =
+      location.pathname === "/login" ||
+      location.pathname === "/users" ||
+      location.pathname.startsWith("/chat");
+
     const PrivateRoute = ({ element: Component, ...rest }) => {
       const token = localStorage.getItem("token");
       return token ? <Component {...rest} /> : <Navigate to="/login" />;
@@ -53,7 +54,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/chat/:usersdata" element={<PrivateRoute element={Chat} />} />
+          <Route
+            path="/chat/:usersdata"
+            element={<PrivateRoute element={Chat} />}
+          />
           <Route path="/users" element={<PrivateRoute element={ListUsers} />} />
           <Route path="/project" element={<Projects />} />
           <Route path="/about" element={<About />} />
@@ -65,9 +69,10 @@ function App() {
       </>
     );
   };
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   return (
-    <div className="App">
+    <div className={isDarkMode ? "App dark-mode" : "App light-mode"}>
       {/* <Cursor /> */}
       <Router>
         <Preloader load={load} />

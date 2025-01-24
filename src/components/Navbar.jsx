@@ -61,14 +61,12 @@ function NavBar() {
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-
-              
               <Nav.Link
                 as={Link}
                 to="/education"
                 onClick={() => updateExpanded(false)}
               >
-                <FaGraduationCap style={{ marginBottom: "2px" }} />  Education
+                <FaGraduationCap style={{ marginBottom: "2px" }} /> Education
               </Nav.Link>
             </Nav.Item>
 
@@ -81,7 +79,7 @@ function NavBar() {
                 <AiOutlineUser style={{ marginBottom: "2px" }} /> About
               </Nav.Link>
             </Nav.Item>
-{/* 
+
             <Nav.Item>
               <Nav.Link
                 as={Link}
@@ -93,7 +91,7 @@ function NavBar() {
                 />{" "}
                 Projects
               </Nav.Link>
-            </Nav.Item> */}
+            </Nav.Item>
 
             <Nav.Item>
               <Nav.Link
