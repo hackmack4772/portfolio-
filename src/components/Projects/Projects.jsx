@@ -1,15 +1,39 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { db } from "../../config/firebase";
+import { collection, getDocs, doc } from "firebase/firestore";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
 import bitsOfCode from "../../Assets/Projects/blog.png";
 
-// import hcp from "../../Assets/Projects/hcp.png"; // Example image for Healthcare Platform
-// import crm from "../../Assets/Projects/crm.png"; // Example image for CRM
-// import surveyBuilder from "../../Assets/Projects/surveyBuilder.png"; // Example image for Survey Builder
-// import videoCall from "../../Assets/Projects/videoCall.png"; // Example image for Video Call
-
 function Projects() {
+  const [projectsData, setProjectsData] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
+
+  // Fetch the project data from Firestore
+  const fetchProjectsDataFromFirestore = async () => {
+    try {
+      const hackmackDocRef = doc(db, "hackmack", "user_projects"); // Reference to the 'user_projects' document
+      const projectsRef = collection(hackmackDocRef, "projectsData"); // Reference to the 'projectsData' subcollection
+      const querySnapshot = await getDocs(projectsRef); // Get all documents in the subcollection
+
+      const fetchedData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(), // Get the project data (title, description, image, etc.)
+      }));
+
+      setProjectsData(fetchedData);
+      setLoading(false); // Set loading to false after data is fetched
+    } catch (error) {
+      console.error("Error fetching project data: ", error);
+      setLoading(false); // Set loading to false in case of an error
+    }
+  };
+
+  useEffect(() => {
+    fetchProjectsDataFromFirestore(); // Fetch project data when component mounts
+  }, []);
+
   return (
     <Container fluid className="project-section">
       <Particle />
@@ -20,55 +44,28 @@ function Projects() {
         <p style={{ color: "white" }}>
           Here are a few notable projects I have worked on.
         </p>
-        <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
-          {/* Healthcare Platform */}
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={bitsOfCode}
-              isBlog={false}
-              title="Healthcare Platform"
-              description="Developed an integrated platform for healthcare professionals (HCPs) featuring content engagement tracking, live webinars, dynamic surveys, and an educational resource library. Used React.js, Redux, and MySQL for efficient performance and data management."
-              ghLink="#"
-              demoLink="#"
-            />
-          </Col>
 
-          {/* CRM Platform */}
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={bitsOfCode}
-              isBlog={false}
-              title="CRM Platform"
-              description="Built a CRM platform with advanced features like campaign management, user tracking, and customizable templates. Visualized complex data using Highcharts to enhance user insights. Developed using React.js, Redux, and MongoDB."
-              ghLink="#"
-              demoLink="#"
-            />
-          </Col>
-
-          {/* Survey Builder */}
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={bitsOfCode}
-              isBlog={false}
-              title="Survey Builder"
-              description="Designed and implemented a dynamic survey builder with drag-and-drop functionality using React.js and Redux. Enabled real-time analytics and easy distribution via QR codes."
-              ghLink="#"
-              demoLink="#"
-            />
-          </Col>
-
-          {/* Real-Time Video Call */}
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={bitsOfCode}
-              isBlog={false}
-              title="Real-Time Video Call"
-              description="Built a real-time video call solution integrating WebRTC, HLS streaming via Nginx, and Zoom Web SDK for seamless video conferencing. Enhanced user engagement with polls and interactive tools."
-              ghLink="#"
-              demoLink="#"
-            />
-          </Col>
-        </Row>
+        {/* Show a loading spinner while data is being fetched */}
+        {loading ? (
+          <div style={{ textAlign: "center", padding: "50px 0" }}>
+            <Spinner animation="border" variant="primary" />
+          </div>
+        ) : (
+          <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
+            {projectsData.map((project) => (
+              <Col md={4} key={project.id} className="project-card">
+                <ProjectCard
+                  imgPath={bitsOfCode}
+                  isBlog={false}
+                  title={project.title}
+                  description={project.description}
+                  ghLink={project.ghLink}
+                  demoLink={project.demoLink}
+                />
+              </Col>
+            ))}
+          </Row>
+        )}
       </Container>
     </Container>
   );
