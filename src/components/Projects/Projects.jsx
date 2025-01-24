@@ -8,30 +8,28 @@ import bitsOfCode from "../../Assets/Projects/blog.png";
 
 function Projects() {
   const [projectsData, setProjectsData] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
-
-  // Fetch the project data from Firestore
+  const [loading, setLoading] = useState(true);
   const fetchProjectsDataFromFirestore = async () => {
     try {
-      const hackmackDocRef = doc(db, "hackmack", "user_projects"); // Reference to the 'user_projects' document
-      const projectsRef = collection(hackmackDocRef, "projectsData"); // Reference to the 'projectsData' subcollection
-      const querySnapshot = await getDocs(projectsRef); // Get all documents in the subcollection
+      const hackmackDocRef = doc(db, "hackmack", "user_projects");
+      const projectsRef = collection(hackmackDocRef, "projectsData");
+      const querySnapshot = await getDocs(projectsRef);
 
       const fetchedData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
-        ...doc.data(), // Get the project data (title, description, image, etc.)
+        ...doc.data(),
       }));
 
       setProjectsData(fetchedData);
-      setLoading(false); // Set loading to false after data is fetched
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching project data: ", error);
-      setLoading(false); // Set loading to false in case of an error
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchProjectsDataFromFirestore(); // Fetch project data when component mounts
+    fetchProjectsDataFromFirestore();
   }, []);
 
   return (
@@ -45,7 +43,6 @@ function Projects() {
           Here are a few notable projects I have worked on.
         </p>
 
-        {/* Show a loading spinner while data is being fetched */}
         {loading ? (
           <div style={{ textAlign: "center", padding: "50px 0" }}>
             <Spinner animation="border" variant="primary" />
