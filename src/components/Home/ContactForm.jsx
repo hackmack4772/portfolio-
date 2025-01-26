@@ -152,9 +152,6 @@ const ContactUs = () => {
             </span>
           </div>
         </div>
-        <div className="footer" /*style={footerStyles}*/>
-          <p>&copy; 2025 Hackmack. All rights reserved.</p>
-        </div>
       </div>
     )
   );
