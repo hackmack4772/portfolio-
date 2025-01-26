@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Spinner } from "react-bootstrap";
-import { collection, getDocs, doc } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import "./education.css";
 
 function Education() {
   const [educationData, setEducationData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const educationRef = collection(db, "educationData");
   const fetchEducationDataFromFirestore = async () => {
     try {
-      const hackmackDocRef = doc(db, "hackmack", "user_education");
-      const educationRef = collection(hackmackDocRef, "educationData");
-      const querySnapshot = await getDocs(educationRef);
-
+      const educationQuery = query(educationRef, orderBy("created", "desc"));
+      const querySnapshot = await getDocs(educationQuery);
       const fetchedData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -56,7 +55,7 @@ function Education() {
                   />
                   <Card.Body>
                     <Card.Title>{education.title}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">
+                    <Card.Subtitle className="mb-2 ">
                       {education.institution}
                     </Card.Subtitle>
                     <Card.Text>

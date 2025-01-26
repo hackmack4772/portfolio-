@@ -7,6 +7,8 @@ import {
   setDoc,
   deleteDoc,
   updateDoc,
+  query,
+  orderBy,
 } from "firebase/firestore";
 import { Container, Table, Button, Form, Modal } from "react-bootstrap";
 
@@ -22,12 +24,11 @@ function AdminEducation() {
     image: "",
   });
 
-  // Fetch education data from Firestore
+  const educationRef = collection(db, "educationData");
   const fetchEducationData = async () => {
     try {
-      const hackmackDocRef = doc(db, "hackmack", "user_education");
-      const educationRef = collection(hackmackDocRef, "educationData");
-      const querySnapshot = await getDocs(educationRef);
+      const educationQuery = query(educationRef, orderBy("created", "desc"));
+      const querySnapshot = await getDocs(educationQuery);
 
       const fetchedData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -40,54 +41,41 @@ function AdminEducation() {
     }
   };
 
-  // Save or update education data in Firestore
   const handleSaveEducation = async () => {
     try {
-      // Correct way to reference a subcollection
-      const educationRef = collection(
-        db,
-        "hackmack",
-        "user_education",
-        "educationData"
-      );
-
       if (currentEducation.id) {
-        // Update an existing document
-        const educationDoc = doc(educationRef, currentEducation.id); // Reference existing document
+        const educationDoc = doc(educationRef, currentEducation.id);
         await updateDoc(educationDoc, {
           title: currentEducation.title,
           institution: currentEducation.institution,
           year: currentEducation.year,
           score: currentEducation.score,
           image: currentEducation.image,
+          updated: new Date(),
         });
       } else {
-        // Add a new document
-        const newEducationDoc = doc(educationRef); // Generate a new document reference
+        const newEducationDoc = doc(educationRef);
         await setDoc(newEducationDoc, {
           title: currentEducation.title,
           institution: currentEducation.institution,
           year: currentEducation.year,
           score: currentEducation.score,
           image: currentEducation.image,
+          created: new Date(),
+          updated: new Date(),
         });
       }
 
-      // Refresh data and close modal
-      fetchEducationData(); // Refresh the list of education items
-      setShowModal(false); // Close the modal
+      fetchEducationData();
+      setShowModal(false);
     } catch (error) {
       console.error("Error saving education data: ", error);
     }
   };
 
-  // Delete education entry from Firestore
   const handleDeleteEducation = async (id) => {
     try {
-      const hackmackDocRef = doc(db, "hackmack", "user_education");
-      const educationRef = collection(hackmackDocRef, "educationData");
       const educationDoc = doc(educationRef, id);
-
       await deleteDoc(educationDoc);
       fetchEducationData();
     } catch (error) {
@@ -95,7 +83,6 @@ function AdminEducation() {
     }
   };
 
-  // Open modal to add or edit an entry
   const handleEditEducation = (education) => {
     setCurrentEducation(
       education || {
@@ -166,7 +153,6 @@ function AdminEducation() {
         </tbody>
       </Table>
 
-      {/* Modal for Adding/Editing Education */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>

@@ -26,6 +26,9 @@ import { useDarkMode } from "./DarkModeContext";
 import AdminProjects from "./admin/AdminProjects";
 import AdminEducation from "./admin/AdminEducation";
 import AdminHome from "./admin/AdminHome";
+import AdminHome2 from "./admin/AdminHome2";
+import ContactUsSettings from "./admin/ContactUsSettings";
+import ContactUsListing from "./admin/ContactUsListing";
 
 function App() {
   const [load, updateLoad] = useState(true);
@@ -68,7 +71,10 @@ function App() {
           <Route path="/resume" element={<Resume />} />
           <Route path="/admin/edit-projects" element={<AdminProjects />} />
           <Route path="/admin/edit-education" element={<AdminEducation />} />
-          <Route path="/admin/edit-Home" element={<AdminHome />} />
+          <Route path="/admin/edit-home" element={<AdminHome />} />
+          <Route path="/admin/edit-home2" element={<AdminHome2 />} />
+          <Route path="/admin/edit-contact" element={<ContactUsSettings />} />
+          <Route path="/admin/contact-listing" element={<ContactUsListing />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         {!isChatRoute && <Footer />}

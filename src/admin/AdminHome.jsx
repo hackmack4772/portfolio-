@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import { db } from "../config/firebase"; // Assuming firebase is configured here
-import {
-  collection,
-  getDocs,
-  doc,
-  setDoc,
-  deleteDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { db } from "../config/firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 function AdminPanel() {
   const [personalData, setPersonalData] = useState({
     name: "",
     description: "",
+    tagline: "",
     socialLinks: {
       github: "",
       twitter: "",
       linkedin: "",
       instagram: "",
     },
+    typewriterStrings: [], // New field for typewriter strings
   });
+
+  const homeRef = doc(db, "home", "homeData"); // Reference to specific document in Firestore
 
   // Handle input changes for both regular and nested fields (social links)
   const handleInputChange = (e) => {
@@ -37,44 +34,24 @@ function AdminPanel() {
     }
   };
 
-  // Save the data to Firestore
+  // Save personal data to Firebase
   const handleSavePersonalData = async () => {
     try {
-      // Correct Firestore document reference for the specified path
-      const personalRef = doc(
-        db,
-        "hackmack",
-        "personal_data",
-        "user_profile",
-        "home"
-      );
-
-      // Set document data in Firestore
-      await setDoc(personalRef, personalData);
-
-      // If successful, show an alert
+      await setDoc(homeRef, personalData);
       alert("Personal data saved successfully!");
     } catch (error) {
-      // Log error to debug and show an alert
       console.error("Error saving personal data: ", error);
       alert("Failed to save data. Please check the console for errors.");
     }
   };
 
-  // Fetch the data from Firestore (if needed)
+  // Fetch personal data from Firebase
   const fetchHomeData = async () => {
     try {
-      const personalRef = doc(
-        db,
-        "hackmack",
-        "personal_data",
-        "user_profile",
-        "home"
-      );
-      const docSnap = await getDocs(personalRef);
+      const docSnap = await getDoc(homeRef);
 
       if (docSnap.exists()) {
-        setPersonalData(docSnap.data());
+        setPersonalData(docSnap.data()); // Set fetched data into the state
       } else {
         console.log("No such document!");
       }
@@ -111,6 +88,18 @@ function AdminPanel() {
             placeholder="Enter Description"
             name="description"
             value={personalData.description}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+
+        {/* Tagline Field */}
+        <Form.Group controlId="formTagline">
+          <Form.Label>Tagline</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="I am..."
+            name="tagline"
+            value={personalData.tagline}
             onChange={handleInputChange}
           />
         </Form.Group>
@@ -158,6 +147,26 @@ function AdminPanel() {
             name="socialLinks.instagram"
             value={personalData.socialLinks.instagram}
             onChange={handleInputChange}
+          />
+        </Form.Group>
+
+        {/* Typewriter Strings */}
+        <Form.Group controlId="formTypewriterStrings">
+          <Form.Label>Typewriter Strings (comma separated)</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter typewriter strings"
+            name="typewriterStrings"
+            value={personalData.typewriterStrings?.join(", ")}
+            onChange={(e) => {
+              const strings = e.target.value
+                .split(",")
+                .map((str) => str.trim());
+              setPersonalData((prevData) => ({
+                ...prevData,
+                typewriterStrings: strings,
+              }));
+            }}
           />
         </Form.Group>
 
