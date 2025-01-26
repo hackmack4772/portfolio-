@@ -131,9 +131,10 @@ const ContactUsSettings = () => {
   };
 
   return (
-    <div>
-      <h2>Contact Us Page Settings</h2>
-      <Form onSubmit={handleSubmit}>
+    <div className="contact-setting">
+      <Form onSubmit={handleSubmit} className="contact-inner-setting">
+        <h2>Contact Us Page Settings</h2>
+
         {/* General Content */}
         <h3>General Content</h3>
         <Form.Group controlId="formPageTitle">

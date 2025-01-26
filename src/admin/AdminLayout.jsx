@@ -21,12 +21,7 @@ const AdminLayout = () => {
       <div className="main-layout">
         <Navigation />
         <div className="admin-layout-container">
-          <Card
-            style={{
-              height: "100%", // Card takes full height of parent
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-            }}
-          >
+          <Card>
             <Card.Body>
               <Routes>
                 <Route path="edit-projects" element={<AdminProjects />} />

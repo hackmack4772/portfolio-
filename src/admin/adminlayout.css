@@ -359,7 +359,7 @@ td {
 }
 .main-layout {
   display: flex;
-  height: 88vh;
+  height: 90vh;
 }
 
 .admin-layout-container {
@@ -367,5 +367,15 @@ td {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   animation: fadeIn 1s ease-in-out;
+  overflow-y: scroll;
   /* max-width: 800px; */
+}
+.contact-setting {
+  display: flex;
+}
+.contact-inner-setting {
+  flex: 1;
+}
+.contact-inner-styling {
+  flex: 1;
 }

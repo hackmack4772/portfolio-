@@ -10,7 +10,7 @@ import {
   query,
   orderBy,
 } from "firebase/firestore";
-import { Container, Table, Button, Form, Modal } from "react-bootstrap";
+import { Container, Table, Button, Form, Modal, Card } from "react-bootstrap";
 
 function AdminEducation() {
   const [educationData, setEducationData] = useState([]);
@@ -102,11 +102,14 @@ function AdminEducation() {
   }, []);
 
   return (
-    <Container>
-      <h1 className="text-center my-4">Admin - Manage Education</h1>
-      <Button className="mb-3" onClick={() => handleEditEducation(null)}>
-        Add New Education
-      </Button>
+    <>
+      <Card.Header>
+        {" "}
+        <h3>All Messages</h3>
+        <Button className="mb-3" onClick={() => handleEditEducation(null)}>
+          Add New Education
+        </Button>
+      </Card.Header>{" "}
       <Table bordered hover>
         <thead>
           <tr>
@@ -152,7 +155,6 @@ function AdminEducation() {
           ))}
         </tbody>
       </Table>
-
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>
@@ -237,7 +239,7 @@ function AdminEducation() {
           </Button>
         </Modal.Footer>
       </Modal>
-    </Container>
+    </>
   );
 }
 
