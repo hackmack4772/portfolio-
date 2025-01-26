@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ContactUs.css";
-import { doc, getDoc } from "@firebase/firestore";
+import { doc, getDoc, addDoc, collection } from "@firebase/firestore";
 import { db } from "../../config/firebase";
 
 const ContactUs = () => {
