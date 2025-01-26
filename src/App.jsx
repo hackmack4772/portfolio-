@@ -1,34 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Preloader from "../src/components/Pre";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import Projects from "./components/Projects/Projects";
-import Footer from "./components/Footer";
 import Resume from "./components/Resume/ResumeNew";
+import Education from "./components/Education/Education";
+import ScrollToTop from "./components/ScrollToTop";
+import Chat from "./chat/Chat";
+import ListUsers from "./chat/ListUsers";
+import Login from "./chat/Login";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
-  useLocation,
 } from "react-router-dom";
-import ScrollToTop from "./components/ScrollToTop";
+import { useDarkMode } from "./DarkModeContext";
 import "./style.css";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Education from "./components/Education/Education";
-import Cursor from "./components/Cursor";
-import Chat from "./chat/Chat";
-import ListUsers from "./chat/ListUsers";
-import Login from "./chat/Login";
-import { useDarkMode } from "./DarkModeContext";
-import AdminProjects from "./admin/AdminProjects";
-import AdminEducation from "./admin/AdminEducation";
-import AdminHome from "./admin/AdminHome";
-import AdminHome2 from "./admin/AdminHome2";
-import ContactUsSettings from "./admin/ContactUsSettings";
-import ContactUsListing from "./admin/ContactUsListing";
+import AdminLayout from "./admin/AdminLayout";
 
 function App() {
   const [load, updateLoad] = useState(true);
@@ -40,14 +33,12 @@ function App() {
 
     return () => clearTimeout(timer);
   }, []);
-
+  const isChatRoute =
+    location.pathname === "/login" ||
+    location.pathname === "/users" ||
+    location.pathname.startsWith("/chat") ||
+    location.pathname.startsWith("/admin");
   const MainContent = () => {
-    const location = useLocation();
-    const isChatRoute =
-      location.pathname === "/login" ||
-      location.pathname === "/users" ||
-      location.pathname.startsWith("/chat");
-
     const PrivateRoute = ({ element: Component, ...rest }) => {
       const token = localStorage.getItem("token");
       return token ? <Component {...rest} /> : <Navigate to="/login" />;
@@ -58,38 +49,36 @@ function App() {
         {!isChatRoute && <Navbar />}
         <ScrollToTop />
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/project" element={<Projects />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/education" element={<Education />} />
+          <Route path="/resume" element={<Resume />} />
+
           <Route
             path="/chat/:usersdata"
             element={<PrivateRoute element={Chat} />}
           />
           <Route path="/users" element={<PrivateRoute element={ListUsers} />} />
-          <Route path="/project" element={<Projects />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/education" element={<Education />} />
-          <Route path="/resume" element={<Resume />} />
-          <Route path="/admin/edit-projects" element={<AdminProjects />} />
-          <Route path="/admin/edit-education" element={<AdminEducation />} />
-          <Route path="/admin/edit-home" element={<AdminHome />} />
-          <Route path="/admin/edit-home2" element={<AdminHome2 />} />
-          <Route path="/admin/edit-contact" element={<ContactUsSettings />} />
-          <Route path="/admin/contact-listing" element={<ContactUsListing />} />
+          <Route path="/admin/*" element={<AdminLayout />} />
+
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-        {!isChatRoute && <Footer />}
+        {!isChatRoute && <Footer />}{" "}
       </>
     );
   };
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
+
+  const { isDarkMode } = useDarkMode();
 
   return (
     <div className={isDarkMode ? "App dark-mode" : "App light-mode"}>
-      {/* <Cursor /> */}
       <Router>
         <Preloader load={load} />
         {!load && (
-          <div className="App" id={load ? "no-scroll" : "scroll"}>
+          <div id={load ? "no-scroll" : "scroll"}>
             <MainContent />
           </div>
         )}

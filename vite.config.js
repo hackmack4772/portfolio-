@@ -9,6 +9,7 @@ export default defineConfig({
       "yj6dn4-5173.csb.app",
       "https://hackmack.vercel.app",
       "scpxky-5173.csb.app",
+      "yj6dn4-5174.csb.app",
     ],
   },
 });

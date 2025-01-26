@@ -9,7 +9,7 @@ body {
   padding: 0;
 }
 
-/* Admin Panel Container */
+/*  Container */
 .admin-container {
   display: flex;
   flex-direction: column;
@@ -197,7 +197,7 @@ form p {
   color: #777;
 }
 
-/* Grid Layout for Admin Panel Content */
+/* Grid Layout for  Content */
 .admin-content {
   display: grid;
   grid-template-columns: 1fr 3fr;

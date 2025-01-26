@@ -52,7 +52,7 @@ function AdminHome2() {
 
   return (
     <div>
-      <h2>Admin Panel - Update Home2 Data</h2>
+      <h2> - Update Home2 Data</h2>
       <Form>
         {/* Heading Field */}
         <Form.Group controlId="formHeading">

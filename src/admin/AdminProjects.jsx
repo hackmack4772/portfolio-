@@ -98,7 +98,7 @@ function AdminProjects() {
 
   return (
     <Container>
-      <h1 className="text-center my-4">Admin - Manage Projects</h1>
+      <h1 className="text-center my-4">Manage Projects</h1>
       <Button className="mb-3" onClick={() => handleEditProject(null)}>
         Add New Project
       </Button>
