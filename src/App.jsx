@@ -22,14 +22,14 @@ import "./style.css";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AdminLayout from "./admin/AdminLayout";
+import { useLoading } from "./LoadingContext";
 
 function App() {
-  const [load, updateLoad] = useState(true);
-
+  const { isLoading, handleLoading } = useLoading();
   useEffect(() => {
     const timer = setTimeout(() => {
-      updateLoad(false);
-    }, 3000);
+      handleLoading(false);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -76,12 +76,13 @@ function App() {
   return (
     <div className={isDarkMode ? "App dark-mode" : "App light-mode"}>
       <Router>
-        <Preloader load={load} />
-        {!load && (
-          <div id={load ? "no-scroll" : "scroll"}>
-            <MainContent />
-          </div>
-        )}
+        <Preloader isLoading={isLoading} />
+        <div
+          id={isLoading ? "no-scroll" : "scroll"}
+          style={{ opacity: !isLoading ? 1 : 0 }}
+        >
+          <MainContent />
+        </div>
       </Router>
     </div>
   );

@@ -3,10 +3,13 @@ import { Container, Row, Col, Card, Spinner } from "react-bootstrap";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import "./education.css";
+import { useLoading } from "../../LoadingContext";
 
 function Education() {
   const [educationData, setEducationData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { handleLoading } = useLoading();
+
   const educationRef = collection(db, "educationData");
   const fetchEducationDataFromFirestore = async () => {
     try {
@@ -19,6 +22,7 @@ function Education() {
 
       setEducationData(fetchedData);
       setLoading(false);
+      handleLoading(false);
     } catch (error) {
       console.error("Error fetching education data: ", error);
       setLoading(false);

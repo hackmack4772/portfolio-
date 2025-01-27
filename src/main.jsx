@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App";
 import ActivityTracker from "./components/ActivityTracker";
 import { DarkModeProvider } from "./DarkModeContext";
+import { LoadingProvider } from "./LoadingContext";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ActivityTracker />
     <DarkModeProvider>
-      <App />{" "}
+      <LoadingProvider>
+        <App />{" "}
+      </LoadingProvider>
     </DarkModeProvider>
   </StrictMode>
 );

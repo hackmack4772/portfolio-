@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-function Pre(props) {
+function Pre({ isLoading }) {
   useEffect(() => {
     const colors = ["#35a3a6", "#35a3a6", "#35a3a6", "#35a3a6", "#35a3a6"];
     const max = 10;
@@ -28,7 +28,7 @@ function Pre(props) {
   }, []);
 
   return (
-    <div className="outer" style={{display:props.load ?"block":"none"}}>
+    <div className="outer" style={{ display: isLoading ? "block" : "none" }}>
       <div className="main"></div>
     </div>
   );

@@ -16,6 +16,7 @@ import animationData from "./l.json";
 import VisitorCounter from "../VisitorCounter";
 import { doc, getDoc } from "firebase/firestore"; // Firestore methods
 import { db } from "../../config/firebase";
+import { useLoading } from "../../LoadingContext";
 
 function Home() {
   const [personalData, setPersonalData] = useState({
@@ -31,6 +32,7 @@ function Home() {
   });
 
   const homeRef = doc(db, "home", "homeData"); // Reference to specific document in Firestore
+  const { handleLoading } = useLoading();
 
   // Fetch personal data from Firestore
   const fetchHomeData = async () => {
@@ -42,6 +44,7 @@ function Home() {
       } else {
         console.log("No such document!");
       }
+      handleLoading(false);
     } catch (error) {
       console.error("Error fetching data: ", error);
     }

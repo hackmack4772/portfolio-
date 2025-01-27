@@ -5,10 +5,12 @@ import { collection, getDocs, doc } from "firebase/firestore";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
 import bitsOfCode from "../../Assets/Projects/blog.png";
+import { useLoading } from "../../LoadingContext";
 
 function Projects() {
   const [projectsData, setProjectsData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { handleLoading } = useLoading();
   const fetchProjectsDataFromFirestore = async () => {
     try {
       const hackmackDocRef = doc(db, "hackmack", "user_projects");
@@ -22,6 +24,7 @@ function Projects() {
 
       setProjectsData(fetchedData);
       setLoading(false);
+      handleLoading(false);
     } catch (error) {
       console.error("Error fetching project data: ", error);
       setLoading(false);
