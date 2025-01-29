@@ -118,14 +118,14 @@ const AuthPage = () => {
         <div className="form-container sign-up-container">
           <form onSubmit={(e) => handleSubmit(e, "signUp")}>
             <h1>Sign Up</h1>
-            <button
+            {/* <button
               type="button"
               onClick={handleLoginWithGoogle}
               className="social"
             >
               <i className="fab fa-google-plus-g"></i>
             </button>
-            <span>or use your email for registration</span>
+            <span>or use your email for registration</span> */}
             <input
               type="text"
               name="name"
@@ -164,14 +164,14 @@ const AuthPage = () => {
         <div className="form-container sign-in-container">
           <form onSubmit={(e) => handleSubmit(e, "signIn")}>
             <h1>Sign In</h1>
-            <button
+            {/* <button
               type="button"
               onClick={handleLoginWithGoogle}
               className="social"
             >
               <i className="fab fa-google-plus-g"></i>
-            </button>
-            <span>or use your email account</span>
+            </button> */}
+            {/* <span>or use your email account</span> */}
             <input
               type="email"
               name="email"
@@ -210,7 +210,7 @@ const AuthPage = () => {
                 Sign In
               </button>
             </div>
-            <div className="overlay-panel overlay-right">
+            {/* <div className="overlay-panel overlay-right">
               <h1>Hello, Friend!</h1>
               <p>Enter your details to start your journey with us</p>
               <button
@@ -220,13 +220,13 @@ const AuthPage = () => {
               >
                 Sign Up
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
-      <button onClick={handleLogout} className="logout-button">
+      {/* <button onClick={handleLogout} className="logout-button">
         Logout
-      </button>
+      </button> */}
     </div>
   );
 };

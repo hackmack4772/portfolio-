@@ -37,43 +37,7 @@ function Home2() {
     <Container fluid className="home-about-section" id="about">
       <Container>
         <Row>
-          <Col md={8} className="home-about-description">
-            <h1 style={{ fontSize: "2.6em" }}>
-              {home2Data.heading && `${home2Data.heading} `}
-              <span className="purple">INTRODUCE</span> MYSELF
-            </h1>
-            <p className="home-about-body">
-              {home2Data.introduction && home2Data.introduction}
-              <br />
-              <br />
-              {home2Data.skills && (
-                <>
-                  My skills include:{" "}
-                  <i>
-                    <b className="purple">{home2Data.skills}</b>
-                  </i>
-                  <br />
-                  <br />
-                </>
-              )}
-              {home2Data.skills2 && (
-                <>
-                  <i>
-                    <b className="purple">{home2Data.skills2}</b>
-                  </i>
-                  <br />
-                  <br />
-                </>
-              )}
-              {home2Data.hobbies && (
-                <>
-                  In my free time, I enjoy:{" "}
-                  <i>
-                    <b className="purple">{home2Data.hobbies}</b>
-                  </i>
-                </>
-              )}
-            </p>
+          <Col md={8} className="home-about-description"dangerouslySetInnerHTML={{ __html: home2Data.introduction }} >
           </Col>
           <Col md={4} className="myAvtar">
             <Tilt>

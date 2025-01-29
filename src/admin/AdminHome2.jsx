@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { db } from "../config/firebase"; // Firebase config import
 import { doc, getDoc, setDoc } from "firebase/firestore"; // Firestore methods
+import { Editor } from "@tinymce/tinymce-react"; // Import TinyMCE Editor
 
 function AdminHome2() {
   const [home2Data, setHome2Data] = useState({
@@ -19,6 +20,11 @@ function AdminHome2() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setHome2Data({ ...home2Data, [name]: value });
+  };
+
+  // Handle TinyMCE editor change
+  const handleEditorChange = (content, editor) => {
+    setHome2Data({ ...home2Data, introduction: content });
   };
 
   // Save Home2 data to Firebase
@@ -69,13 +75,24 @@ function AdminHome2() {
         {/* Introduction Field */}
         <Form.Group controlId="formIntroduction">
           <Form.Label>Introduction</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter Introduction"
-            name="introduction"
-            value={home2Data.introduction}
-            onChange={handleInputChange}
-          />
+          <Editor
+  apiKey="wcs0tr03ex8aael6x0srckygt7derbszhies2gq7kevl31n3"
+  value={home2Data.introduction}
+  init={{
+    height: 500,
+    menubar: false,
+    plugins: [
+      'advlist autolink lists link image charmap print preview anchor',
+      'searchreplace visualblocks code fullscreen',
+      'insertdatetime media table paste code help wordcount',
+      'code' // Ensure 'code' is included
+    ],
+    toolbar:
+      'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat | code', // Ensure 'code' is in the toolbar
+  }}
+  onEditorChange={handleEditorChange}
+/>
+
         </Form.Group>
 
         {/* Skills Field */}
