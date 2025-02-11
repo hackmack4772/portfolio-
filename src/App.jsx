@@ -23,6 +23,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AdminLayout from "./admin/AdminLayout";
 import { useLoading } from "./LoadingContext";
+import NotFound from "./components/NotFound";
 
 function App() {
   const { isLoading, handleLoading } = useLoading();
@@ -36,6 +37,7 @@ function App() {
   const isChatRoute =
     location.pathname === "/login" ||
     location.pathname === "/users" ||
+    location.pathname === "/not-found" ||
     location.pathname.startsWith("/chat") ||
     location.pathname.startsWith("/admin");
   const MainContent = () => {
@@ -51,6 +53,7 @@ function App() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
+          <Route path="/not-found" element={<NotFound />} />
           <Route path="/login" element={<Login />} />
           <Route path="/project" element={<Projects />} />
           <Route path="/about" element={<About />} />
@@ -64,7 +67,7 @@ function App() {
           <Route path="/users" element={<PrivateRoute element={ListUsers} />} />
           <Route path="/admin/*" element={<AdminLayout />} />
 
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to="/not-found" />} />
         </Routes>
         {!isChatRoute && <Footer />}{" "}
       </>
