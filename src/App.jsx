@@ -24,6 +24,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AdminLayout from "./admin/AdminLayout";
 import { useLoading } from "./LoadingContext";
 import NotFound from "./components/NotFound";
+import Menu from "./components/Home/Menu";
 
 function App() {
   const { isLoading, handleLoading } = useLoading();
@@ -52,7 +53,8 @@ function App() {
         <ScrollToTop />
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Menu />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/not-found" element={<NotFound />} />
           <Route path="/login" element={<Login />} />
           <Route path="/project" element={<Projects />} />
@@ -69,7 +71,7 @@ function App() {
 
           <Route path="*" element={<Navigate to="/not-found" />} />
         </Routes>
-        {!isChatRoute && <Footer />}{" "}
+        {/* {!isChatRoute && <Footer />}{" "} */}
       </>
     );
   };
