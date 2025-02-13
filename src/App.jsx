@@ -37,6 +37,7 @@ function App() {
   }, []);
   const isChatRoute =
     location.pathname === "/login" ||
+    location.pathname === "/" ||
     location.pathname === "/users" ||
     location.pathname === "/not-found" ||
     location.pathname.startsWith("/chat") ||
