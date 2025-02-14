@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import "./home.css";
 import { useLoading } from "../../LoadingContext";
 import myImg from "../../Assets/avatar.jpeg";
+import {
+  AiFillGithub,
+  AiFillInstagram,
+  AiOutlineTwitter,
+} from "react-icons/ai";
+import { FaLinkedinIn } from "react-icons/fa";
+import { Col, Container, Navbar, Row } from "react-bootstrap";
 
 const menuItems = [
   { icon: "fa fa-home", title: "Home", path: "/home" },
@@ -22,28 +29,81 @@ function Menu() {
   }, []);
 
   return (
-    <div
-      className="home-section"
-      id="home"
-    >
+    <div id="home">
       <div className="page-home">
-          <section>
-            <div class="container">
-              <div class="background-img">
-                <div class="box">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <div class="content">
-                    <p>
-                    <img src={myImg} className="img-fluid" alt="avatar" />
-                     Aamir Saleem Lone
-                    </p>
-                    
-                  </div>
+        {/* <Navbar
+      fixed="top"
+      expand="md"
+      className={ "navbar"}
+    >
+      <Container>
+        <Navbar.Brand href="/" className="d-flex">
+          Hack <span>mack</span>
+        </Navbar.Brand>
+  
+      </Container>
+    </Navbar> */}
+        <div class="container">
+          <div class="background-img">
+            <div class="box">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <div class="content">
+                <p>
+                  <img src={myImg} className="img-fluid" alt="avatar" />
+                  Aamir Saleem Lone
+                </p>
+              </div>
+            </div>
 
-                </div>
+            <h1>FIND ME ON</h1>
+            <p>
+              I’d love to <span className="purple">connect</span> with you!
+            </p>
+            <ul className="home-about-social-links">
+              <li className="social-icons">
+                <a
+                  // href={personalData.socialLinks.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="icon-colour home-social-icons"
+                >
+                  <AiFillGithub />
+                </a>
+              </li>
+              <li className="social-icons">
+                <a
+                  // href={personalData.socialLinks.twitter}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="icon-colour home-social-icons"
+                >
+                  <AiOutlineTwitter />
+                </a>
+              </li>
+              <li className="social-icons">
+                <a
+                  // href={personalData.socialLinks.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="icon-colour home-social-icons"
+                >
+                  <FaLinkedinIn />
+                </a>
+              </li>
+              <li className="social-icons">
+                <a
+                  // href={personalData.socialLinks.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="icon-colour home-social-icons"
+                >
+                  <AiFillInstagram />
+                </a>
+              </li>
+            </ul>
 
             <div className="col-xs-12 col-md-12 col-lg-12">
               <div className="page-title home text-center">
@@ -52,7 +112,7 @@ function Menu() {
               </div>
               <div className="hexagon-menu clear">
                 {menuItems.map((item, index) => (
-                  <div className="hexagon-item ml-2 mb-5" key={index}>
+                  <div className="hexagon-item" key={index}>
                     <div className="hex-item">
                       <div />
                       <div />
@@ -87,13 +147,10 @@ function Menu() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
 
-              </div>
-            </div>
-          </section>
-       
         {/* <div className="overlay" /> */}
-       
       </div>
     </div>
   );
