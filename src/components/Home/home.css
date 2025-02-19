@@ -554,7 +554,7 @@ label {
 }
 
 /* .hex-item div::before
-/* ,.hex-item div::after  */
+,.hex-item div::after 
 {
   background-color: #1e2530;
   content: "";

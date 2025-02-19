@@ -82,7 +82,7 @@ function App() {
   return (
     <div className={isDarkMode ? "App dark-mode" : "App light-mode"}>
       <Router>
-        <Preloader isLoading={isLoading} />
+        {/* <Preloader isLoading={isLoading} /> */}
         <div
           id={isLoading ? "no-scroll" : "scroll"}
           style={{ opacity: !isLoading ? 1 : 0 }}
