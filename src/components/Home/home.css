@@ -786,6 +786,7 @@ label {
   border-radius: 4px;
   /* box-shadow: 0px 0px 5px #2a3cad; */
   position: relative;
+  zoom: 0.83;
 }
 
 .content h2 {
@@ -897,6 +898,8 @@ label {
 @media (max-width: 991px) {
   .background-img {
     width:100%;
+    zoom: 1;
+
 
   }
 }
@@ -971,5 +974,10 @@ label {
   fill: #1e2530;
   stroke-linecap: round;
   stroke-dasharray: 300;
+}
+
+.header-text {
+  font-size: 3rem;
+
 }
 

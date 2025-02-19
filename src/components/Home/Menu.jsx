@@ -44,7 +44,13 @@ function Menu() {
     </Navbar> */}
         <div class="container">
           <div class="background-img">
-            <p className="header-text">Hackmack </p>
+          <p className="header-text">
+  {"HackMack".split("").map((char, index) => (
+    <span key={index} className="char" style={{ animationDelay: `${index * 0.1}s` }}>
+      {char}
+    </span>
+  ))}
+</p>
             <div class="box">
               <span></span>
               <span></span>
