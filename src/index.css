@@ -8,7 +8,7 @@ body {
 }
 body {
   height: 100vh;
-  with: 100vw;
+  width: 100vw;
   background: #141e30;
   /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #243b55, #141e30);

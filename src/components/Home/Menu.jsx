@@ -45,6 +45,7 @@ function Menu() {
     </Navbar> */}
         <div class="container">
           <div class="background-img">
+          <p className="header-text">Hackmack </p>
             <div class="box">
               <span></span>
               <span></span>
