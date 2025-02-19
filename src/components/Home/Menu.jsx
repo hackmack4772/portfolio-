@@ -107,10 +107,6 @@ function Menu() {
             </ul>
 
             <div className="col-xs-12 col-md-12 col-lg-12">
-              <div className="page-title home text-center">
-                <span className="heading-page"> </span>
-                <p className="mt20"></p>
-              </div>
               <div className="hexagon-menu clear">
                 {menuItems.map((item, index) => (
                   <div className="hexagon-item" key={index}>
