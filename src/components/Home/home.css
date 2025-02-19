@@ -6,6 +6,8 @@ body {
   background-color: #0c0f15;
   color: #ababab;
   overflow-x: hidden; /* Fixed the syntax here */
+  background-image: var(--image-gradient), url(../../Assets/home-bg.jpg)
+
 }
 
 ::-webkit-scrollbar {
@@ -913,3 +915,60 @@ label {
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
 }
 
+
+@keyframes cyberGlow {
+  0% {
+    stroke-dasharray: 0, 300;
+    stroke-opacity: 0;
+    stroke-width: 2;
+    filter: drop-shadow(0px 0px 5px #00FFFF);
+    transform: scale(1) rotate(0deg);
+  }
+  20% {
+    stroke-dasharray: 80, 220;
+    stroke-opacity: 0.7;
+    stroke-width: 3;
+    filter: drop-shadow(0px 0px 10px #FF00FF);
+    transform: scale(1.05) rotate(3deg);
+  }
+  40% {
+    stroke-dasharray: 150, 150;
+    stroke-opacity: 1;
+    stroke-width: 4;
+    filter: drop-shadow(0px 0px 15px #00FFFF);
+    transform: scale(1.1) rotate(-3deg);
+  }
+  60% {
+    stroke-dasharray: 220, 80;
+    stroke-opacity: 0.7;
+    stroke-width: 3;
+    filter: drop-shadow(0px 0px 10px #FF00FF);
+    transform: scale(1.05) rotate(3deg);
+  }
+  80% {
+    stroke-dasharray: 80, 220;
+    stroke-opacity: 0.5;
+    stroke-width: 2;
+    filter: drop-shadow(0px 0px 5px #00FFFF);
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    stroke-dasharray: 0, 300;
+    stroke-opacity: 0;
+    stroke-width: 2;
+    filter: drop-shadow(0px 0px 5px #FF00FF);
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.hex-content svg {
+  animation: cyberGlow 6s infinite ease-in-out;
+}
+
+.hex-content svg path {
+  stroke: url(#cyberGradient);
+  stroke-width: 2;
+  fill: #1e2530;
+  stroke-linecap: round;
+  stroke-dasharray: 300;
+}

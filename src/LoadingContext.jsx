@@ -5,7 +5,7 @@ const LoadingContext = createContext();
 
 // Create a Provider Component
 export const LoadingProvider = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLoading = (status) => setIsLoading(status);
 

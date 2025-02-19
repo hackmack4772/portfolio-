@@ -9,7 +9,6 @@ import {
   AiOutlineTwitter,
 } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
-import { Col, Container, Navbar, Row } from "react-bootstrap";
 
 const menuItems = [
   { icon: "fa fa-home", title: "Home", path: "/home" },
@@ -45,7 +44,7 @@ function Menu() {
     </Navbar> */}
         <div class="container">
           <div class="background-img">
-          <p className="header-text">Hackmack </p>
+            <p className="header-text">Hackmack </p>
             <div class="box">
               <span></span>
               <span></span>
@@ -107,6 +106,10 @@ function Menu() {
             </ul>
 
             <div className="col-xs-12 col-md-12 col-lg-12">
+              <div className="page-title home text-center">
+                <span className="heading-page"> </span>
+                <p className="mt20"></p>
+              </div>
               <div className="hexagon-menu clear">
                 {menuItems.map((item, index) => (
                   <div className="hexagon-item" key={index}>
@@ -129,17 +132,25 @@ function Menu() {
                       </span>
                       <svg
                         viewBox="0 0 173.20508075688772 200"
-                        height={200}
-                        width={174}
+                        height={190}
+                        width={164}
                         version="1.1"
                         xmlns="http://www.w3.org/2000/svg"
                       >
+                        <defs>
+                          <linearGradient id="cyberGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style={{ stopColor: "#00FFFF", stopOpacity: 1 }} />
+                            <stop offset="100%" style={{ stopColor: "#FF00FF", stopOpacity: 1 }} />
+                          </linearGradient>
+                        </defs>
                         <path
                           d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z"
                           fill="#1e2530"
+                          stroke="url(#cyberGradient)"
                         />
                       </svg>
                     </Link>
+
                   </div>
                 ))}
               </div>

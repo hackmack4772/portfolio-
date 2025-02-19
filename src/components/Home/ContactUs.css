@@ -84,7 +84,7 @@ button.contact_form_submit {
   background: var(--image-gradient);
   border: none;
   color: #fff;
-  padding: 10px 15px;
+  padding: 18px;
   width: 100%;
   margin-top: 10px;
   border-radius: 25px;
@@ -172,7 +172,7 @@ button.contact_form_submit:hover {
   }
 
   button.contact_form_submit {
-    padding: 8px 12px;
+    padding: 18px 12px;
     font-size: 12px;
   }
 
