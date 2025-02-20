@@ -76,7 +76,7 @@ function Menu() {
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
                 >
-                  <AiFillGithub />
+                  <AiFillGithub  color="black"/>
                 </a>
               </li>
               <li className="social-icons">
@@ -86,7 +86,7 @@ function Menu() {
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
                 >
-                  <AiOutlineTwitter />
+                  <AiOutlineTwitter  color="black" />
                 </a>
               </li>
               <li className="social-icons">
@@ -96,7 +96,7 @@ function Menu() {
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
                 >
-                  <FaLinkedinIn />
+                  <FaLinkedinIn color="black" />
                 </a>
               </li>
               <li className="social-icons">
@@ -106,7 +106,7 @@ function Menu() {
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
                 >
-                  <AiFillInstagram />
+                  <AiFillInstagram  color="black" />
                 </a>
               </li>
             </ul>

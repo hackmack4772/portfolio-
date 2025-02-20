@@ -829,7 +829,7 @@ label {
   background: #111845a6;
   box-sizing: border-box;
   box-shadow: 0 20px 50px rgb(23, 32, 90);
-  border: 2px solid #2a3cad;
+  border: 2px solid #00FFFF;
   color: white;
   padding: 20px;
   overflow: hidden;
@@ -1013,4 +1013,22 @@ padding: 20px;
 h1.purple{
   font-size: 1.5rem;
   margin: 5px;
+}
+
+.home-social-icons {
+  color: white; /* Icon color */
+  font-size: 24px; /* Adjust icon size if needed */
+}
+
+.social-icons {
+  display: inline-block;
+  background-color: black; /* Background color */
+  border-radius: 50%; /* Makes it circular */
+  padding: 10px; /* Adjust padding for spacing */
+  margin: 5px; /* Space between icons */
+  transition: 0.3s ease-in-out; /* Smooth hover effect */
+}
+
+.social-icons:hover {
+  background-color: #333; /* Slightly lighter black on hover */
 }
