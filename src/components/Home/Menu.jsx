@@ -44,13 +44,13 @@ function Menu() {
     </Navbar> */}
         <div class="container">
           <div class="background-img">
-          <p className="header-text">
-  {"HackMack".split("").map((char, index) => (
-    <span key={index} className="char" style={{ animationDelay: `${index * 0.1}s` }}>
-      {char}
-    </span>
-  ))}
-</p>
+            <p className="header-text">
+              {"HackMack".split("").map((char, index) => (
+                <span key={index} className="char" style={{ animationDelay: `${index * 0.1}s` }}>
+                  {char}
+                </span>
+              ))}
+            </p>
             <div class="box">
               <span></span>
               <span></span>
@@ -64,14 +64,14 @@ function Menu() {
               </div>
             </div>
 
-            <h1>FIND ME ON</h1>
+            <h1  className="purple" >FIND ME ON</h1>
             <p>
               I’d love to <span className="purple">connect</span> with you!
             </p>
             <ul className="home-about-social-links">
               <li className="social-icons">
                 <a
-                  // href={personalData.socialLinks.github}
+                  href={"https://github.com/hackmack4772"}
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
@@ -81,7 +81,7 @@ function Menu() {
               </li>
               <li className="social-icons">
                 <a
-                  // href={personalData.socialLinks.twitter}
+                  href={"https://twitter.com/hackmack4772"}
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
@@ -91,7 +91,7 @@ function Menu() {
               </li>
               <li className="social-icons">
                 <a
-                  // href={personalData.socialLinks.linkedin}
+                  href={"https://www.linkedin.com/in/aamir-saleem-lone/"}
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
@@ -101,7 +101,7 @@ function Menu() {
               </li>
               <li className="social-icons">
                 <a
-                  // href={personalData.socialLinks.instagram}
+                  href={"https://www.instagram.com/aamir-saleem-lone"}
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
