@@ -7,40 +7,61 @@ import { AiOutlineDownload } from "react-icons/ai";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import { useLoading } from "../../LoadingContext";
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 function ResumeNew() {
-  const [width, setWidth] = useState(1200);
+  const [numPages, setNumPages] = useState(null);
+  const [width, setWidth] = useState(window.innerWidth);
+
   const { handleLoading } = useLoading();
 
   useEffect(() => {
-    const handleApiData = () => {
-      handleLoading(false);
+    handleLoading(false);
+
+    const updateWidth = () => {
+      setWidth(window.innerWidth);
     };
-    handleApiData();
+
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
   }, []);
-  useEffect(() => {
-    setWidth(window.innerWidth);
-  }, []);
+
+  // Adjust scale based on screen width
+  const getScale = () => {
+    if (width > 1200) return 1.5; // Large screens
+    if (width > 768) return 1.2; // Tablets
+    return 0.8; // Mobile
+  };
 
   return (
     <div>
-      <Container fluid className="resume-section">
+      <Container fluid className="resume-section" style={{ overflowX: "hidden" }}>
         <Particle />
 
-        <Row className="resume">
-          <Document file={pdf} className="d-flex justify-content-center">
-            <Page pageNumber={1} scale={width > 786 ? 1.7 : 0.6} />
-          </Document>
-        </Row>
-
-        <Row style={{ justifyContent: "center", position: "relative" }}>
-          <Button
-            variant="primary"
-            href={pdf}
-            target="_blank"
-            style={{ maxWidth: "250px" }}
+        {/* Scrollable Resume Viewer (No horizontal overflow) */}
+        <div
+          style={{
+            maxHeight: "80vh",
+            overflowY: "auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Document
+            file={pdf}
+            onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+            className="d-flex flex-column align-items-center"
           >
+            {Array.from({ length: numPages }, (_, index) => (
+              <Page key={index} pageNumber={index + 1} scale={getScale()} />
+            ))}
+          </Document>
+        </div>
+
+        <Row style={{ justifyContent: "center", position: "relative", marginTop: "20px" }}>
+          <Button variant="primary" href={pdf} target="_blank" style={{ maxWidth: "250px" }}>
             <AiOutlineDownload />
             &nbsp;Download CV
           </Button>
