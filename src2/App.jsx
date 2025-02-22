@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Preloader from "./components/Pre";
+import Preloader from "../src/components/Pre";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./components/Home/Home";
@@ -23,7 +23,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AdminLayout from "./admin/AdminLayout";
 import { useLoading } from "./LoadingContext";
-import NotFound from "./components/NotFound";
+import NotFound from "../src/pages/NotFound/NotFound";
 import Menu from "./components/Home/Menu";
 
 function App() {

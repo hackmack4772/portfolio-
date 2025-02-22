@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: "Victor Mono", "Fira Code", "JetBrains Mono", monospace;
+  }
+
+
+
 body {
-  font-family: "Libre Baskerville", serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 30px;

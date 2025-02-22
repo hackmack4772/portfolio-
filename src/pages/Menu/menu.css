@@ -798,19 +798,19 @@
     text-align: center;
   }
   
-  .home-social-icons {
+  .menu-social-icons {
     color: white; /* Icon color */
     font-size: 24px; /* Adjust icon size if needed */
   }
   
   
-.home-about-social {
+.menu-about-social {
   text-align: center !important;
   padding-top: 25px;
   color: white !important;
 }
 
-.home-about-social-links {
+.menu-about-social-links {
   justify-content: center !important;
   padding-top: 15px !important;
   display: flex !important;
@@ -818,7 +818,7 @@
   padding-inline-start: 0 !important;
 }
 
-.home-social-icons {
+.menu-social-icons {
   position: relative !important;
   display: inline-block !important;
   width: 40px !important;
@@ -831,7 +831,7 @@
   transition: 0.5s !important;
 }
 
-.home-social-icons::before {
+.menu-social-icons::before {
   content: "";
   position: absolute;
   top: 0;
@@ -845,12 +845,12 @@
   z-index: -1;
 }
 
-.home-social-icons:hover::before {
+.menu-social-icons:hover::before {
   transform: scale(1.1);
   box-shadow: 0 0 15px #03a3a5;;
 }
 
-.home-social-icons:hover {
+.menu-social-icons:hover {
   color: #0cfbff;
   box-shadow: 0 0 5px #0cfbff;
   text-shadow: 0 0 2px #0cfbff;

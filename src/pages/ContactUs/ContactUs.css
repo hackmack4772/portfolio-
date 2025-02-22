@@ -4,14 +4,12 @@
 }
 
 .contact_us {
-  /* background-color: #f1f1f1; */
   padding: 60px 0;
 }
 
 .contact_inner {
-  background-color: #fff;
   position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   padding: 30px;
   animation: fadeIn 1s ease-in-out;
@@ -31,16 +29,16 @@
 }
 
 .contact_form_inner {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.08);
   border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
   padding: 30px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contact_form_inner:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
 }
 
 .contact_field {
@@ -48,21 +46,23 @@
 }
 
 .contact_field h3 {
-  color: #000;
+  color: #fff; /* White for readability */
   font-size: 28px;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
 .contact_field p {
-  color: #000;
+  color: #ccc;
   font-size: 14px;
   margin-bottom: 20px;
 }
 
 .contact_field .form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
   border-radius: 25px;
-  border: 1px solid #ccc;
+  border: 1px solid #555;
   margin-bottom: 15px;
   padding: 10px 20px;
   font-size: 14px;
@@ -78,13 +78,14 @@
 
 .contact_field .form-control::placeholder {
   font-size: 14px;
+  color: #aaa;
 }
 
 button.contact_form_submit {
-  background: var(--image-gradient);
+  background: linear-gradient(to right, #00ffff, #00ffff);
   border: none;
-  color: #fff;
-  padding: 18px;
+  color: #000;
+  padding: 5px;
   width: 100%;
   margin-top: 10px;
   border-radius: 25px;
@@ -103,7 +104,7 @@ button.contact_form_submit:hover {
   text-align: center;
   font-size: 24px;
   font-weight: bold;
-  color: #000;
+  color: #fff;
   margin-bottom: 20px;
   animation: fadeIn 2s ease-in-out;
 }
@@ -117,6 +118,11 @@ button.contact_form_submit:hover {
 .socil_item_inner li a {
   color: #fff;
   font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.socil_item_inner li a:hover {
+  color: #1325e8;
 }
 
 .socil_item_inner {
@@ -124,7 +130,7 @@ button.contact_form_submit:hover {
 }
 
 .contact_info_sec {
-  background-color: #2d2d2d;
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 20px;
   border-radius: 15px;
   margin-top: 20px;
@@ -137,11 +143,12 @@ button.contact_form_submit:hover {
 
 .info_single {
   margin: 15px 0;
-  color: #fff;
+  color: #ddd;
 }
 
 .info_single i {
   margin-right: 10px;
+  color: #8f10b7;
 }
 
 .info_single span {
@@ -191,4 +198,33 @@ button.contact_form_submit:hover {
   .info_single span {
     font-size: 12px;
   }
+}
+
+
+
+@keyframes cyberBorder {
+  0% {
+    box-shadow: 0 10px 40px rgba(0, 65, 65, 0.3);
+  }
+  25% {
+    box-shadow: 0 15px 50px rgba(0, 65, 65, 0.4);
+  }
+  50% {
+    box-shadow: 0 20px 60px rgba(255, 255, 255, 0.8); /* Darker shadow */
+  }
+  75% {
+    box-shadow: 0 15px 50px rgba(0, 65, 65, 0.4);
+  }
+  100% {
+    box-shadow: 0 10px 40px rgba(0, 65, 65, 0.3);
+  }
+}
+
+
+/* Apply the animation to the contact form */
+.contact_inner {
+  border: 3px solid transparent;
+  border-image-slice: 1;
+  animation: cyberBorder 4s infinite linear;
+  border-radius: 15px;
 }

@@ -29,7 +29,7 @@ function Menu() {
 
   return (
     <div id="home">
-      <div className="page-home">
+      <div className="page-menu">
         {/* <Navbar
       fixed="top"
       expand="md"
@@ -68,13 +68,13 @@ function Menu() {
             <p>
               I’d love to <span className="purple">connect</span> with you!
             </p>
-            <ul className="home-about-social-links">
+            <ul className="menu-about-social-links">
               <li className="social-icons">
                 <a
                   href={"https://github.com/hackmack4772"}
                   target="_blank"
                   rel="noreferrer"
-                  className="icon-colour home-social-icons"
+                  className="icon-colour menu-social-icons"
                 >
                   <AiFillGithub  color="black"/>
                 </a>
@@ -84,7 +84,7 @@ function Menu() {
                   href={"https://twitter.com/hackmack4772"}
                   target="_blank"
                   rel="noreferrer"
-                  className="icon-colour home-social-icons"
+                  className="icon-colour menu-social-icons"
                 >
                   <AiOutlineTwitter  color="black" />
                 </a>
@@ -94,7 +94,7 @@ function Menu() {
                   href={"https://www.linkedin.com/in/aamir-saleem-lone/"}
                   target="_blank"
                   rel="noreferrer"
-                  className="icon-colour home-social-icons"
+                  className="icon-colour menu-social-icons"
                 >
                   <FaLinkedinIn color="black" />
                 </a>
@@ -104,7 +104,7 @@ function Menu() {
                   href={"https://www.instagram.com/aamir-saleem-lone"}
                   target="_blank"
                   rel="noreferrer"
-                  className="icon-colour home-social-icons"
+                  className="icon-colour menu-social-icons"
                 >
                   <AiFillInstagram  color="black" />
                 </a>
@@ -112,7 +112,7 @@ function Menu() {
             </ul>
 
             <div className="col-xs-12 col-md-12 col-lg-12">
-              <div className="page-title home text-center">
+              <div className="page-title menu text-center">
                 <span className="heading-page"> </span>
                 <p className="mt20"></p>
               </div>

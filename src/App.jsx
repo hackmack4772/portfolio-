@@ -1,43 +1,36 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "./components/Navbar";
-import Menu from "./pages/Menu/Menu";
+import React, { useState, useEffect, lazy, Suspense } from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { useLoading } from "./Context/LoadingContext";
 import { useDarkMode } from "./Context/DarkModeContext";
 
-// import Preloader from "./components/Pre";
-// import Footer from "./components/Footer";
-// import Home from "./components/Home/Home";
-// import About from "./components/About/About";
-// import Projects from "./components/Projects/Projects";
-// import Resume from "./components/Resume/ResumeNew";
-// import Education from "./components/Education/Education";
-import ScrollToTop from "./components/ScrollToTop";
-// import Chat from "./chat/Chat";
-// import ListUsers from "./chat/ListUsers";
-// import Login from "./chat/Login";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
-import LandingPage from "./pages/LandingPage/LandingPage";
-// import "./style.css";
-// import "./App.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import AdminLayout from "./admin/AdminLayout";
-// import { useLoading } from "./LoadingContext";
-// import NotFound from "./pages/NotFound";
+// Lazy load components
+const Navbar = lazy(() => import("./components/Navbar/Navbar"));
+const Menu = lazy(() => import("./pages/Menu/Menu"));
+const LandingPage = lazy(() => import("./pages/LandingPage/LandingPage"));
+const Footer = lazy(() => import("./components/Footer/Footer"));
+const ScrollToTop = lazy(() => import("./components/ScrollToTop"));
+const Preloader = lazy(() => import("./components/Pre"));
+const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
+// const Login = lazy(() => import("./chat/Login"));
+// const Projects = lazy(() => import("./components/Projects/Projects"));
+// const About = lazy(() => import("./components/About/About"));
+// const Education = lazy(() => import("./components/Education/Education"));
+// const Resume = lazy(() => import("./components/Resume/ResumeNew"));
+// const Chat = lazy(() => import("./chat/Chat"));
+// const ListUsers = lazy(() => import("./chat/ListUsers"));
+// const AdminLayout = lazy(() => import("./admin/AdminLayout"));
 
 function App() {
-  const { isLoading=false, handleLoading } = useLoading();
+  const { isLoading = false, handleLoading } = useLoading();
+
   useEffect(() => {
     const timer = setTimeout(() => {
       handleLoading(false);
     }, 5000);
-
     return () => clearTimeout(timer);
   }, []);
+
+  const { isDarkMode } = useDarkMode();
   const isChatRoute =
     location.pathname === "/login" ||
     location.pathname === "/" ||
@@ -45,54 +38,46 @@ function App() {
     location.pathname === "/not-found" ||
     location.pathname.startsWith("/chat") ||
     location.pathname.startsWith("/admin");
-  const MainContent = () => {
-    const PrivateRoute = ({ element: Component, ...rest }) => {
-      const token = localStorage.getItem("token");
-      return token ? <Component {...rest} /> : <Navigate to="/login" />;
-    };
 
-    return (
-      <>
-        {!isChatRoute && <Navbar />}
-        <ScrollToTop />
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={<Menu />} />
-          <Route path="/home" element={<LandingPage />} />
-          {/* 
-          <Route path="/not-found" element={<NotFound />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/project" element={<Projects />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/education" element={<Education />} />
-          <Route path="/resume" element={<Resume />} /> */}
-
-          {/* <Route
-            path="/chat/:usersdata"
-            element={<PrivateRoute element={Chat} />}
-          /> */}
-          {/* <Route path="/users" element={<PrivateRoute element={ListUsers} />} /> */}
-          {/* <Route path="/admin/*" element={<AdminLayout />} /> */}
-
-          <Route path="*" element={<Navigate to="/not-found" />} />
-        </Routes>
-        {/* {!isChatRoute && <Footer />}{" "} */}
-      </>
-    );
+  const PrivateRoute = ({ element: Component, ...rest }) => {
+    const token = localStorage.getItem("token");
+    return token ? <Component {...rest} /> : <Navigate to="/login" />;
   };
 
-  const { isDarkMode } = useDarkMode();
+  const MainContent = () => (
+    <Suspense fallback={<div className="loading-screen">Loading...</div>}>
+      {!isChatRoute && <Navbar />}
+      <ScrollToTop />
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Menu />} />
+        <Route path="/home" element={<LandingPage />} />
+        <Route path="/not-found" element={<NotFound />} />
+        {/* <Route path="/login" element={<Login />} />
+        <Route path="/project" element={<Projects />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/education" element={<Education />} />
+        <Route path="/resume" element={<Resume />} />
+         */}
+        {/* Private Routes */}
+        {/* <Route path="/chat/:usersdata" element={<PrivateRoute element={Chat} />} />
+        <Route path="/users" element={<PrivateRoute element={ListUsers} />} />
+        <Route path="/admin/*" element={<AdminLayout />} /> */}
+
+        <Route path="*" element={<Navigate to="/not-found" />} />
+      </Routes>
+      {!isChatRoute && <Footer />}
+    </Suspense>
+  );
 
   return (
     <div className={isDarkMode ? "App dark-mode" : "App light-mode"}>
       <Router>
-        {/* <Preloader isLoading={isLoading} /> */}
-        <div
-          id={isLoading ? "no-scroll" : "scroll"}
-          style={{ opacity: !isLoading ? 1 : 0 }}
-        >
-          <MainContent />
-        </div>
+        <Suspense fallback={<Preloader isLoading={isLoading} />}>
+          <div id={isLoading ? "no-scroll" : "scroll"} style={{ opacity: !isLoading ? 1 : 0 }}>
+            <MainContent />
+          </div>
+        </Suspense>
       </Router>
     </div>
   );

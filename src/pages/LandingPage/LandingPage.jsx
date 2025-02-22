@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import homeLogo from "../../Assets/home-main.svg";
-// import Home2 from "./Home2";
-// import ContactForm from "./ContactForm";
+import MyJourney from "../MyJourney/MyJourney";
+import ContactUs from "../ContactUs/ContactUs";
 import {
   AiFillGithub,
   AiOutlineTwitter,
@@ -98,9 +98,9 @@ function LandingPage() {
         </Container>
       </Container>
 
-      {/* <Home2 /> */}
+      <MyJourney />
       <Container fluid className="contact_us">
-        {/* <ContactForm /> */}
+        <ContactUs />
         <Row>
           <Col md={11} className="home-about-social">
             <h1>FIND ME ON</h1>
