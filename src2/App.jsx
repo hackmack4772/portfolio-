@@ -1,36 +1,33 @@
 import React, { useState, useEffect } from "react";
+import Preloader from "./components/Pre";
 import Navbar from "./components/Navbar";
-import Menu from "./pages/Menu/Menu";
-import { useLoading } from "./Context/LoadingContext";
-import { useDarkMode } from "./Context/DarkModeContext";
-
-// import Preloader from "./components/Pre";
-// import Footer from "./components/Footer";
-// import Home from "./components/Home/Home";
-// import About from "./components/About/About";
-// import Projects from "./components/Projects/Projects";
-// import Resume from "./components/Resume/ResumeNew";
-// import Education from "./components/Education/Education";
+import Footer from "./components/Footer";
+import Home from "./components/Home/Home";
+import About from "./components/About/About";
+import Projects from "./components/Projects/Projects";
+import Resume from "./components/Resume/ResumeNew";
+import Education from "./components/Education/Education";
 import ScrollToTop from "./components/ScrollToTop";
-// import Chat from "./chat/Chat";
-// import ListUsers from "./chat/ListUsers";
-// import Login from "./chat/Login";
+import Chat from "./chat/Chat";
+import ListUsers from "./chat/ListUsers";
+import Login from "./chat/Login";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
 } from "react-router-dom";
-import LandingPage from "./pages/LandingPage/LandingPage";
-// import "./style.css";
-// import "./App.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import AdminLayout from "./admin/AdminLayout";
-// import { useLoading } from "./LoadingContext";
-// import NotFound from "./pages/NotFound";
+import { useDarkMode } from "./DarkModeContext";
+import "./style.css";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import AdminLayout from "./admin/AdminLayout";
+import { useLoading } from "./LoadingContext";
+import NotFound from "./components/NotFound";
+import Menu from "./components/Home/Menu";
 
 function App() {
-  const { isLoading=false, handleLoading } = useLoading();
+  const { isLoading, handleLoading } = useLoading();
   useEffect(() => {
     const timer = setTimeout(() => {
       handleLoading(false);
@@ -58,21 +55,20 @@ function App() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Menu />} />
-          <Route path="/home" element={<LandingPage />} />
-          {/* 
+          <Route path="/home" element={<Home />} />
           <Route path="/not-found" element={<NotFound />} />
           <Route path="/login" element={<Login />} />
           <Route path="/project" element={<Projects />} />
           <Route path="/about" element={<About />} />
           <Route path="/education" element={<Education />} />
-          <Route path="/resume" element={<Resume />} /> */}
+          <Route path="/resume" element={<Resume />} />
 
-          {/* <Route
+          <Route
             path="/chat/:usersdata"
             element={<PrivateRoute element={Chat} />}
-          /> */}
-          {/* <Route path="/users" element={<PrivateRoute element={ListUsers} />} /> */}
-          {/* <Route path="/admin/*" element={<AdminLayout />} /> */}
+          />
+          <Route path="/users" element={<PrivateRoute element={ListUsers} />} />
+          <Route path="/admin/*" element={<AdminLayout />} />
 
           <Route path="*" element={<Navigate to="/not-found" />} />
         </Routes>
