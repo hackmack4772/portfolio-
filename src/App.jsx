@@ -14,7 +14,7 @@ const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 // const Login = lazy(() => import("./chat/Login"));
 // const Projects = lazy(() => import("./components/Projects/Projects"));
 // const About = lazy(() => import("./components/About/About"));
-// const Education = lazy(() => import("./components/Education/Education"));
+const Education = lazy(() => import("./pages/Education/Education"));
 // const Resume = lazy(() => import("./components/Resume/ResumeNew"));
 // const Chat = lazy(() => import("./chat/Chat"));
 // const ListUsers = lazy(() => import("./chat/ListUsers"));
@@ -53,10 +53,11 @@ function App() {
         <Route path="/" element={<Menu />} />
         <Route path="/home" element={<LandingPage />} />
         <Route path="/not-found" element={<NotFound />} />
+        <Route path="/education" element={<Education />} />
+
         {/* <Route path="/login" element={<Login />} />
         <Route path="/project" element={<Projects />} />
         <Route path="/about" element={<About />} />
-        <Route path="/education" element={<Education />} />
         <Route path="/resume" element={<Resume />} />
          */}
         {/* Private Routes */}

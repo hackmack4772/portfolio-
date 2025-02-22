@@ -133,3 +133,14 @@
   .navbar-nav .nav-item a:hover::after {
     width: 100%;
   }
+  .navbar .navbar-brand {
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .navbar-brand span {
+    color: #35a3a6;
+    font-weight: 900;
+    text-transform: capitalize;
+  }
+  

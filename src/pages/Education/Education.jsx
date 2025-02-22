@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Spinner } from "react-bootstrap";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { db } from "../../../src/config/firebase";
+import { db } from "../../config/firebase";
 import "./education.css";
-import { useLoading } from "../../LoadingContext";
+import { useLoading } from "../../Context/LoadingContext";
 
 function Education() {
   const [educationData, setEducationData] = useState([]);
@@ -39,7 +39,7 @@ function Education() {
         <h1 className="education-heading">
           My <strong className="purple">Education</strong>
         </h1>
-        <p style={{ color: "white" }}>
+        <p style={{ color: "white" }} className="text-center">
           A summary of my academic qualifications and milestones.
         </p>
 
