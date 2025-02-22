@@ -225,6 +225,6 @@ button.contact_form_submit:hover {
 .contact_inner {
   border: 3px solid transparent;
   border-image-slice: 1;
-  animation: cyberBorder 4s infinite linear;
+  /* animation: cyberBorder 4s infinite linear; */
   border-radius: 15px;
 }
