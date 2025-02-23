@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
+import "./loader.css"
 
-function Pre({ isLoading }) {
+function Preloader({ isLoading }) {
   useEffect(() => {
     const colors = ["#35a3a6", "#35a3a6", "#35a3a6", "#35a3a6", "#35a3a6"];
     const max = 10;
@@ -28,10 +29,10 @@ function Pre({ isLoading }) {
   }, []);
 
   return (
-    <div className="outer" style={{ display: isLoading ? "block" : "none" }}>
+    <div className="outer" style={{ display: isLoading ? "block" : "block" }}>
       <div className="main"></div>
     </div>
   );
 }
 
-export default Pre;
+export default Preloader;

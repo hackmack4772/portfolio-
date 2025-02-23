@@ -2,6 +2,7 @@ import React, { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { useLoading } from "./Context/LoadingContext";
 import { useDarkMode } from "./Context/DarkModeContext";
+import Preloader from "./components/Preloader/Preloader";
 
 // Lazy load components
 const Navbar = lazy(() => import("./components/Navbar/Navbar"));
@@ -9,7 +10,6 @@ const Menu = lazy(() => import("./pages/Menu/Menu"));
 const LandingPage = lazy(() => import("./pages/LandingPage/LandingPage"));
 const Footer = lazy(() => import("./components/Footer/Footer"));
 const ScrollToTop = lazy(() => import("./components/ScrollToTop"));
-const Preloader = lazy(() => import("./components/Pre"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 const About = lazy(() => import("./pages/About/About"));
 const Projects = lazy(() => import("./pages/Projects/Projects"));
@@ -46,7 +46,7 @@ function App() {
   };
 
   const MainContent = () => (
-    <Suspense fallback={<div className="loading-screen">Loading...</div>}>
+    <>
       {!isChatRoute && <Navbar />}
       <ScrollToTop />
       <Routes>
@@ -72,7 +72,7 @@ function App() {
         <Route path="*" element={<Navigate to="/not-found" />} />
       </Routes>
       {!isChatRoute && <Footer />}
-    </Suspense>
+    </>
   );
 
   return (
