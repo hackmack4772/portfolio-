@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import Particle from "../Particle";
-import Github from "./Github";
-import Techstack from "./Techstack";
-import Aboutcard from "./AboutCard";
+import Github from "../../components/Github";
+import Techstack from "../../components/Techstack";
+import Aboutcard from "../../components/AboutCard";
 import laptopImg from "../../Assets/about.png";
-import Toolstack from "./Toolstack";
-import { useLoading } from "../../LoadingContext";
+import Toolstack from "../../components/Toolstack";
+import { useLoading } from "../../Context/LoadingContext";
+import "./about.css"
 
 function About() {
   const { handleLoading } = useLoading();
@@ -19,7 +19,6 @@ function About() {
   }, []);
   return (
     <Container fluid className="about-section">
-      <Particle />
       <Container>
         {/* About Section */}
         <Row style={{ justifyContent: "center", padding: "10px" }}>

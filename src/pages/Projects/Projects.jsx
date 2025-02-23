@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
-import { db } from "../../../src/config/firebase";
+import { db } from "../../config/firebase";
 import { collection, getDocs, doc } from "firebase/firestore";
-import ProjectCard from "./ProjectCards";
-import Particle from "../Particle";
 import bitsOfCode from "../../Assets/Projects/blog.png";
-import { useLoading } from "../../LoadingContext";
+import { useLoading } from "../../Context/LoadingContext";
+import ProjectCards from "../../components/ProjectCards";
+import "./projects.css"
 
 function Projects() {
   const [projectsData, setProjectsData] = useState([]);
@@ -37,12 +37,11 @@ function Projects() {
 
   return (
     <Container fluid className="project-section">
-      <Particle />
       <Container>
         <h1 className="project-heading">
           My Recent <strong className="purple">Works</strong>
         </h1>
-        <p style={{ color: "white" }}>
+        <p style={{ color: "white" ,textAlign:"center"}} >
           Here are a few notable projects I have worked on.
         </p>
 
@@ -54,7 +53,7 @@ function Projects() {
           <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
             {projectsData.map((project) => (
               <Col md={4} key={project.id} className="project-card">
-                <ProjectCard
+                <ProjectCards
                   imgPath={bitsOfCode}
                   isBlog={false}
                   title={project.title}

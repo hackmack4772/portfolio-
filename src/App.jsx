@@ -11,11 +11,12 @@ const Footer = lazy(() => import("./components/Footer/Footer"));
 const ScrollToTop = lazy(() => import("./components/ScrollToTop"));
 const Preloader = lazy(() => import("./components/Pre"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
-// const Login = lazy(() => import("./chat/Login"));
-// const Projects = lazy(() => import("./components/Projects/Projects"));
-// const About = lazy(() => import("./components/About/About"));
+const About = lazy(() => import("./pages/About/About"));
+const Projects = lazy(() => import("./pages/Projects/Projects"));
+const Resume = lazy(() => import("./pages/Resume/ResumeNew"));
 const Education = lazy(() => import("./pages/Education/Education"));
-// const Resume = lazy(() => import("./components/Resume/ResumeNew"));
+
+// const Login = lazy(() => import("./chat/Login"));
 // const Chat = lazy(() => import("./chat/Chat"));
 // const ListUsers = lazy(() => import("./chat/ListUsers"));
 // const AdminLayout = lazy(() => import("./admin/AdminLayout"));
@@ -54,11 +55,14 @@ function App() {
         <Route path="/home" element={<LandingPage />} />
         <Route path="/not-found" element={<NotFound />} />
         <Route path="/education" element={<Education />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/project" element={<Projects />} />
+        <Route path="/resume" element={<Resume />} />
+
+
+
 
         {/* <Route path="/login" element={<Login />} />
-        <Route path="/project" element={<Projects />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/resume" element={<Resume />} />
          */}
         {/* Private Routes */}
         {/* <Route path="/chat/:usersdata" element={<PrivateRoute element={Chat} />} />

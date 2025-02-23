@@ -15,7 +15,6 @@ import animationData from "../../Assets/lootie/code.json";
 import { doc, getDoc } from "firebase/firestore"; // Firestore methods
 import { db } from "../../config/firebase";
 import { useLoading } from "../../Context/LoadingContext";
-import Particle from "../../components/Particle";
 import Type from "../../components/Type";
 import "./landing-page.css"
 function LandingPage() {
@@ -67,7 +66,6 @@ function LandingPage() {
   return (
     <section>
       <Container fluid className="home-section" id="home">
-        <Particle />
         <Container className="home-content">
           <Row>
             <Col md={7} className="home-header">
@@ -102,8 +100,8 @@ function LandingPage() {
       <Container fluid className="contact_us">
         <ContactUs />
         <Row>
-          <Col md={11} className="home-about-social">
-            <h1>FIND ME ON</h1>
+          <Col md={12} className="home-about-social">
+            <h1 className="purple">FIND ME ON</h1>
             <p>
               I’d love to <span className="purple">connect</span> with you!
             </p>
