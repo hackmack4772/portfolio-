@@ -65,3 +65,9 @@
   background-color: #00a1b5 !important; /* Slightly darker cyan for focus */
   border-color: #00a1b5 !important;
 }
+
+.card-img-top {
+  height: 400px; /* Set your desired fixed height */
+  object-fit: cover; /* Ensures the aspect ratio is maintained without stretching */
+  width: 100%; /* Makes sure it spans the full width of the card */
+}
