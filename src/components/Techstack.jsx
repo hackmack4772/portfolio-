@@ -7,63 +7,44 @@ import {
   DiNodejs,
   DiMongodb,
   DiGit,
-  DiJava,
 } from "react-icons/di";
 import {
   SiNextdotjs,
   SiLaravel,
-  SiRedis,
   SiPostgresql,
   SiHtml5,
   SiCss3,
-  SiTailwindcss,
 } from "react-icons/si";
+
+const techStack = [
+  { icon: <CgCPlusPlus />, name: "C++" },
+  { icon: <DiJavascript1 />, name: "JavaScript" },
+  { icon: <DiNodejs />, name: "Node.js" },
+  { icon: <DiReact />, name: "React" },
+  { icon: <SiNextdotjs />, name: "Next.js" },
+  { icon: <SiLaravel />, name: "Laravel" },
+  { icon: <DiMongodb />, name: "MongoDB" },
+  { icon: <SiPostgresql />, name: "PostgreSQL" },
+  { icon: <DiGit />, name: "Git" },
+  { icon: <SiHtml5 />, name: "HTML5" },
+  { icon: <SiCss3 />, name: "CSS3" },
+];
 
 function Techstack() {
   return (
     <Row style={{ justifyContent: "center", paddingBottom: "50px" }}>
-      <Col xs={4} md={2} className="tech-icons">
-        <CgCPlusPlus />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiJavascript1 />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiNodejs />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiReact />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <SiNextdotjs />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <SiLaravel />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiMongodb />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <SiPostgresql />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <SiRedis />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiGit />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <SiHtml5 />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <SiCss3 />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <SiTailwindcss />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiJava />
-      </Col>
+      {techStack.map((tech, index) => (
+        <Col
+          key={index}
+          xs={4}
+          md={2}
+          className="tech-icons"
+          aria-label={tech.name}
+          title={tech.name} // Tooltip on hover
+        >
+          {tech.icon}
+        </Col>
+      ))}
     </Row>
   );
 }

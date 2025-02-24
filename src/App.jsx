@@ -16,19 +16,25 @@ const Projects = lazy(() => import("./pages/Projects/Projects"));
 const Resume = lazy(() => import("./pages/Resume/ResumeNew"));
 const Education = lazy(() => import("./pages/Education/Education"));
 
-// const Login = lazy(() => import("./chat/Login"));
-// const Chat = lazy(() => import("./chat/Chat"));
-// const ListUsers = lazy(() => import("./chat/ListUsers"));
-// const AdminLayout = lazy(() => import("./admin/AdminLayout"));
-
 function App() {
-  const { isLoading = false, handleLoading } = useLoading();
+  const { isLoading, handleLoading } = useLoading();
+  const [showLoader, setShowLoader] = useState(true);
+  const [contentReady, setContentReady] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    handleLoading(true);
+    const minLoaderTime = setTimeout(() => {
+      setShowLoader(false);
+    }, 1000);
+    const stopLoader = setTimeout(() => {
       handleLoading(false);
-    }, 5000);
-    return () => clearTimeout(timer);
+      setContentReady(true); 
+    }, 2000);
+
+    return () => {
+      clearTimeout(minLoaderTime);
+      clearTimeout(stopLoader);
+    };
   }, []);
 
   const { isDarkMode } = useDarkMode();
@@ -40,49 +46,30 @@ function App() {
     location.pathname.startsWith("/chat") ||
     location.pathname.startsWith("/admin");
 
-  const PrivateRoute = ({ element: Component, ...rest }) => {
-    const token = localStorage.getItem("token");
-    return token ? <Component {...rest} /> : <Navigate to="/login" />;
-  };
-
-  const MainContent = () => (
-    <>
-      {!isChatRoute && <Navbar />}
-      <ScrollToTop />
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Menu />} />
-        <Route path="/home" element={<LandingPage />} />
-        <Route path="/not-found" element={<NotFound />} />
-        <Route path="/education" element={<Education />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/project" element={<Projects />} />
-        <Route path="/resume" element={<Resume />} />
-
-
-
-
-        {/* <Route path="/login" element={<Login />} />
-         */}
-        {/* Private Routes */}
-        {/* <Route path="/chat/:usersdata" element={<PrivateRoute element={Chat} />} />
-        <Route path="/users" element={<PrivateRoute element={ListUsers} />} />
-        <Route path="/admin/*" element={<AdminLayout />} /> */}
-
-        <Route path="*" element={<Navigate to="/not-found" />} />
-      </Routes>
-      {!isChatRoute && <Footer />}
-    </>
-  );
-
   return (
     <div className={isDarkMode ? "App dark-mode" : "App light-mode"}>
       <Router>
-        <Suspense fallback={<Preloader isLoading={isLoading} />}>
-          <div id={isLoading ? "no-scroll" : "scroll"} style={{ opacity: !isLoading ? 1 : 0 }}>
-            <MainContent />
-          </div>
-        </Suspense>
+        {showLoader || !contentReady ? (
+          <Preloader isLoading={true} />
+        ) : (
+          <Suspense fallback={<Preloader isLoading={true} />}>
+            <div id="main-content" style={{ opacity: contentReady ? 1 : 0, transition: "opacity 0.5s ease-in-out" }}>
+              {!isChatRoute && <Navbar />}
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={<Menu />} />
+                <Route path="/home" element={<LandingPage />} />
+                <Route path="/not-found" element={<NotFound />} />
+                <Route path="/education" element={<Education />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/project" element={<Projects />} />
+                <Route path="/resume" element={<Resume />} />
+                <Route path="*" element={<Navigate to="/not-found" />} />
+              </Routes>
+              {!isChatRoute && <Footer />}
+            </div>
+          </Suspense>
+        )}
       </Router>
     </div>
   );
