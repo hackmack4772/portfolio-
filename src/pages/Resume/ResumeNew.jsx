@@ -5,12 +5,7 @@ import pdf from "../../Assets/resume.pdf";
 import { AiOutlineDownload } from "react-icons/ai";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-<<<<<<< HEAD:src/pages/Resume/ResumeNew.jsx
 import { useLoading } from "../../Context/LoadingContext";
-=======
-import { useLoading } from "../../LoadingContext";
-
->>>>>>> 0a572b633cd7c1a7f70a15220ae41eaeceb168de:src/components/Resume/ResumeNew.jsx
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 import "./resume.css"
 
