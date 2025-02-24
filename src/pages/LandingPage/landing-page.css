@@ -2,7 +2,9 @@
 :root {
     --image-gradient: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
   }
-
+.landing-page{
+  width: 100vw;
+}
 
   button:focus {
     box-shadow: none !important;

@@ -64,7 +64,7 @@ function LandingPage() {
   };
 
   return (
-    <section>
+    <section className="landing-page">
       <Container fluid className="home-section" id="home">
         <Container className="home-content">
           <Row>
