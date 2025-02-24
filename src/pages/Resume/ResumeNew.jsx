@@ -35,12 +35,7 @@ function ResumeNew() {
 
   return (
     <div>
-<<<<<<< HEAD:src/pages/Resume/ResumeNew.jsx
       <Container fluid className="resume-section">
-=======
-      <Container fluid className="resume-section" style={{ overflowX: "hidden" }}>
-        <Particle />
->>>>>>> 0a572b633cd7c1a7f70a15220ae41eaeceb168de:src/components/Resume/ResumeNew.jsx
 
         {/* Scrollable Resume Viewer (No horizontal overflow) */}
         <div
