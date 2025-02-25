@@ -30,18 +30,6 @@ function Menu() {
   return (
     <div id="home">
       <div className="page-menu">
-        {/* <Navbar
-      fixed="top"
-      expand="md"
-      className={ "navbar"}
-    >
-      <Container>
-        <Navbar.Brand href="/" className="d-flex">
-          Hack <span>mack</span>
-        </Navbar.Brand>
-  
-      </Container>
-    </Navbar> */}
         <div className="container">
           <div className="background-img">
             <p className="header-text">
@@ -58,40 +46,40 @@ function Menu() {
               <span></span>
               <div className="content">
                 <p>
-               <img src={myImg} className="img-fluid" alt="avatar" /> 
+                  <img src={myImg} className="img-fluid" alt="avatar" />
                   Aamir Saleem Lone
                 </p>
               </div>
             </div>
 
-            <h1  className="purple" >FIND ME ON</h1>
+            <h1 className="purple">FIND ME ON</h1>
             <p>
               I’d love to <span className="purple">connect</span> with you!
             </p>
             <ul className="menu-about-social-links">
               <li className="social-icons">
                 <a
-                  href={"https://github.com/hackmack4772"}
+                  href="https://github.com/hackmack4772"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour menu-social-icons"
                 >
-                  <AiFillGithub  color="black"/>
+                  <AiFillGithub color="black" />
                 </a>
               </li>
               <li className="social-icons">
                 <a
-                  href={"https://twitter.com/hackmack4772"}
+                  href="https://twitter.com/hackmack4772"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour menu-social-icons"
                 >
-                  <AiOutlineTwitter  color="black" />
+                  <AiOutlineTwitter color="black" />
                 </a>
               </li>
               <li className="social-icons">
                 <a
-                  href={"https://www.linkedin.com/in/aamir-saleem-lone/"}
+                  href="https://www.linkedin.com/in/aamir-saleem-lone/"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour menu-social-icons"
@@ -101,12 +89,12 @@ function Menu() {
               </li>
               <li className="social-icons">
                 <a
-                  href={"https://www.instagram.com/aamir-saleem-lone"}
+                  href="https://www.instagram.com/aamir-saleem-lone"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour menu-social-icons"
                 >
-                  <AiFillInstagram  color="black" />
+                  <AiFillInstagram color="black" />
                 </a>
               </li>
             </ul>
@@ -156,15 +144,12 @@ function Menu() {
                         />
                       </svg>
                     </Link>
-
                   </div>
                 ))}
               </div>
             </div>
           </div>
         </div>
-
-        {/* <div className="overlay" /> */}
       </div>
     </div>
   );

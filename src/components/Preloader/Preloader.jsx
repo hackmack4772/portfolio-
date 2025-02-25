@@ -18,7 +18,8 @@ function Preloader({ isLoading }) {
       className="preloader-container"
       style={{ display: isLoading ? "flex" : "none" }}
     >
-      <Lottie options={defaultOptions} height={400} width={400}    style={{ pointerEvents: 'none' }}     />
+      <Lottie options={defaultOptions} height={400} width={400}    style={{ pointerEvents: 'none' }}   onClick={(e) => e.stopPropagation()} 
+    />
     </div>
   );
 }
