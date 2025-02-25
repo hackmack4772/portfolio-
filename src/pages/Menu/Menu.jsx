@@ -105,47 +105,54 @@ function Menu() {
                 <p className="mt20"></p>
               </div>
               <div className="hexagon-menu clear">
-                {menuItems.map((item, index) => (
-                  <div className="hexagon-item" key={index}>
-                    <div className="hex-item">
-                      <div />
-                      <div />
-                      <div />
-                    </div>
-                    <div className="hex-item">
-                      <div />
-                      <div />
-                      <div />
-                    </div>
-                    <Link to={item.path} className="hex-content">
-                      <span className="hex-content-inner">
-                        <span className="icon">
-                          <i className={`fa ${item.icon}`} />
-                        </span>
-                        <span className="title">{item.title}</span>
-                      </span>
-                      <svg
-                        viewBox="0 0 173.20508075688772 200"
-                        height={190}
-                        width={164}
-                        version="1.1"
-                        xmlns="http://www.w3.org/2000/svg"
+                {menuItems.map((item, index) => {
+                  const ParentTag = item.title === "Home" ? "a" : Link;
+                  return (
+                    <div className="hexagon-item" key={index}>
+                      <div className="hex-item">
+                        <div />
+                        <div />
+                        <div />
+                      </div>
+                      <div className="hex-item">
+                        <div />
+                        <div />
+                        <div />
+                      </div>
+                      <ParentTag
+                        to={item.title !== "Home" ? item.path : undefined}
+                        href={item.title === "Home" ? item.path : undefined}
+                        className="hex-content"
                       >
-                        <defs>
-                          <linearGradient id="cyberGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style={{ stopColor: "#00FFFF", stopOpacity: 1 }} />
-                            <stop offset="100%" style={{ stopColor: "#FF00FF", stopOpacity: 1 }} />
-                          </linearGradient>
-                        </defs>
-                        <path
-                          d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z"
-                          fill="#1e2530"
-                          stroke="url(#cyberGradient)"
-                        />
-                      </svg>
-                    </Link>
-                  </div>
-                ))}
+                        <span className="hex-content-inner">
+                          <span className="icon">
+                            <i className={`fa ${item.icon}`} />
+                          </span>
+                          <span className="title">{item.title}</span>
+                        </span>
+                        <svg
+                          viewBox="0 0 173.20508075688772 200"
+                          height={190}
+                          width={164}
+                          version="1.1"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <defs>
+                            <linearGradient id="cyberGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" style={{ stopColor: "#00FFFF", stopOpacity: 1 }} />
+                              <stop offset="100%" style={{ stopColor: "#FF00FF", stopOpacity: 1 }} />
+                            </linearGradient>
+                          </defs>
+                          <path
+                            d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z"
+                            fill="#1e2530"
+                            stroke="url(#cyberGradient)"
+                          />
+                        </svg>
+                      </ParentTag>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
