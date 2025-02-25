@@ -90,7 +90,7 @@ function LandingPage() {
             </Col>
 
             <Col md={5} style={{ paddingBottom: 20 }}>
-              <Lottie options={animationOptions1} className="img-fluid" />
+              <Lottie options={animationOptions1} className="img-fluid"   style={{ pointerEvents: 'none' }}  />
             </Col>
           </Row>
         </Container>
