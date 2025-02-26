@@ -98,7 +98,6 @@ function LandingPage() {
 
       <MyJourney />
       <Container fluid className="contact_us">
-        <ContactUs />
         <Row>
           <Col md={12} className="home-about-social">
             <h1 className="purple">FIND ME ON</h1>
@@ -149,6 +148,8 @@ function LandingPage() {
             </ul>
           </Col>
         </Row>
+        <ContactUs />
+
       </Container>
     </section>
   );

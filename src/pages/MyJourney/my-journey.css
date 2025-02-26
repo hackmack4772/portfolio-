@@ -1,7 +1,7 @@
  
   .home-about-section {
     position: relative;
-    padding-bottom: 70px !important;
+    padding-bottom: 40px !important;
     padding-top: 70px !important;
   }
   
@@ -20,7 +20,7 @@
   
   .home-about-social {
     text-align: center !important;
-    padding-top: 25px;
+    /* padding-top: 25px; */
     color: white !important;
   }
   
@@ -77,7 +77,7 @@
   }
   
   .icon-colour {
-    color: #0cfb00 !important;
+    color: #8f10b7 !important;
   }
 .code-font ,.home-about-description  h1{
   color: #ccc;

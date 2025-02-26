@@ -34,7 +34,7 @@ function Menu() {
           <div className="background-img">
             <p className="header-text">
               {"HackMack".split("").map((char, index) => (
-                <span key={index} className="char" style={{ animationDelay: `${index * 0.1}s` }}>
+                <span key={index} className={`char ${index>3 &&"header-other-part"}`} >
                   {char}
                 </span>
               ))}
@@ -56,13 +56,13 @@ function Menu() {
             <p>
               I’d love to <span className="purple">connect</span> with you!
             </p>
-            <ul className="menu-about-social-links">
+            <ul className="home-about-social-links">
               <li className="social-icons">
                 <a
                   href="https://github.com/hackmack4772"
                   target="_blank"
                   rel="noreferrer"
-                  className="icon-colour menu-social-icons"
+                  className="icon-colour home-social-icons"
                 >
                   <AiFillGithub color="black" />
                 </a>
@@ -72,7 +72,7 @@ function Menu() {
                   href="https://twitter.com/hackmack4772"
                   target="_blank"
                   rel="noreferrer"
-                  className="icon-colour menu-social-icons"
+                  className="icon-colour home-social-icons"
                 >
                   <AiOutlineTwitter color="black" />
                 </a>
@@ -82,7 +82,7 @@ function Menu() {
                   href="https://www.linkedin.com/in/aamir-saleem-lone/"
                   target="_blank"
                   rel="noreferrer"
-                  className="icon-colour menu-social-icons"
+                  className="icon-colour home-social-icons"
                 >
                   <FaLinkedinIn color="black" />
                 </a>
@@ -92,7 +92,7 @@ function Menu() {
                   href="https://www.instagram.com/aamir-saleem-lone"
                   target="_blank"
                   rel="noreferrer"
-                  className="icon-colour menu-social-icons"
+                  className="icon-colour home-social-icons"
                 >
                   <AiFillInstagram color="black" />
                 </a>
@@ -132,8 +132,8 @@ function Menu() {
                         </span>
                         <svg
                           viewBox="0 0 173.20508075688772 200"
-                          height={190}
-                          width={164}
+                          // height={190}
+                          // width={164}
                           version="1.1"
                           xmlns="http://www.w3.org/2000/svg"
                         >
