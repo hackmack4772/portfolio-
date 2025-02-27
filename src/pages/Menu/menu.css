@@ -851,5 +851,5 @@
   text-transform: capitalize;
 }
 .job-profile{
-  font-size: x-large;
+  font-size: 12px !important;
 }
