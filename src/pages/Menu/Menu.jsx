@@ -47,7 +47,8 @@ function Menu() {
               <div className="content">
                 <p>
                   <img src={myImg} className="img-fluid" alt="avatar" />
-                  Aamir Saleem Lone
+                  <h5>Aamir Saleem Lone</h5>
+                  <p  className="job-profile">MERN Stack Developer</p>
                 </p>
               </div>
             </div>
