@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import Particle from "../Particle";
 import pdf from "../../Assets/resume.pdf";
 import { AiOutlineDownload } from "react-icons/ai";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-import { useLoading } from "../../LoadingContext";
-
+import { useLoading } from "../../Context/LoadingContext";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+import "./resume.css"
 
 function ResumeNew() {
   const [numPages, setNumPages] = useState(null);
@@ -36,8 +35,7 @@ function ResumeNew() {
 
   return (
     <div>
-      <Container fluid className="resume-section" style={{ overflowX: "hidden" }}>
-        <Particle />
+      <Container fluid className="resume-section">
 
         {/* Scrollable Resume Viewer (No horizontal overflow) */}
         <div

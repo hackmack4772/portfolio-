@@ -3,8 +3,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import Tilt from "react-parallax-tilt";
 import { doc, getDoc } from "firebase/firestore"; // Firestore methods
 import { db } from "../../config/firebase";
+import "./my-journey.css"
 
-function Home2() {
+function MyJourney() {
   const [home2Data, setHome2Data] = useState({
     heading: "",
     introduction: "",
@@ -37,15 +38,17 @@ function Home2() {
     <Container fluid className="home-about-section" id="about">
       <Container>
         <Row>
-          <Col md={8} className="home-about-description"dangerouslySetInnerHTML={{ __html: home2Data.introduction }} >
+          <Col md={8} className="home-about-description code-font" dangerouslySetInnerHTML={{ __html: home2Data.introduction }} >
           </Col>
           <Col md={4} className="myAvtar">
             <Tilt>
-              <img
-                src={home2Data.imageUrl || "defaultImageUrl"} // Default image if none provided
-                className="img-fluid"
-                alt="avatar"
-              />
+              <div className="cube-container">
+                <img
+                  src={home2Data.imageUrl || "defaultImageUrl"} // Default image if none provided
+                  className="cube-image"
+                  alt="avatar"
+                />
+              </div>
             </Tilt>
           </Col>
         </Row>
@@ -54,4 +57,4 @@ function Home2() {
   );
 }
 
-export default Home2;
+export default MyJourney;
