@@ -48,7 +48,7 @@ function Menu() {
                 </span>
               ))}
             </p>
-            
+
             <div className="box">
               <span></span>
               <span></span>
@@ -59,7 +59,7 @@ function Menu() {
               </div>
             </div>
             <h5>Aamir Saleem Lone</h5>
-                <p className="job-profile">MERN Stack Developer</p>
+            <p className="job-profile">MERN Stack Developer</p>
 
             <h1 className="purple">FIND ME ON</h1>
             <p>
@@ -113,7 +113,7 @@ function Menu() {
                 <span className="heading-page"> </span>
                 <p className="mt20"></p>
               </div>
-              
+
               <div className={`hexagon-menu clear ${menuExpanded ? 'menu-expanded' : ''}`}>
                 {menuItems.map((item, index) => {
                   const ParentTag = item.title === "Home" ? "a" : Link;
@@ -162,9 +162,9 @@ function Menu() {
                   );
                 })}
               </div>
-              
-              <button 
-                className={`menu-toggle ${menuExpanded ? 'menu-toggle-active' : ''}`} 
+
+              <button
+                className={`menu-toggle ${menuExpanded ? 'menu-toggle-active' : ''}`}
                 onClick={toggleMenu}
                 aria-label={menuExpanded ? "Close menu" : "Open menu"}
               >

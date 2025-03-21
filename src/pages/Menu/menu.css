@@ -328,7 +328,7 @@ p:last-child {
 
 .hex-content svg {
   position: absolute;
-  top: 0;
+  top: -54px;
   left: 0;
   transform: scale(0.9);
   stroke-width: 1.5;
