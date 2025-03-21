@@ -123,8 +123,8 @@ p:last-child {
 /* Box styling */
 .box {
   position: relative;
-  width: 180px;
-  height: 180px;
+  width: 280px;
+  height: 280px;
   background-color: var(--card-bg);
   border-radius: 50%;
   overflow: hidden;
@@ -152,7 +152,7 @@ p:last-child {
   border-radius: 50%;
   background-color: var(--card-bg);
   z-index: 3;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -199,7 +199,7 @@ p:last-child {
   transform: rotate(30deg);
   visibility: visible;
   opacity: 1;
-  overflow: hidden;
+  /* overflow: hidden; */
   transition: all var(--transition-medium) ease;
 }
 

@@ -56,10 +56,10 @@ function Menu() {
               <span></span>
               <div className="content">
                 <img src={myImg} className="img-fluid" alt="avatar" style={{ width: '100%', borderRadius: '50%' }} />
-                <h5>Aamir Saleem Lone</h5>
-                <p className="job-profile">MERN Stack Developer</p>
               </div>
             </div>
+            <h5>Aamir Saleem Lone</h5>
+                <p className="job-profile">MERN Stack Developer</p>
 
             <h1 className="purple">FIND ME ON</h1>
             <p>

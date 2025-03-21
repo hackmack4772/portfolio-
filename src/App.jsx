@@ -4,6 +4,7 @@ import { useLoading } from "./Context/LoadingContext";
 import { useDarkMode } from "./Context/DarkModeContext";
 import Preloader from "./components/Preloader/Preloader";
 import Particle from "./components/Particle";
+import { Container, Row } from "react-bootstrap";
 
 // Lazy load components
 const Navbar = lazy(() => import("./components/Navbar/Navbar"));
@@ -67,7 +68,11 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/project" element={<Projects />} />
                 <Route path="/resume" element={<Resume />} />
-                <Route path="/contact" element={<ContactUs />} />
+                <Route path="/contact" element={
+                   <section className="landing-page">
+                          <Container className="home-content">
+                            <Row>
+                  <ContactUs /></Row></Container></section>} />
                 <Route path="*" element={<Navigate to="/not-found" />} />
               </Routes>
               {!isChatRoute && <Footer />}
