@@ -98,8 +98,8 @@ function LandingPage() {
 
       <MyJourney />
       <Container fluid className="contact_us">
-        <Row>
-          <Col md={12} className="home-about-social">
+        {/* <Row> */}
+          <Col md={11} className="home-about-social">
             <h1 className="purple">FIND ME ON</h1>
             <p>
               I’d love to <span className="purple">connect</span> with you!
@@ -147,7 +147,7 @@ function LandingPage() {
               </li>
             </ul>
           </Col>
-        </Row>
+        {/* </Row> */}
         <ContactUs />
 
       </Container>
