@@ -1,13 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Base colors */
-  --primary-color: #35a3a6;
-  --primary-hover: #4bb4b7;
-  --secondary-color: #8f10b7;
+  /* Color Palette */
+  --primary-color: #8f10b7;
+  --primary-hover: #7a0d9b;
+  --secondary-color: #03a3a5;
   --accent-color: #0cfbff;
+  --text-color: #ffffff;
+  --text-secondary: #cccccc;
+  --bg-color: #0e1118;
+  --card-bg: #1e2530;
+  --border-color: #2a3cad;
+  --shadow: rgba(0, 0, 0, 0.3);
   
-  /* Light mode colors - refined with softer tones */
+  /* Transitions */
+  --transition-fast: 0.2s;
+  --transition-medium: 0.3s;
+  --transition-slow: 0.5s;
+  
+  /* Base colors */
   --light-bg: #f8f9fa;
   --light-bg-secondary: #eef1f5;
   --light-text: #2d3436;
@@ -42,11 +53,6 @@
   --card-bg: var(--dark-card-bg);
   --shadow: var(--dark-shadow);
   --navbar-bg: var(--dark-navbar);
-  
-  /* Animation durations */
-  --transition-slow: 0.5s;
-  --transition-medium: 0.3s;
-  --transition-fast: 0.15s;
 }
 
 /* Light mode class to be toggled */
@@ -332,7 +338,7 @@ a:hover {
 
 /* Add this FontAwesome fix at the end of your index.css file */
 .fa {
-  font-family: 'Font Awesome 6 Free';
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands';
   font-weight: 900;
 }
 
