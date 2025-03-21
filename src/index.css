@@ -329,3 +329,41 @@ a:hover {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* Add this FontAwesome fix at the end of your index.css file */
+.fa {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+}
+
+.fa-home:before {
+  content: "\f015";
+}
+
+.fa-user:before {
+  content: "\f007";
+}
+
+.fa-graduation-cap:before {
+  content: "\f19d";
+}
+
+.fa-briefcase:before {
+  content: "\f0b1";
+}
+
+.fa-file-text:before {
+  content: "\f15c";
+}
+
+.fa-envelope:before {
+  content: "\f0e0";
+}
+
+.fa-times:before {
+  content: "\f00d";
+}
+
+.fa-bars:before {
+  content: "\f0c9";
+}
