@@ -1,47 +1,109 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
+:root {
+  /* Base colors */
+  --primary-color: #35a3a6;
+  --primary-hover: #4bb4b7;
+  --secondary-color: #8f10b7;
+  --accent-color: #0cfbff;
+  
+  /* Light mode colors - refined with softer tones */
+  --light-bg: #f8f9fa;
+  --light-bg-secondary: #eef1f5;
+  --light-text: #2d3436;
+  --light-text-secondary: #636e72;
+  --light-border: #dfe6e9;
+  --light-card-bg: #ffffff;
+  --light-shadow: rgba(0, 0, 0, 0.08);
+  --light-navbar: rgba(248, 249, 250, 0.85);
+  
+  /* Dark mode colors */
+  --dark-bg: #0c0f15;
+  --dark-bg-secondary: #1b1a2e;
+  --dark-text: #f5f5f5;
+  --dark-text-secondary: #ababab;
+  --dark-border: #2d1950;
+  --dark-card-bg: #181a27;
+  --dark-shadow: rgba(0, 0, 0, 0.3);
+  --dark-navbar: rgba(27, 26, 46, 0.85);
+  
+  /* System colors */
+  --success-color: #28a745;
+  --error-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
+
+  /* Default theme (dark) */
+  --bg-color: var(--dark-bg);
+  --bg-secondary: var(--dark-bg-secondary);
+  --text-color: var(--dark-text);
+  --text-secondary: var(--dark-text-secondary);
+  --border-color: var(--dark-border);
+  --card-bg: var(--dark-card-bg);
+  --shadow: var(--dark-shadow);
+  --navbar-bg: var(--dark-navbar);
+  
+  /* Animation durations */
+  --transition-slow: 0.5s;
+  --transition-medium: 0.3s;
+  --transition-fast: 0.15s;
+}
+
+/* Light mode class to be toggled */
+.light-mode {
+  --bg-color: var(--light-bg);
+  --bg-secondary: var(--light-bg-secondary);
+  --text-color: var(--light-text);
+  --text-secondary: var(--light-text-secondary);
+  --border-color: var(--light-border);
+  --card-bg: var(--light-card-bg);
+  --shadow: var(--light-shadow);
+  --navbar-bg: var(--light-navbar);
+}
+
 * {
-    font-family: "Victor Mono", "Fira Code", "JetBrains Mono", monospace;
-  }
-
-
+  font-family: "Victor Mono", "Fira Code", "JetBrains Mono", monospace;
+  transition: background-color var(--transition-medium) ease, 
+              color var(--transition-medium) ease,
+              border-color var(--transition-medium) ease,
+              box-shadow var(--transition-medium) ease;
+}
 
 body {
   font-weight: 400;
   font-size: 16px;
   line-height: 30px;
-  background-color: #0c0f15;
-  color: #ababab;
-  overflow-x: hidden; /* Fixed the syntax here */
+  background-color: var(--bg-color);
+  color: var(--text-secondary);
+  overflow-x: hidden;
   zoom: 0.96;
-
 }
 
 .purple {
-  color: var(--imp-text-color) !important;
+  color: var(--secondary-color) !important;
 }
-
 
 ::-webkit-scrollbar {
   width: 7px;
-  background-color: #F5F5F5;
-
+  background-color: var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #cfc4c5;
-  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  transition: background-color var(--transition-medium) ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-hover);
 }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #F5F5F5;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
 }
 
-
-
 /* //ICons */
-
 
 .home-about-social-links {
   justify-content: center !important;
@@ -59,9 +121,10 @@ body {
   text-align: center !important;
   font-size: 1.2em !important;
   line-height: 2em !important;
-  background: rgba(255, 255, 255, 0.972) !important;
+  background: var(--card-bg) !important;
   border-radius: 50% !important;
-  transition: 0.5s !important;
+  transition: var(--transition-medium) !important;
+  color: var(--text-color) !important;
 }
 
 .home-social-icons::before {
@@ -72,21 +135,21 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: #8f10b7;
-  transition: 0.5s;
+  background: var(--secondary-color);
+  transition: var(--transition-medium);
   transform: scale(0.9);
   z-index: -1;
 }
 
 .home-social-icons:hover::before {
   transform: scale(1.1);
-  box-shadow: 0 0 15px #03a3a5;;
+  box-shadow: 0 0 15px var(--primary-color);
 }
 
 .home-social-icons:hover {
-  color: #0cfbff;
-  box-shadow: 0 0 5px #0cfbff;
-  text-shadow: 0 0 2px #0cfbff;
+  color: var(--accent-color);
+  box-shadow: 0 0 5px var(--accent-color);
+  text-shadow: 0 0 2px var(--accent-color);
 }
 
 .social-icons {
@@ -96,9 +159,8 @@ body {
 }
 
 .icon-colour {
-  color: #0cfb00 !important;
+  color: var(--primary-color) !important;
 }
-
 
 /* Loader */
 
@@ -125,8 +187,8 @@ body {
 }
 
 .btn-primary {
-  background-color: #35a3a6;
-  color: #ffffff;
+  background-color: var(--primary-color);
+  color: white;
   border: none;
   font-family: "Open Sans", sans-serif;
   font-weight: 700;
@@ -134,36 +196,136 @@ body {
   line-height: 40px;
   padding: 0 28px;
   text-transform: uppercase;
-  border-radius: 8px; /* Smooth rounded corners */
-  transition: all 0.3s ease-in-out; /* Smooth transition */
+  border-radius: 8px;
+  transition: all var(--transition-medium) ease-in-out;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   font-size: 14px;
-  margin-top:6px; /* Added top margin */
+  margin-top: 6px;
 }
 
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  background-color: #35a3a6; /* Same as default */
+  background-color: var(--primary-hover);
   filter: brightness(1.1);
   transform: scale(1.05);
   outline: none;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Smooth shadow effect */
+  box-shadow: 0px 4px 8px var(--shadow);
 }
 
 .btn-border {
-  border: 1px solid #d7d8db;
+  border: 1px solid var(--border-color);
   display: inline-block;
   padding: 5px 12px;
-  border-radius: 8px; /* Smooth rounded corners */
-  transition: all 0.3s ease-in-out;
-  margin-top: 10px; /* Added top margin */
+  border-radius: 8px;
+  transition: all var(--transition-medium) ease-in-out;
+  margin-top: 10px;
+  color: var(--text-secondary);
 }
 
 .btn-border:hover {
-  border-color: #35a3a6;
+  border-color: var(--primary-color);
   transform: scale(1.05);
+  color: var(--primary-color);
+}
+
+/* Card styling */
+.card {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  color: var(--text-color) !important;
+  transition: all var(--transition-medium) ease-in-out !important;
+  overflow: hidden !important;
+}
+
+.card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 10px 20px var(--shadow) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.card-title {
+  color: var(--text-color) !important;
+  font-weight: 600 !important;
+}
+
+.card-subtitle, .card-text {
+  color: var(--text-secondary) !important;
+}
+
+.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+/* Form controls */
+.form-control {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 0.2rem rgba(53, 163, 166, 0.25) !important;
+}
+
+/* Input placeholder */
+::placeholder {
+  color: var(--text-secondary) !important;
+  opacity: 0.6 !important;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+/* Text link styling */
+a {
+  color: var(--primary-color) !important;
+  text-decoration: none !important;
+  transition: color var(--transition-fast) ease !important;
+}
+
+a:hover {
+  color: var(--accent-color) !important;
+  text-decoration: underline !important;
+}
+
+/* Section heading styles */
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--text-color);
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+  border-radius: 3px;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }

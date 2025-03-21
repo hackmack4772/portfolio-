@@ -1,7 +1,10 @@
 import React from "react";
 import Particles from "react-tsparticles";
+import { useDarkMode } from "../Context/DarkModeContext";
 
 function Particle() {
+  const { isDarkMode } = useDarkMode();
+  
   return (
     <Particles
       id="tsparticles"
@@ -32,6 +35,9 @@ function Particle() {
               opacity_min: 0.05,
             },
           },
+          color: {
+            value: isDarkMode ? "#ffffff" : "#000000",
+          },
         },
         interactivity: {
           events: {
@@ -47,6 +53,11 @@ function Particle() {
           },
         },
         retina_detect: true,
+        background: {
+          color: {
+            value: "transparent",
+          },
+        },
       }}
     />
   );

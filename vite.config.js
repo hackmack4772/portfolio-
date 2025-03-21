@@ -5,6 +5,8 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
+    port: 3000,
+    host: true,
     allowedHosts: [
       "yj6dn4-5173.csb.app",
       "https://hackmack.vercel.app",

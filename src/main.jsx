@@ -1,22 +1,20 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import './style.css';
+import App from './App';
 // import ActivityTracker from "./components/ActivityTracker";
-import { DarkModeProvider } from "./Context/DarkModeContext";
-import { LoadingProvider } from "./Context/LoadingContext";
+import { DarkModeProvider } from './Context/DarkModeContext';
+import { LoadingProvider } from './Context/LoadingContext';
 import Particle from "./components/Particle";
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
     {/* <ActivityTracker /> */}
-    <DarkModeProvider>
-       <LoadingProvider> 
-       <Particle />
-        <App />{" "}
-        </LoadingProvider>
-      
-    </DarkModeProvider>
-    
-  </StrictMode>
+    <LoadingProvider>
+      <DarkModeProvider>
+        <App />
+      </DarkModeProvider>
+    </LoadingProvider>
+  </React.StrictMode>
 );

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import { useLoading } from "./Context/LoadingContext";
 import { useDarkMode } from "./Context/DarkModeContext";
 import Preloader from "./components/Preloader/Preloader";
+import Particle from "./components/Particle";
 
 // Lazy load components
 const Navbar = lazy(() => import("./components/Navbar/Navbar"));
@@ -15,6 +16,7 @@ const About = lazy(() => import("./pages/About/About"));
 const Projects = lazy(() => import("./pages/Projects/Projects"));
 const Resume = lazy(() => import("./pages/Resume/ResumeNew"));
 const Education = lazy(() => import("./pages/Education/Education"));
+const ContactUs = lazy(() => import("./pages/ContactUs/ContactUs"));
 
 function App() {
   const { isLoading, handleLoading } = useLoading();
@@ -47,13 +49,14 @@ function App() {
     location.pathname.startsWith("/admin");
 
   return (
-    <div className={isDarkMode ? "App dark-mode" : "App light-mode"}>
+    <div className={isDarkMode ? "App" : "App light-mode"}>
       <Router>
         {showLoader || !contentReady ? (
           <Preloader isLoading={true} />
         ) : (
           <Suspense fallback={<Preloader isLoading={true} />}>
             <div id="main-content" style={{ opacity: contentReady ? 1 : 0, transition: "opacity 0.5s ease-in-out" }}>
+              <Particle />
               {!isChatRoute && <Navbar />}
               <ScrollToTop />
               <Routes>
@@ -64,6 +67,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/project" element={<Projects />} />
                 <Route path="/resume" element={<Resume />} />
+                <Route path="/contact" element={<ContactUs />} />
                 <Route path="*" element={<Navigate to="/not-found" />} />
               </Routes>
               {!isChatRoute && <Footer />}
