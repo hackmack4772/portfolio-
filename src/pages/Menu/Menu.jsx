@@ -109,10 +109,10 @@ function Menu() {
             </ul>
 
             <div className="col-xs-12 col-md-12 col-lg-12">
-              <div className="page-title menu text-center">
+              {/* <div className="page-title menu text-center">
                 <span className="heading-page"> </span>
                 <p className="mt20"></p>
-              </div>
+              </div> */}
 
               <div className={`hexagon-menu clear ${menuExpanded ? 'menu-expanded' : ''}`}>
                 {menuItems.map((item, index) => {
@@ -163,13 +163,13 @@ function Menu() {
                 })}
               </div>
 
-              <button
+              {/* <button
                 className={`menu-toggle ${menuExpanded ? 'menu-toggle-active' : ''}`}
                 onClick={toggleMenu}
                 aria-label={menuExpanded ? "Close menu" : "Open menu"}
               >
                 <i className={`fa fa-${menuExpanded ? 'times' : 'bars'}`}></i>
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

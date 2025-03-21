@@ -485,46 +485,46 @@ p:last-child {
   
   .hexagon-item {
     float: none;
-    margin: 10px 0;
-    width: 150px;
-    height: 130px;
+    /* width: 150px;
+    height: 130px; */
     transform: rotate(30deg) scale(0.8);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: absolute;
-    left: 50%;
-    margin-left: -75px;
-    top: 10px;
-    opacity: 0;
-    visibility: hidden;
+    gap: 15px;
+    /* position: absolute; */
+    /* left: 50%; */
+    /* margin-left: -75px; */
+    /* top: 10px; */
+    /* opacity: 0; */
+    /* visibility: hidden; */
   }
   
   /* Initially all items are stacked */
-  .menu-expanded .hexagon-item {
+  /* .menu-expanded .hexagon-item {
     opacity: 1;
     visibility: visible;
-  }
+  } */
   
   /* Parabola formation - specific positioning for each item */
-  .menu-expanded .hexagon-item:nth-child(1) { transform: rotate(30deg) translate(-120px, 0) scale(0.8); }
+  /* .menu-expanded .hexagon-item:nth-child(1) { transform: rotate(30deg) translate(-120px, 0) scale(0.8); }
   .menu-expanded .hexagon-item:nth-child(2) { transform: rotate(30deg) translate(-80px, 20px) scale(0.8); }
   .menu-expanded .hexagon-item:nth-child(3) { transform: rotate(30deg) translate(-40px, 60px) scale(0.8); }
   .menu-expanded .hexagon-item:nth-child(4) { transform: rotate(30deg) translate(0, 80px) scale(0.8); }
   .menu-expanded .hexagon-item:nth-child(5) { transform: rotate(30deg) translate(40px, 60px) scale(0.8); }
   .menu-expanded .hexagon-item:nth-child(6) { transform: rotate(30deg) translate(80px, 20px) scale(0.8); }
-  .menu-expanded .hexagon-item:nth-child(7) { transform: rotate(30deg) translate(120px, 0) scale(0.8); }
+  .menu-expanded .hexagon-item:nth-child(7) { transform: rotate(30deg) translate(120px, 0) scale(0.8); } */
   
   /* Adjust the height of the menu container when expanded */
-  .menu-expanded .hexagon-menu {
+  /* .menu-expanded .hexagon-menu {
     height: 240px;
     margin-bottom: 60px;
-  }
+  } */
   
   /* Fix for the menu item stacking */
-  .hexagon-menu:before {
+  /* .hexagon-menu:before {
     content: "";
     display: block;
     padding-top: 100%;
-  }
+  } */
   
   /* Animation delay for staggered appearance */
   .menu-expanded .hexagon-item:nth-child(1) { transition-delay: 0s; }
