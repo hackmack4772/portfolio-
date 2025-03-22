@@ -14,11 +14,11 @@ import {
   faFilter,
   faSort,
   faEye,
-  faGithub,
   faSearch,
   faEnvelope,
   faFileAlt
 } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import "./Projects.css";
 import { db } from "../../config/firebase";
 

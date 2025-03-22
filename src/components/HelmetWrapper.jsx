@@ -1,12 +1,12 @@
-import React from 'react';
-import { Helmet as ReactHelmet } from 'react-helmet';
+import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 
 /**
- * A wrapper component for React Helmet to address the UNSAFE_componentWillMount warning in React 18
- * This component simply forwards all props to the underlying Helmet component
+ * HelmetWrapper - A wrapper for React Helmet to avoid the UNSAFE_componentWillMount warning
+ * This component uses useEffect instead of componentWillMount
  */
-const HelmetWrapper = ({ children, ...rest }) => {
-  return <ReactHelmet {...rest}>{children}</ReactHelmet>;
+const HelmetWrapper = ({ children }) => {
+  return <Helmet>{children}</Helmet>;
 };
 
 export default HelmetWrapper; 

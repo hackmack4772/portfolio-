@@ -10,6 +10,12 @@ import Toolstack from "../../components/Toolstack";
 import laptopImg from "../../Assets/about.png";
 import { FaCode, FaServer, FaDatabase, FaMobileAlt, FaTools } from "react-icons/fa";
 
+// Make sure this function is defined before it's used
+function getColorClass(index) {
+  const colors = ["primary", "secondary", "accent"];
+  return colors[index % colors.length];
+}
+
 function About() {
   const [aboutData, setAboutData] = useState({
     tagline: "Developer, Designer, Problem Solver",
@@ -88,7 +94,7 @@ function About() {
         }, 100);
       } catch (error) {
         console.error("Error fetching about data:", error);
-        handleLoading(false);
+      handleLoading(false);
         setLoading(false);
         // Even on error, make sure we're not stuck in loading state
         setVisible(true);
@@ -139,7 +145,7 @@ function About() {
           <p>Loading about data...</p>
         </div>
       ) : (
-        <Container>
+      <Container>
           <div className="about-content">
             {/* Animated particles in background */}
             <div className="about-particles">
@@ -153,7 +159,7 @@ function About() {
             <div className={`section-heading ${visible ? 'animate' : ''}`}>
               <h1 className="heading">
                 About <span className="accent-text">Me</span>
-              </h1>
+            </h1>
               <p className="subheading">
                 {aboutData?.tagline || "Developer, Designer, Problem Solver"}
               </p>
@@ -185,7 +191,7 @@ function About() {
                     <span>JavaScript</span>
                   </div>
                 </div>
-              </Col>
+          </Col>
               
               <Col lg={7} className="about-text-column">
                 {/* About Tabs */}
@@ -218,7 +224,28 @@ function About() {
                   {activeTab === 'personal' && (
                     <div className="about-bio">
                       <h2 className="bio-title">Who am I?</h2>
-                      <Aboutcard />
+                      <div className="biography-content">
+                        <p className="bio-text">{aboutData.biography}</p>
+                        
+                        <div className="personal-info">
+                          <div className="info-item">
+                            <span className="info-label"><i className="fas fa-map-marker-alt"></i> Location:</span>
+                            <span className="info-value">New York, USA</span>
+                          </div>
+                          <div className="info-item">
+                            <span className="info-label"><i className="fas fa-envelope"></i> Email:</span>
+                            <span className="info-value">developer@example.com</span>
+                          </div>
+                          <div className="info-item">
+                            <span className="info-label"><i className="fas fa-code-branch"></i> GitHub:</span>
+                            <span className="info-value">github.com/developer</span>
+                          </div>
+                          <div className="info-item">
+                            <span className="info-label"><i className="fas fa-briefcase"></i> Open to Work:</span>
+                            <span className="info-value info-badge">Available for Freelance</span>
+                          </div>
+                        </div>
+                      </div>
                       
                       {aboutData?.highlights && (
                         <div className="about-highlights">
@@ -311,9 +338,9 @@ function About() {
                     </div>
                   )}
                 </div>
-              </Col>
-            </Row>
-            
+          </Col>
+        </Row>
+
             <div className={`section-divider ${visible ? 'animate' : ''}`}>
               <div className="divider-line"></div>
               <div className="divider-icon">
@@ -358,7 +385,7 @@ function About() {
               </div>
 
               <div className={`skills-container ${visible ? 'animate' : ''}`}>
-                <Techstack />
+        <Techstack />
               </div>
             </div>
             
@@ -374,7 +401,7 @@ function About() {
             <div className="tools-section">
               <h2 className={`section-subtitle ${visible ? 'animate' : ''}`}>Tools I Use</h2>
               <div className={`tools-container ${visible && animationCompleted.tools ? 'animate' : ''}`}>
-                <Toolstack />
+        <Toolstack />
               </div>
             </div>
             
@@ -386,11 +413,11 @@ function About() {
               <div className="divider-line"></div>
             </div>
 
-            {/* GitHub Section */}
+        {/* GitHub Section */}
             <div className="github-section">
               <h2 className={`section-subtitle ${visible ? 'animate' : ''}`}>Days I Code</h2>
               <div className={`github-container ${visible && animationCompleted.github ? 'animate' : ''}`}>
-                <Github />
+        <Github />
               </div>
             </div>
 
@@ -410,16 +437,10 @@ function About() {
               </div>
             </div>
           </div>
-        </Container>
+      </Container>
       )}
     </section>
   );
-}
-
-// Helper function to get color class based on index
-function getColorClass(index) {
-  const colors = ["primary", "secondary", "accent"];
-  return colors[index % colors.length];
 }
 
 export default About;
