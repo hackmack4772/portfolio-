@@ -19,7 +19,7 @@ import {
   faFileAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import "./Projects.css";
+import "./projects.css";
 import { db } from "../../config/firebase";
 
 function Projects() {

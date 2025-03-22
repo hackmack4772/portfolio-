@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePortfolioData } from '../utils/usePortfolioData';
-import './Projects.css';
+import './projects.css';
 
 const Projects = () => {
   // Fetch only projects data

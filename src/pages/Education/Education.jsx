@@ -3,7 +3,7 @@ import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import HelmetWrapper from "../../components/HelmetWrapper";
-import "./Education.css";
+import "./education.css";
 import { useLoading } from "../../Context/LoadingContext";
 
 function Education() {
