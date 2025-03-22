@@ -1,81 +1,74 @@
-import React, { useEffect } from "react";
-import anime from "animejs";
+import React, { useEffect, useState } from "react";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import HelmetWrapper from "../../components/HelmetWrapper";
+import "./NotFound.css";
 
-import "./not-found.css";
+function NotFound() {
+  const [isTextAnimated, setIsTextAnimated] = useState(false);
 
-export default function NotFound() {
   useEffect(() => {
-    anime({
-      targets: ".row svg",
-      translateY: 10,
-      autoplay: true,
-      loop: true,
-      easing: "easeInOutSine",
-      direction: "alternate",
-    });
+    // Start the animation after a short delay
+    const timer = setTimeout(() => {
+      setIsTextAnimated(true);
+    }, 300);
 
-    anime({
-      targets: "#zero",
-      translateX: 10,
-      autoplay: true,
-      loop: true,
-      easing: "easeInOutSine",
-      direction: "alternate",
-      scale: [{ value: 1 }, { value: 1.4 }, { value: 1, delay: 250 }],
-      rotateY: { value: "+=180", delay: 200 },
-    });
+    return () => clearTimeout(timer);
   }, []);
+
   return (
-    <>
-    <a href="/" target="_blank">
-      <header className="top-header"></header>
-      {/*dust particel*/}
-      <div>
-        <div className="starsec" />
-        <div className="starthird" />
-        <div className="starfourth" />
-        <div className="starfifth" />
+    <section className="not-found-section">
+      <HelmetWrapper>
+        <title>Page Not Found | My Portfolio</title>
+        <meta name="description" content="The page you are looking for does not exist." />
+      </HelmetWrapper>
+      
+      {/* Custom animated background */}
+      <div className="animated-background">
+        <div className="stars"></div>
+        <div className="stars2"></div>
+        <div className="stars3"></div>
       </div>
-      {/*Dust particle end-*/}
-      <div className="lamp__wrap">
-        <div className="lamp">
-          <div className="cable" />
-          <div className="cover" />
-          <div className="in-cover">
-            <div className="bulb" />
-          </div>
-          <div className="light" />
-        </div>
-      </div>
-      {/* END Lamp */}
-    </a>
-    <section className="error">
-      <a href="/" target="_blank">
-        {/* Content */}
-      </a>
-      <div className="error__content">
-        <a href="/" target="_blank">
-          <div className="error__message message">
-            <h1 className="message__title">Page Not Found</h1>
-            <p className="message__text">
-              We're sorry, the page you were looking for isn't found here. The
-              link you followed may either be broken or no longer exists. Please
-              try again, or take a look at our.
+      
+      <Container fluid className="not-found-container">
+        <Row className="justify-content-center">
+          <Col md={10} lg={8} className="text-center">
+            <div className="error-code-container">
+              <h1 className="error-code">4</h1>
+              <div className="error-circle">
+                <div className="error-face">
+                  <div className="error-eye left"></div>
+                  <div className="error-eye right"></div>
+                  <div className="error-mouth sad"></div>
+                </div>
+              </div>
+              <h1 className="error-code">4</h1>
+            </div>
+            
+            <h2 className={`error-text ${isTextAnimated ? 'animate' : ''}`}>
+              Page Not Found
+            </h2>
+            
+            <p className="error-description">
+              Oops! The page you are looking for might have been removed, 
+              had its name changed, or is temporarily unavailable.
             </p>
-          </div>
-        </a>
-        <div className="error__nav e-nav">
-          <a href="/" target="_blank"></a>
-          <a
-            href="/"
-            target="_blanck"
-            className="e-nav__link"
-          />
-        </div>
-      </div>
-      {/* END Content */}
+            
+            <div className="error-actions">
+              <Link to="/">
+                <Button className="home-button">
+                  <span className="button-content">
+                    <i className="fas fa-home"></i>
+                    <span>Go Home</span>
+                  </span>
+                </Button>
+              </Link>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
-  </>
-  
   );
 }
+
+export default NotFound;

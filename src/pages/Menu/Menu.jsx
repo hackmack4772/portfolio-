@@ -15,7 +15,7 @@ const menuItems = [
   { icon: "home", title: "Home", path: "/home" },
   { icon: "graduation-cap", title: "Education", path: "/education" },
   { icon: "info-circle", title: "About", path: "/about" },
-  { icon: "briefcase", title: "Projects", path: "/project" },
+  { icon: "briefcase", title: "Projects", path: "/projects" },
   { icon: "file-text", title: "Resume", path: "/resume" },
   { icon: "comments", title: "Testimonials", path: "/testimonials" },
   { icon: "envelope", title: "Contact", path: "/contact" },

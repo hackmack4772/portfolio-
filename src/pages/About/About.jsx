@@ -1,84 +1,425 @@
-import React, { useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Spinner, ProgressBar } from "react-bootstrap";
+import HelmetWrapper from "../../components/HelmetWrapper";
+import { useLoading } from "../../Context/LoadingContext";
+import "./About.css";
 import Github from "../../components/Github";
 import Techstack from "../../components/Techstack";
 import Aboutcard from "../../components/AboutCard";
-import laptopImg from "../../Assets/about.png";
 import Toolstack from "../../components/Toolstack";
-import { useLoading } from "../../Context/LoadingContext";
-import "./about.css"
+import laptopImg from "../../Assets/about.png";
+import { FaCode, FaServer, FaDatabase, FaMobileAlt, FaTools } from "react-icons/fa";
 
 function About() {
+  const [aboutData, setAboutData] = useState({
+    tagline: "Developer, Designer, Problem Solver",
+    biography: "I am a passionate full-stack developer with 5+ years of experience creating modern web applications. I enjoy solving complex problems and turning ideas into clean, efficient code. My goal is to build software that not only functions flawlessly but also provides exceptional user experiences.",
+    highlights: [
+      "5+ years of experience in full-stack development",
+      "Specialized in React.js and Node.js ecosystems",
+      "Contributed to open-source projects",
+      "Published articles on modern web development",
+      "Speaker at local tech conferences",
+      "Mentor for junior developers"
+    ],
+    experience: [
+      { skill: "Frontend Development", years: "5+ years", level: 90 },
+      { skill: "Backend Development", years: "4+ years", level: 85 },
+      { skill: "Database Design", years: "3+ years", level: 80 },
+      { skill: "DevOps", years: "2+ years", level: 75 },
+      { skill: "UI/UX Design", years: "3+ years", level: 70 }
+    ],
+    certifications: [
+      { name: "AWS Certified Developer", issuer: "Amazon Web Services", year: "2022" },
+      { name: "Professional React Developer", issuer: "Meta", year: "2022" },
+      { name: "MongoDB Professional", issuer: "MongoDB Inc.", year: "2021" },
+      { name: "Cloud Engineering", issuer: "Google Cloud", year: "2020" }
+    ],
+    education: [
+      { degree: "Master of Computer Science", institution: "Technical University", year: "2018-2020" },
+      { degree: "Bachelor of Software Engineering", institution: "State University", year: "2014-2018" },
+      { degree: "Full-Stack Web Development", institution: "Tech Bootcamp", year: "2017" }
+    ]
+  });
+  const [skillsByCategory, setSkillsByCategory] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [visible, setVisible] = useState(false);
+  const [activeTab, setActiveTab] = useState("personal");
   const { handleLoading } = useLoading();
+  
+  // Animation tracking
+  const [animationCompleted, setAnimationCompleted] = useState({
+    main: false,
+    skills: false,
+    tools: false,
+    github: false
+  });
+
+  // Skill categories for filter tabs
+  const skillCategories = [
+    { name: "Frontend", icon: "fas fa-laptop-code", color: "primary" },
+    { name: "Backend", icon: "fas fa-server", color: "secondary" },
+    { name: "DevOps", icon: "fas fa-cloud", color: "accent" },
+    { name: "Tools", icon: "fas fa-tools", color: "primary" }
+  ];
 
   useEffect(() => {
-    const handleApiData = () => {
-      handleLoading(false);
+    const fetchData = async () => {
+      try {
+        // Here you would normally fetch data from API/Firebase
+        // For now we'll just use the default data
+
+        // Simulate data load and trigger animations
+        handleLoading(false);
+        setLoading(false);
+        
+        // Set visible state to true immediately after loading is complete
+        setVisible(true);
+        
+        // Setup tab animation timers
+        setTimeout(() => {
+          setActiveTab('professional');
+          
+          // Staggered animation for sections
+          setTimeout(() => setAnimationCompleted({ ...animationCompleted, main: true }), 500);
+          setTimeout(() => setAnimationCompleted({ ...animationCompleted, skills: true }), 800);
+          setTimeout(() => setAnimationCompleted({ ...animationCompleted, tools: true }), 1100);
+          setTimeout(() => setAnimationCompleted({ ...animationCompleted, github: true }), 1400);
+        }, 100);
+      } catch (error) {
+        console.error("Error fetching about data:", error);
+        handleLoading(false);
+        setLoading(false);
+        // Even on error, make sure we're not stuck in loading state
+        setVisible(true);
+      }
     };
-    handleApiData();
-  }, []);
+
+    fetchData();
+  }, [handleLoading]);
+
+  // Enhanced handling of animations when they become visible
+  useEffect(() => {
+    if (visible) {
+      // Force all elements with animation classes to be visible
+      document.querySelectorAll(
+        '.section-heading, .about-tabs, .about-tab-content, .about-image-container, ' +
+        '.summary-section, .skill-categories-tabs, .skills-container, ' +
+        '.tools-container, .github-container, .about-footer'
+      ).forEach((element) => {
+        // Force inline style to override any CSS that might be preventing visibility
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+        
+        // Add the animate class with a slight delay to ensure CSS transition works
+        setTimeout(() => {
+          element.classList.add('animate');
+        }, 50);
+      });
+    }
+  }, [visible]);
+
+  // Handle tab switching
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
+
   return (
-    <Container fluid className="about-section">
-      <Container>
-        {/* About Section */}
-        <Row style={{ justifyContent: "center", padding: "10px" }}>
-          <Col
-            md={7}
-            style={{
-              justifyContent: "center",
-              paddingTop: "30px",
-              paddingBottom: "50px",
-            }}
-          >
-            <h1 style={{ fontSize: "2.1em", paddingBottom: "20px" }}>
-              Know Who <strong className="purple">I'M</strong>
-            </h1>
-            <Aboutcard />
-          </Col>
-          <Col
-            md={5}
-            style={{ paddingTop: "120px", paddingBottom: "50px" }}
-            className="about-img"
-          >
-            <img src={laptopImg} alt="about" className="img-fluid" />
-          </Col>
-        </Row>
+    <section className="about-section">
+      <HelmetWrapper>
+        <title>About Me | My Portfolio</title>
+        <meta name="description" content="Learn more about me, my skills, and my professional journey." />
+      </HelmetWrapper>
 
-        {/* Professional Summary */}
-        <h1 className="project-heading">
-          Professional <strong className="purple">Summary</strong>
-        </h1>
-        <p style={{ color: "white" }}>
-          I am a dedicated and innovative <strong>MERN Stack Developer</strong>
-          with hands-on experience in <strong>React.js</strong>,{" "}
-          <strong>Express.js</strong>, <strong>Laravel</strong>,{" "}
-          <strong>Lumen</strong>, and <strong>MongoDB</strong>. I started my
-          journey as a trainee web developer at Shine Dezign Infonet Pvt. Ltd.
-          and transitioned into a full-time role. I specialize in creating
-          scalable systems, efficient APIs, and end-to-end solutions for modern,
-          user-centric web applications.
-        </p>
+      {loading ? (
+        <div className="loading-container">
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+          <p>Loading about data...</p>
+        </div>
+      ) : (
+        <Container>
+          <div className="about-content">
+            {/* Animated particles in background */}
+            <div className="about-particles">
+              <div className="particle particle-1"></div>
+              <div className="particle particle-2"></div>
+              <div className="particle particle-3"></div>
+              <div className="particle particle-4"></div>
+            </div>
+            
+            {/* Section Heading */}
+            <div className={`section-heading ${visible ? 'animate' : ''}`}>
+              <h1 className="heading">
+                About <span className="accent-text">Me</span>
+              </h1>
+              <p className="subheading">
+                {aboutData?.tagline || "Developer, Designer, Problem Solver"}
+              </p>
+            </div>
 
-        {/* Professional Skillset */}
-        <h1 className="project-heading">
-          Professional <strong className="purple">Skillset</strong>
-        </h1>
-        <Techstack />
+            <Row className="about-main">
+              <Col lg={5} className="about-image-column">
+                <div className={`about-image-container ${visible ? 'animate' : ''}`}>
+                  {aboutData?.image ? (
+                    <img src={aboutData.image} alt="Profile" className="about-image" />
+                  ) : (
+                    <div className="about-image-placeholder">
+                      <i className="fas fa-user"></i>
+                    </div>
+                  )}
+                  <div className="about-image-decoration"></div>
+                  
+                  {/* Floating badges */}
+                  <div className="floating-badge badge-1">
+                    <i className="fab fa-react"></i>
+                    <span>React</span>
+                  </div>
+                  <div className="floating-badge badge-2">
+                    <i className="fab fa-node-js"></i>
+                    <span>Node.js</span>
+                  </div>
+                  <div className="floating-badge badge-3">
+                    <i className="fab fa-js"></i>
+                    <span>JavaScript</span>
+                  </div>
+                </div>
+              </Col>
+              
+              <Col lg={7} className="about-text-column">
+                {/* About Tabs */}
+                <div className={`about-tabs ${visible ? 'animate' : ''}`}>
+                  <div 
+                    className={`tab-button ${activeTab === 'personal' ? 'active' : ''}`}
+                    onClick={() => handleTabChange('personal')}
+                  >
+                    <i className="fas fa-user"></i>
+                    <span>Personal</span>
+                  </div>
+                  <div 
+                    className={`tab-button ${activeTab === 'professional' ? 'active' : ''}`}
+                    onClick={() => handleTabChange('professional')}
+                  >
+                    <i className="fas fa-briefcase"></i>
+                    <span>Professional</span>
+                  </div>
+                  <div 
+                    className={`tab-button ${activeTab === 'education' ? 'active' : ''}`}
+                    onClick={() => handleTabChange('education')}
+                  >
+                    <i className="fas fa-graduation-cap"></i>
+                    <span>Education</span>
+                  </div>
+                </div>
 
-        {/* Tools */}
-        <h1 className="project-heading">
-          <strong className="purple">Tools</strong> I use
-        </h1>
-        <Toolstack />
+                {/* Tab Content */}
+                <div className={`about-tab-content ${visible ? 'animate' : ''}`}>
+                  {activeTab === 'personal' && (
+                    <div className="about-bio">
+                      <h2 className="bio-title">Who am I?</h2>
+                      <Aboutcard />
+                      
+                      {aboutData?.highlights && (
+                        <div className="about-highlights">
+                          <h3 className="highlights-title">Highlights</h3>
+                          <ul className="highlights-list">
+                            {aboutData.highlights.map((highlight, index) => (
+                              <li key={index} className="highlight-item">
+                                <span className="highlight-icon">
+                                  <i className="fas fa-check-circle"></i>
+                                </span>
+                                <span className="highlight-text">{highlight}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  
+                  {activeTab === 'professional' && (
+                    <div className="professional-tab">
+                      <h2 className="bio-title">Professional Experience</h2>
+                      <div className="experience-skills">
+                        {aboutData?.experience?.map((exp, index) => (
+                          <div key={index} className="experience-skill-item">
+                            <div className="skill-header">
+                              <span className="skill-name">{exp.skill}</span>
+                              <span className="skill-years">{exp.years}</span>
+                            </div>
+                            <ProgressBar 
+                              now={exp.level} 
+                              className={`custom-progress ${getColorClass(index)}`}
+                            />
+                          </div>
+                        )) || <p>No experience data available</p>}
+                      </div>
+                      
+                      <div className="certifications-section">
+                        <h3 className="highlights-title">Certifications</h3>
+                        <div className="certifications-grid">
+                          {aboutData?.certifications?.map((cert, index) => (
+                            <div key={index} className={`certification-card ${getColorClass(index)}`}>
+                              <div className="certification-icon">
+                                <i className="fas fa-certificate"></i>
+                              </div>
+                              <div className="certification-details">
+                                <h4>{cert.name}</h4>
+                                <div className="certification-meta">
+                                  <span>{cert.issuer}</span>
+                                  <span className="cert-year">{cert.year}</span>
+                                </div>
+                              </div>
+                            </div>
+                          )) || <p>No certification data available</p>}
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
-        {/* GitHub Section */}
-        <h1 className="project-heading">
-          My <strong className="purple">GitHub</strong> Stats
-        </h1>
-        <Github />
-      </Container>
-    </Container>
+                  {activeTab === 'education' && (
+                    <div className="education-tab">
+                      <h2 className="bio-title">Education Background</h2>
+                      
+                      {aboutData?.education?.map((edu, index) => (
+                        <div key={index} className="education-card">
+                          <div className="education-icon">
+                            <i className="fas fa-graduation-cap"></i>
+                          </div>
+                          <div className="education-details">
+                            <h3 className="education-degree">{edu.degree}</h3>
+                            <div className="education-meta">
+                              <span className="education-institution">{edu.institution}</span>
+                              <span className="education-year">{edu.year}</span>
+                            </div>
+                          </div>
+                        </div>
+                      )) || <p>No education data available</p>}
+                      
+                      <div className="education-skills">
+                        <h3 className="highlights-title">Core Knowledge Areas</h3>
+                        <div className="knowledge-tags">
+                          <span className="knowledge-tag">Data Structures</span>
+                          <span className="knowledge-tag">Algorithms</span>
+                          <span className="knowledge-tag">Web Development</span>
+                          <span className="knowledge-tag">Database Systems</span>
+                          <span className="knowledge-tag">Software Engineering</span>
+                          <span className="knowledge-tag">UI/UX Design</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </Col>
+            </Row>
+            
+            <div className={`section-divider ${visible ? 'animate' : ''}`}>
+              <div className="divider-line"></div>
+              <div className="divider-icon">
+                <i className="fas fa-laptop-code"></i>
+              </div>
+              <div className="divider-line"></div>
+            </div>
+
+            {/* Professional Summary Section */}
+            <div className={`summary-section ${visible ? 'animate' : ''}`}>
+              <h2 className="section-subtitle">Professional Summary</h2>
+              <div className="summary-content">
+                <div className="summary-quote">
+                  <i className="fas fa-quote-left quote-icon left"></i>
+                  <p>{aboutData?.biography || "I am a passionate developer with a love for clean code and innovative solutions."}</p>
+                  <i className="fas fa-quote-right quote-icon right"></i>
+                </div>
+              </div>
+            </div>
+
+            <div className={`section-divider ${visible ? 'animate' : ''}`}>
+              <div className="divider-line"></div>
+              <div className="divider-icon secondary">
+                <i className="fas fa-code"></i>
+              </div>
+              <div className="divider-line"></div>
+            </div>
+            
+            {/* Skills Section */}
+            <div className="skills-section">
+              <h2 className={`section-subtitle ${visible ? 'animate' : ''}`}>Professional Skillset</h2>
+              
+              <div className={`skill-categories-tabs ${visible ? 'animate' : ''}`}>
+                {skillCategories.map((category, index) => (
+                  <div key={index} className="skill-category-tab">
+                    <div className={`category-icon-wrapper ${category.color}`}>
+                      <i className={category.icon}></i>
+                    </div>
+                    <span>{category.name}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className={`skills-container ${visible ? 'animate' : ''}`}>
+                <Techstack />
+              </div>
+            </div>
+            
+            <div className={`section-divider ${visible ? 'animate' : ''}`}>
+              <div className="divider-line"></div>
+              <div className="divider-icon accent">
+                <i className="fas fa-tools"></i>
+              </div>
+              <div className="divider-line"></div>
+            </div>
+
+            {/* Tools Section */}
+            <div className="tools-section">
+              <h2 className={`section-subtitle ${visible ? 'animate' : ''}`}>Tools I Use</h2>
+              <div className={`tools-container ${visible && animationCompleted.tools ? 'animate' : ''}`}>
+                <Toolstack />
+              </div>
+            </div>
+            
+            <div className={`section-divider ${visible ? 'animate' : ''}`}>
+              <div className="divider-line"></div>
+              <div className="divider-icon primary">
+                <i className="fab fa-github"></i>
+              </div>
+              <div className="divider-line"></div>
+            </div>
+
+            {/* GitHub Section */}
+            <div className="github-section">
+              <h2 className={`section-subtitle ${visible ? 'animate' : ''}`}>Days I Code</h2>
+              <div className={`github-container ${visible && animationCompleted.github ? 'animate' : ''}`}>
+                <Github />
+              </div>
+            </div>
+
+            {/* About Footer */}
+            <div className={`about-footer ${visible ? 'animate' : ''}`}>
+              <div className="footer-cta">
+                <h3>Let's Connect!</h3>
+                <p>Interested in working together? Feel free to reach out.</p>
+                <div className="cta-buttons">
+                  <a href="/projects" className="cta-btn primary-btn">
+                    <i className="fas fa-project-diagram"></i> View Projects
+                  </a>
+                  <a href="/contact" className="cta-btn secondary-btn">
+                    <i className="fas fa-envelope"></i> Contact Me
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      )}
+    </section>
   );
+}
+
+// Helper function to get color class based on index
+function getColorClass(index) {
+  const colors = ["primary", "secondary", "accent"];
+  return colors[index % colors.length];
 }
 
 export default About;

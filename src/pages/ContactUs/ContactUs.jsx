@@ -1,127 +1,317 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import "./ContactUs.css";
-import { doc, getDoc, addDoc, collection } from "@firebase/firestore";
-import { db } from "../../config/firebase";
+import { useLoading } from "../../Context/LoadingContext";
+import emailjs from "@emailjs/browser";
+import HelmetWrapper from "../../components/HelmetWrapper";
 
-const ContactUs = () => {
-  const [settings, setSettings] = useState({});
-  const [apiStatus, setApiStatus] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
+function ContactUs() {
+  const { handleLoading } = useLoading();
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+  const [activeField, setActiveField] = useState(null);
+  const [isButtonAnimating, setIsButtonAnimating] = useState(false);
+  const formRef = useRef();
+
+  // Define validation schema using Yup
+  const validationSchema = Yup.object({
+    user_name: Yup.string().required("Name is required"),
+    user_email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    subject: Yup.string().required("Subject is required"),
+    message: Yup.string()
+      .min(10, "Message must be at least 10 characters")
+      .required("Message is required"),
   });
 
-  useEffect(() => {
-    const fetchSettings = async () => {
-      // Fetch settings from Firestore
-      const settingsRef = doc(db, "siteSettings", "contactUs");
-      const docSnap = await getDoc(settingsRef);
-      if (docSnap.exists()) {
-        setSettings(docSnap.data());
-      } else {
-        console.log("No settings found!");
+  // Initialize formik
+  const formik = useFormik({
+    initialValues: {
+      user_name: "",
+      user_email: "",
+      subject: "",
+      message: "",
+    },
+    validationSchema,
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        handleLoading(true);
+        setIsButtonAnimating(true);
+        
+        await emailjs.sendForm(
+          process.env.REACT_APP_EMAILJS_SERVICE_ID,
+          process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+          formRef.current,
+          process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+        );
+        
+        setFormSubmitted(true);
+        setSubmitError(null);
+        resetForm();
+      } catch (error) {
+        console.error("Email send error:", error);
+        setSubmitError("Failed to send message. Please try again later.");
+      } finally {
+        handleLoading(false);
+        setIsButtonAnimating(false);
       }
-      setApiStatus(true);
-    };
-    fetchSettings();
-  }, []);
+    },
+  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  // Handle field focus animation
+  const handleFocus = (fieldName) => {
+    setActiveField(fieldName);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const docRef = await addDoc(collection(db, "contactMessages"), formData);
-      alert(`Thank you, ${formData.name}! Your message has been sent.`);
-      setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
-      console.error("Error sending message:", error);
-      alert("There was an error sending your message. Please try again later.");
-    }
+  // Handle field blur animation
+  const handleBlur = (e) => {
+    formik.handleBlur(e);
+    setActiveField(null);
   };
 
   return (
-    apiStatus && (
-      <div className="contact_inner">
-        <div className="slogan">
-          {settings.pageTitle || "Connecting People, Building Dreams"}
-        </div>
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="contact_form_inner">
-              <form onSubmit={handleSubmit}>
-                <div className="contact_field">
-                  <p>
-                    {settings.introText ||
-                      "Feel Free to contact us any time..."}
-                  </p>
-                  <input
-                    type="text"
-                    name="name"
-                    className="form-control form-group"
-                    placeholder="Name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required={settings.formFields?.enableNameField}
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    className="form-control form-group"
-                    placeholder="Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required={settings.formFields?.enableEmailField}
-                  />
-                  <textarea
-                    name="message"
-                    className="form-control form-group"
-                    placeholder="Message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required={settings.formFields?.enableMessageField}
-                  ></textarea>
-                  <button
-                    type="submit"
-                    className="contact_form_submit"
-                  >
-                    Send
-                  </button>
-                </div>
-              </form>
+    <Container fluid className="contact-section">
+      <HelmetWrapper>
+        <title>Contact Me | My Portfolio</title>
+        <meta name="description" content="Get in touch with me for collaborations or inquiries." />
+      </HelmetWrapper>
+      
+      <Container className="contact-content">
+        <h1 className="contact-heading">
+          Get In <span className="accent-text">Touch</span>
+        </h1>
+        <p className="contact-subtitle">
+          Feel free to reach out for collaborations or just a friendly hello
+        </p>
+
+        {formSubmitted ? (
+          <div className="success-message">
+            <div className="checkmark-circle">
+              <div className="checkmark draw"></div>
             </div>
+            <h3>Message Sent!</h3>
+            <p>Thank you for reaching out. I'll get back to you soon.</p>
+            <Button 
+              onClick={() => setFormSubmitted(false)} 
+              className="contact-button"
+            >
+              Send Another Message
+            </Button>
           </div>
-        </div>
-        <div className="contact_info_sec">
-          <h4>Contact Info</h4>
-          <div className="d-flex info_single align-items-center">
-            <i className="fas fa-headset"></i>
-            <span>{settings.contactDetails?.phone || "+91 9596581274"}</span>
-          </div>
-          <div className="d-flex info_single align-items-center">
-            <i className="fas fa-envelope-open-text"></i>
-            <span>
-              {settings.contactDetails?.email || "hackmackcrew4772@gmail.com"}
-            </span>
-          </div>
-          <div className="d-flex info_single align-items-center">
-            <i className="fas fa-map-marked-alt"></i>
-            <span>
-              {settings.contactDetails?.address ||
-                "Handwara, Jammu and Kashmir, 193302"}
-            </span>
-          </div>
-        </div>
-      </div>
-    )
+        ) : (
+          <Row className="contact-form-container">
+            <Col md={5} className="contact-form-left">
+              <div className="contact-info">
+                <div className="contact-info-item">
+                  <div className="contact-info-icon">
+                    <i className="fas fa-map-marker-alt"></i>
+                  </div>
+                  <div className="contact-info-text">
+                    <h4>Location</h4>
+                    <p>Handwara, Jammu and kashmir</p>
+                  </div>
+                </div>
+                <div className="contact-info-item">
+                  <div className="contact-info-icon">
+                    <i className="fas fa-envelope"></i>
+                  </div>
+                  <div className="contact-info-text">
+                    <h4>Email</h4>
+                    <p>loneaamir6@gmail.com</p>
+                  </div>
+                </div>
+                <div className="contact-info-item">
+                  <div className="contact-info-icon">
+                    <i className="fas fa-phone"></i>
+                  </div>
+                  <div className="contact-info-text">
+                    <h4>Phone</h4>
+                    <p>+91-9596581274</p>
+                  </div>
+                </div>
+                <div className="contact-social">
+                  <a href="https://github.com/yourusername" target="_blank" rel="noreferrer" aria-label="GitHub">
+                    <i className="fab fa-github"></i>
+                  </a>
+                  <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                    <i className="fab fa-linkedin-in"></i>
+                  </a>
+                  <a href="https://twitter.com/yourusername" target="_blank" rel="noreferrer" aria-label="Twitter">
+                    <i className="fab fa-twitter"></i>
+                  </a>
+                  <a href="https://instagram.com/yourusername" target="_blank" rel="noreferrer" aria-label="Instagram">
+                    <i className="fab fa-instagram"></i>
+                  </a>
+                </div>
+              </div>
+            </Col>
+            <Col md={7} className="contact-form-right">
+              <Form ref={formRef} onSubmit={formik.handleSubmit} className="contact-form">
+                {submitError && (
+                  <div className="error-message">
+                    <i className="fas fa-exclamation-circle"></i> {submitError}
+                  </div>
+                )}
+                
+                <Form.Group className="mb-4">
+                  <div className={`form-input-group ${activeField === 'user_name' ? 'focused' : ''} ${
+                    formik.touched.user_name && formik.errors.user_name 
+                      ? 'has-error' 
+                      : formik.touched.user_name && !formik.errors.user_name 
+                      ? 'has-success' 
+                      : ''
+                  }`}>
+                    <Form.Label>Name</Form.Label>
+                    <span className="input-icon">
+                      <i className="fas fa-user"></i>
+                    </span>
+                    <Form.Control
+                      type="text"
+                      name="user_name"
+                      placeholder="Your Name"
+                      value={formik.values.user_name}
+                      onChange={formik.handleChange}
+                      onFocus={() => handleFocus('user_name')}
+                      onBlur={handleBlur}
+                    />
+                    <span className="validation-icon">
+                      {formik.touched.user_name && formik.errors.user_name ? (
+                        <i className="fas fa-times-circle error-icon"></i>
+                      ) : formik.touched.user_name && !formik.errors.user_name ? (
+                        <i className="fas fa-check-circle success-icon"></i>
+                      ) : null}
+                    </span>
+                  </div>
+                  {formik.touched.user_name && formik.errors.user_name && (
+                    <div className="error-feedback">{formik.errors.user_name}</div>
+                  )}
+                </Form.Group>
+
+                <Form.Group className="mb-4">
+                  <div className={`form-input-group ${activeField === 'user_email' ? 'focused' : ''} ${
+                    formik.touched.user_email && formik.errors.user_email 
+                      ? 'has-error' 
+                      : formik.touched.user_email && !formik.errors.user_email 
+                      ? 'has-success' 
+                      : ''
+                  }`}>
+                    <Form.Label>Email</Form.Label>
+                    <span className="input-icon">
+                      <i className="fas fa-envelope"></i>
+                    </span>
+                    <Form.Control
+                      type="email"
+                      name="user_email"
+                      placeholder="Your Email"
+                      value={formik.values.user_email}
+                      onChange={formik.handleChange}
+                      onFocus={() => handleFocus('user_email')}
+                      onBlur={handleBlur}
+                    />
+                    <span className="validation-icon">
+                      {formik.touched.user_email && formik.errors.user_email ? (
+                        <i className="fas fa-times-circle error-icon"></i>
+                      ) : formik.touched.user_email && !formik.errors.user_email ? (
+                        <i className="fas fa-check-circle success-icon"></i>
+                      ) : null}
+                    </span>
+                  </div>
+                  {formik.touched.user_email && formik.errors.user_email && (
+                    <div className="error-feedback">{formik.errors.user_email}</div>
+                  )}
+                </Form.Group>
+
+                <Form.Group className="mb-4">
+                  <div className={`form-input-group ${activeField === 'subject' ? 'focused' : ''} ${
+                    formik.touched.subject && formik.errors.subject 
+                      ? 'has-error' 
+                      : formik.touched.subject && !formik.errors.subject 
+                      ? 'has-success' 
+                      : ''
+                  }`}>
+                    <Form.Label>Subject</Form.Label>
+                    <span className="input-icon">
+                      <i className="fas fa-heading"></i>
+                    </span>
+                    <Form.Control
+                      type="text"
+                      name="subject"
+                      placeholder="Subject"
+                      value={formik.values.subject}
+                      onChange={formik.handleChange}
+                      onFocus={() => handleFocus('subject')}
+                      onBlur={handleBlur}
+                    />
+                    <span className="validation-icon">
+                      {formik.touched.subject && formik.errors.subject ? (
+                        <i className="fas fa-times-circle error-icon"></i>
+                      ) : formik.touched.subject && !formik.errors.subject ? (
+                        <i className="fas fa-check-circle success-icon"></i>
+                      ) : null}
+                    </span>
+                  </div>
+                  {formik.touched.subject && formik.errors.subject && (
+                    <div className="error-feedback">{formik.errors.subject}</div>
+                  )}
+                </Form.Group>
+
+                <Form.Group className="mb-4">
+                  <div className={`form-input-group ${activeField === 'message' ? 'focused' : ''} ${
+                    formik.touched.message && formik.errors.message 
+                      ? 'has-error' 
+                      : formik.touched.message && !formik.errors.message 
+                      ? 'has-success' 
+                      : ''
+                  }`}>
+                    <Form.Label>Message</Form.Label>
+                    <span className="input-icon textarea-icon">
+                      <i className="fas fa-comment"></i>
+                    </span>
+                    <Form.Control
+                      as="textarea"
+                      name="message"
+                      rows={5}
+                      placeholder="Your Message"
+                      value={formik.values.message}
+                      onChange={formik.handleChange}
+                      onFocus={() => handleFocus('message')}
+                      onBlur={handleBlur}
+                    />
+                    <span className="validation-icon textarea-validation">
+                      {formik.touched.message && formik.errors.message ? (
+                        <i className="fas fa-times-circle error-icon"></i>
+                      ) : formik.touched.message && !formik.errors.message ? (
+                        <i className="fas fa-check-circle success-icon"></i>
+                      ) : null}
+                    </span>
+                  </div>
+                  {formik.touched.message && formik.errors.message && (
+                    <div className="error-feedback">{formik.errors.message}</div>
+                  )}
+                </Form.Group>
+
+                <Button 
+                  type="submit" 
+                  className={`contact-button ${isButtonAnimating ? 'button-submitting' : ''}`}
+                  disabled={formik.isSubmitting}
+                >
+                  <span className="button-text">
+                    {formik.isSubmitting ? 'Sending...' : 'Send Message'}
+                  </span>
+                  <span className="button-icon">
+                    <i className={`fas ${formik.isSubmitting ? 'fa-spinner fa-spin' : 'fa-paper-plane'}`}></i>
+                  </span>
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        )}
+      </Container>
+    </Container>
   );
-};
+}
 
 export default ContactUs;

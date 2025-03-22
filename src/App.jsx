@@ -13,8 +13,8 @@ import { Container, Row } from "react-bootstrap";
 import Admin from "./admin/Admin.jsx";
 import Login from "./admin/Login.jsx";
 import Dashboard from "./admin/Dashboard.jsx";
-import { onAuthStateChanged } from "firebase/auth";
-import "./admin/styles/admin-styles.css";
+import { onAuthStateChanged } from 'firebase/auth';
+import './admin/styles/admin-styles.css';
 import { auth } from "./admin/utils/firebase";
 
 // Lazy load components
@@ -45,6 +45,7 @@ function App() {
 
     return () => unsubscribe();
   }, []);
+  
 
   useEffect(() => {
     handleLoading(true);
@@ -73,6 +74,7 @@ function App() {
 
   return (
     <div className={isDarkMode ? "App" : "App light-mode"}>
+
       <Router>
         {showLoader || !contentReady ? (
           <Preloader isLoading={true} />
@@ -92,33 +94,21 @@ function App() {
                 <Route
                   path="/admin"
                   element={
-                    user ? (
-                      <Navigate to="/admin/dashboard" />
-                    ) : (
-                      <div className="admin-app">
-                        <Login />
-                      </div>
-                    )
+                    user ? <Navigate to="/admin/dashboard" /> :      <div className="admin-app">
+ <Login /></div>
                   }
                 />
                 <Route
                   path="/admin/dashboard/*"
-                  element={
-                    user ? (
-                      <div className="admin-app">
-                        <Dashboard />
-                      </div>
-                    ) : (
-                      <Navigate to="/admin" />
-                    )
-                  }
+                  element={user ?       <div className="admin-app">
+<Dashboard /></div>: <Navigate to="/admin" />}
                 />
                 <Route path="/" element={<Menu />} />
                 <Route path="/home" element={<LandingPage />} />
                 <Route path="/not-found" element={<NotFound />} />
                 <Route path="/education" element={<Education />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/project" element={<Projects />} />
+                <Route path="/projects" element={<Projects />} />
                 <Route path="/resume" element={<Resume />} />
                 <Route
                   path="/contact"

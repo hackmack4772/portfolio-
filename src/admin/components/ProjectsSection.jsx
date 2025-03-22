@@ -12,18 +12,11 @@ import {
   query,
   orderBy
 } from 'firebase/firestore';
-import { 
-  getStorage, 
-  ref, 
-  uploadBytesResumable, 
-  getDownloadURL, 
-  deleteObject 
-} from 'firebase/storage';
 import { app } from '../utils/firebase';
+import { uploadToCloudinary, deleteFromCloudinary } from '../utils/cloudinary';
 import '../styles/admin-styles.css';
 
 const db = getFirestore(app);
-const storage = getStorage(app);
 
 const ProjectsSection = () => {
   const [projects, setProjects] = useState([]);
@@ -125,36 +118,22 @@ const ProjectsSection = () => {
     }
   };
 
-  // Upload image to Firebase Storage
-  const uploadImage = async (projectId) => {
+  // Upload image to Cloudinary
+  const uploadImage = async () => {
     if (!imageFile) return null;
     
     setUploading(true);
     setUploadProgress(0);
     
     try {
-      const storageRef = ref(storage, `projects/${projectId}/${imageFile.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, imageFile);
-      
-      return new Promise((resolve, reject) => {
-        uploadTask.on(
-          'state_changed',
-          (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            setUploadProgress(progress);
-          },
-          (error) => {
-            setUploading(false);
-            reject(error);
-          },
-          async () => {
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            setUploading(false);
-            setUploadProgress(0);
-            resolve(downloadURL);
-          }
-        );
+      // Use the Cloudinary utility to upload the image
+      const imageUrl = await uploadToCloudinary(imageFile, (progress) => {
+        setUploadProgress(progress);
       });
+      
+      setUploading(false);
+      setUploadProgress(0);
+      return imageUrl;
     } catch (error) {
       setUploading(false);
       setUploadProgress(0);
@@ -170,30 +149,25 @@ const ProjectsSection = () => {
     try {
       setLoading(true);
       
-      // Add document to Firestore first to get the ID
+      let imageURL = '';
+      
+      // Upload image if selected
+      if (imageFile) {
+        imageURL = await uploadImage();
+      }
+      
+      // Add document to Firestore
       const projectRef = await addDoc(collection(db, "projects"), {
         title: projectData.title,
         description: projectData.description,
         technologies: projectData.technologies,
         githubLink: projectData.githubLink,
         demoLink: projectData.demoLink,
-        imageURL: '',
+        imageURL: imageURL,
         featured: projectData.featured,
         order: parseInt(projectData.order) || 0,
         createdAt: serverTimestamp()
       });
-      
-      let imageURL = '';
-      
-      // Upload image if selected
-      if (imageFile) {
-        imageURL = await uploadImage(projectRef.id);
-        
-        // Update the document with the image URL
-        await updateDoc(doc(db, "projects", projectRef.id), {
-          imageURL: imageURL
-        });
-      }
       
       setMessage({ text: 'Project added successfully!', type: 'success' });
       
@@ -273,14 +247,13 @@ const ProjectsSection = () => {
         // Delete old image if exists
         if (projectData.imageURL) {
           try {
-            const oldImageRef = ref(storage, projectData.imageURL);
-            await deleteObject(oldImageRef);
+            await deleteFromCloudinary(projectData.imageURL);
           } catch (error) {
-            console.log("No previous image to delete or error:", error);
+            console.log("Error deleting image or no image to delete:", error);
           }
         }
         
-        imageURL = await uploadImage(editingProject);
+        imageURL = await uploadImage();
       }
       
       // Update the document
@@ -320,11 +293,10 @@ const ProjectsSection = () => {
     try {
       setLoading(true);
       
-      // Delete image from storage if exists
+      // Delete image from Cloudinary if exists
       if (imageURL) {
         try {
-          const imageRef = ref(storage, imageURL);
-          await deleteObject(imageRef);
+          await deleteFromCloudinary(imageURL);
         } catch (error) {
           console.log("Error deleting image or no image to delete:", error);
         }
