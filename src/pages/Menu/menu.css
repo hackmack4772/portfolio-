@@ -123,8 +123,8 @@ p:last-child {
 /* Box styling */
 .box {
   position: relative;
-  width: 280px;
-  height: 280px;
+  width: 200px;
+  height: 200px;
   background-color: var(--card-bg);
   border-radius: 50%;
   overflow: hidden;

@@ -9,6 +9,7 @@ import {
   AiOutlineTwitter,
 } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
+import { Navbar } from "react-bootstrap";
 
 const menuItems = [
   { icon: "home", title: "Home", path: "/home" },
@@ -41,14 +42,17 @@ function Menu() {
       <div className="page-menu">
         <div className="container">
           <div className="background-img">
-            <p className="header-text">
-              {"HackMack".split("").map((char, index) => (
+            {/* <p className="header-text"> */}
+            <Navbar.Brand href="/" className="d-flex" style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>
+              Hack <span>mack</span>
+            </Navbar.Brand>
+
+            {/* {"HackMack".split("").map((char, index) => (
                 <span key={index} className={`char ${index > 3 ? "header-other-part" : ""}`}>
                   {char}
                 </span>
-              ))}
-            </p>
-
+              ))} */}
+            {/* </p> */}
             <div className="box">
               <span></span>
               <span></span>
