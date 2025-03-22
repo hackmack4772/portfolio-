@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Spinner, Card } from "react-bootstrap";
-import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, where, doc } from "firebase/firestore";
 import HelmetWrapper from "../../components/HelmetWrapper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -36,16 +36,15 @@ function Projects() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const projectsQuery = query(
-          collection(db, "projects"),
-          orderBy("date", "desc")
-        );
-        const projectsSnapshot = await getDocs(projectsQuery);
-        const projectsData = projectsSnapshot.docs.map(doc => ({
+        const hackmackDocRef = doc(db, "hackmack", "user_projects");
+        const projectsRef = collection(hackmackDocRef, "projectsData");
+        const querySnapshot = await getDocs(projectsRef);
+  
+        const projectsData = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data()
+          ...doc.data(),
         }));
-        
+  
         setProjects(projectsData);
         
         // Extract unique categories
