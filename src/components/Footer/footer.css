@@ -1,12 +1,13 @@
-
   /* --------- */
   /* Footer */
   /* --------- */
   .footer {
-    background-color: rgb(10, 4, 22);
+    background-color: var(--bg-secondary);
     bottom: 0 !important;
     padding-top: 10px !important;
-    padding-bottom: 8px !important ;
+    padding-bottom: 8px !important;
+    border-top: 1px solid var(--border-color);
+    transition: all 0.3s ease;
   }
   .footer-copywright {
     text-align: center !important;
@@ -29,7 +30,7 @@
   
   .footer h3 {
     font-size: 1em;
-    color: white !important;
+    color: var(--text-color) !important;
     margin-top: 0.5em !important;
     margin-bottom: 0.5em !important;
   }
@@ -40,5 +41,14 @@
   }
   
   .blockquote-footer {
-    color: #0cfbff !important;
+    color: var(--accent-color) !important;
+  }
+
+  /* Light mode adjustments */
+  .light-mode .footer {
+    background-color: var(--light-bg-secondary);
+  }
+
+  .light-mode .footer h3 {
+    color: var(--light-text) !important;
   }

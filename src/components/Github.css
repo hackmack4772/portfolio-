@@ -1,13 +1,13 @@
 /* GitHub Component Styling */
 :root {
-  --github-primary: #00FFFF;
-  --github-secondary: #8f10b7;
-  --github-dark: #0D1117;
-  --github-light: #FFFFFF;
-  --github-card-bg: rgba(22, 27, 34, 0.8);
+  --github-primary: var(--accent-color);
+  --github-secondary: var(--primary-color);
+  --github-dark: var(--bg-secondary);
+  --github-light: var(--text-color);
+  --github-card-bg: var(--card-bg);
   --github-transition: all 0.4s ease-in-out;
-  --github-glow: 0 0 15px rgba(0, 255, 255, 0.5);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --github-glow: 0 0 15px var(--shadow);
+  --glass-border: 1px solid var(--border-color);
 }
 
 /* Main Section Styling */
@@ -15,7 +15,7 @@
   position: relative;
   padding: 5rem 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f0f 0%, #121212 100%);
+  background: var(--bg-color);
   overflow: hidden;
   /*opacity: 0;*/
 opacity: 1;
@@ -125,12 +125,12 @@ opacity: 1;
   left: 0;
   width: 100%;
   height: 4px;
-  background: linear-gradient(90deg, rgba(0,255,255,0) 0%, rgba(0,255,255,1) 50%, rgba(0,255,255,0) 100%);
+  background: linear-gradient(90deg, rgba(0,255,255,0) 0%, var(--github-primary) 50%, rgba(0,255,255,0) 100%);
   animation: pulse 2s infinite;
 }
 
 .section-subtitle {
-  color: #ccc;
+  color: var(--text-secondary);
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
 }
@@ -158,7 +158,7 @@ opacity: 1;
   padding: 25px;
   margin-bottom: 30px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px var(--shadow);
   border: var(--glass-border);
   overflow: hidden;
   transition: var(--github-transition);
@@ -168,7 +168,7 @@ opacity: 1;
 
 .github-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--github-glow), 0 15px 35px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--github-glow), 0 15px 35px var(--shadow);
 }
 
 .contribution-card {
@@ -261,12 +261,12 @@ opacity: 1;
   border-radius: 8px;
   margin-bottom: 15px;
   transition: var(--github-transition);
-  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 5px 15px var(--shadow));
 }
 
 .stats-image:hover {
   transform: scale(1.02);
-  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(0 8px 20px var(--shadow));
 }
 
 /* Stat Highlights */
@@ -294,15 +294,15 @@ opacity: 1;
 }
 
 .commits {
-  background: linear-gradient(135deg, #00bcd4, #007acc);
+  background: linear-gradient(135deg, var(--info-color), var(--secondary-color));
 }
 
 .prs {
-  background: linear-gradient(135deg, #8e44ad, #9b59b6);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
 }
 
 .stars {
-  background: linear-gradient(135deg, #f39c12, #e67e22);
+  background: linear-gradient(135deg, var(--warning-color), var(--secondary-color));
 }
 
 /* Tech Badges */
@@ -319,14 +319,14 @@ opacity: 1;
   padding: 5px 12px;
   border-radius: 20px;
   font-size: 12px;
-  border: 1px solid rgba(0, 255, 255, 0.2);
+  border: 1px solid var(--border-color);
   transition: var(--github-transition);
 }
 
 .tech-badge:hover {
   background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(143, 16, 183, 0.2));
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 15px var(--shadow);
 }
 
 /* Footer */
@@ -351,7 +351,7 @@ opacity: 1;
   transition: var(--github-transition);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px var(--shadow);
 }
 
 .github-button::before {
@@ -367,7 +367,7 @@ opacity: 1;
 
 .github-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 25px var(--shadow);
   color: var(--github-light);
 }
 
@@ -378,6 +378,26 @@ opacity: 1;
 .button-icon {
   display: flex;
   align-items: center;
+}
+
+/* Light mode adjustments */
+.light-mode .github-section {
+  background: var(--light-bg);
+}
+
+.light-mode .github-card {
+  background: var(--light-card-bg);
+  box-shadow: 0 10px 30px var(--light-shadow);
+}
+
+.light-mode .card-title,
+.light-mode .stat-item,
+.light-mode .tech-badge {
+  color: var(--light-text);
+}
+
+.light-mode .section-subtitle {
+  color: var(--light-text-secondary);
 }
 
 /* Animations */

@@ -7,6 +7,7 @@ export default function Github() {
   const [isVisible, setIsVisible] = useState(true);
   const [calendarLoaded, setCalendarLoaded] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isDarkMode, setIsDarkMode] = useState(true);
   
   useEffect(() => {
     // Use Intersection Observer to detect when component is in viewport
@@ -28,11 +29,24 @@ export default function Github() {
       setWindowWidth(window.innerWidth);
     };
     
+    // Check if the body has light-mode class
+    const checkTheme = () => {
+      setIsDarkMode(!document.body.classList.contains('light-mode'));
+    };
+    
     window.addEventListener('resize', handleResize);
+    
+    // Initial theme check
+    checkTheme();
+    
+    // Watch for theme changes
+    const observer2 = new MutationObserver(checkTheme);
+    observer2.observe(document.body, { attributes: true, attributeFilter: ['class'] });
     
     return () => {
       if (element) observer.disconnect();
       window.removeEventListener('resize', handleResize);
+      observer2.disconnect();
     };
   }, []);
   
@@ -47,6 +61,23 @@ export default function Github() {
     if (windowWidth <= 768) return 10;
     return 12;
   };
+  
+  // Theme for GitHub Calendar
+  const calendarTheme = {
+    level4: isDarkMode ? "#00FFFF" : "#0366d6",
+    level3: isDarkMode ? "#00BFFF" : "#0591f5",
+    level2: isDarkMode ? "#00808F" : "#64acf1",
+    level1: isDarkMode ? "#005055" : "#9ed8ff",
+    level0: isDarkMode ? "#1A1A1A" : "#ebedf0",
+  };
+  
+  // GitHub stats theme
+  const statsTheme = isDarkMode ? "react" : "default";
+  const bgColor = isDarkMode ? "0D1117" : "ffffff";
+  const textColor = isDarkMode ? "FFFFFF" : "000000";
+  const titleColor = isDarkMode ? "00FFFF" : "0366D6";
+  const iconColor = isDarkMode ? "00FFFF" : "0591F5";
+  const hideBorder = true;
   
   return (
     <div id="github-section" className={`github-section visible ${isVisible ? 'visible' : ''}`}>
@@ -83,19 +114,13 @@ export default function Github() {
                     username="hackmack4772"
                     blockSize={getBlockSize()}
                     blockMargin={windowWidth <= 480 ? 3 : 5}
-                    color="#FFFFFF"
+                    color={isDarkMode ? "#FFFFFF" : "#000000"}
                     fontSize={windowWidth <= 480 ? 12 : 14}
                     showWeekdayLabels={windowWidth > 480}
                     dateFormat="yyyy-MM-dd"
                     tooltip={"{{count}} contributions on {{date}}"}
                     onDataReady={handleCalendarLoad}
-                    theme={{
-                      level4: "#00FFFF", // Cyan for highest activity
-                      level3: "#00BFFF", // Lighter cyan
-                      level2: "#00808F", // Teal
-                      level1: "#005055", // Dark teal
-                      level0: "#1A1A1A", // Dark background
-                    }}
+                    theme={calendarTheme}
                     hideColorLegend={windowWidth <= 576}
                     hideMonthLabels={windowWidth <= 480}
                     hideTotalCount={windowWidth <= 480}
@@ -116,7 +141,7 @@ export default function Github() {
                 </div>
                 <h3 className="card-title">GitHub Stats</h3>
                 <img
-                  src={`https://github-readme-stats.vercel.app/api?username=hackmack4772&show_icons=true&theme=react&bg_color=0D1117&title_color=00FFFF&icon_color=00FFFF&text_color=FFFFFF&hide_border=true&count_private=true${windowWidth <= 480 ? '&hide=contribs,issues' : ''}`}
+                  src={`https://github-readme-stats.vercel.app/api?username=hackmack4772&show_icons=true&theme=${statsTheme}&bg_color=${bgColor}&title_color=${titleColor}&icon_color=${iconColor}&text_color=${textColor}&hide_border=${hideBorder}&count_private=true${windowWidth <= 480 ? '&hide=contribs,issues' : ''}`}
                   alt="GitHub Stats"
                   className="stats-image"
                   loading="lazy"
@@ -162,7 +187,7 @@ export default function Github() {
                 </div>
                 <h3 className="card-title">Top Languages</h3>
                 <img
-                  src={`https://github-readme-stats.vercel.app/api/top-langs/?username=hackmack4772&layout=compact&theme=react&bg_color=0D1117&title_color=00FFFF&text_color=FFFFFF&hide_border=true${windowWidth <= 480 ? '&hide=css' : ''}`}
+                  src={`https://github-readme-stats.vercel.app/api/top-langs/?username=hackmack4772&layout=compact&theme=${statsTheme}&bg_color=${bgColor}&title_color=${titleColor}&text_color=${textColor}&hide_border=${hideBorder}${windowWidth <= 480 ? '&hide=css' : ''}`}
                   alt="Top Languages"
                   className="stats-image"
                   loading="lazy"

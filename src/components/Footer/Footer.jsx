@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import {
   AiFillGithub,
@@ -11,6 +11,27 @@ import "./footer.css"
 function Footer() {
   let date = new Date();
   let year = date.getFullYear();
+  
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  
+  useEffect(() => {
+    // Check if the body has light-mode class
+    const checkTheme = () => {
+      setIsDarkMode(!document.body.classList.contains('light-mode'));
+    };
+    
+    // Initial theme check
+    checkTheme();
+    
+    // Watch for theme changes
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+  
   return (
     <Container fluid className="footer">
       <Row>
@@ -25,7 +46,7 @@ function Footer() {
             <li className="social-icons">
               <a
                 href="https://github.com/hackmack4772"
-                style={{ color: "white" }}
+                className="footer-social-icon"
                 target="_blank" 
                 rel="noopener noreferrer"
               >
@@ -35,7 +56,7 @@ function Footer() {
             <li className="social-icons">
               <a
                 href="https://twitter.com/hackmack4772"
-                style={{ color: "white" }}
+                className="footer-social-icon"
                 target="_blank" 
                 rel="noopener noreferrer"
               >
@@ -45,7 +66,7 @@ function Footer() {
             <li className="social-icons">
               <a
                 href="https://www.linkedin.com/in/aamir-saleem-lone/"
-                style={{ color: "white" }}
+                className="footer-social-icon"
                 target="_blank" 
                 rel="noopener noreferrer"
               >
@@ -55,7 +76,7 @@ function Footer() {
             <li className="social-icons">
               <a
                 href="https://www.instagram.com/aamir-saleem-lone"
-                style={{ color: "white" }}
+                className="footer-social-icon"
                 target="_blank" 
                 rel="noopener noreferrer"
               >
