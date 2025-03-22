@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Spinner, ProgressBar } from "react-bootstrap";
 import HelmetWrapper from "../../components/HelmetWrapper";
 import { useLoading } from "../../Context/LoadingContext";
-import "./About.css";
+import "./about.css";
 import Github from "../../components/Github";
 import Techstack from "../../components/Techstack";
 import Aboutcard from "../../components/AboutCard";
