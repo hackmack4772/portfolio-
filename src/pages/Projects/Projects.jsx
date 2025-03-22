@@ -117,12 +117,10 @@ function Projects() {
 
   if (loading) {
     return (
-      <div className="loading-container">
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-        <p>Loading projects...</p>
-      </div>
+     <div className="loading-container">
+               <Spinner animation="border" variant="primary" />
+               <p>Loading education data...</p>
+             </div>
     );
   }
 
@@ -136,10 +134,10 @@ function Projects() {
       <Container>
         <div className="projects-content">
           {/* Section Heading */}
-          <div className={`section-heading ${visible ? 'animate' : ''}`}>
-            <h1 className="heading">
+          <div className={`section-heading ${visible ? 'animate' : ''}`} style={{ marginTop: "5rem" }}>
+            <h5 className="heading">
               My <span className="accent-text">Projects</span>
-            </h1>
+            </h5>
             <p className="subheading">
               Explore my latest work and technical projects
             </p>

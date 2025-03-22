@@ -18,35 +18,74 @@ function getColorClass(index) {
 
 function About() {
   const [aboutData, setAboutData] = useState({
-    tagline: "Developer, Designer, Problem Solver",
-    biography: "I am a passionate full-stack developer with 5+ years of experience creating modern web applications. I enjoy solving complex problems and turning ideas into clean, efficient code. My goal is to build software that not only functions flawlessly but also provides exceptional user experiences.",
+    tagline: "MERN Stack Developer | Architecting Scalable Web Solutions",
+    biography:
+      "I am Aamir Saleem Lone, a dedicated and innovative MERN Stack Developer with hands-on experience in React.js, Express.js, Laravel, Lumen, and MongoDB. Having transitioned from a trainee to a full-time role at Shine Dezign Infonet Pvt. Ltd., I specialize in designing scalable systems, developing efficient APIs, and building seamless user experiences. Passionate about learning new technologies and excelling in team-based environments.",
     highlights: [
-      "5+ years of experience in full-stack development",
-      "Specialized in React.js and Node.js ecosystems",
-      "Contributed to open-source projects",
-      "Published articles on modern web development",
-      "Speaker at local tech conferences",
-      "Mentor for junior developers"
+      "Full-stack developer specializing in MERN stack, Laravel, and Lumen",
+      "Built a comprehensive CRM with campaign management and user tracking",
+      "Developed a dynamic survey builder with Redux and drag-and-drop",
+      "Integrated WebRTC and Nginx HLS for real-time video streaming",
+      "Implemented Zoom Web SDK for seamless video conferencing",
+      "Designed data visualizations using Highcharts for actionable insights"
     ],
     experience: [
-      { skill: "Frontend Development", years: "5+ years", level: 90 },
-      { skill: "Backend Development", years: "4+ years", level: 85 },
-      { skill: "Database Design", years: "3+ years", level: 80 },
-      { skill: "DevOps", years: "2+ years", level: 75 },
-      { skill: "UI/UX Design", years: "3+ years", level: 70 }
+      { skill: "Frontend Development (React, Redux, React Native)", years: "2+ years", level: 90 },
+      { skill: "Backend Development (Node.js, Laravel, Lumen, Express.js)", years: "2+ years", level: 85 },
+      { skill: "Database Design (MongoDB, MySQL, Firebase)", years: "2+ years", level: 80 },
+      { skill: "Authentication & Security (MSAL, Firebase, OAuth)", years: "2 years", level: 78 },
+      { skill: "WebRTC & Streaming (Zoom, Webex, RTMP, Nginx)", years: "1.5+ years", level: 75 },
     ],
-    certifications: [
-      { name: "AWS Certified Developer", issuer: "Amazon Web Services", year: "2022" },
-      { name: "Professional React Developer", issuer: "Meta", year: "2022" },
-      { name: "MongoDB Professional", issuer: "MongoDB Inc.", year: "2021" },
-      { name: "Cloud Engineering", issuer: "Google Cloud", year: "2020" }
-    ],
+    // certifications: [
+    //   { name: "Full-Stack Web Development", issuer: "Tech Bootcamp", year: "2022" },
+    //   { name: "Cloud Engineering", issuer: "Google Cloud", year: "2023" },
+    // ],
     education: [
-      { degree: "Master of Computer Science", institution: "Technical University", year: "2018-2020" },
-      { degree: "Bachelor of Software Engineering", institution: "State University", year: "2014-2018" },
-      { degree: "Full-Stack Web Development", institution: "Tech Bootcamp", year: "2017" }
-    ]
+      { degree: "Master of Computer Applications (MCA)", institution: "Swami Vivekanand Institute of Engineering & Technology (SVIET), Punjab, India", year: "2023 - Present" },
+      { degree: "Bachelor of Computer Applications (BCA)", institution: "RIMT University, Punjab, India", year: "2019 - 2022 (CGPA: 9.08)" },
+      { degree: "Higher Secondary Education", institution: "JKBOSE, Jammu & Kashmir, India", year: "2017 - 2019 (Percentage: 80.4%)" },
+      { degree: "Secondary Education", institution: "JKBOSE, Jammu & Kashmir, India", year: "2015 - 2017 (Percentage: 86.6%)" }
+    ],
+    projects: [
+      {
+        name: "Healthcare Platform for HCPs",
+        description: "Developed an integrated platform tailored for healthcare professionals (HCPs) to engage with content, webinars, surveys, and educational resources.",
+        features: [
+          "Content engagement tracking with analytics and regional insights",
+          "Webinar hosting with live streaming, Zoom/Webex integration, and attendee tracking",
+          "Survey management with real-time analytics and QR code distribution",
+          "Content delivery and expert opinions via interactive polling",
+          "Admin modules for CRM, event scheduling, and HCP activity tracking"
+        ]
+      },
+    ],
+    skills: {
+      programmingLanguages: ["JavaScript", "C", "C++", "Java", "PHP", "Python"],
+      frameworksLibraries: ["React.js", "Redux", "Laravel", "Lumen", "Express.js", "Bootstrap"],
+      databases: ["MongoDB", "MySQL", "Firebase"],
+      webTechnologies: ["RESTful APIs", "HTML5", "CSS3", "AJAX", "WebRTC", "Socket.io"],
+      toolsPlatforms: ["Git", "Npm", "Webpack", "Nginx", "Vite"]
+    },
+    languages: {
+      English: "Basic conversational and written skills",
+      Hindi: "Beginner level comprehension and speaking",
+      Urdu: "Beginner level comprehension and speaking",
+      Kashmiri: "Basic understanding and communication skills"
+    },
+    hobbies: ["Listening to music", "Learning new technologies", "Photography", "Playing basketball"],
+    image:"https://scontent.fluh1-4.fna.fbcdn.net/v/t39.30808-6/433144336_935032665291538_1802496408152811038_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Yh1YrmM1IssQ7kNvgEeLEq2&_nc_oc=AdlKNlh4b23mRFDWlw6FCMmwZ3o40rFgJ_zefWNMNVRLaRMRS4w-hqbW0ASoe0uXPJA&_nc_zt=23&_nc_ht=scontent.fluh1-4.fna&_nc_gid=rad4e_EIAY5AdmOQ4Z2_Hw&oh=00_AYHv-dZPqhykOCOq36vZXuEwW_ZU_RCiCZPx2fYS9B23PA&oe=67E49426",
+    contact: {
+      location: "San Zipora Kutlari, Kupwara, Jammu and Kashmir, 193302",
+      phone: "9596581274",
+      email: "loneaamir6@gmail.com",
+      links: {
+        linkedin: "LinkedIn",
+        github: "GitHub",
+        portfolio: "Portfolio"
+      }
+    }
   });
+  
   const [skillsByCategory, setSkillsByCategory] = useState({});
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(false);
@@ -84,7 +123,7 @@ function About() {
         
         // Setup tab animation timers
         setTimeout(() => {
-          setActiveTab('professional');
+          // setActiveTab('professional');
           
           // Staggered animation for sections
           setTimeout(() => setAnimationCompleted({ ...animationCompleted, main: true }), 500);
@@ -138,12 +177,10 @@ function About() {
       </HelmetWrapper>
 
       {loading ? (
-        <div className="loading-container">
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-          <p>Loading about data...</p>
-        </div>
+       <div className="loading-container">
+                 <Spinner animation="border" variant="primary" />
+                 <p>Loading education data...</p>
+               </div>
       ) : (
       <Container>
           <div className="about-content">
@@ -157,9 +194,9 @@ function About() {
             
             {/* Section Heading */}
             <div className={`section-heading ${visible ? 'animate' : ''}`}>
-              <h1 className="heading">
+              <h5 className="heading">
                 About <span className="accent-text">Me</span>
-            </h1>
+            </h5>
               <p className="subheading">
                 {aboutData?.tagline || "Developer, Designer, Problem Solver"}
               </p>
@@ -222,47 +259,52 @@ function About() {
                 {/* Tab Content */}
                 <div className={`about-tab-content ${visible ? 'animate' : ''}`}>
                   {activeTab === 'personal' && (
-                    <div className="about-bio">
-                      <h2 className="bio-title">Who am I?</h2>
-                      <div className="biography-content">
-                        <p className="bio-text">{aboutData.biography}</p>
-                        
-                        <div className="personal-info">
-                          <div className="info-item">
-                            <span className="info-label"><i className="fas fa-map-marker-alt"></i> Location:</span>
-                            <span className="info-value">New York, USA</span>
-                          </div>
-                          <div className="info-item">
-                            <span className="info-label"><i className="fas fa-envelope"></i> Email:</span>
-                            <span className="info-value">developer@example.com</span>
-                          </div>
-                          <div className="info-item">
-                            <span className="info-label"><i className="fas fa-code-branch"></i> GitHub:</span>
-                            <span className="info-value">github.com/developer</span>
-                          </div>
-                          <div className="info-item">
-                            <span className="info-label"><i className="fas fa-briefcase"></i> Open to Work:</span>
-                            <span className="info-value info-badge">Available for Freelance</span>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {aboutData?.highlights && (
-                        <div className="about-highlights">
-                          <h3 className="highlights-title">Highlights</h3>
-                          <ul className="highlights-list">
-                            {aboutData.highlights.map((highlight, index) => (
-                              <li key={index} className="highlight-item">
-                                <span className="highlight-icon">
-                                  <i className="fas fa-check-circle"></i>
-                                </span>
-                                <span className="highlight-text">{highlight}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
+                   <div className="about-bio">
+                   <h2 className="bio-title">Who am I?</h2>
+                   <div className="biography-content">
+                     <p className="bio-text">{aboutData.biography}</p>
+                 
+                     <div className="personal-info">
+                       <div className="info-item">
+                         <span className="info-label"><i className="fas fa-map-marker-alt"></i> Location:</span>
+                         <span className="info-value">San Zipora Kutlari, Kupwara, Jammu and Kashmir, 193302</span>
+                       </div>
+                       <div className="info-item">
+                         <span className="info-label"><i className="fas fa-envelope"></i> Email:</span>
+                         <span className="info-value">loneaamir6@gmail.com</span>
+                       </div>
+                       <div className="info-item">
+                         <span className="info-label"><i className="fas fa-code-branch"></i> GitHub:</span>
+                         <span className="info-value">
+                           <a href="https://github.com/hackmack4772" target="_blank" rel="noopener noreferrer">
+                             github.com/hackmack4772
+                           </a>
+                         </span>
+                       </div>
+                       <div className="info-item">
+                         <span className="info-label"><i className="fas fa-briefcase"></i> Open to Work:</span>
+                         <span className="info-value info-badge">Available for Full-time & Freelance</span>
+                       </div>
+                     </div>
+                   </div>
+                 
+                   {aboutData?.highlights && (
+                     <div className="about-highlights">
+                       <h3 className="highlights-title">Highlights</h3>
+                       <ul className="highlights-list">
+                         {aboutData.highlights.map((highlight, index) => (
+                           <li key={index} className="highlight-item">
+                             <span className="highlight-icon">
+                               <i className="fas fa-check-circle"></i>
+                             </span>
+                             <span className="highlight-text">{highlight}</span>
+                           </li>
+                         ))}
+                       </ul>
+                     </div>
+                   )}
+                 </div>
+                 
                   )}
                   
                   {activeTab === 'professional' && (
@@ -283,7 +325,7 @@ function About() {
                         )) || <p>No experience data available</p>}
                       </div>
                       
-                      <div className="certifications-section">
+                      {/* <div className="certifications-section">
                         <h3 className="highlights-title">Certifications</h3>
                         <div className="certifications-grid">
                           {aboutData?.certifications?.map((cert, index) => (
@@ -301,7 +343,7 @@ function About() {
                             </div>
                           )) || <p>No certification data available</p>}
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   )}
 
@@ -354,9 +396,9 @@ function About() {
               <h2 className="section-subtitle">Professional Summary</h2>
               <div className="summary-content">
                 <div className="summary-quote">
-                  <i className="fas fa-quote-left quote-icon left"></i>
+                  {/* <i className="fas fa-quote-left quote-icon left"></i> */}
                   <p>{aboutData?.biography || "I am a passionate developer with a love for clean code and innovative solutions."}</p>
-                  <i className="fas fa-quote-right quote-icon right"></i>
+                  {/* <i className="fas fa-quote-right quote-icon right"></i> */}
                 </div>
               </div>
             </div>
