@@ -133,18 +133,18 @@ function ContactUs() {
                   </div>
                 </div>
                 <div className="contact-social">
-                  <a href="https://github.com/yourusername" target="_blank" rel="noreferrer" aria-label="GitHub">
+                  <a href="https://github.com/hackmack4772" target="_blank" rel="noreferrer" aria-label="GitHub">
                     <i className="fab fa-github"></i>
                   </a>
-                  <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                  <a href="https://www.linkedin.com/in/aamir-saleem-lone/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
                     <i className="fab fa-linkedin-in"></i>
                   </a>
-                  <a href="https://twitter.com/yourusername" target="_blank" rel="noreferrer" aria-label="Twitter">
+                  <a href="https://twitter.com/hackmack4772" target="_blank" rel="noreferrer" aria-label="Twitter">
                     <i className="fab fa-twitter"></i>
                   </a>
-                  <a href="https://instagram.com/yourusername" target="_blank" rel="noreferrer" aria-label="Instagram">
+                  {/* <a href="https://instagram.com/yourusername" target="_blank" rel="noreferrer" aria-label="Instagram">
                     <i className="fab fa-instagram"></i>
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </Col>

@@ -1,0 +1,1 @@
+import{t as e,v as t,w as s}from"./index-BCgmw89e.js";const o={apiKey:"AIzaSyBtm9WpPn-WT0IFVKOW6Xs-dcX474oW16o",authDomain:"hackmack4772.firebaseapp.com",projectId:"hackmack4772",storageBucket:"hackmack4772.firebasestorage.app",messagingSenderId:"38931846023",appId:"1:38931846023:web:2ed96aa0b1912c0fa6b922"},a=e(o);t(a);const c=s(a);export{c as d};
