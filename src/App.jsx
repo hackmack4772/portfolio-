@@ -66,7 +66,7 @@ function App() {
   const { isDarkMode } = useDarkMode();
   const isChatRoute =
     location.pathname === "/login" ||
-    location.pathname === "/" ||
+    // location.pathname === "/" ||
     location.pathname === "/users" ||
     location.pathname === "/not-found" ||
     location.pathname.startsWith("/chat") ||
