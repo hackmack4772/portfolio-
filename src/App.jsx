@@ -103,7 +103,8 @@ function App() {
                   element={user ?       <div className="admin-app">
 <Dashboard /></div>: <Navigate to="/admin" />}
                 />
-                <Route path="/" element={<Menu />} />
+                <Route path="/" element={<LandingPage />} />
+                {/* <Route path="/" element={<Menu />} /> */}
                 <Route path="/home" element={<LandingPage />} />
                 <Route path="/not-found" element={<NotFound />} />
                 <Route path="/education" element={<Education />} />
