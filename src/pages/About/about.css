@@ -620,7 +620,7 @@ opacity: 1;
     line-height: 1.7;
     background-color: var(--card-bg);
     border-radius: 16px;
-    padding: 2rem;
+    padding: 1rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
@@ -1156,7 +1156,7 @@ opacity: 1;
   /* Enhanced Summary Section */
   .summary-quote {
     position: relative;
-    padding: 20px 40px;
+    padding: 10px 20px;
   }
 
   .quote-icon {
