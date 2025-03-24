@@ -30,9 +30,9 @@ function About() {
       "Designed data visualizations using Highcharts for actionable insights"
     ],
     experience: [
-      { skill: "Frontend Development (React, Redux, React Native)", years: "2+ years", level: 90 },
-      { skill: "Backend Development (Node.js, Laravel, Lumen, Express.js)", years: "2+ years", level: 85 },
-      { skill: "Database Design (MongoDB, MySQL, Firebase)", years: "2+ years", level: 80 },
+      { skill: "Frontend Development (React, Redux)", years: "1.5+ years", level: 80 },
+      { skill: "Backend Development (Node.js, Laravel, Lumen, Express.js)", years: "1.5+ years", level: 80 },
+      { skill: "Database Design (MongoDB, MySQL, Firebase)", years: "1.5+ years", level: 80 },
       { skill: "Authentication & Security (MSAL, Firebase, OAuth)", years: "2 years", level: 78 },
       { skill: "WebRTC & Streaming (Zoom, Webex, RTMP, Nginx)", years: "1.5+ years", level: 75 },
     ],
