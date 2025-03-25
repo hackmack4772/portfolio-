@@ -42,10 +42,10 @@ function ContactUs() {
         setIsButtonAnimating(true);
         
         await emailjs.sendForm(
-          process.env.REACT_APP_EMAILJS_SERVICE_ID,
-          process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+          "service_scq3s4o",
+         "template_hckvbsb",
           formRef.current,
-          process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+          "iswW2jJ51suRac3kO"
         );
         
         setFormSubmitted(true);
