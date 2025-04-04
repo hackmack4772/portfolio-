@@ -73,7 +73,7 @@ function About() {
       Kashmiri: "Basic understanding and communication skills"
     },
     hobbies: ["Listening to music", "Learning new technologies", "Photography", "Playing basketball"],
-    image:"https://scontent.fluh1-4.fna.fbcdn.net/v/t39.30808-6/433144336_935032665291538_1802496408152811038_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Yh1YrmM1IssQ7kNvgEeLEq2&_nc_oc=AdlKNlh4b23mRFDWlw6FCMmwZ3o40rFgJ_zefWNMNVRLaRMRS4w-hqbW0ASoe0uXPJA&_nc_zt=23&_nc_ht=scontent.fluh1-4.fna&_nc_gid=rad4e_EIAY5AdmOQ4Z2_Hw&oh=00_AYHv-dZPqhykOCOq36vZXuEwW_ZU_RCiCZPx2fYS9B23PA&oe=67E49426",
+    image:"https://sdmntprwestus2.oaiusercontent.com/files/00000000-dc20-51f8-bb66-ec9825a48ffb/raw?se=2025-04-04T05%3A54%3A44Z&sp=r&sv=2024-08-04&sr=b&scid=625a6a1e-009c-5cf9-be1e-d9ba5a146dd0&skoid=b53ae837-f585-4db7-b46f-2d0322fce5a9&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-03T18%3A14%3A10Z&ske=2025-04-04T18%3A14%3A10Z&sks=b&skv=2024-08-04&sig=cBpye4fa0LNcMw0wbdBY6kY1cJj0%2BOU%2Bz2uS3krBhi8%3D",
     contact: {
       location: "San Zipora Kutlari, Kupwara, Jammu and Kashmir, 193302",
       phone: "9596581274",
