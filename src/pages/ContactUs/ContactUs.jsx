@@ -75,7 +75,7 @@ function ContactUs() {
   return (
     <Container fluid className="contact-section">
       <HelmetWrapper>
-        <title>Contact Me | My Portfolio</title>
+        {/* <title>Contact Me | My Portfolio</title> */}
         <meta name="description" content="Get in touch with me for collaborations or inquiries." />
       </HelmetWrapper>
       

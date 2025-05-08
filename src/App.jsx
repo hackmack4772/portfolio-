@@ -45,7 +45,7 @@ function App() {
 
     return () => unsubscribe();
   }, []);
-  
+
 
   useEffect(() => {
     handleLoading(true);
@@ -94,14 +94,14 @@ function App() {
                 <Route
                   path="/admin"
                   element={
-                    user ? <Navigate to="/admin/dashboard" /> :      <div className="admin-app">
- <Login /></div>
+                    user ? <Navigate to="/admin/dashboard" /> : <div className="admin-app">
+                      <Login /></div>
                   }
                 />
                 <Route
                   path="/admin/dashboard/*"
-                  element={user ?       <div className="admin-app">
-<Dashboard /></div>: <Navigate to="/admin" />}
+                  element={user ? <div className="admin-app">
+                    <Dashboard /></div> : <Navigate to="/admin" />}
                 />
                 <Route path="/" element={<LandingPage />} />
                 {/* <Route path="/" element={<Menu />} /> */}
