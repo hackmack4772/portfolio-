@@ -73,7 +73,7 @@ function About() {
       Kashmiri: "Basic understanding and communication skills"
     },
     hobbies: ["Listening to music", "Learning new technologies", "Photography", "Playing basketball"],
-    image:"public/avatar.jpeg",
+    image:"https://i.postimg.cc/fTG19xq0/1737006453580.jpg",
     contact: {
       location: "San Zipora Kutlari, Kupwara, Jammu and Kashmir, 193302",
       phone: "9596581274",
