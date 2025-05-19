@@ -79,55 +79,59 @@ function App() {
         {showLoader || !contentReady ? (
           <Preloader isLoading={true} />
         ) : (
-          <Suspense fallback={<Preloader isLoading={true} />}>
-            <div
-              id="main-content"
-              style={{
-                opacity: contentReady ? 1 : 0,
-                transition: "opacity 0.5s ease-in-out",
-              }}
-            >
-              <Particle />
-              {!isChatRoute && <Navbar />}
-              <ScrollToTop />
-              <Routes>
-                <Route
-                  path="/admin"
-                  element={
-                    user ? <Navigate to="/admin/dashboard" /> : <div className="admin-app">
-                      <Login /></div>
-                  }
-                />
-                <Route
-                  path="/admin/dashboard/*"
-                  element={user ? <div className="admin-app">
-                    <Dashboard /></div> : <Navigate to="/admin" />}
-                />
-                <Route path="/" element={<LandingPage />} />
-                {/* <Route path="/" element={<Menu />} /> */}
-                <Route path="/home" element={<LandingPage />} />
-                <Route path="/not-found" element={<NotFound />} />
-                <Route path="/education" element={<Education />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/projects" element={<Projects />} />
-                <Route path="/resume" element={<Resume />} />
-                <Route
-                  path="/contact"
-                  element={
-                    <section className="landing-page">
-                      <Container className="home-content">
-                        <Row>
-                          <ContactUs />
-                        </Row>
-                      </Container>
-                    </section>
-                  }
-                />
-                <Route path="*" element={<Navigate to="/not-found" />} />
-              </Routes>
-              {!isChatRoute && <Footer />}
-            </div>
-          </Suspense>
+          <>
+            {!isChatRoute && <Navbar />}
+
+            <Suspense fallback={<Preloader isLoading={true} />}>
+              <div
+                id="main-content"
+                style={{
+                  opacity: contentReady ? 1 : 0,
+                  transition: "opacity 0.5s ease-in-out",
+                }}
+              >
+                <Particle />
+                <ScrollToTop />
+                <Routes>
+                  <Route
+                    path="/admin"
+                    element={
+                      user ? <Navigate to="/admin/dashboard" /> : <div className="admin-app">
+                        <Login /></div>
+                    }
+                  />
+                  <Route
+                    path="/admin/dashboard/*"
+                    element={user ? <div className="admin-app">
+                      <Dashboard /></div> : <Navigate to="/admin" />}
+                  />
+                  <Route path="/" element={<LandingPage />} />
+                  {/* <Route path="/" element={<Menu />} /> */}
+                  <Route path="/home" element={<LandingPage />} />
+                  <Route path="/not-found" element={<NotFound />} />
+                  <Route path="/education" element={<Education />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/projects" element={<Projects />} />
+                  <Route path="/resume" element={<Resume />} />
+                  <Route
+                    path="/contact"
+                    element={
+                      <section className="landing-page">
+                        <Container className="home-content">
+                          <Row>
+                            <ContactUs />
+                          </Row>
+                        </Container>
+                      </section>
+                    }
+                  />
+                  <Route path="*" element={<Navigate to="/not-found" />} />
+                </Routes>
+                {!isChatRoute && <Footer />}
+              </div>
+            </Suspense>
+          </>
+
         )}
       </Router>
     </div>
