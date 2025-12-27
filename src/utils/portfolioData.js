@@ -104,7 +104,7 @@ export const applyColorScheme = (colors) => {
  *         <p>{portfolioData.about.title}</p>
  *       </header>
  *       
- *       {/* Rest of your app */}
+ *Rest of your app 
  *     </div>
  *   );
  * }
