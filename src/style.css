@@ -236,6 +236,13 @@ button:focus {
   padding-top: 80px !important;
 }
 
+@media screen and (min-height: 801px) {
+  .home-header {
+    padding-top: 200px !important;
+  }
+}
+
+
 .home-section {
   position: relative;
   background-position: top center;
