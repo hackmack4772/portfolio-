@@ -66,8 +66,8 @@ function LandingPage() {
   return (
     <section className="landing-page">
       <Container fluid className="home-section" id="home">
-        <Container className="home-content">
-          <Row>
+        <Container className="home-content" style={{height:"100vh",display:"flex",alignItems: "end"}} >
+          <Row style={{ alignItems: "end" }}>
             <Col md={7} className="home-header">
               <h1 style={{ paddingBottom: 15 }} className="heading">
                 Hi There!{" "}

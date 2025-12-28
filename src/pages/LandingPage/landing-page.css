@@ -105,12 +105,12 @@
   }
   
 .home-header {
-  padding-top: 80px !important;
+  /* padding-top: 80px !important; */
 }
 
 @media screen and (min-height: 851px) {
   .home-header {
-    padding-top: 290px !important;
+    /* padding-top: 290px !important; */
   }
 }
 
