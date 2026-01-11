@@ -18,5 +18,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </LoadingProvider>
   </React.StrictMode>
 );
-document.getElementById("seo-content")?.remove();
-
