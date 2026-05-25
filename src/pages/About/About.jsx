@@ -95,7 +95,7 @@ function About() {
   ];
 
   return (
-    <SectionWrapper id="about-section">
+    <SectionWrapper id="about-section" className="pt-36 pb-16 md:pt-40 md:pb-24 lg:pt-44" spacing="none">
       <HelmetWrapper>
         <title>About Me | My Portfolio</title>
         <meta name="description" content="Learn more about Aamir Saleem Lone, my skills, and my professional journey." />

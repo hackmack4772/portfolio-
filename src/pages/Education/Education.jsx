@@ -79,7 +79,7 @@ function Education() {
   const bcaInstitution = "RIMT University";
 
   return (
-    <SectionWrapper id="education-section" className="pt-28">
+    <SectionWrapper id="education-section" className="pt-28 pb-16 md:pb-24" spacing="none">
       <HelmetWrapper>
         <title>Education | My Portfolio</title>
         <meta name="description" content="Academic background and professional certifications" />

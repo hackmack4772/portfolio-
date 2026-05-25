@@ -88,7 +88,7 @@ function Projects() {
   const glowColors = ["primary", "secondary", "accent"];
 
   return (
-    <SectionWrapper id="projects-section" className="pt-28">
+    <SectionWrapper id="projects-section" className="pt-28 pb-16 md:pb-24" spacing="none">
       <HelmetWrapper>
         <title>My Projects | Portfolio</title>
         <meta name="description" content="Browse through my portfolio of projects showcasing my skills and experience." />

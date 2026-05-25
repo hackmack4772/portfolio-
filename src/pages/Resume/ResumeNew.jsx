@@ -45,7 +45,7 @@ function ResumeNew() {
   }, []);
 
   return (
-    <SectionWrapper id="resume-section" className="pt-28">
+    <SectionWrapper id="resume-section" className="pt-28 pb-16 md:pb-24" spacing="none">
       <HelmetWrapper>
         <title>Curriculum Vitae | Portfolio</title>
         <meta name="description" content="View or download my resume outlining my engineering skills and work history." />
@@ -128,4 +128,3 @@ function ResumeNew() {
 }
 
 export default ResumeNew;
-

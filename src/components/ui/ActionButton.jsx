@@ -9,7 +9,7 @@ export default function ActionButton({
   className = "",
   ...props
 }) {
-  const baseClasses = "inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 select-none cursor-pointer focus:outline-none";
+  const baseClasses = "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-xs font-mono uppercase tracking-wider transition-all duration-300 select-none cursor-pointer focus:outline-none";
   
   const variants = {
     primary: "text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_20px_rgba(12,251,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed",
@@ -20,7 +20,7 @@ export default function ActionButton({
   const Component = href ? "a" : "button";
 
   return (
-    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block w-full sm:w-auto text-center">
+    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-flex w-full sm:w-auto">
       <Component 
         className={`${baseClasses} ${variants[variant]} ${className}`}
         href={href}
@@ -32,4 +32,3 @@ export default function ActionButton({
     </motion.div>
   );
 }
-

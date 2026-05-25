@@ -33,7 +33,7 @@ function TiltContainer({ children }) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className="relative cursor-pointer w-full flex justify-center"
+      className="relative flex w-full cursor-pointer justify-center"
       whileHover={{ scale: 1.03 }}
       transition={{ type: "spring", stiffness: 350, damping: 25 }}
     >
@@ -76,7 +76,7 @@ function MyJourney() {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <div className="grid w-full items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:gap-14">
       
       {/* Journey Text Content */}
       <motion.div 
@@ -84,7 +84,7 @@ function MyJourney() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="lg:col-span-8 flex flex-col gap-6"
+        className="flex min-w-0 flex-col"
       >
         <SectionTitle 
           subtitle="Biography" 
@@ -92,10 +92,11 @@ function MyJourney() {
           highlight="Introduce Myself" 
           description="A summary of my engineering background and technical expertise"
           align="left"
+          className="mb-6 md:mb-8"
         />
 
         <div 
-          className="text-xs md:text-sm leading-relaxed text-text-muted font-sans flex flex-col gap-4 text-justify my-journey-introduction -mt-8"
+          className="my-journey-introduction flex max-w-4xl flex-col gap-4 text-left font-sans text-xs leading-relaxed text-text-muted md:text-sm"
           dangerouslySetInnerHTML={{ __html: cleanIntroduction(home2Data.introduction) }} 
         />
       </motion.div>
@@ -106,12 +107,12 @@ function MyJourney() {
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="lg:col-span-4 flex items-center justify-center"
+        className="flex w-full items-center justify-center lg:justify-end"
       >
         <TiltContainer>
           <div 
             style={{ transform: "translateZ(30px)" }}
-            className="relative w-64 h-64 md:w-72 md:h-72 rounded-2xl p-[1.5px] bg-gradient-to-tr from-primary to-accent shadow-2xl overflow-hidden group"
+            className="group relative h-64 w-64 overflow-hidden rounded-2xl bg-gradient-to-tr from-primary to-accent p-[1.5px] shadow-2xl md:h-72 md:w-72"
           >
             {/* Inner Image Frame */}
             <div className="absolute inset-0 bg-bg-base rounded-2xl overflow-hidden flex items-center justify-center">

@@ -5,11 +5,11 @@ export default function ContentContainer({ children, className = "", size = "lg"
     sm: "max-w-3xl",
     md: "max-w-5xl",
     lg: "max-w-7xl",
-    xl: "max-w-full"
+    xl: "max-w-screen-2xl"
   };
 
   return (
-    <div className={`w-full mx-auto ${sizeClasses[size]} ${className}`}>
+    <div className={`mx-auto w-full min-w-0 ${sizeClasses[size]} ${className}`}>
       {children}
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SectionTitle({ subtitle, title, highlight, description, align = "center" }) {
+export default function SectionTitle({ subtitle, title, highlight, description, align = "center", className = "" }) {
   const alignmentClasses = {
     left: "text-left items-start",
     center: "text-center items-center",
@@ -8,7 +8,7 @@ export default function SectionTitle({ subtitle, title, highlight, description, 
   };
 
   return (
-    <div className={`flex flex-col mb-12 md:mb-16 select-none ${alignmentClasses[align]}`}>
+    <div className={`mb-12 flex flex-col select-none md:mb-16 ${alignmentClasses[align]} ${className}`}>
       {subtitle && (
         <h5 className="text-[10px] md:text-xs font-mono uppercase tracking-[0.25em] text-accent mb-2.5 flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />

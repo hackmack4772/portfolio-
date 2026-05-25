@@ -370,7 +370,7 @@ function ContactUs({ hideHeader = false }) {
   }
 
   return (
-    <SectionWrapper id="contact-section" className="pt-28 pb-16">
+    <SectionWrapper id="contact-section" className="pt-36 pb-16 md:pt-40 md:pb-24 lg:pt-44" spacing="none">
       <HelmetWrapper>
         <title>Contact Me | Portfolio</title>
         <meta name="description" content="Get in touch with Aamir Saleem Lone for collaborations, jobs, or feedback." />
@@ -392,4 +392,3 @@ function ContactUs({ hideHeader = false }) {
 }
 
 export default ContactUs;
-

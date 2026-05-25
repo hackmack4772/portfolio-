@@ -4,6 +4,8 @@ export default function SectionWrapper({
   id, 
   children, 
   className = "", 
+  containerClassName = "",
+  spacing = "default",
   variant = "default",
   showTicks = true 
 }) {
@@ -13,10 +15,16 @@ export default function SectionWrapper({
     dark: "bg-bg-base"
   };
 
+  const spacingClasses = {
+    default: "py-16 md:py-24",
+    compact: "py-12 md:py-16",
+    none: ""
+  };
+
   return (
     <section 
       id={id} 
-      className={`relative w-full py-16 md:py-24 px-6 sm:px-12 md:px-16 lg:px-20 xl:px-24 overflow-hidden ${bgClasses[variant]} ${className}`}
+      className={`relative isolate w-full overflow-hidden px-6 sm:px-8 md:px-12 lg:px-20 xl:px-24 ${spacingClasses[spacing]} ${bgClasses[variant]} ${className}`}
     >
       {/* Corner Ticks (+ marks for futuristic engineering details) */}
       {showTicks && (
@@ -33,7 +41,7 @@ export default function SectionWrapper({
       )}
       
       {/* Centralized Grid constraint wrapper */}
-      <div className="max-w-7xl mx-auto w-full relative z-10">
+      <div className={`relative z-10 mx-auto w-full max-w-7xl min-w-0 ${containerClassName}`}>
         {children}
       </div>
     </section>

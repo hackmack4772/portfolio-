@@ -4,7 +4,7 @@ import ScrollToTop from "../ScrollToTop";
 
 export default function MainLayout({ children }) {
   return (
-    <div className="min-h-screen bg-bg-base text-text-base flex flex-col relative overflow-x-hidden selection:bg-primary selection:text-white font-sans antialiased">
+    <div className="relative isolate flex min-h-screen w-full flex-col overflow-x-hidden bg-bg-base font-sans text-text-base antialiased selection:bg-primary selection:text-white">
       {/* Dynamic Background Grid Overlay */}
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none -z-10" />
       
@@ -16,9 +16,9 @@ export default function MainLayout({ children }) {
       <ScrollToTop />
       
       {/* Main Content Area */}
-      <div className="flex-grow flex flex-col">
+      <main className="flex min-w-0 flex-1 flex-col">
         {children}
-      </div>
+      </main>
     </div>
   );
 }
