@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { collection, getDocs, orderBy, query, doc, getDoc } from "firebase/firestore";
+import React from "react";
 import { motion } from "framer-motion";
 import { Trophy, Award, BookOpen, Star, FileCheck } from "lucide-react";
-import { db } from "../../config/firebase";
 import HelmetWrapper from "../../components/HelmetWrapper";
-import { useLoading } from "../../Context/LoadingContext";
+import { usePortfolio } from "../../Context/PortfolioDataContext";
 import SectionWrapper from "../../components/ui/SectionWrapper";
 import SectionTitle from "../../components/ui/SectionTitle";
 import TimelineItem from "../../components/ui/TimelineItem";
@@ -12,66 +10,32 @@ import GlowCard from "../../components/ui/GlowCard";
 import FloatingBadge from "../../components/ui/FloatingBadge";
 
 function Education() {
-  const [educationData, setEducationData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const { handleLoading } = useLoading();
+  const { about, education } = usePortfolio();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let list = [];
-        
-        // 1. Try to fetch from content/about
-        const aboutRef = doc(db, "content", "about");
-        const aboutSnap = await getDoc(aboutRef);
-        if (aboutSnap.exists() && aboutSnap.data().education && aboutSnap.data().education.length > 0) {
-          list = aboutSnap.data().education.map((edu, idx) => ({
-            id: `about-edu-${idx}`,
-            title: edu.degree,
-            institution: edu.institution,
-            year: edu.year,
-            score: edu.degree.includes(",") ? edu.degree.split(",").pop().trim() : "Completed"
-          }));
-        }
-        
-        // 2. Fallback to educationData collection if list is empty
-        if (list.length === 0) {
-          const educationRef = collection(db, "educationData");
-          const educationQuery = query(educationRef, orderBy("created", "desc"));
-          const educationSnapshot = await getDocs(educationQuery);
-          
-          list = educationSnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-        }
-
-        // 3. Fallback to hardcoded details if still empty
-        if (list.length === 0) {
-          list = [
-            { id: "hardcoded-1", title: "Master of Computer Applications (MCA)", institution: "Swami Vivekanand Institute of Engineering & Technology", year: "2023 – 2025", score: "CGPA: 8.0" },
-            { id: "hardcoded-2", title: "Bachelor of Computer Applications (BCA)", institution: "RIMT University, Punjab", year: "2019 – 2022", score: "CGPA: 9.08" },
-            { id: "hardcoded-3", title: "Higher Secondary Education", institution: "JKBOSE, Jammu & Kashmir", year: "2017 – 2019", score: "80.4%" },
-          ];
-        }
-
-        setEducationData(list);
-        setLoading(false);
-        handleLoading(false);
-      } catch (error) {
-        console.error("Error fetching education data: ", error);
-        // Fallback on error
-        setEducationData([
-          { id: "hardcoded-1", title: "Master of Computer Applications (MCA)", institution: "Swami Vivekanand Institute of Engineering & Technology", year: "2023 – 2025", score: "CGPA: 8.0" },
-          { id: "hardcoded-2", title: "Bachelor of Computer Applications (BCA)", institution: "RIMT University, Punjab", year: "2019 – 2022", score: "CGPA: 9.08" },
-        ]);
-        setLoading(false);
-        handleLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [handleLoading]);
+  let educationData = [];
+  if (about?.education && about.education.length > 0) {
+    educationData = about.education.map((edu, idx) => ({
+      id: `about-edu-${idx}`,
+      title: edu.degree,
+      institution: edu.institution,
+      year: edu.year,
+      score: edu.degree.includes(",") ? edu.degree.split(",").pop().trim() : "Completed"
+    }));
+  } else if (education && education.length > 0) {
+    educationData = education.map((edu) => ({
+      id: edu.id,
+      title: edu.title || edu.degree,
+      institution: edu.institution,
+      year: edu.year,
+      score: edu.score || "Completed"
+    }));
+  } else {
+    educationData = [
+      { id: "hardcoded-1", title: "Master of Computer Applications (MCA)", institution: "Swami Vivekanand Institute of Engineering & Technology", year: "2023 – 2025", score: "CGPA: 8.0" },
+      { id: "hardcoded-2", title: "Bachelor of Computer Applications (BCA)", institution: "RIMT University, Punjab", year: "2019 – 2022", score: "CGPA: 9.08" },
+      { id: "hardcoded-3", title: "Higher Secondary Education", institution: "JKBOSE, Jammu & Kashmir", year: "2017 – 2019", score: "80.4%" },
+    ];
+  }
 
   // Extract statistics for the summary card
   const peakCgpa = "9.08";

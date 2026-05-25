@@ -13,7 +13,7 @@ const ThemeToggle = () => {
       </span>
       <motion.button
         onClick={toggleDarkMode}
-        className="relative h-10 w-10 flex items-center justify-center rounded-full glass-panel cursor-pointer shadow-[0_0_15px_rgba(143,16,183,0.1)] hover:shadow-[0_0_20px_rgba(12,251,255,0.2)] focus:outline-none transition-all duration-300 overflow-hidden"
+        className="relative h-10 w-10 flex items-center justify-center rounded-full glass-panel cursor-pointer shadow-glow-primary hover:shadow-glow-accent focus:outline-none transition-all duration-300 overflow-hidden"
         whileTap={{ scale: 0.9 }}
         whileHover={{ scale: 1.05 }}
         aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}

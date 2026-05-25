@@ -8,6 +8,7 @@ import {
   updateDoc, 
   deleteDoc 
 } from 'firebase/firestore';
+import { usePortfolio } from '../../Context/PortfolioDataContext';
 import { 
   Code, 
   Plus, 
@@ -22,6 +23,7 @@ import {
 } from 'lucide-react';
 
 const SkillsSection = () => {
+  const { refreshData } = usePortfolio();
   const [skills, setSkills] = useState([]);
   const [skillCategories, setSkillCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -108,6 +110,7 @@ const SkillsSection = () => {
       }
       
       const docRef = await addDoc(collection(db, "skills"), skillToAdd);
+      refreshData();
       
       setSkills(prev => {
         const newSkills = [...prev, { id: docRef.id, ...skillToAdd }];
@@ -140,6 +143,7 @@ const SkillsSection = () => {
       let updatedSkill = { ...skillData };
       const docRef = doc(db, "skills", editingSkill.id);
       await updateDoc(docRef, updatedSkill);
+      refreshData();
       
       setSkills(prev => {
         const updatedSkills = prev.map(skill => 
@@ -172,6 +176,7 @@ const SkillsSection = () => {
     
     try {
       await deleteDoc(doc(db, "skills", skillId));
+      refreshData();
       setSkills(prev => prev.filter(skill => skill.id !== skillId));
       setMessage({ text: 'Skill deleted successfully!', type: 'success' });
     } catch (error) {

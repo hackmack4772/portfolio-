@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Download, FileText, ExternalLink, Trophy, BookOpen, FileCheck, Layers } from "lucide-react";
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import { motion, AnimatePresence } from "framer-motion";
-import { db } from "../../config/firebase";
 import pdfFallback from "../../Assets/resume.pdf";
-import { useLoading } from "../../Context/LoadingContext";
+import { usePortfolio } from "../../Context/PortfolioDataContext";
 import HelmetWrapper from "../../components/HelmetWrapper";
 import SectionWrapper from "../../components/ui/SectionWrapper";
 import SectionTitle from "../../components/ui/SectionTitle";
@@ -13,16 +11,17 @@ import GlowCard from "../../components/ui/GlowCard";
 import FloatingBadge from "../../components/ui/FloatingBadge";
 
 function ResumeNew() {
-  const { handleLoading } = useLoading();
+  const { about, contact, skills } = usePortfolio();
   const [isMobile, setIsMobile] = useState(false);
-  const [resumeUrl, setResumeUrl] = useState(pdfFallback);
-  const [aboutData, setAboutData] = useState({
-    experience: [],
-    education: []
-  });
-  const [dbSkills, setDbSkills] = useState([]);
   const [activeTab, setActiveTab] = useState("experience");
   const [showPdfPreview, setShowPdfPreview] = useState(false);
+
+  const resumeUrl = contact?.resumeURL && contact.resumeURL.trim().startsWith("http")
+    ? contact.resumeURL.trim()
+    : pdfFallback;
+
+  const aboutData = about || { experience: [], education: [] };
+  const dbSkills = skills || [];
 
   useEffect(() => {
     // Detect mobile screen sizing
@@ -34,39 +33,6 @@ function ResumeNew() {
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
-
-  useEffect(() => {
-    const fetchResumeData = async () => {
-      try {
-        const contactSnap = await getDoc(doc(db, "content", "contact"));
-        if (contactSnap.exists()) {
-          const cData = contactSnap.data();
-          if (cData.resumeURL && cData.resumeURL.trim().startsWith("http")) {
-            setResumeUrl(cData.resumeURL.trim());
-          }
-        }
-
-        const aboutSnap = await getDoc(doc(db, "content", "about"));
-        if (aboutSnap.exists()) {
-          setAboutData(aboutSnap.data());
-        }
-
-        const skillsSnapshot = await getDocs(collection(db, "skills"));
-        const skillsList = skillsSnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        skillsList.sort((a, b) => (a.order || 0) - (b.order || 0));
-        setDbSkills(skillsList);
-
-        handleLoading(false);
-      } catch (err) {
-        console.error("Error fetching resume dashboard data:", err);
-        handleLoading(false);
-      }
-    };
-    fetchResumeData();
-  }, [handleLoading]);
 
   return (
     <SectionWrapper id="resume-section" className="pt-36 md:pt-40 lg:pt-44 pb-16" spacing="none">

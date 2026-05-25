@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import React from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { db } from "../../config/firebase";
+import { usePortfolio } from "../../Context/PortfolioDataContext";
 import SectionTitle from "../../components/ui/SectionTitle";
 
 function TiltContainer({ children }) {
@@ -43,32 +42,14 @@ function TiltContainer({ children }) {
 }
 
 function MyJourney() {
-  const [home2Data, setHome2Data] = useState({
+  const { home2 } = usePortfolio();
+  const home2Data = home2 || {
     heading: "My Journey",
-    introduction: "Loading journey details...",
+    introduction: "",
     skills: "",
     hobbies: "",
     imageUrl: "",
-  });
-
-  const home2Ref = doc(db, "home", "home2");
-
-  const fetchHome2Data = async () => {
-    try {
-      const docSnap = await getDoc(home2Ref);
-      if (docSnap.exists()) {
-        setHome2Data(docSnap.data());
-      } else {
-        console.log("No such home2 document!");
-      }
-    } catch (error) {
-      console.error("Error fetching Home2 data: ", error);
-    }
   };
-
-  useEffect(() => {
-    fetchHome2Data();
-  }, []);
 
   const cleanIntroduction = (htmlString) => {
     if (!htmlString) return "";

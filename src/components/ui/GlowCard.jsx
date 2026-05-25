@@ -10,9 +10,9 @@ export default function GlowCard({
   onClick 
 }) {
   const glowShadows = {
-    primary: "hover:shadow-[0_0_30px_rgba(143,16,183,0.15)] hover:border-primary/45",
-    secondary: "hover:shadow-[0_0_30px_rgba(3,163,165,0.15)] hover:border-secondary/45",
-    accent: "hover:shadow-[0_0_30px_rgba(12,251,255,0.15)] hover:border-accent/45"
+    primary: "hover:shadow-glow-primary hover:border-primary/45",
+    secondary: "hover:shadow-glow-secondary hover:border-secondary/45",
+    accent: "hover:shadow-glow-accent hover:border-accent/45"
   };
 
   const glassClasses = {

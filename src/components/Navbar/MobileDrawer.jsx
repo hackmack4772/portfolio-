@@ -144,7 +144,7 @@ export default function MobileDrawer({ isOpen, onClose, navItems, isActivePath, 
           </div>
           <div className="flex items-center gap-1.5">
             <HardDrive className="w-3 h-3 text-green-400" />
-            <span>COGNITIVE_CORE: ANTIGRAVITY_v3.5</span>
+            <span>COGNITIVE_CORE: HACKMACK_v3.5</span>
           </div>
         </div>
       </motion.div>

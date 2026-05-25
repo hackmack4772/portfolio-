@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
+import { usePortfolio } from '../../Context/PortfolioDataContext';
 import { 
   Mail, 
   Phone, 
@@ -18,6 +19,7 @@ import {
 } from 'lucide-react';
 
 const ContactSection = () => {
+  const { refreshData } = usePortfolio();
   const [contactData, setContactData] = useState({
     email: '',
     phone: '',
@@ -86,6 +88,7 @@ const ContactSection = () => {
     try {
       const docRef = doc(db, "content", "contact");
       await setDoc(docRef, contactData, { merge: true });
+      refreshData();
       setMessage({ text: 'Contact & social details synced successfully!', type: 'success' });
     } catch (error) {
       console.error("Error saving contact data:", error);

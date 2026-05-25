@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
+import { usePortfolio } from '../../Context/PortfolioDataContext';
 import { Palette, Eye, Save, Sparkles, CheckCircle2, AlertCircle } from 'lucide-react';
 import ColorPicker from './ColorPicker';
 
 const ColorSchemeSection = () => {
+  const { refreshData } = usePortfolio();
   const [colors, setColors] = useState({
     primaryColor: '#8f10b7',
     primaryHover: '#7a0d9b',
@@ -83,6 +85,7 @@ const ColorSchemeSection = () => {
     try {
       const docRef = doc(db, "settings", "colors");
       await setDoc(docRef, colors, { merge: true });
+      refreshData();
       
       // Update CSS variables directly
       applyColorsToCSS(colors);

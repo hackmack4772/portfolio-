@@ -4,6 +4,12 @@ import { useDarkMode } from "../../Context/DarkModeContext";
 function CanvasParticles() {
   const canvasRef = useRef(null);
   const { isDarkMode } = useDarkMode();
+  const isDarkModeRef = useRef(isDarkMode);
+
+  // Keep dark mode state synced in a ref to avoid destroying/rebuilding canvas loop on toggle
+  useEffect(() => {
+    isDarkModeRef.current = isDarkMode;
+  }, [isDarkMode]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -16,11 +22,17 @@ function CanvasParticles() {
     let particles = [];
     let mouse = { x: null, y: null, radius: 120 };
 
-    // Set canvas dimensions
+    // Set canvas dimensions with a debounced handler to avoid layout thrashing during resizing
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       initParticles();
+    };
+
+    let resizeTimeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resizeCanvas, 150);
     };
 
     // Particle blueprint
@@ -28,17 +40,12 @@ function CanvasParticles() {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 0.5; // Small size for a clean look
+        this.size = Math.random() * 2 + 0.5; // Clean, micro-particles
         this.speedX = (Math.random() - 0.5) * 0.3;
-        this.speedY = -Math.random() * 0.4 - 0.1; // Floating upwards (anti-gravity)
+        this.speedY = -Math.random() * 0.4 - 0.1; // Floating upwards
         this.opacity = Math.random() * 0.5 + 0.1;
         this.baseOpacity = this.opacity;
-        
-        // Random glow color tailored to dark/light theme
-        const colorHue = isDarkMode ? 270 + Math.random() * 60 : 180 + Math.random() * 60; // Purples for dark, cyans for light
-        this.color = isDarkMode 
-          ? `hsla(${colorHue}, 70%, 75%, ${this.opacity})` 
-          : `hsla(${colorHue}, 50%, 40%, ${this.opacity})`;
+        this.hueOffset = Math.random() * 60;
       }
 
       update() {
@@ -79,18 +86,20 @@ function CanvasParticles() {
       }
 
       draw() {
+        const isDark = isDarkModeRef.current;
+        const colorHue = isDark ? 270 + this.hueOffset : 180 + this.hueOffset;
+        const color = isDark 
+          ? `hsla(${colorHue}, 70%, 75%, ${this.opacity})` 
+          : `hsla(${colorHue}, 50%, 40%, ${this.opacity})`;
+
         ctx.save();
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         
-        // Draw soft glow
         ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = this.color;
+        ctx.fillStyle = color;
         
-        if (this.size > 1.5 && isDarkMode) {
-          ctx.shadowBlur = 8;
-          ctx.shadowColor = this.color;
-        }
+        // Caching optimization: shadowBlur is omitted to avoid massive rasterization GPU lag
         
         ctx.fill();
         ctx.restore();
@@ -99,7 +108,8 @@ function CanvasParticles() {
 
     const initParticles = () => {
       particles = [];
-      const numberOfParticles = Math.floor((canvas.width * canvas.height) / 10000); // Dynamic count based on screen size
+      const densityCount = Math.floor((canvas.width * canvas.height) / 15000);
+      const numberOfParticles = Math.min(densityCount, 120); // Cap at 120 particles to optimize CPU/GPU rendering
       for (let i = 0; i < numberOfParticles; i++) {
         particles.push(new Particle());
       }
@@ -117,7 +127,7 @@ function CanvasParticles() {
     };
 
     // Listeners
-    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("resize", handleResize);
     
     const handleMouseMove = (e) => {
       mouse.x = e.clientX;
@@ -133,23 +143,26 @@ function CanvasParticles() {
     document.addEventListener("mouseleave", handleMouseLeave);
 
     // Initial setup
-    resizeCanvas();
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initParticles();
     animate();
 
     return () => {
-      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
+      clearTimeout(resizeTimeout);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [isDarkMode]);
+  }, []); // Run exactly once on mount!
 
   return (
     <canvas
       ref={canvasRef}
       id="canvas-particles"
       className="fixed inset-0 -z-50 pointer-events-none block"
-      style={{ mixBlendMode: "screen" }}
+      style={{ mixBlendMode: isDarkMode ? "screen" : "normal" }}
     />
   );
 }

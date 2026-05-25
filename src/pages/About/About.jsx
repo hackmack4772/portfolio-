@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   User, 
@@ -12,13 +12,11 @@ import {
   Terminal,
   Calendar
 } from "lucide-react";
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
-import { db } from "../../config/firebase";
 import HelmetWrapper from "../../components/HelmetWrapper";
 import Github from "../../components/Github";
 import Techstack from "../../components/Techstack";
 import Toolstack from "../../components/Toolstack";
-import { useLoading } from "../../Context/LoadingContext";
+import { usePortfolio } from "../../Context/PortfolioDataContext";
 import SectionWrapper from "../../components/ui/SectionWrapper";
 import SectionTitle from "../../components/ui/SectionTitle";
 import GlowCard from "../../components/ui/GlowCard";
@@ -26,67 +24,31 @@ import TechPill from "../../components/ui/TechPill";
 import avatarHacker from "../../Assets/avatar_hacker.png";
 
 function About() {
-  const [aboutData, setAboutData] = useState({
+  const [activeTab, setActiveTab] = useState("personal");
+  const { about, contact, skills } = usePortfolio();
+
+  const aboutData = {
     tagline: "Full-Stack Engineer | Building Scalable Web & Reward Platforms",
     biography: "I am Aamir Saleem Lone, a passionate Full-Stack Developer with nearly 3 years of hands-on experience in building scalable, secure, and performance-driven web applications. Currently working at Mahindra Comviva on the Mobilytix Rewards platform, I specialize in developing enterprise-grade solutions using React, Node.js, TypeScript, and modern backend systems. Previously, I worked at Shine Dezign Infonet, where I contributed to healthcare, CRM, and real-time streaming applications. I hold a Master’s degree in Computer Applications (MCA) and enjoy building reliable systems that solve real-world problems.",
     skills: [],
     education: [],
     experience: [],
-    photoURL: avatarHacker
-  });
+    photoURL: avatarHacker,
+    ...about
+  };
 
-  const [contactData, setContactData] = useState({
+  const contactData = {
     email: "loneaamir6@gmail.com",
     address: "Handwara, Jammu and Kashmir, India",
     socialLinks: {
       github: "https://github.com/hackmack4772",
       linkedin: "https://www.linkedin.com/in/aamir-saleem-lone/",
       twitter: "https://twitter.com/hackmack4772",
-    }
-  });
+    },
+    ...contact
+  };
 
-  const [dbSkills, setDbSkills] = useState([]);
-  const [activeTab, setActiveTab] = useState("personal");
-  const { handleLoading } = useLoading();
-
-  useEffect(() => {
-    const fetchAboutPageData = async () => {
-      try {
-        const aboutSnap = await getDoc(doc(db, "content", "about"));
-        if (aboutSnap.exists()) {
-          const aData = aboutSnap.data();
-          setAboutData(prev => ({
-            ...prev,
-            ...aData
-          }));
-        }
-
-        const contactSnap = await getDoc(doc(db, "content", "contact"));
-        if (contactSnap.exists()) {
-          const cData = contactSnap.data();
-          setContactData(prev => ({
-            ...prev,
-            ...cData
-          }));
-        }
-
-        const skillsSnapshot = await getDocs(collection(db, "skills"));
-        const skillsList = skillsSnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        skillsList.sort((a, b) => (a.order || 0) - (b.order || 0));
-        setDbSkills(skillsList);
-
-        handleLoading(false);
-      } catch (error) {
-        console.error("Error loading about page database content:", error);
-        handleLoading(false);
-      }
-    };
-
-    fetchAboutPageData();
-  }, [handleLoading]);
+  const dbSkills = skills || [];
 
   const tabs = [
     { id: "personal", label: "Bio Details", icon: User },

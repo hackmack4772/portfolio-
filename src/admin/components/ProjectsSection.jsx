@@ -8,6 +8,7 @@ import {
   updateDoc, 
   deleteDoc 
 } from 'firebase/firestore';
+import { usePortfolio } from '../../Context/PortfolioDataContext';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { 
   FolderGit2, 
@@ -30,6 +31,7 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 const ProjectsSection = () => {
+  const { refreshData } = usePortfolio();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -132,6 +134,7 @@ const ProjectsSection = () => {
       
       const hackmackDocRef = doc(db, "hackmack", "user_projects");
       const docRef = await addDoc(collection(hackmackDocRef, "projectsData"), projectToAdd);
+      refreshData();
       
       setProjects(prev => [{ id: docRef.id, ...projectToAdd }, ...prev]);
       
@@ -169,6 +172,7 @@ const ProjectsSection = () => {
       const hackmackDocRef = doc(db, "hackmack", "user_projects");
       const docRef = doc(collection(hackmackDocRef, "projectsData"), editingProject.id);
       await updateDoc(docRef, updatedProject);
+      refreshData();
       
       setProjects(prev => prev.map(p => p.id === editingProject.id ? { id: p.id, ...updatedProject } : p));
       resetForm();
@@ -188,6 +192,7 @@ const ProjectsSection = () => {
       const hackmackDocRef = doc(db, "hackmack", "user_projects");
       const docRef = doc(collection(hackmackDocRef, "projectsData"), projectId);
       await deleteDoc(docRef);
+      refreshData();
       
       setProjects(prev => prev.filter(p => p.id !== projectId));
       setMessage({ text: 'Project card deleted successfully!', type: 'success' });

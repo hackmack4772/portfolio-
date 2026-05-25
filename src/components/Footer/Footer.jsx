@@ -1,44 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Github, Twitter, Linkedin, Instagram, Globe } from "lucide-react";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../config/firebase";
+import React from "react";
+import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
+import { usePortfolio } from "../../Context/PortfolioDataContext";
 
 function Footer() {
+  const { about, contact } = usePortfolio();
   const year = new Date().getFullYear();
-  const [personalName, setPersonalName] = useState("Aamir Saleem Lone");
-  const [socialLinks, setSocialLinks] = useState({
+
+  const personalName = about?.name || "Aamir Saleem Lone";
+  const socialLinks = contact?.socialLinks || {
     github: "https://github.com/hackmack4772",
     twitter: "https://twitter.com/hackmack4772",
     linkedin: "https://www.linkedin.com/in/aamir-saleem-lone/",
     instagram: "https://www.instagram.com/aamir-saleem-lone",
-  });
-
-  useEffect(() => {
-    const fetchFooterData = async () => {
-      try {
-        // Fetch about for display name
-        const aboutSnap = await getDoc(doc(db, "content", "about"));
-        if (aboutSnap.exists() && aboutSnap.data().name) {
-          setPersonalName(aboutSnap.data().name);
-        }
-
-        // Fetch contact for social links
-        const contactSnap = await getDoc(doc(db, "content", "contact"));
-        if (contactSnap.exists()) {
-          const cData = contactSnap.data();
-          if (cData.socialLinks) {
-            setSocialLinks(prev => ({
-              ...prev,
-              ...cData.socialLinks
-            }));
-          }
-        }
-      } catch (err) {
-        console.error("Error fetching footer data:", err);
-      }
-    };
-    fetchFooterData();
-  }, []);
+  };
 
   const socials = [
     { icon: Github, href: socialLinks.github, label: "GitHub" },

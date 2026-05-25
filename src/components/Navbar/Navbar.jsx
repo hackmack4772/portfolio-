@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../config/firebase";
+import { usePortfolio } from "../../Context/PortfolioDataContext";
 import { 
   Home, 
   GraduationCap, 
@@ -31,10 +30,12 @@ const navItems = [
 ];
 
 function NavBar() {
+  const { contact } = usePortfolio();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [githubUrl, setGithubUrl] = useState("https://github.com/hackmack4772");
   const location = useLocation();
+
+  const githubUrl = contact?.socialLinks?.github || "https://github.com/hackmack4772";
 
   // Scroll Event Listener
   useEffect(() => {
@@ -48,24 +49,6 @@ function NavBar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Fetch GitHub Repository URL
-  useEffect(() => {
-    const fetchNavbarData = async () => {
-      try {
-        const contactSnap = await getDoc(doc(db, "content", "contact"));
-        if (contactSnap.exists()) {
-          const cData = contactSnap.data();
-          if (cData.socialLinks?.github) {
-            setGithubUrl(cData.socialLinks.github);
-          }
-        }
-      } catch (err) {
-        console.error("Error fetching navbar github:", err);
-      }
-    };
-    fetchNavbarData();
   }, []);
 
   const isActivePath = (path) => {

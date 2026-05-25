@@ -1,6 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../config/firebase";
+import { usePortfolio } from "./PortfolioDataContext";
 
 // Create the Context
 const DarkModeContext = createContext();
@@ -43,6 +42,8 @@ const applyColors = (isDark, c) => {
 
 // Create a Provider Component
 export const DarkModeProvider = ({ children }) => {
+  const { colors } = usePortfolio();
+
   // Check for user's system preference
   const prefersDarkMode = () => {
     return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -59,7 +60,6 @@ export const DarkModeProvider = ({ children }) => {
   };
 
   const [isDarkMode, setIsDarkMode] = useState(getInitialMode);
-  const [colors, setColors] = useState(null);
 
   // Toggle between dark and light mode
   const toggleDarkMode = () => {
@@ -70,24 +70,6 @@ export const DarkModeProvider = ({ children }) => {
   const setDarkMode = (value) => {
     setIsDarkMode(Boolean(value));
   };
-
-  // Fetch color scheme on mount
-  useEffect(() => {
-    const fetchColors = async () => {
-      try {
-        const docRef = doc(db, "settings", "colors");
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const colorsData = docSnap.data();
-          setColors(colorsData);
-          applyColors(isDarkMode, colorsData);
-        }
-      } catch (err) {
-        console.error("Error loading theme settings colors:", err);
-      }
-    };
-    fetchColors();
-  }, []);
 
   // Listen for system preference changes
   useEffect(() => {

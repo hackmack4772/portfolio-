@@ -1,10 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Mail, Phone, Send, Sparkles, CheckCircle, AlertCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../config/firebase";
-import { useLoading } from "../../Context/LoadingContext";
+import { usePortfolio } from "../../Context/PortfolioDataContext";
 import HelmetWrapper from "../../components/HelmetWrapper";
 import SectionWrapper from "../../components/ui/SectionWrapper";
 import SectionTitle from "../../components/ui/SectionTitle";
@@ -13,7 +11,7 @@ import SocialDock from "../../components/ui/SocialDock";
 import ActionButton from "../../components/ui/ActionButton";
 
 function ContactUs({ hideHeader = false }) {
-  const { handleLoading } = useLoading();
+  const { contact } = usePortfolio();
   const formRef = useRef();
 
   const [formData, setFormData] = useState({
@@ -23,7 +21,7 @@ function ContactUs({ hideHeader = false }) {
     message: "",
   });
 
-  const [contactData, setContactData] = useState({
+  const contactData = {
     email: "loneaamir6@gmail.com",
     phone: "+91-9596581274",
     address: "Handwara, Jammu and Kashmir, India",
@@ -31,31 +29,15 @@ function ContactUs({ hideHeader = false }) {
       github: "https://github.com/hackmack4772",
       linkedin: "https://www.linkedin.com/in/aamir-saleem-lone/",
       twitter: "https://twitter.com/hackmack4772"
-    }
-  });
+    },
+    ...contact
+  };
 
   const [errors, setErrors] = useState({});
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState(null);
   const [activeField, setActiveField] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    const fetchContactInfo = async () => {
-      try {
-        const contactSnap = await getDoc(doc(db, "content", "contact"));
-        if (contactSnap.exists()) {
-          setContactData(prev => ({
-            ...prev,
-            ...contactSnap.data()
-          }));
-        }
-      } catch (err) {
-        console.error("Error fetching contact details:", err);
-      }
-    };
-    fetchContactInfo();
-  }, []);
 
   // Field validator
   const validateField = (name, value) => {

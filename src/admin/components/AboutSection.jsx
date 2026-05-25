@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
+import { usePortfolio } from '../../Context/PortfolioDataContext';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { 
   User, 
@@ -16,6 +17,7 @@ import {
 } from 'lucide-react';
 
 const AboutSection = () => {
+  const { refreshData } = usePortfolio();
   const [aboutData, setAboutData] = useState({
     name: '',
     title: '',
@@ -157,6 +159,7 @@ const AboutSection = () => {
       
       const docRef = doc(db, "content", "about");
       await setDoc(docRef, updatedData, { merge: true });
+      refreshData();
       
       setAboutData(updatedData);
       setImageFile(null);

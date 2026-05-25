@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { collection, getDocs, doc } from "firebase/firestore";
+import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Filter, 
@@ -10,7 +9,7 @@ import {
   Terminal,
   FolderOpen
 } from "lucide-react";
-import { db } from "../../config/firebase";
+import { usePortfolio } from "../../Context/PortfolioDataContext";
 import HelmetWrapper from "../../components/HelmetWrapper";
 import SectionWrapper from "../../components/ui/SectionWrapper";
 import SectionTitle from "../../components/ui/SectionTitle";
@@ -19,45 +18,21 @@ import TechPill from "../../components/ui/TechPill";
 import ActionButton from "../../components/ui/ActionButton";
 
 function Projects() {
-  const [projects, setProjects] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { projects: dbProjects, loading } = usePortfolio();
+  const projects = dbProjects || [];
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("date");
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const hackmackDocRef = doc(db, "hackmack", "user_projects");
-        const projectsRef = collection(hackmackDocRef, "projectsData");
-        const querySnapshot = await getDocs(projectsRef);
-  
-        const projectsData = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-  
-        setProjects(projectsData);
-        
-        // Extract unique categories
-        const allCategories = projectsData.reduce((cats, project) => {
-          if (project.category && !cats.includes(project.category)) {
-            cats.push(project.category);
-          }
-          return cats;
-        }, []);
-        
-        setCategories(allCategories);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-        setLoading(false);
+  // Extract unique categories
+  const categories = useMemo(() => {
+    return projects.reduce((cats, project) => {
+      if (project.category && !cats.includes(project.category)) {
+        cats.push(project.category);
       }
-    };
-    
-    fetchProjects();
-  }, []);
+      return cats;
+    }, []);
+  }, [projects]);
 
   // Filter projects based on category and search query
   const filteredProjects = projects.filter(project => {
