@@ -12,23 +12,21 @@ import ActionButton from "../../components/ui/ActionButton";
 import FloatingBadge from "../../components/ui/FloatingBadge";
 import GridOverlay from "../../components/ui/GridOverlay";
 import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
+import homeBg from "../../Assets/home-bg.png";
 
 function HeroTerminal() {
   return (
     <div className="relative group w-full max-w-md select-none">
-      {/* Decorative Outer Cyber Glow Outline */}
-      <div className="absolute -inset-0.5 bg-gradient-to-tr from-primary/30 to-accent/30 rounded-xl blur-lg opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
+      {/* Premium Apple-style drop glow under terminal */}
+      <div className="absolute -inset-4 bg-gradient-to-tr from-primary/10 to-accent/10 rounded-2xl blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none" />
       
       <TerminalPanel
-        title="aamir_lone_spec.json"
-        className="border border-border-base/40 bg-bg-base/95 shadow-2xl relative"
+        title="aamir_saleem_lone.ts"
+        className="relative"
       >
-        {/* Soft radial glow internally */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-primary/5 rounded-full blur-2xl pointer-events-none -z-10" />
-
         <div className="flex min-w-0 gap-4">
           {/* Editor line indices */}
-          <div className="hidden select-none text-right font-mono text-[10px] text-text-muted/30 sm:block">
+          <div className="hidden select-none text-right font-mono text-[10px] text-text-muted/20 sm:block">
             <div>01</div>
             <div>02</div>
             <div>03</div>
@@ -41,55 +39,20 @@ function HeroTerminal() {
             <div>10</div>
             <div>11</div>
             <div>12</div>
-            <div>13</div>
           </div>
           
-          <pre className="no-scrollbar min-w-0 overflow-x-auto font-mono text-[10px] leading-relaxed text-text-base sm:text-xs">
+          <pre className="no-scrollbar min-w-0 overflow-x-auto font-mono text-[10px] leading-relaxed text-text-muted/95 sm:text-xs">
             <code>
-              {"{\n"}
-              {"  "}
-              <span className="text-primary font-bold">"developer"</span>
-              {": {\n"}
-              {"    "}
-              <span className="text-secondary font-semibold">"name"</span>
-              {": "}
-              <span className="text-accent">"Aamir Saleem Lone"</span>
-              {",\n"}
-              {"    "}
-              <span className="text-secondary font-semibold">"role"</span>
-              {": "}
-              <span className="text-accent">"Full-Stack Engineer"</span>
-              {",\n"}
-              {"    "}
-              <span className="text-secondary font-semibold">"experience"</span>
-              {": "}
-              <span className="text-accent">"3+ Professional Years"</span>
-              {",\n"}
-              {"    "}
-              <span className="text-secondary font-semibold">"status"</span>
-              {": "}
-              <span className="text-green-400">"active_online"</span>
-              {"\n"}
-              {"  },\n"}
-              {"  "}
-              <span className="text-primary font-bold">"core_stack"</span>
-              {": [\n"}
-              {"    "}
-              <span className="text-accent">"React"</span>
-              {", "}
-              <span className="text-accent">"Node.js"</span>
-              {", "}
-              <span className="text-accent">"TypeScript"</span>
-              {",\n"}
-              {"    "}
-              <span className="text-accent">"Postgres"</span>
-              {", "}
-              <span className="text-accent">"MongoDB"</span>
-              {", "}
-              <span className="text-accent">"FeathersJS"</span>
-              {"\n"}
-              {"  ]\n"}
-              {"}"}
+              <span className="text-text-muted/30">// INITIALIZE CORE NODE</span>{"\n"}
+              <span className="text-accent font-semibold">import</span> {"{"} <span className="text-secondary font-bold">Engineer</span> {"}"} <span className="text-accent font-semibold">from</span> <span className="text-primary font-bold">"@core"</span>;{"\n\n"}
+              <span className="text-accent font-semibold">const</span> <span className="text-text-base">dev</span> = <span className="text-accent font-semibold">new</span> <span className="text-secondary font-bold">Engineer</span>({"{\n"}
+              {"  "}name: <span className="text-[#34d399]">"Aamir Saleem Lone"</span>,{"\n"}
+              {"  "}role: <span className="text-[#34d399]">"Full-Stack Engineer"</span>,{"\n"}
+              {"  "}experience: <span className="text-[#eab308]">"3+ Years"</span>,{"\n"}
+              {"  "}tech: [<span className="text-[#38bdf8]">"React"</span>, <span className="text-[#38bdf8]">"Node"</span>, <span className="text-[#38bdf8]">"TS"</span>, <span className="text-[#38bdf8]">"SQL"</span>]{"\n"}
+              {"}"});{"\n\n"}
+              <span className="text-text-muted/30">// RUN PORTFOLIO APPS</span>{"\n"}
+              <span className="text-text-base">dev</span>.<span className="text-[#38bdf8]">bootDeployment</span>();
             </code>
           </pre>
         </div>
@@ -234,71 +197,87 @@ function LandingPage() {
       >
         <GridOverlay />
 
-        {/* Soft Background Blurs */}
-        <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse-glow -z-10" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse-glow -z-10" />
+        {/* Artistic background image blending (home-bg.png) */}
+        <div className="absolute inset-0 select-none pointer-events-none overflow-hidden -z-10">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.06] lg:opacity-[0.08] mix-blend-luminosity scale-105"
+            style={{ 
+              backgroundImage: `url(${homeBg})`,
+              maskImage: 'radial-gradient(circle at 75% 50%, black 25%, transparent 75%)',
+              WebkitMaskImage: 'radial-gradient(circle at 75% 50%, black 25%, transparent 75%)'
+            }}
+          />
+          {/* Subtle grid lines overlaid on the image for technical depth */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.008)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.008)_1px,transparent_1px)] bg-[size:40px_40px]" />
+          
+          {/* Smooth vignette overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-bg-base via-transparent to-bg-base" />
+        </div>
+
+        {/* Soft Ambient Blurs */}
+        <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-primary/5 rounded-full blur-[140px] animate-pulse-glow -z-20 pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-accent/5 rounded-full blur-[140px] animate-pulse-glow -z-20 pointer-events-none" />
 
         <div className="grid w-full items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] xl:gap-20">
           {/* Hero Left Content */}
-          <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-5 text-center lg:items-start lg:text-left">
+          <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 text-center lg:items-start lg:text-left">
             <FloatingBadge
-              label="system_online: status_active"
+              label="system_online // core_active"
               color="accent"
             />
 
-            <motion.h1
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="text-4xl font-black leading-tight tracking-tight md:text-5xl lg:text-6xl"
-            >
-              Hi There!{" "}
-              <span className="inline-block animate-[wave-animation_2.1s_infinite]" aria-hidden="true">
-                👋🏻
-              </span>
-            </motion.h1>
+            <div className="flex flex-col gap-2">
+              <motion.h1
+                initial={{ y: 15, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6 }}
+                className="text-4xl font-light leading-tight tracking-tight text-white/90 md:text-5xl lg:text-6.5xl font-sans"
+              >
+                Hi There, <span className="font-extrabold bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">I'm</span>{" "}
+                <span className="inline-block animate-[wave-animation_2.1s_infinite]" aria-hidden="true">
+                  👋🏻
+                </span>
+              </motion.h1>
 
-            <motion.h2
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-2xl font-extrabold leading-tight md:text-3xl lg:text-4xl"
-            >
-              I'm{" "}
-              <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-mono">
+              <motion.h2
+                initial={{ y: 15, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent md:text-5xl lg:text-6xl font-sans"
+              >
                 {personalData.name}
-              </span>
-            </motion.h2>
+              </motion.h2>
+            </div>
 
             <motion.div
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 15, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex w-full justify-center lg:justify-start"
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="flex w-full justify-center lg:justify-start font-mono text-sm tracking-widest text-accent/80 uppercase"
             >
               <Type typewriterStrings={personalData.typewriterStrings} />
             </motion.div>
 
             <motion.p
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 15, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="max-w-2xl text-xs sm:text-sm leading-relaxed text-text-muted text-center lg:text-left font-sans"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="max-w-xl text-xs sm:text-sm leading-relaxed text-text-muted/90 text-center lg:text-left font-sans"
             >
               {displayTagline}
             </motion.p>
 
             <motion.div
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 15, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               className="flex w-full flex-col items-stretch gap-4 pt-3 sm:w-auto sm:flex-row sm:items-center sm:justify-start"
             >
-              <ActionButton href="#about" variant="secondary" className="w-full sm:w-auto">
+              <ActionButton href="#about" variant="secondary" className="w-full sm:w-auto glass-premium hover:bg-white/[0.04] transition-all">
                 Discover Journey
               </ActionButton>
 
-              <ActionButton href="#contact" variant="primary" className="w-full sm:w-auto">
+              <ActionButton href="#contact" variant="primary" className="w-full sm:w-auto bg-accent text-bg-base hover:bg-accent/80 shadow-[0_0_25px_rgba(12,251,255,0.25)] transition-all">
                 Get in Touch
               </ActionButton>
             </motion.div>
@@ -306,9 +285,9 @@ function LandingPage() {
 
           {/* Hero Right Content */}
           <motion.div
-            initial={{ scale: 0.95, opacity: 0 }}
+            initial={{ scale: 0.96, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.25 }}
             className="flex w-full justify-center lg:justify-end"
           >
             <HeroTerminal />
