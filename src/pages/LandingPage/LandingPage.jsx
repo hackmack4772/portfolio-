@@ -191,7 +191,7 @@ function LandingPage() {
       <SectionWrapper
         id="home"
         className="flex min-h-screen items-center pt-32 pb-16 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32"
-        containerClassName="flex items-center w-full"
+        containerClassName="flex items-center w-full min-h-[70vh]"
         spacing="none"
         showTicks={true}
       >
