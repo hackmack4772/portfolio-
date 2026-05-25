@@ -124,7 +124,7 @@ function About() {
             
             <div className="w-64 h-64 md:w-72 md:h-72 rounded-2xl overflow-hidden relative">
               <img
-                src={aboutData.photoURL || aboutData.image || avatarHacker}
+                src={avatarHacker}
                 alt="Aamir Saleem Lone Avatar"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out scale-100 group-hover:scale-105 select-none pointer-events-none"
               />
