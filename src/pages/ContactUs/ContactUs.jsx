@@ -6,7 +6,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { useLoading } from "../../Context/LoadingContext";
 import HelmetWrapper from "../../components/HelmetWrapper";
-import SectionWrapper from "../../components/ui/SectionWrapper";
+import SectionContainer from "../../components/ui/SectionContainer";
 import SectionTitle from "../../components/ui/SectionTitle";
 import GlowCard from "../../components/ui/GlowCard";
 import SocialDock from "../../components/ui/SocialDock";
@@ -234,15 +234,20 @@ function ContactUs({ hideHeader = false }) {
                   )}
 
                   {/* Input 1: Name */}
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-mono uppercase tracking-wider text-text-muted">Your Name</label>
-                    <div className={`relative rounded-xl border transition-all duration-300 ${
+                  <div className="flex flex-col gap-1.5 group/field">
+                    <div className="flex justify-between items-center px-1 font-mono text-[9px] uppercase tracking-wider text-text-muted select-none">
+                      <span>_user_identity</span>
+                      <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
+                    </div>
+                    <div className={`relative rounded-xl border bg-bg-sub/10 transition-all duration-300 ${
                       activeField === "user_name" 
-                        ? "border-accent shadow-[0_0_10px_rgba(12,251,255,0.15)]" 
+                        ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.15)]" 
                         : errors.user_name 
                         ? "border-red-500/50" 
-                        : "border-border-base/40"
+                        : "border-border-base/40 group-hover/field:border-primary/45"
                     }`}>
+                      {/* Monospace caret indicator */}
+                      <span className="absolute left-3.5 top-3 text-[10px] font-mono text-accent/60 select-none">$</span>
                       <input
                         type="text"
                         name="user_name"
@@ -251,26 +256,30 @@ function ContactUs({ hideHeader = false }) {
                         onChange={handleChange}
                         onFocus={() => handleFocus("user_name")}
                         onBlur={handleBlur}
-                        className="w-full px-4 py-3 bg-bg-sub/30 rounded-xl text-xs md:text-sm text-text-base placeholder-text-muted/40 focus:outline-none"
+                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none transition-all duration-300"
                       />
                     </div>
                     {errors.user_name && (
-                      <span className="text-[10px] font-mono text-red-500/90 flex items-center gap-1 mt-0.5">
+                      <span className="text-[9px] font-mono text-red-500/90 flex items-center gap-1 mt-0.5 px-1 animate-pulse">
                         <AlertCircle className="w-3 h-3" /> {errors.user_name}
                       </span>
                     )}
                   </div>
 
                   {/* Input 2: Email */}
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-mono uppercase tracking-wider text-text-muted">Your Email</label>
-                    <div className={`relative rounded-xl border transition-all duration-300 ${
+                  <div className="flex flex-col gap-1.5 group/field">
+                    <div className="flex justify-between items-center px-1 font-mono text-[9px] uppercase tracking-wider text-text-muted select-none">
+                      <span>_delivery_node</span>
+                      <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
+                    </div>
+                    <div className={`relative rounded-xl border bg-bg-sub/10 transition-all duration-300 ${
                       activeField === "user_email" 
-                        ? "border-accent shadow-[0_0_10px_rgba(12,251,255,0.15)]" 
+                        ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.15)]" 
                         : errors.user_email 
                         ? "border-red-500/50" 
-                        : "border-border-base/40"
+                        : "border-border-base/40 group-hover/field:border-primary/45"
                     }`}>
+                      <span className="absolute left-3.5 top-3 text-[10px] font-mono text-accent/60 select-none">$</span>
                       <input
                         type="email"
                         name="user_email"
@@ -279,67 +288,75 @@ function ContactUs({ hideHeader = false }) {
                         onChange={handleChange}
                         onFocus={() => handleFocus("user_email")}
                         onBlur={handleBlur}
-                        className="w-full px-4 py-3 bg-bg-sub/30 rounded-xl text-xs md:text-sm text-text-base placeholder-text-muted/40 focus:outline-none"
+                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none transition-all duration-300"
                       />
                     </div>
                     {errors.user_email && (
-                      <span className="text-[10px] font-mono text-red-500/90 flex items-center gap-1 mt-0.5">
+                      <span className="text-[9px] font-mono text-red-500/90 flex items-center gap-1 mt-0.5 px-1 animate-pulse">
                         <AlertCircle className="w-3 h-3" /> {errors.user_email}
                       </span>
                     )}
                   </div>
 
                   {/* Input 3: Subject */}
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-mono uppercase tracking-wider text-text-muted">Subject</label>
-                    <div className={`relative rounded-xl border transition-all duration-300 ${
+                  <div className="flex flex-col gap-1.5 group/field">
+                    <div className="flex justify-between items-center px-1 font-mono text-[9px] uppercase tracking-wider text-text-muted select-none">
+                      <span>_transmission_header</span>
+                      <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
+                    </div>
+                    <div className={`relative rounded-xl border bg-bg-sub/10 transition-all duration-300 ${
                       activeField === "subject" 
-                        ? "border-accent shadow-[0_0_10px_rgba(12,251,255,0.15)]" 
+                        ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.15)]" 
                         : errors.subject 
                         ? "border-red-500/50" 
-                        : "border-border-base/40"
+                        : "border-border-base/40 group-hover/field:border-primary/45"
                     }`}>
+                      <span className="absolute left-3.5 top-3 text-[10px] font-mono text-accent/60 select-none">$</span>
                       <input
                         type="text"
                         name="subject"
-                        placeholder="Subject of message"
+                        placeholder="e.g. Project Collaboration Proposal"
                         value={formData.subject}
                         onChange={handleChange}
                         onFocus={() => handleFocus("subject")}
                         onBlur={handleBlur}
-                        className="w-full px-4 py-3 bg-bg-sub/30 rounded-xl text-xs md:text-sm text-text-base placeholder-text-muted/40 focus:outline-none"
+                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none transition-all duration-300"
                       />
                     </div>
                     {errors.subject && (
-                      <span className="text-[10px] font-mono text-red-500/90 flex items-center gap-1 mt-0.5">
+                      <span className="text-[9px] font-mono text-red-500/90 flex items-center gap-1 mt-0.5 px-1 animate-pulse">
                         <AlertCircle className="w-3 h-3" /> {errors.subject}
                       </span>
                     )}
                   </div>
 
                   {/* Input 4: Message */}
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-mono uppercase tracking-wider text-text-muted">Message</label>
-                    <div className={`relative rounded-xl border transition-all duration-300 ${
+                  <div className="flex flex-col gap-1.5 group/field">
+                    <div className="flex justify-between items-center px-1 font-mono text-[9px] uppercase tracking-wider text-text-muted select-none">
+                      <span>_payload_body</span>
+                      <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
+                    </div>
+                    <div className={`relative rounded-xl border bg-bg-sub/10 transition-all duration-300 ${
                       activeField === "message" 
-                        ? "border-accent shadow-[0_0_10px_rgba(12,251,255,0.15)]" 
+                        ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.15)]" 
                         : errors.message 
                         ? "border-red-500/50" 
-                        : "border-border-base/40"
+                        : "border-border-base/40 group-hover/field:border-primary/45"
                     }`}>
+                      <span className="absolute left-3.5 top-3 text-[10px] font-mono text-accent/60 select-none">$</span>
                       <textarea
                         name="message"
                         rows={5}
-                        placeholder="Write your details here..."
+                        placeholder="Type your message body details here..."
                         value={formData.message}
                         onChange={handleChange}
                         onFocus={() => handleFocus("message")}
                         onBlur={handleBlur}
-                        className="w-full px-4 py-3 bg-bg-sub/30 rounded-xl text-xs md:text-sm text-text-base placeholder-text-muted/40 focus:outline-none resize-none"
+                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none resize-none transition-all duration-300"
                       />
                     </div>
                     {errors.message && (
-                      <span className="text-[10px] font-mono text-red-500/90 flex items-center gap-1 mt-0.5">
+                      <span className="text-[9px] font-mono text-red-500/90 flex items-center gap-1 mt-0.5 px-1 animate-pulse">
                         <AlertCircle className="w-3 h-3" /> {errors.message}
                       </span>
                     )}
@@ -370,7 +387,7 @@ function ContactUs({ hideHeader = false }) {
   }
 
   return (
-    <SectionWrapper id="contact-section" className="pt-36 pb-16 md:pt-40 md:pb-24 lg:pt-44" spacing="none">
+    <SectionContainer id="contact-section" className="pt-36 pb-16 md:pt-40 md:pb-24 lg:pt-44" spacing="none" showTicks={true}>
       <HelmetWrapper>
         <title>Contact Me | Portfolio</title>
         <meta name="description" content="Get in touch with Aamir Saleem Lone for collaborations, jobs, or feedback." />
@@ -387,7 +404,7 @@ function ContactUs({ hideHeader = false }) {
       />
 
       {formContent}
-    </SectionWrapper>
+    </SectionContainer>
   );
 }
 

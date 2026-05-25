@@ -6,7 +6,7 @@ import ContactUs from "../ContactUs/ContactUs";
 import { db } from "../../config/firebase";
 import { useLoading } from "../../Context/LoadingContext";
 import Type from "../../components/Type";
-import SectionWrapper from "../../components/ui/SectionWrapper";
+import SectionContainer from "../../components/ui/SectionContainer";
 import TerminalPanel from "../../components/ui/TerminalPanel";
 import ActionButton from "../../components/ui/ActionButton";
 import FloatingBadge from "../../components/ui/FloatingBadge";
@@ -15,76 +15,86 @@ import GridOverlay from "../../components/ui/GridOverlay";
 
 function HeroTerminal() {
   return (
-    <TerminalPanel
-      title="aamir_lone_spec.json"
-      className="max-w-md"
-    >
-      <div className="flex min-w-0 gap-4">
-        <div className="hidden select-none text-right font-mono text-[10px] text-text-muted/30 sm:block">
-          <div>01</div>
-          <div>02</div>
-          <div>03</div>
-          <div>04</div>
-          <div>05</div>
-          <div>06</div>
-          <div>07</div>
-          <div>08</div>
-          <div>09</div>
-          <div>10</div>
-          <div>11</div>
-          <div>12</div>
-          <div>13</div>
+    <div className="relative group w-full max-w-md select-none">
+      {/* Decorative Outer Cyber Glow Outline */}
+      <div className="absolute -inset-0.5 bg-gradient-to-tr from-primary/30 to-accent/30 rounded-xl blur-lg opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
+      
+      <TerminalPanel
+        title="aamir_lone_spec.json"
+        className="border border-border-base/40 bg-bg-base/95 shadow-2xl relative"
+      >
+        {/* Soft radial glow internally */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-primary/5 rounded-full blur-2xl pointer-events-none -z-10" />
+
+        <div className="flex min-w-0 gap-4">
+          {/* Editor line indices */}
+          <div className="hidden select-none text-right font-mono text-[10px] text-text-muted/30 sm:block">
+            <div>01</div>
+            <div>02</div>
+            <div>03</div>
+            <div>04</div>
+            <div>05</div>
+            <div>06</div>
+            <div>07</div>
+            <div>08</div>
+            <div>09</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+          </div>
+          
+          <pre className="no-scrollbar min-w-0 overflow-x-auto font-mono text-[10px] leading-relaxed text-text-base sm:text-xs">
+            <code>
+              {"{\n"}
+              {"  "}
+              <span className="text-primary font-bold">"developer"</span>
+              {": {\n"}
+              {"    "}
+              <span className="text-secondary font-semibold">"name"</span>
+              {": "}
+              <span className="text-accent">"Aamir Saleem Lone"</span>
+              {",\n"}
+              {"    "}
+              <span className="text-secondary font-semibold">"role"</span>
+              {": "}
+              <span className="text-accent">"Full-Stack Engineer"</span>
+              {",\n"}
+              {"    "}
+              <span className="text-secondary font-semibold">"experience"</span>
+              {": "}
+              <span className="text-accent">"3+ Professional Years"</span>
+              {",\n"}
+              {"    "}
+              <span className="text-secondary font-semibold">"status"</span>
+              {": "}
+              <span className="text-green-400">"active_online"</span>
+              {"\n"}
+              {"  },\n"}
+              {"  "}
+              <span className="text-primary font-bold">"core_stack"</span>
+              {": [\n"}
+              {"    "}
+              <span className="text-accent">"React"</span>
+              {", "}
+              <span className="text-accent">"Node.js"</span>
+              {", "}
+              <span className="text-accent">"TypeScript"</span>
+              {",\n"}
+              {"    "}
+              <span className="text-accent">"Postgres"</span>
+              {", "}
+              <span className="text-accent">"MongoDB"</span>
+              {", "}
+              <span className="text-accent">"FeathersJS"</span>
+              {"\n"}
+              {"  ]\n"}
+              {"}"}
+            </code>
+          </pre>
         </div>
-        <pre className="no-scrollbar min-w-0 overflow-x-auto font-mono text-[10px] leading-relaxed text-text-base sm:text-xs">
-          <code>
-            {"{\n"}
-            {"  "}
-            <span className="text-primary">"developer"</span>
-            {": {\n"}
-            {"    "}
-            <span className="text-secondary">"name"</span>
-            {": "}
-            <span className="text-accent">"Aamir Saleem Lone"</span>
-            {",\n"}
-            {"    "}
-            <span className="text-secondary">"role"</span>
-            {": "}
-            <span className="text-accent">"Full-Stack Engineer"</span>
-            {",\n"}
-            {"    "}
-            <span className="text-secondary">"experience"</span>
-            {": "}
-            <span className="text-accent">"3+ Professional Years"</span>
-            {",\n"}
-            {"    "}
-            <span className="text-secondary">"status"</span>
-            {": "}
-            <span className="text-green-400">"active_online"</span>
-            {"\n"}
-            {"  },\n"}
-            {"  "}
-            <span className="text-primary">"core_stack"</span>
-            {": [\n"}
-            {"    "}
-            <span className="text-accent">"React"</span>
-            {", "}
-            <span className="text-accent">"Node.js"</span>
-            {", "}
-            <span className="text-accent">"TypeScript"</span>
-            {",\n"}
-            {"    "}
-            <span className="text-accent">"Postgres"</span>
-            {", "}
-            <span className="text-accent">"MongoDB"</span>
-            {", "}
-            <span className="text-accent">"FeathersJS"</span>
-            {"\n"}
-            {"  ]\n"}
-            {"}"}
-          </code>
-        </pre>
-      </div>
-    </TerminalPanel>
+      </TerminalPanel>
+    </div>
   );
 }
 
@@ -165,10 +175,10 @@ function LandingPage() {
   return (
     <div className="w-full bg-bg-base text-text-base">
       {/* Hero Section */}
-      <SectionWrapper
+      <SectionContainer
         id="home"
-        className="flex min-h-screen items-center py-24 md:py-28 lg:py-32"
-        containerClassName="flex items-center"
+        className="flex min-h-screen items-center pt-32 pb-16 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32"
+        containerClassName="flex items-center w-full"
         spacing="none"
         showTicks={true}
       >
@@ -178,9 +188,9 @@ function LandingPage() {
         <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse-glow -z-10" />
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse-glow -z-10" />
 
-        <div className="grid w-full items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,28rem)] lg:gap-14">
+        <div className="grid w-full items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] xl:gap-20">
           {/* Hero Left Content */}
-          <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-5 text-center lg:max-w-2xl">
+          <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-5 text-center lg:items-start lg:text-left">
             <FloatingBadge
               label="system_online: status_active"
               color="accent"
@@ -190,7 +200,7 @@ function LandingPage() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="text-4xl font-black leading-tight tracking-tight md:text-6xl"
+              className="text-4xl font-black leading-tight tracking-tight md:text-5xl lg:text-6xl"
             >
               Hi There!{" "}
               <span className="inline-block animate-[wave-animation_2.1s_infinite]" aria-hidden="true">
@@ -202,7 +212,7 @@ function LandingPage() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-2xl font-extrabold leading-tight md:text-4xl"
+              className="text-2xl font-extrabold leading-tight md:text-3xl lg:text-4xl"
             >
               I'm{" "}
               <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-mono">
@@ -214,7 +224,7 @@ function LandingPage() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex w-full justify-center"
+              className="flex w-full justify-center lg:justify-start"
             >
               <Type typewriterStrings={personalData.typewriterStrings} />
             </motion.div>
@@ -223,7 +233,7 @@ function LandingPage() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="max-w-2xl text-sm leading-relaxed text-text-muted"
+              className="max-w-2xl text-xs sm:text-sm leading-relaxed text-text-muted text-center lg:text-left font-sans"
             >
               {displayTagline}
             </motion.p>
@@ -232,7 +242,7 @@ function LandingPage() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex w-full flex-col items-stretch gap-3 pt-2 sm:w-auto sm:flex-row sm:items-center sm:justify-center"
+              className="flex w-full flex-col items-stretch gap-4 pt-3 sm:w-auto sm:flex-row sm:items-center sm:justify-start"
             >
               <ActionButton href="#about" variant="secondary" className="w-full sm:w-auto">
                 Discover Journey
@@ -254,29 +264,28 @@ function LandingPage() {
             <HeroTerminal />
           </motion.div>
         </div>
-      </SectionWrapper>
+      </SectionContainer>
 
       {/* Journey Section */}
-      <SectionWrapper id="about" variant="sub">
+      <SectionContainer id="about" variant="sub" showTicks={true}>
         <MyJourney />
-      </SectionWrapper>
+      </SectionContainer>
 
       {/* Social & Contact Section */}
-      <SectionWrapper id="contact">
-        <div className="mx-auto mb-12 flex w-full max-w-4xl flex-col items-center gap-4 text-center md:mb-16">
-          <h2 className="text-2xl font-black tracking-tight text-text-base md:text-4xl">
-            FIND ME ON
+      <SectionContainer id="contact" showTicks={true}>
+        <div className="mx-auto mb-10 flex w-full max-w-4xl flex-col items-center gap-3 text-center md:mb-14">
+          <h2 className="text-xl font-bold tracking-widest text-text-base md:text-3xl font-mono uppercase">
+            FIND_ME_ON
           </h2>
-          <p className="text-xs text-text-muted md:text-sm">
-            I'd love to{" "}
-            <span className="text-accent font-semibold">connect</span> with you!
+          <p className="text-[10px] md:text-xs text-text-muted uppercase tracking-wider font-mono">
+            I'd love to <span className="text-accent font-semibold">connect</span> with you!
           </p>
 
           <SocialDock socialLinks={personalData.socialLinks} />
         </div>
 
         <ContactUs hideHeader={true} />
-      </SectionWrapper>
+      </SectionContainer>
     </div>
   );
 }

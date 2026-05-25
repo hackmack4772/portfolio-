@@ -76,7 +76,7 @@ function MyJourney() {
   };
 
   return (
-    <div className="grid w-full items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:gap-14">
+    <div className="grid w-full items-center gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16 xl:gap-24">
       
       {/* Journey Text Content */}
       <motion.div 
@@ -87,49 +87,61 @@ function MyJourney() {
         className="flex min-w-0 flex-col"
       >
         <SectionTitle 
-          subtitle="Biography" 
+          subtitle="BIOGRAPHY" 
           title="Let me" 
           highlight="Introduce Myself" 
           description="A summary of my engineering background and technical expertise"
           align="left"
-          className="mb-6 md:mb-8"
+          className="mb-6 md:mb-8 font-mono"
         />
 
         <div 
-          className="my-journey-introduction flex max-w-4xl flex-col gap-4 text-left font-sans text-xs leading-relaxed text-text-muted md:text-sm"
+          className="my-journey-introduction flex max-w-4xl flex-col gap-5 text-left font-sans text-xs leading-relaxed text-text-muted md:text-sm"
           dangerouslySetInnerHTML={{ __html: cleanIntroduction(home2Data.introduction) }} 
         />
       </motion.div>
 
-      {/* Journey Avatar 3D Tilt Image */}
+      {/* Journey Avatar Cyber HUD Widget */}
       <motion.div 
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.1 }}
+        transition={{ duration: 0.6, delay: 0.15 }}
         className="flex w-full items-center justify-center lg:justify-end"
       >
         <TiltContainer>
           <div 
             style={{ transform: "translateZ(30px)" }}
-            className="group relative h-64 w-64 overflow-hidden rounded-2xl bg-gradient-to-tr from-primary to-accent p-[1.5px] shadow-2xl md:h-72 md:w-72"
+            className="group relative h-64 w-64 rounded-2xl bg-gradient-to-tr from-primary to-accent p-[2px] shadow-2xl md:h-72 md:w-72"
           >
-            {/* Inner Image Frame */}
+            {/* HUD Corner Ticks */}
+            <div className="absolute top-2 left-2 text-[8px] font-mono text-accent/60 group-hover:text-accent pointer-events-none select-none z-20 transition-colors">
+              [ 0x01_AVATAR ]
+            </div>
+            <div className="absolute bottom-2 right-2 text-[8px] font-mono text-primary/60 group-hover:text-accent pointer-events-none select-none z-20 transition-colors">
+              // RECON: OK
+            </div>
+
+            {/* Inner Image Frame with glass overlay */}
             <div className="absolute inset-0 bg-bg-base rounded-2xl overflow-hidden flex items-center justify-center">
               {home2Data.imageUrl ? (
                 <img
                   src={home2Data.imageUrl}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   alt="Aamir Saleem Lone Avatar"
                 />
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-card-base to-bg-sub flex items-center justify-center">
-                  <span className="text-xs font-mono tracking-widest text-text-muted">AVATAR IMAGE</span>
+                  <span className="text-[10px] font-mono tracking-widest text-text-muted">IMAGE_NULL</span>
                 </div>
               )}
+              
+              {/* Sci-fi Overlay Scanline Effect */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent pointer-events-none group-hover:opacity-40 transition-opacity" />
             </div>
             
-            {/* Decorative border highlight */}
+            {/* Outer Cybernetic Ring Glow */}
+            <div className="absolute -inset-1 border border-accent/20 rounded-3xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
             <div className="absolute inset-0 border border-border-base/50 rounded-2xl pointer-events-none group-hover:border-accent/40 transition-colors duration-500" />
           </div>
         </TiltContainer>
