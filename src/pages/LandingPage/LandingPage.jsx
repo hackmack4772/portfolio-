@@ -6,12 +6,12 @@ import ContactUs from "../ContactUs/ContactUs";
 import { db } from "../../config/firebase";
 import { useLoading } from "../../Context/LoadingContext";
 import Type from "../../components/Type";
-import SectionContainer from "../../components/ui/SectionContainer";
+import SectionWrapper from "../../components/ui/SectionWrapper";
 import TerminalPanel from "../../components/ui/TerminalPanel";
 import ActionButton from "../../components/ui/ActionButton";
 import FloatingBadge from "../../components/ui/FloatingBadge";
-import SocialDock from "../../components/ui/SocialDock";
 import GridOverlay from "../../components/ui/GridOverlay";
+import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
 
 function HeroTerminal() {
   return (
@@ -99,6 +99,7 @@ function HeroTerminal() {
 }
 
 function LandingPage() {
+  const [hoveredNode, setHoveredNode] = useState(null);
   const [personalData, setPersonalData] = useState({
     name: "Aamir Saleem Lone",
     description: "",
@@ -172,10 +173,59 @@ function LandingPage() {
       ? personalData.tagline
       : "Full-Stack Developer designing high-performance, responsive systems with beautiful, modern layouts.";
 
+  const socialNodes = [
+    { icon: Github, href: personalData.socialLinks?.github || "https://github.com/hackmack4772", label: "GitHub", port: "443" },
+    { icon: Twitter, href: personalData.socialLinks?.twitter || "https://twitter.com/hackmack4772", label: "Twitter", port: "80" },
+    { icon: Linkedin, href: personalData.socialLinks?.linkedin || "https://www.linkedin.com/in/aamir-saleem-lone/", label: "LinkedIn", port: "8080" },
+    { icon: Instagram, href: personalData.socialLinks?.instagram || "https://www.instagram.com/aamir-saleem-lone", label: "Instagram", port: "8443" },
+  ].filter(link => link.href);
+
+  const getDiagnosticText = () => {
+    switch (hoveredNode) {
+      case "GitHub":
+        return {
+          cmd: "curl -I https://github.com/hackmack4772",
+          line1: "HTTP/2 200 OK",
+          line2: "server: GitHub.com | connection: keep-alive",
+          status: "ESTABLISHED // SECURE_PORT_443"
+        };
+      case "Twitter":
+        return {
+          cmd: "ping -c 1 twitter.com",
+          line1: "64 bytes from 104.244.42.1: icmp_seq=1 ttl=56 time=14.2 ms",
+          line2: "--- twitter.com ping statistics --- 1 packets transmitted, 1 received",
+          status: "ROUTE_ACTIVE // SECURE_PORT_80"
+        };
+      case "LinkedIn":
+        return {
+          cmd: "ssh -T git@linkedin.com",
+          line1: "Welcome aamir-saleem-lone! Shell access is restricted.",
+          line2: "Authorized keys verified. Protocol version 2.0 active.",
+          status: "HANDSHAKE_GRANTED // PORT_8080"
+        };
+      case "Instagram":
+        return {
+          cmd: "traceroute instagram.com",
+          line1: "1  gateway (192.168.1.1)  0.315 ms",
+          line2: "2  edge-star-shv (157.240.23.174)  22.450 ms",
+          status: "LINK_ESTABLISHED // PORT_8443"
+        };
+      default:
+        return {
+          cmd: "ssh-connect -t social_ports --user=guest",
+          line1: "Initializing encrypted connection to external domains...",
+          line2: "✓ Handshake successful: Node coordinates resolved.",
+          status: "SYSTEM_READY // WAITING_FOR_PORTAL_SELECTION"
+        };
+    }
+  };
+
+  const diagnostic = getDiagnosticText();
+
   return (
     <div className="w-full bg-bg-base text-text-base">
       {/* Hero Section */}
-      <SectionContainer
+      <SectionWrapper
         id="home"
         className="flex min-h-screen items-center pt-32 pb-16 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32"
         containerClassName="flex items-center w-full"
@@ -264,28 +314,110 @@ function LandingPage() {
             <HeroTerminal />
           </motion.div>
         </div>
-      </SectionContainer>
+      </SectionWrapper>
 
       {/* Journey Section */}
-      <SectionContainer id="about" variant="sub" showTicks={true}>
+      <SectionWrapper id="about" variant="sub" showTicks={true}>
         <MyJourney />
-      </SectionContainer>
+      </SectionWrapper>
 
       {/* Social & Contact Section */}
-      <SectionContainer id="contact" showTicks={true}>
-        <div className="mx-auto mb-10 flex w-full max-w-4xl flex-col items-center gap-3 text-center md:mb-14">
-          <h2 className="text-xl font-bold tracking-widest text-text-base md:text-3xl font-mono uppercase">
-            FIND_ME_ON
-          </h2>
-          <p className="text-[10px] md:text-xs text-text-muted uppercase tracking-wider font-mono">
-            I'd love to <span className="text-accent font-semibold">connect</span> with you!
-          </p>
+      <SectionWrapper id="contact" showTicks={true}>
+        <div className="mx-auto mb-16 flex w-full max-w-2xl flex-col items-center">
+          {/* Cyberpunk Outer Card */}
+          <div className="relative group w-full">
+            {/* Outer Glow */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-2xl blur-md opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
+            
+            <div className="relative rounded-2xl border border-border-base/40 bg-bg-base/90 shadow-2xl overflow-hidden flex flex-col font-mono text-xs text-text-muted">
+              {/* Terminal Title Bar */}
+              <div className="flex items-center justify-between px-4 py-3 bg-bg-sub/60 border-b border-border-base/30 select-none">
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ef4444] opacity-80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#f59e0b] opacity-80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#10b981] opacity-80" />
+                </div>
+                <div className="text-[10px] tracking-wider uppercase text-text-muted flex items-center gap-1.5">
+                  <span className="text-accent">&gt;</span> SOCIAL_CONNECTIVITY.sh
+                </div>
+                <div className="w-10 flex justify-end">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                </div>
+              </div>
+              
+              {/* Terminal Content */}
+              <div className="p-6 flex flex-col gap-5 text-left">
+                {/* Diagnostic Terminal View */}
+                <div className="bg-bg-base/70 rounded-lg border border-border-base/20 p-4 font-mono text-[11px] leading-relaxed text-text-muted/90 min-h-[90px] flex flex-col justify-between">
+                  <div className="flex flex-col gap-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-secondary font-bold">$</span>
+                      <span className="text-text-base">{diagnostic.cmd}</span>
+                    </div>
+                    <div className="text-text-muted/60 pl-3">{diagnostic.line1}</div>
+                    <div className="text-text-muted/60 pl-3">{diagnostic.line2}</div>
+                  </div>
+                  <div className="flex items-center justify-between border-t border-border-base/10 pt-2 mt-2">
+                    <span className="text-[10px] text-text-muted/40 uppercase">STATUS_FEED</span>
+                    <span className="text-[10px] font-bold text-accent tracking-widest">{diagnostic.status}</span>
+                  </div>
+                </div>
 
-          <SocialDock socialLinks={personalData.socialLinks} />
+                <div className="text-center py-1">
+                  <h2 className="text-lg md:text-xl font-bold tracking-[0.2em] text-text-base uppercase font-mono">
+                    FIND_ME_ON
+                  </h2>
+                  <p className="text-[10px] text-text-muted uppercase tracking-wider font-mono mt-1">
+                    I'd love to <span className="text-accent font-semibold">connect</span> with you!
+                  </p>
+                </div>
+
+                {/* Highly Interactive Social Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
+                  {socialNodes.map((link, idx) => {
+                    const Icon = link.icon;
+                    return (
+                      <motion.a
+                        key={idx}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onMouseEnter={() => setHoveredNode(link.label)}
+                        onMouseLeave={() => setHoveredNode(null)}
+                        whileHover={{ scale: 1.02, y: -2 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="relative group/btn flex items-center gap-3 px-4 py-3 rounded-xl border border-border-base/30 bg-bg-sub/20 hover:bg-bg-sub/55 hover:border-accent/40 transition-all duration-300 select-none cursor-pointer"
+                        aria-label={link.label}
+                      >
+                        {/* Interactive inner shadow */}
+                        <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover/btn:opacity-100 rounded-xl blur transition-opacity duration-300" />
+                        
+                        <div className="p-1.5 rounded-lg bg-bg-base/60 border border-border-base/20 group-hover/btn:border-accent/40 group-hover/btn:bg-accent/10 transition-all duration-300">
+                          <Icon className="w-4 h-4 text-text-muted group-hover/btn:text-accent transition-colors duration-300" />
+                        </div>
+                        
+                        <div className="flex flex-col text-left min-w-0">
+                          <span className="text-[10px] font-bold text-text-base group-hover/btn:text-accent tracking-wider uppercase transition-colors duration-300 truncate">
+                            {link.label}
+                          </span>
+                          <span className="text-[8px] font-mono text-text-muted/40 group-hover/btn:text-accent/50 transition-colors duration-300">
+                            PORT // {link.port}
+                          </span>
+                        </div>
+
+                        {/* Hover bar indicator */}
+                        <div className="absolute bottom-0 left-4 right-4 h-[2px] bg-accent scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-300 origin-center shadow-[0_0_8px_rgba(12,251,255,0.8)]" />
+                      </motion.a>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <ContactUs hideHeader={true} />
-      </SectionContainer>
+      </SectionWrapper>
     </div>
   );
 }

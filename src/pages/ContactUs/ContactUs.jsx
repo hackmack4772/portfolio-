@@ -6,7 +6,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { useLoading } from "../../Context/LoadingContext";
 import HelmetWrapper from "../../components/HelmetWrapper";
-import SectionContainer from "../../components/ui/SectionContainer";
+import SectionWrapper from "../../components/ui/SectionWrapper";
 import SectionTitle from "../../components/ui/SectionTitle";
 import GlowCard from "../../components/ui/GlowCard";
 import SocialDock from "../../components/ui/SocialDock";
@@ -186,7 +186,7 @@ function ContactUs({ hideHeader = false }) {
             className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch"
           >
             {/* Left Column: Contact Cards info */}
-            <div className="md:col-span-5 flex flex-col gap-6 h-full justify-between">
+            <div className="md:col-span-5 flex flex-col gap-6 h-full justify-start">
               <div className="flex flex-col gap-5">
                 {contactInfo.map((info, idx) => {
                   const InfoIcon = info.icon;
@@ -210,12 +210,14 @@ function ContactUs({ hideHeader = false }) {
               </div>
 
               {/* Social Connections */}
-              <GlowCard glowColor="primary" hoverGlow={false} className="p-5 flex flex-col gap-3">
-                <span className="text-[10px] font-mono text-text-muted uppercase tracking-widest text-center md:text-left flex items-center gap-1 justify-center md:justify-start">
-                  <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" /> Connect with me
-                </span>
-                <SocialDock socialLinks={contactData.socialLinks} className="justify-center md:justify-start" />
-              </GlowCard>
+              {!hideHeader && (
+                <GlowCard glowColor="primary" hoverGlow={false} className="p-5 flex flex-col gap-3">
+                  <span className="text-[10px] font-mono text-text-muted uppercase tracking-widest text-center md:text-left flex items-center gap-1 justify-center md:justify-start">
+                    <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" /> Connect with me
+                  </span>
+                  <SocialDock socialLinks={contactData.socialLinks} className="justify-center md:justify-start" />
+                </GlowCard>
+              )}
             </div>
 
             {/* Right Column: Custom Interactive Form */}
@@ -387,7 +389,7 @@ function ContactUs({ hideHeader = false }) {
   }
 
   return (
-    <SectionContainer id="contact-section" className="pt-36 pb-16 md:pt-40 md:pb-24 lg:pt-44" spacing="none" showTicks={true}>
+    <SectionWrapper id="contact-section" className="pt-36 pb-16 md:pt-40 md:pb-24 lg:pt-44" spacing="none" showTicks={true}>
       <HelmetWrapper>
         <title>Contact Me | Portfolio</title>
         <meta name="description" content="Get in touch with Aamir Saleem Lone for collaborations, jobs, or feedback." />
@@ -404,7 +406,7 @@ function ContactUs({ hideHeader = false }) {
       />
 
       {formContent}
-    </SectionContainer>
+    </SectionWrapper>
   );
 }
 
