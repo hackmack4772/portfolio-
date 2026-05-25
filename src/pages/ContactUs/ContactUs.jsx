@@ -241,12 +241,12 @@ function ContactUs({ hideHeader = false }) {
                       <span>_user_identity</span>
                       <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
                     </div>
-                    <div className={`relative rounded-xl border bg-bg-sub/10 transition-all duration-300 ${
+                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition-all duration-300 ${
                       activeField === "user_name" 
-                        ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.15)]" 
+                        ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.12)]" 
                         : errors.user_name 
-                        ? "border-red-500/50" 
-                        : "border-border-base/40 group-hover/field:border-primary/45"
+                        ? "border-red-500/40" 
+                        : "border-white/[0.07] group-hover/field:border-accent/40"
                     }`}>
                       {/* Monospace caret indicator */}
                       <span className="absolute left-3.5 top-3 text-[10px] font-mono text-accent/60 select-none">$</span>
@@ -274,12 +274,12 @@ function ContactUs({ hideHeader = false }) {
                       <span>_delivery_node</span>
                       <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
                     </div>
-                    <div className={`relative rounded-xl border bg-bg-sub/10 transition-all duration-300 ${
+                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition-all duration-300 ${
                       activeField === "user_email" 
-                        ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.15)]" 
+                        ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.12)]" 
                         : errors.user_email 
-                        ? "border-red-500/50" 
-                        : "border-border-base/40 group-hover/field:border-primary/45"
+                        ? "border-red-500/40" 
+                        : "border-white/[0.07] group-hover/field:border-accent/40"
                     }`}>
                       <span className="absolute left-3.5 top-3 text-[10px] font-mono text-accent/60 select-none">$</span>
                       <input
@@ -306,12 +306,12 @@ function ContactUs({ hideHeader = false }) {
                       <span>_transmission_header</span>
                       <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
                     </div>
-                    <div className={`relative rounded-xl border bg-bg-sub/10 transition-all duration-300 ${
+                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition-all duration-300 ${
                       activeField === "subject" 
-                        ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.15)]" 
+                        ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.12)]" 
                         : errors.subject 
-                        ? "border-red-500/50" 
-                        : "border-border-base/40 group-hover/field:border-primary/45"
+                        ? "border-red-500/40" 
+                        : "border-white/[0.07] group-hover/field:border-accent/40"
                     }`}>
                       <span className="absolute left-3.5 top-3 text-[10px] font-mono text-accent/60 select-none">$</span>
                       <input
@@ -338,12 +338,12 @@ function ContactUs({ hideHeader = false }) {
                       <span>_payload_body</span>
                       <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
                     </div>
-                    <div className={`relative rounded-xl border bg-bg-sub/10 transition-all duration-300 ${
+                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition-all duration-300 ${
                       activeField === "message" 
-                        ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.15)]" 
+                        ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.12)]" 
                         : errors.message 
-                        ? "border-red-500/50" 
-                        : "border-border-base/40 group-hover/field:border-primary/45"
+                        ? "border-red-500/40" 
+                        : "border-white/[0.07] group-hover/field:border-accent/40"
                     }`}>
                       <span className="absolute left-3.5 top-3 text-[10px] font-mono text-accent/60 select-none">$</span>
                       <textarea

@@ -20,7 +20,7 @@ export default function ActionButton({
   const Component = href ? "a" : "button";
 
   return (
-    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-flex w-full sm:w-auto">
+    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={`inline-flex ${className.includes("w-full") ? "w-full" : "w-full sm:w-auto"}`}>
       <Component 
         className={`${baseClasses} ${variants[variant]} ${className}`}
         href={href}

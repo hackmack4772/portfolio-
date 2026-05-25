@@ -200,11 +200,11 @@ function LandingPage() {
         {/* Artistic background image blending (home-bg.png) */}
         <div className="absolute inset-0 select-none pointer-events-none overflow-hidden -z-10">
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.06] lg:opacity-[0.08] mix-blend-luminosity scale-105"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.18] lg:opacity-[0.24] mix-blend-luminosity scale-105"
             style={{ 
               backgroundImage: `url(${homeBg})`,
-              maskImage: 'radial-gradient(circle at 75% 50%, black 25%, transparent 75%)',
-              WebkitMaskImage: 'radial-gradient(circle at 75% 50%, black 25%, transparent 75%)'
+              maskImage: 'radial-gradient(circle at 75% 50%, black 30%, transparent 70%)',
+              WebkitMaskImage: 'radial-gradient(circle at 75% 50%, black 30%, transparent 70%)'
             }}
           />
           {/* Subtle grid lines overlaid on the image for technical depth */}

@@ -10,10 +10,10 @@ export default function Header({ children, isScrolled }) {
       className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-4 transition-all duration-300 pointer-events-none"
     >
       <div
-        className={`mx-auto w-full max-w-7xl glass-navbar-premium rounded-2xl flex items-center justify-between px-5 md:px-8 pointer-events-auto transition-all duration-300 relative overflow-hidden ${
+        className={`mx-auto w-full max-w-7xl glass-navbar-premium rounded-2xl flex items-center justify-between px-6 md:px-10 pointer-events-auto transition-all duration-300 relative overflow-hidden ${
           isScrolled 
-            ? "py-2.5 bg-bg-base/90 shadow-2xl scale-[0.99] border-primary/30" 
-            : "py-4 bg-bg-base/75 shadow-lg border-border-base/40"
+            ? "py-4 bg-bg-base/90 shadow-2xl scale-[0.99] border-primary/30" 
+            : "py-6 bg-bg-base/75 shadow-lg border-border-base/40"
         }`}
       >
         {/* Futuristic background elements */}
