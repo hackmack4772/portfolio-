@@ -30,6 +30,19 @@
   --shadow-glow-primary: var(--glow-primary);
   --shadow-glow-secondary: var(--glow-secondary);
   --shadow-glow-accent: var(--glow-accent);
+
+  /* Spacing Tokens */
+  --spacing-tight: 0.5rem;
+  --spacing-base: 1rem;
+  --spacing-wide: 2rem;
+
+  /* Radius Tokens */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  /* Motion/Ease Tokens */
+  --transition-timing-function-smooth: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes cursor-blink {
@@ -331,3 +344,16 @@ body {
   background-color: rgba(0, 0, 0, 0.04) !important;
 }
 
+/* Depth Hierarchy Elevations */
+.elevate-l0 {
+  z-index: 0;
+}
+.elevate-l1 {
+  z-index: 10;
+}
+.elevate-l2 {
+  z-index: 20;
+}
+.elevate-l3 {
+  z-index: 30;
+}

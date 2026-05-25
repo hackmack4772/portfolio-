@@ -7,7 +7,8 @@ import {
   Eye, 
   Github, 
   Terminal,
-  FolderOpen
+  FolderOpen,
+  Layers
 } from "lucide-react";
 import { usePortfolio } from "../../Context/PortfolioDataContext";
 import HelmetWrapper from "../../components/HelmetWrapper";
@@ -17,12 +18,111 @@ import GlowCard from "../../components/ui/GlowCard";
 import TechPill from "../../components/ui/TechPill";
 import ActionButton from "../../components/ui/ActionButton";
 
+function getProjectBlueprint(title, technologies = [], category = "") {
+  const techs = technologies.map(t => t.toLowerCase());
+  
+  let architecture = "";
+  let schema = "";
+  let tradeoffs = [];
+  
+  if (techs.some(t => t.includes("webrtc") || t.includes("zoom") || t.includes("socket") || t.includes("streaming") || t.includes("video"))) {
+    architecture = `  ┌──────────────────────────────────────────────────────────┐
+  │                 SYSTEM DESIGN: Real-Time WebRTC          │
+  └──────────────────────────────────────────────────────────┘
+  [Client Peer A] ────(RTC Peer Connection)────> [Client Peer B]
+        │                                             ▲
+        └────(Signaling: WebSockets)──> [Node.js Signaling]
+                                               │
+                                         [Redis PubSub]`;
+    schema = `  // WebRTC Signal Message model
+  interface SignalPayload {
+    type: "offer" | "answer" | "candidate";
+    sdp?: string;
+    candidate?: RTCIceCandidate;
+    roomId: string;
+    timestamp: number;
+  }`;
+    tradeoffs = [
+      "P2P direct streams utilized for sub-100ms latency between active peers.",
+      "TURN relays enabled via Coturn for traversal of symmetric NAT firewalls.",
+      "Node.js signaling process clustered with Redis adapter for session sync."
+    ];
+  } else if (techs.some(t => t.includes("node") || t.includes("react") || t.includes("mongo") || t.includes("express") || t.includes("firebase"))) {
+    architecture = `  ┌──────────────────────────────────────────────────────────┐
+  │                   SYSTEM DESIGN: MERN Stack              │
+  └──────────────────────────────────────────────────────────┘
+  [React Client SPA] ────(REST API / HTTPS)────> [Express App Node]
+                                                      │
+                                               [Redis Caching]
+                                                      │
+                                            [MongoDB Replica Set]`;
+    schema = `  // MongoDB Mongoose Schema
+  const ItemSchema = new Schema({
+    title: { type: String, required: true, index: true },
+    description: { type: String },
+    owner: { type: Schema.Types.ObjectId, ref: 'User' },
+    status: { type: String, default: 'active' }
+  }, { timestamps: true });`;
+    tradeoffs = [
+      "Indexed query fields to maintain sub-5ms write/read database response.",
+      "Redis memory-cache layer configured for project metadata endpoints.",
+      "Stateless JWT authentication implemented for horizontal scale capacity."
+    ];
+  } else if (techs.some(t => t.includes("laravel") || t.includes("php") || t.includes("sql") || t.includes("mysql") || t.includes("postgres"))) {
+    architecture = `  ┌──────────────────────────────────────────────────────────┐
+  │               SYSTEM DESIGN: MVC Relational RDBMS         │
+  └──────────────────────────────────────────────────────────┘
+  [Client Agent] ────(REST API / HTTPS)────> [Laravel Service API]
+                                                      │
+                                             [Redis Queue Engine]
+                                                      │
+                                             [PostgreSQL Instance]`;
+    schema = `  -- SQL Schema definition
+  CREATE TABLE records (
+    id BIGSERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    status VARCHAR(50) DEFAULT 'draft',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_status (status)
+  );`;
+    tradeoffs = [
+      "Asynchronous tasks delegated to Redis queue worker for faster UI thread returns.",
+      "Database connections pooled to avoid max thread exhaustion under load spikes.",
+      "Strict normalization utilized with target indexing for reporting joins."
+    ];
+  } else {
+    architecture = `  ┌──────────────────────────────────────────────────────────┐
+  │                  SYSTEM DESIGN: Serverless               │
+  └──────────────────────────────────────────────────────────┘
+  [SPA Client] ────(SSL API Call)────> [Vercel Serverless Function]
+                                              │
+                                       [Edge Cache Core]
+                                              │
+                                    [Supabase Postgres DB]`;
+    schema = `  -- PostgreSQL Relational Model
+  CREATE TABLE nodes (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    label TEXT UNIQUE NOT NULL,
+    config JSONB
+  );`;
+    tradeoffs = [
+      "Vercel Edge functions used to host API routes for global low-latency runs.",
+      "JSONB payload columns utilized to accommodate highly flexible config inputs.",
+      "Optimistic frontend rendering used to mask remote database write latencies."
+    ];
+  }
+  
+  return { architecture, schema, tradeoffs };
+}
+
 function Projects() {
   const { projects: dbProjects, loading } = usePortfolio();
   const projects = dbProjects || [];
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("date");
+  const [expandedProject, setExpandedProject] = useState(null);
+  const [blueprintTab, setBlueprintTab] = useState("architecture");
 
   // Extract unique categories
   const categories = useMemo(() => {
@@ -212,6 +312,57 @@ function Projects() {
                       </div>
                     </div>
 
+                    {/* Expandable Blueprint Console */}
+                    <AnimatePresence>
+                      {expandedProject === project.id && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                          className="border-t border-border-base/30 bg-bg-sub/20 font-mono text-[9px] text-text-muted overflow-hidden flex flex-col w-full"
+                        >
+                          {/* Inner Tabs header */}
+                          <div className="flex border-b border-border-base/20 bg-bg-base/40 select-none text-[8px]">
+                            {['architecture', 'schema', 'tradeoffs'].map((tab) => (
+                              <button
+                                key={tab}
+                                onClick={() => setBlueprintTab(tab)}
+                                className={`flex-1 py-2 text-center uppercase tracking-wider font-bold border-r last:border-r-0 border-border-base/20 cursor-pointer transition-colors ${
+                                  blueprintTab === tab 
+                                    ? "bg-bg-sub/50 text-accent font-black" 
+                                    : "hover:bg-bg-sub/10 text-text-muted/65"
+                                }`}
+                              >
+                                {tab}
+                              </button>
+                            ))}
+                          </div>
+
+                          {/* Inner Tab Contents */}
+                          <div className="p-4 text-left overflow-x-auto no-scrollbar max-h-48">
+                            {blueprintTab === 'architecture' && (
+                              <pre className="text-accent leading-tight whitespace-pre font-mono text-[9px]">
+                                {getProjectBlueprint(project.title, project.technologies, project.category).architecture}
+                              </pre>
+                            )}
+                            {blueprintTab === 'schema' && (
+                              <pre className="text-secondary leading-tight whitespace-pre font-mono text-[9px]">
+                                {getProjectBlueprint(project.title, project.technologies, project.category).schema}
+                              </pre>
+                            )}
+                            {blueprintTab === 'tradeoffs' && (
+                              <ul className="space-y-1.5 list-disc pl-3 leading-relaxed text-text-muted/90 text-[10px] font-sans">
+                                {getProjectBlueprint(project.title, project.technologies, project.category).tradeoffs.map((item, idx) => (
+                                  <li key={idx}>{item}</li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
                     {/* Action buttons */}
                     <div className="p-5 pt-0 flex items-center gap-3">
                       {project.demoUrl && (
@@ -237,6 +388,18 @@ function Projects() {
                           <span>Code</span>
                         </a>
                       )}
+
+                      <button
+                        onClick={() => setExpandedProject(expandedProject === project.id ? null : project.id)}
+                        className={`flex items-center justify-center gap-1.5 flex-grow px-3 py-2 rounded-full text-[10px] font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                          expandedProject === project.id 
+                            ? "bg-primary text-text-base border border-primary hover:bg-primary/80" 
+                            : "text-text-muted glass-premium border border-white/[0.08] hover:border-accent/50 hover:bg-accent/10"
+                        }`}
+                      >
+                        <Layers className="w-3.5 h-3.5" />
+                        <span>System</span>
+                      </button>
                     </div>
                   </GlowCard>
                 );
