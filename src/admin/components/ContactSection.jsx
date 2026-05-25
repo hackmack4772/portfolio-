@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
 import { 
   Mail, 
   Phone, 
@@ -85,7 +85,7 @@ const ContactSection = () => {
 
     try {
       const docRef = doc(db, "content", "contact");
-      await updateDoc(docRef, contactData);
+      await setDoc(docRef, contactData, { merge: true });
       setMessage({ text: 'Contact & social details synced successfully!', type: 'success' });
     } catch (error) {
       console.error("Error saving contact data:", error);

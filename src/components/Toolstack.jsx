@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { getSkillIcon, getSkillGlowClass } from "../utils/iconResolver";
+import { Terminal } from "lucide-react";
 
 function Toolstack() {
   const [toolSkills, setToolSkills] = useState([]);
@@ -18,7 +19,7 @@ function Toolstack() {
 
         // Filter for "tools" category skills
         const filtered = skillsList.filter(
-          (s) => s.category && s.category.toLowerCase().includes("tool")
+          (s) => s.category && typeof s.category === "string" && s.category.toLowerCase().includes("tool")
         );
 
         // Sort by order field
@@ -45,8 +46,16 @@ function Toolstack() {
 
   if (toolSkills.length === 0) {
     return (
-      <div className="text-center py-6 text-xs text-text-muted font-mono">
-        No tool skills found. Configure them inside admin panel.
+      <div className="flex flex-col items-center justify-center p-8 rounded-2xl glass-premium border border-white/[0.08] text-center gap-3 py-12 select-none max-w-lg mx-auto">
+        <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent animate-pulse">
+          <Terminal className="w-5 h-5" />
+        </div>
+        <div className="space-y-1">
+          <h4 className="text-xs font-bold text-text-base font-mono uppercase tracking-wider">No Tool Skills</h4>
+          <p className="text-[10px] text-text-muted max-w-[280px] leading-relaxed">
+            Developer tools list is empty. Configure your environment tools inside the admin settings panel.
+          </p>
+        </div>
       </div>
     );
   }

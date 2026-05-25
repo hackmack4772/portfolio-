@@ -216,7 +216,17 @@ function ResumeNew() {
                           </div>
                         ))
                       ) : (
-                        <span className="text-xs font-mono text-text-muted">No experience entries logged.</span>
+                        <div className="flex flex-col items-center justify-center p-8 rounded-xl glass-premium border border-white/[0.05] text-center gap-3 py-12 select-none">
+                          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary animate-pulse">
+                            <Layers className="w-5 h-5" />
+                          </div>
+                          <div className="space-y-1">
+                            <h4 className="text-xs font-bold text-text-base font-mono uppercase tracking-wider">No Experience Entries</h4>
+                            <p className="text-[10px] text-text-muted max-w-[220px] leading-relaxed">
+                              Experience timeline logs are empty. Configure entries inside your admin panel.
+                            </p>
+                          </div>
+                        </div>
                       )}
                     </div>
                   )}
@@ -246,7 +256,17 @@ function ResumeNew() {
                             );
                           })
                         ) : (
-                          <span className="text-xs font-mono text-text-muted">No skills loaded. Add them in admin settings.</span>
+                          <div className="col-span-2 flex flex-col items-center justify-center p-8 rounded-xl glass-premium border border-white/[0.05] text-center gap-3 py-12 select-none">
+                            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent animate-pulse">
+                              <FileText className="w-5 h-5" />
+                            </div>
+                            <div className="space-y-1">
+                              <h4 className="text-xs font-bold text-text-base font-mono uppercase tracking-wider">No Skills Loaded</h4>
+                              <p className="text-[10px] text-text-muted max-w-[220px] leading-relaxed">
+                                Proficiencies matrix is empty. Configure skills inside your admin settings.
+                              </p>
+                            </div>
+                          </div>
                         )}
                       </div>
                     </div>

@@ -288,7 +288,17 @@ function About() {
                             </div>
                           ))
                         ) : (
-                          <span className="text-xs font-mono text-text-muted">No experience entries found. Configure them inside admin panel.</span>
+                          <div className="flex flex-col items-center justify-center p-8 rounded-xl glass-premium border border-white/[0.05] text-center gap-3 py-12 select-none">
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary animate-pulse">
+                              <Briefcase className="w-5 h-5" />
+                            </div>
+                            <div className="space-y-1">
+                              <h4 className="text-xs font-bold text-text-base font-mono uppercase tracking-wider">No Experience Entries</h4>
+                              <p className="text-[10px] text-text-muted max-w-[220px] leading-relaxed">
+                                Experience timeline is empty. Configure entries inside your admin panel settings.
+                              </p>
+                            </div>
+                          </div>
                         )}
                       </div>
                     </div>
@@ -324,7 +334,17 @@ function About() {
                             );
                           })
                         ) : (
-                          <span className="text-xs font-mono text-text-muted">No skills proficiencies loaded. Add them in admin settings.</span>
+                          <div className="flex flex-col items-center justify-center p-8 rounded-xl glass-premium border border-white/[0.05] text-center gap-3 py-12 select-none">
+                            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent animate-pulse">
+                              <Code2 className="w-5 h-5" />
+                            </div>
+                            <div className="space-y-1">
+                              <h4 className="text-xs font-bold text-text-base font-mono uppercase tracking-wider">No Skills Loaded</h4>
+                              <p className="text-[10px] text-text-muted max-w-[220px] leading-relaxed">
+                                Proficiencies matrix is empty. Configure skills inside your admin panel settings.
+                              </p>
+                            </div>
+                          </div>
                         )}
                       </div>
                     </div>
@@ -355,7 +375,17 @@ function About() {
                             </div>
                           ))
                         ) : (
-                          <span className="text-xs font-mono text-text-muted">No education records found. Configure them inside admin panel.</span>
+                          <div className="flex flex-col items-center justify-center p-8 rounded-xl glass-premium border border-white/[0.05] text-center gap-3 py-12 select-none">
+                            <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary animate-pulse">
+                              <GraduationCap className="w-5 h-5" />
+                            </div>
+                            <div className="space-y-1">
+                              <h4 className="text-xs font-bold text-text-base font-mono uppercase tracking-wider">No Academic Milestones</h4>
+                              <p className="text-[10px] text-text-muted max-w-[220px] leading-relaxed">
+                                Education history is empty. Configure milestones inside your admin panel settings.
+                              </p>
+                            </div>
+                          </div>
                         )}
                       </div>
                     </div>

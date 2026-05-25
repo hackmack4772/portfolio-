@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { 
   User, 
@@ -156,7 +156,7 @@ const AboutSection = () => {
       }
       
       const docRef = doc(db, "content", "about");
-      await updateDoc(docRef, updatedData);
+      await setDoc(docRef, updatedData, { merge: true });
       
       setAboutData(updatedData);
       setImageFile(null);
