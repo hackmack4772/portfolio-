@@ -1,7 +1,45 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 // Create the Context
 const DarkModeContext = createContext();
+
+// Helper to apply colors
+const applyColors = (isDark, c) => {
+  const root = document.documentElement;
+  if (!c) return;
+
+  // Common colors
+  if (c.primaryColor) root.style.setProperty('--primary-color', c.primaryColor);
+  if (c.primaryHover) root.style.setProperty('--primary-hover', c.primaryHover);
+  if (c.secondaryColor) root.style.setProperty('--secondary-color', c.secondaryColor);
+  if (c.accentColor) root.style.setProperty('--accent-color', c.accentColor);
+  if (c.successColor) root.style.setProperty('--success-color', c.successColor);
+  if (c.errorColor) root.style.setProperty('--error-color', c.errorColor);
+  if (c.warningColor) root.style.setProperty('--warning-color', c.warningColor);
+  if (c.infoColor) root.style.setProperty('--info-color', c.infoColor);
+
+  if (isDark) {
+    root.style.setProperty('--bg-color', c.darkBg || '#0c0f15');
+    root.style.setProperty('--bg-secondary', c.darkBgSecondary || '#111420');
+    root.style.setProperty('--text-color', c.darkText || '#f5f5f5');
+    root.style.setProperty('--text-secondary', c.darkTextSecondary || '#ababab');
+    root.style.setProperty('--border-color', c.darkBorder || 'rgba(143, 16, 183, 0.2)');
+    root.style.setProperty('--card-bg', c.darkCardBg || 'rgba(20, 24, 39, 0.6)');
+    root.style.setProperty('--shadow', c.darkShadow || 'rgba(0, 0, 0, 0.5)');
+    root.style.setProperty('--navbar-bg', c.darkNavbar || 'rgba(12, 15, 21, 0.8)');
+  } else {
+    root.style.setProperty('--bg-color', c.lightBg || '#f8f9fa');
+    root.style.setProperty('--bg-secondary', c.lightBgSecondary || '#edf0f5');
+    root.style.setProperty('--text-color', c.lightText || '#1e2530');
+    root.style.setProperty('--text-secondary', c.lightTextSecondary || '#4a5568');
+    root.style.setProperty('--border-color', c.lightBorder || 'rgba(3, 163, 165, 0.2)');
+    root.style.setProperty('--card-bg', c.lightCardBg || 'rgba(255, 255, 255, 0.7)');
+    root.style.setProperty('--shadow', c.lightShadow || 'rgba(0, 0, 0, 0.08)');
+    root.style.setProperty('--navbar-bg', c.lightNavbar || 'rgba(248, 249, 250, 0.85)');
+  }
+};
 
 // Create a Provider Component
 export const DarkModeProvider = ({ children }) => {
@@ -21,6 +59,7 @@ export const DarkModeProvider = ({ children }) => {
   };
 
   const [isDarkMode, setIsDarkMode] = useState(getInitialMode);
+  const [colors, setColors] = useState(null);
 
   // Toggle between dark and light mode
   const toggleDarkMode = () => {
@@ -31,6 +70,24 @@ export const DarkModeProvider = ({ children }) => {
   const setDarkMode = (value) => {
     setIsDarkMode(Boolean(value));
   };
+
+  // Fetch color scheme on mount
+  useEffect(() => {
+    const fetchColors = async () => {
+      try {
+        const docRef = doc(db, "settings", "colors");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const colorsData = docSnap.data();
+          setColors(colorsData);
+          applyColors(isDarkMode, colorsData);
+        }
+      } catch (err) {
+        console.error("Error loading theme settings colors:", err);
+      }
+    };
+    fetchColors();
+  }, []);
 
   // Listen for system preference changes
   useEffect(() => {
@@ -67,10 +124,14 @@ export const DarkModeProvider = ({ children }) => {
       rootElement.classList.add("light-mode");
       document.body.classList.add("light-mode");
     }
-  }, [isDarkMode]);
+
+    if (colors) {
+      applyColors(isDarkMode, colors);
+    }
+  }, [isDarkMode, colors]);
 
   return (
-    <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode, setDarkMode }}>
+    <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode, setDarkMode, colors }}>
       {children}
     </DarkModeContext.Provider>
   );

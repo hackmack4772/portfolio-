@@ -1,317 +1,395 @@
-import React, { useState, useRef } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import "./ContactUs.css";
-import { useLoading } from "../../Context/LoadingContext";
+import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MapPin, Mail, Phone, Send, Sparkles, CheckCircle, AlertCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../config/firebase";
+import { useLoading } from "../../Context/LoadingContext";
 import HelmetWrapper from "../../components/HelmetWrapper";
+import SectionWrapper from "../../components/ui/SectionWrapper";
+import SectionTitle from "../../components/ui/SectionTitle";
+import GlowCard from "../../components/ui/GlowCard";
+import SocialDock from "../../components/ui/SocialDock";
+import ActionButton from "../../components/ui/ActionButton";
 
-function ContactUs() {
+function ContactUs({ hideHeader = false }) {
   const { handleLoading } = useLoading();
+  const formRef = useRef();
+
+  const [formData, setFormData] = useState({
+    user_name: "",
+    user_email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [contactData, setContactData] = useState({
+    email: "loneaamir6@gmail.com",
+    phone: "+91-9596581274",
+    address: "Handwara, Jammu and Kashmir, India",
+    socialLinks: {
+      github: "https://github.com/hackmack4772",
+      linkedin: "https://www.linkedin.com/in/aamir-saleem-lone/",
+      twitter: "https://twitter.com/hackmack4772"
+    }
+  });
+
+  const [errors, setErrors] = useState({});
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState(null);
   const [activeField, setActiveField] = useState(null);
-  const [isButtonAnimating, setIsButtonAnimating] = useState(false);
-  const formRef = useRef();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Define validation schema using Yup
-  const validationSchema = Yup.object({
-    user_name: Yup.string().required("Name is required"),
-    user_email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
-    subject: Yup.string().required("Subject is required"),
-    message: Yup.string()
-      .min(10, "Message must be at least 10 characters")
-      .required("Message is required"),
-  });
-
-  // Initialize formik
-  const formik = useFormik({
-    initialValues: {
-      user_name: "",
-      user_email: "",
-      subject: "",
-      message: "",
-    },
-    validationSchema,
-    onSubmit: async (values, { resetForm }) => {
+  useEffect(() => {
+    const fetchContactInfo = async () => {
       try {
-        handleLoading(true);
-        setIsButtonAnimating(true);
-        
-        await emailjs.sendForm(
-          "service_scq3s4o",
-         "template_hckvbsb",
-          formRef.current,
-          "iswW2jJ51suRac3kO"
-        );
-        
-        setFormSubmitted(true);
-        setSubmitError(null);
-        resetForm();
-      } catch (error) {
-        console.error("Email send error:", error);
-        setSubmitError("Failed to send message. Please try again later.");
-      } finally {
-        handleLoading(false);
-        setIsButtonAnimating(false);
+        const contactSnap = await getDoc(doc(db, "content", "contact"));
+        if (contactSnap.exists()) {
+          setContactData(prev => ({
+            ...prev,
+            ...contactSnap.data()
+          }));
+        }
+      } catch (err) {
+        console.error("Error fetching contact details:", err);
       }
-    },
-  });
+    };
+    fetchContactInfo();
+  }, []);
 
-  // Handle field focus animation
+  // Field validator
+  const validateField = (name, value) => {
+    let error = "";
+    if (!value.trim()) {
+      error = `${name.replace("user_", "")} is required`;
+    } else if (name === "user_email") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) {
+        error = "Invalid email address";
+      }
+    } else if (name === "message" && value.trim().length < 10) {
+      error = "Message must be at least 10 characters";
+    }
+    return error;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    
+    // Clear error on change if valid
+    const error = validateField(name, value);
+    setErrors((prev) => ({ ...prev, [name]: error }));
+  };
+
   const handleFocus = (fieldName) => {
     setActiveField(fieldName);
   };
 
-  // Handle field blur animation
   const handleBlur = (e) => {
-    formik.handleBlur(e);
+    const { name, value } = e.target;
+    const error = validateField(name, value);
+    setErrors((prev) => ({ ...prev, [name]: error }));
     setActiveField(null);
   };
 
-  return (
-    <Container fluid className="contact-section">
-      <HelmetWrapper>
-        {/* <title>Contact Me | My Portfolio</title> */}
-        <meta name="description" content="Get in touch with me for collaborations or inquiries." />
-      </HelmetWrapper>
-      
-      <Container className="contact-content">
-        <h1 className="contact-heading">
-          Get In <span className="accent-text">Touch</span>
-        </h1>
-        <p className="contact-subtitle">
-          Feel free to reach out for collaborations or just a friendly hello
-        </p>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Validate all fields
+    const formErrors = {};
+    Object.keys(formData).forEach((key) => {
+      const error = validateField(key, formData[key]);
+      if (error) {
+        formErrors[key] = error;
+      }
+    });
 
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      handleLoading(true);
+      
+      await emailjs.sendForm(
+        "service_scq3s4o",
+        "template_hckvbsb",
+        formRef.current,
+        "iswW2jJ51suRac3kO"
+      );
+      
+      setFormSubmitted(true);
+      setSubmitError(null);
+      setFormData({
+        user_name: "",
+        user_email: "",
+        subject: "",
+        message: "",
+      });
+      setErrors({});
+    } catch (error) {
+      console.error("EmailJS send error:", error);
+      setSubmitError("Failed to send message. Please check your network or try again later.");
+    } finally {
+      setIsSubmitting(false);
+      handleLoading(false);
+    }
+  };
+
+  const contactInfo = [
+    { icon: MapPin, label: "Location", value: contactData.address, color: "text-primary", glowColor: "primary" },
+    { icon: Mail, label: "Email", value: contactData.email, color: "text-secondary", glowColor: "secondary" },
+    { icon: Phone, label: "Phone", value: contactData.phone, color: "text-accent", glowColor: "accent" },
+  ];
+
+  const formContent = (
+    <div className="max-w-5xl mx-auto w-full">
+      <AnimatePresence mode="wait">
         {formSubmitted ? (
-          <div className="success-message">
-            <div className="checkmark-circle">
-              <div className="checkmark draw"></div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="glass-panel p-8 rounded-3xl border border-primary/30 max-w-lg mx-auto flex flex-col items-center justify-center text-center gap-4 shadow-2xl relative overflow-hidden"
+          >
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent" />
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, delay: 0.15 }}
+              className="w-16 h-16 rounded-full bg-accent/15 flex items-center justify-center text-accent"
+            >
+              <CheckCircle className="w-8 h-8" />
+            </motion.div>
+            <div className="space-y-2">
+              <h3 className="text-xl font-bold">Message Dispatched!</h3>
+              <p className="text-xs md:text-sm text-text-muted leading-relaxed max-w-xs">
+                Thank you for reaching out, your message has been sent successfully. I will get back to you shortly.
+              </p>
             </div>
-            <h3>Message Sent!</h3>
-            <p>Thank you for reaching out. I'll get back to you soon.</p>
-            <Button 
-              onClick={() => setFormSubmitted(false)} 
-              className="contact-button"
+            <ActionButton
+              onClick={() => setFormSubmitted(false)}
+              variant="primary"
+              className="mt-4"
             >
               Send Another Message
-            </Button>
-          </div>
+            </ActionButton>
+          </motion.div>
         ) : (
-          <Row className="contact-form-container">
-            <Col md={5} className="contact-form-left">
-              <div className="contact-info">
-                <div className="contact-info-item">
-                  <div className="contact-info-icon">
-                    <i className="fas fa-map-marker-alt"></i>
-                  </div>
-                  <div className="contact-info-text">
-                    <h4>Location</h4>
-                    <p>Handwara, Jammu and kashmir</p>
-                  </div>
-                </div>
-                <div className="contact-info-item">
-                  <div className="contact-info-icon">
-                    <i className="fas fa-envelope"></i>
-                  </div>
-                  <div className="contact-info-text">
-                    <h4>Email</h4>
-                    <p>loneaamir6@gmail.com</p>
-                  </div>
-                </div>
-                <div className="contact-info-item">
-                  <div className="contact-info-icon">
-                    <i className="fas fa-phone"></i>
-                  </div>
-                  <div className="contact-info-text">
-                    <h4>Phone</h4>
-                    <p>+91-9596581274</p>
-                  </div>
-                </div>
-                <div className="contact-social">
-                  <a href="https://github.com/hackmack4772" target="_blank" rel="noreferrer" aria-label="GitHub">
-                    <i className="fab fa-github"></i>
-                  </a>
-                  <a href="https://www.linkedin.com/in/aamir-saleem-lone/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-                    <i className="fab fa-linkedin-in"></i>
-                  </a>
-                  <a href="https://twitter.com/hackmack4772" target="_blank" rel="noreferrer" aria-label="Twitter">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                  {/* <a href="https://instagram.com/yourusername" target="_blank" rel="noreferrer" aria-label="Instagram">
-                    <i className="fab fa-instagram"></i>
-                  </a> */}
-                </div>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch"
+          >
+            {/* Left Column: Contact Cards info */}
+            <div className="md:col-span-5 flex flex-col gap-6 h-full justify-between">
+              <div className="flex flex-col gap-5">
+                {contactInfo.map((info, idx) => {
+                  const InfoIcon = info.icon;
+                  return (
+                    <GlowCard
+                      key={idx}
+                      glowColor={info.glowColor}
+                      hoverGlow={true}
+                      className="p-5 flex gap-4 items-center"
+                    >
+                      <div className={`w-10 h-10 rounded-xl bg-bg-sub/80 border border-border-base/40 flex items-center justify-center shrink-0 ${info.color}`}>
+                        <InfoIcon className="w-5 h-5" />
+                      </div>
+                      <div className="space-y-0.5">
+                        <span className="text-[10px] font-mono text-text-muted uppercase tracking-wider block">{info.label}</span>
+                        <span className="text-xs md:text-sm font-semibold text-text-base">{info.value}</span>
+                      </div>
+                    </GlowCard>
+                  );
+                })}
               </div>
-            </Col>
-            <Col md={7} className="contact-form-right">
-              <Form ref={formRef} onSubmit={formik.handleSubmit} className="contact-form">
-                {submitError && (
-                  <div className="error-message">
-                    <i className="fas fa-exclamation-circle"></i> {submitError}
-                  </div>
-                )}
-                
-                <Form.Group className="mb-4">
-                  <div className={`form-input-group ${activeField === 'user_name' ? 'focused' : ''} ${
-                    formik.touched.user_name && formik.errors.user_name 
-                      ? 'has-error' 
-                      : formik.touched.user_name && !formik.errors.user_name 
-                      ? 'has-success' 
-                      : ''
-                  }`}>
-                    <Form.Label>Name</Form.Label>
-                    <span className="input-icon">
-                      <i className="fas fa-user"></i>
-                    </span>
-                    <Form.Control
-                      type="text"
-                      name="user_name"
-                      placeholder="Your Name"
-                      value={formik.values.user_name}
-                      onChange={formik.handleChange}
-                      onFocus={() => handleFocus('user_name')}
-                      onBlur={handleBlur}
-                    />
-                    <span className="validation-icon">
-                      {formik.touched.user_name && formik.errors.user_name ? (
-                        <i className="fas fa-times-circle error-icon"></i>
-                      ) : formik.touched.user_name && !formik.errors.user_name ? (
-                        <i className="fas fa-check-circle success-icon"></i>
-                      ) : null}
-                    </span>
-                  </div>
-                  {formik.touched.user_name && formik.errors.user_name && (
-                    <div className="error-feedback">{formik.errors.user_name}</div>
-                  )}
-                </Form.Group>
 
-                <Form.Group className="mb-4">
-                  <div className={`form-input-group ${activeField === 'user_email' ? 'focused' : ''} ${
-                    formik.touched.user_email && formik.errors.user_email 
-                      ? 'has-error' 
-                      : formik.touched.user_email && !formik.errors.user_email 
-                      ? 'has-success' 
-                      : ''
-                  }`}>
-                    <Form.Label>Email</Form.Label>
-                    <span className="input-icon">
-                      <i className="fas fa-envelope"></i>
-                    </span>
-                    <Form.Control
-                      type="email"
-                      name="user_email"
-                      placeholder="Your Email"
-                      value={formik.values.user_email}
-                      onChange={formik.handleChange}
-                      onFocus={() => handleFocus('user_email')}
-                      onBlur={handleBlur}
-                    />
-                    <span className="validation-icon">
-                      {formik.touched.user_email && formik.errors.user_email ? (
-                        <i className="fas fa-times-circle error-icon"></i>
-                      ) : formik.touched.user_email && !formik.errors.user_email ? (
-                        <i className="fas fa-check-circle success-icon"></i>
-                      ) : null}
-                    </span>
-                  </div>
-                  {formik.touched.user_email && formik.errors.user_email && (
-                    <div className="error-feedback">{formik.errors.user_email}</div>
-                  )}
-                </Form.Group>
+              {/* Social Connections */}
+              <GlowCard glowColor="primary" hoverGlow={false} className="p-5 flex flex-col gap-3">
+                <span className="text-[10px] font-mono text-text-muted uppercase tracking-widest text-center md:text-left flex items-center gap-1 justify-center md:justify-start">
+                  <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" /> Connect with me
+                </span>
+                <SocialDock socialLinks={contactData.socialLinks} className="justify-center md:justify-start" />
+              </GlowCard>
+            </div>
 
-                <Form.Group className="mb-4">
-                  <div className={`form-input-group ${activeField === 'subject' ? 'focused' : ''} ${
-                    formik.touched.subject && formik.errors.subject 
-                      ? 'has-error' 
-                      : formik.touched.subject && !formik.errors.subject 
-                      ? 'has-success' 
-                      : ''
-                  }`}>
-                    <Form.Label>Subject</Form.Label>
-                    <span className="input-icon">
-                      <i className="fas fa-heading"></i>
-                    </span>
-                    <Form.Control
-                      type="text"
-                      name="subject"
-                      placeholder="Subject"
-                      value={formik.values.subject}
-                      onChange={formik.handleChange}
-                      onFocus={() => handleFocus('subject')}
-                      onBlur={handleBlur}
-                    />
-                    <span className="validation-icon">
-                      {formik.touched.subject && formik.errors.subject ? (
-                        <i className="fas fa-times-circle error-icon"></i>
-                      ) : formik.touched.subject && !formik.errors.subject ? (
-                        <i className="fas fa-check-circle success-icon"></i>
-                      ) : null}
-                    </span>
-                  </div>
-                  {formik.touched.subject && formik.errors.subject && (
-                    <div className="error-feedback">{formik.errors.subject}</div>
-                  )}
-                </Form.Group>
-
-                <Form.Group className="mb-4">
-                  <div className={`form-input-group ${activeField === 'message' ? 'focused' : ''} ${
-                    formik.touched.message && formik.errors.message 
-                      ? 'has-error' 
-                      : formik.touched.message && !formik.errors.message 
-                      ? 'has-success' 
-                      : ''
-                  }`}>
-                    <Form.Label>Message</Form.Label>
-                    <span className="input-icon textarea-icon">
-                      <i className="fas fa-comment"></i>
-                    </span>
-                    <Form.Control
-                      as="textarea"
-                      name="message"
-                      rows={5}
-                      placeholder="Your Message"
-                      value={formik.values.message}
-                      onChange={formik.handleChange}
-                      onFocus={() => handleFocus('message')}
-                      onBlur={handleBlur}
-                    />
-                    <span className="validation-icon textarea-validation">
-                      {formik.touched.message && formik.errors.message ? (
-                        <i className="fas fa-times-circle error-icon"></i>
-                      ) : formik.touched.message && !formik.errors.message ? (
-                        <i className="fas fa-check-circle success-icon"></i>
-                      ) : null}
-                    </span>
-                  </div>
-                  {formik.touched.message && formik.errors.message && (
-                    <div className="error-feedback">{formik.errors.message}</div>
-                  )}
-                </Form.Group>
-
-                <Button 
-                  type="submit" 
-                  className={`contact-button ${isButtonAnimating ? 'button-submitting' : ''}`}
-                  disabled={formik.isSubmitting}
+            {/* Right Column: Custom Interactive Form */}
+            <div className="md:col-span-7">
+              <GlowCard glowColor="accent" hoverGlow={false} className="p-6 md:p-8">
+                <form
+                  ref={formRef}
+                  onSubmit={handleSubmit}
+                  className="flex flex-col gap-5 relative overflow-hidden"
                 >
-                  <span className="button-text">
-                    {formik.isSubmitting ? 'Sending...' : 'Send Message'}
-                  </span>
-                  <span className="button-icon">
-                    <i className={`fas ${formik.isSubmitting ? 'fa-spinner fa-spin' : 'fa-paper-plane'}`}></i>
-                  </span>
-                </Button>
-              </Form>
-            </Col>
-          </Row>
+                  {submitError && (
+                    <div className="flex items-center gap-2 p-3.5 rounded-xl border border-red-500/30 bg-red-500/10 text-red-500 text-xs">
+                      <AlertCircle className="w-4.5 h-4.5 shrink-0" />
+                      <span>{submitError}</span>
+                    </div>
+                  )}
+
+                  {/* Input 1: Name */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-mono uppercase tracking-wider text-text-muted">Your Name</label>
+                    <div className={`relative rounded-xl border transition-all duration-300 ${
+                      activeField === "user_name" 
+                        ? "border-accent shadow-[0_0_10px_rgba(12,251,255,0.15)]" 
+                        : errors.user_name 
+                        ? "border-red-500/50" 
+                        : "border-border-base/40"
+                    }`}>
+                      <input
+                        type="text"
+                        name="user_name"
+                        placeholder="e.g. John Doe"
+                        value={formData.user_name}
+                        onChange={handleChange}
+                        onFocus={() => handleFocus("user_name")}
+                        onBlur={handleBlur}
+                        className="w-full px-4 py-3 bg-bg-sub/30 rounded-xl text-xs md:text-sm text-text-base placeholder-text-muted/40 focus:outline-none"
+                      />
+                    </div>
+                    {errors.user_name && (
+                      <span className="text-[10px] font-mono text-red-500/90 flex items-center gap-1 mt-0.5">
+                        <AlertCircle className="w-3 h-3" /> {errors.user_name}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Input 2: Email */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-mono uppercase tracking-wider text-text-muted">Your Email</label>
+                    <div className={`relative rounded-xl border transition-all duration-300 ${
+                      activeField === "user_email" 
+                        ? "border-accent shadow-[0_0_10px_rgba(12,251,255,0.15)]" 
+                        : errors.user_email 
+                        ? "border-red-500/50" 
+                        : "border-border-base/40"
+                    }`}>
+                      <input
+                        type="email"
+                        name="user_email"
+                        placeholder="e.g. john@example.com"
+                        value={formData.user_email}
+                        onChange={handleChange}
+                        onFocus={() => handleFocus("user_email")}
+                        onBlur={handleBlur}
+                        className="w-full px-4 py-3 bg-bg-sub/30 rounded-xl text-xs md:text-sm text-text-base placeholder-text-muted/40 focus:outline-none"
+                      />
+                    </div>
+                    {errors.user_email && (
+                      <span className="text-[10px] font-mono text-red-500/90 flex items-center gap-1 mt-0.5">
+                        <AlertCircle className="w-3 h-3" /> {errors.user_email}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Input 3: Subject */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-mono uppercase tracking-wider text-text-muted">Subject</label>
+                    <div className={`relative rounded-xl border transition-all duration-300 ${
+                      activeField === "subject" 
+                        ? "border-accent shadow-[0_0_10px_rgba(12,251,255,0.15)]" 
+                        : errors.subject 
+                        ? "border-red-500/50" 
+                        : "border-border-base/40"
+                    }`}>
+                      <input
+                        type="text"
+                        name="subject"
+                        placeholder="Subject of message"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        onFocus={() => handleFocus("subject")}
+                        onBlur={handleBlur}
+                        className="w-full px-4 py-3 bg-bg-sub/30 rounded-xl text-xs md:text-sm text-text-base placeholder-text-muted/40 focus:outline-none"
+                      />
+                    </div>
+                    {errors.subject && (
+                      <span className="text-[10px] font-mono text-red-500/90 flex items-center gap-1 mt-0.5">
+                        <AlertCircle className="w-3 h-3" /> {errors.subject}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Input 4: Message */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-mono uppercase tracking-wider text-text-muted">Message</label>
+                    <div className={`relative rounded-xl border transition-all duration-300 ${
+                      activeField === "message" 
+                        ? "border-accent shadow-[0_0_10px_rgba(12,251,255,0.15)]" 
+                        : errors.message 
+                        ? "border-red-500/50" 
+                        : "border-border-base/40"
+                    }`}>
+                      <textarea
+                        name="message"
+                        rows={5}
+                        placeholder="Write your details here..."
+                        value={formData.message}
+                        onChange={handleChange}
+                        onFocus={() => handleFocus("message")}
+                        onBlur={handleBlur}
+                        className="w-full px-4 py-3 bg-bg-sub/30 rounded-xl text-xs md:text-sm text-text-base placeholder-text-muted/40 focus:outline-none resize-none"
+                      />
+                    </div>
+                    {errors.message && (
+                      <span className="text-[10px] font-mono text-red-500/90 flex items-center gap-1 mt-0.5">
+                        <AlertCircle className="w-3 h-3" /> {errors.message}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Submit button */}
+                  <ActionButton
+                    type="submit"
+                    disabled={isSubmitting}
+                    variant="primary"
+                    className="mt-2 w-full flex items-center justify-center gap-2"
+                  >
+                    <Send className={`w-4 h-4 ${isSubmitting ? "animate-pulse" : ""}`} />
+                    <span>{isSubmitting ? "Transmitting..." : "Send Message"}</span>
+                  </ActionButton>
+
+                </form>
+              </GlowCard>
+            </div>
+          </motion.div>
         )}
-      </Container>
-    </Container>
+      </AnimatePresence>
+    </div>
+  );
+
+  if (hideHeader) {
+    return formContent;
+  }
+
+  return (
+    <SectionWrapper id="contact-section" className="pt-28 pb-16">
+      <HelmetWrapper>
+        <title>Contact Me | Portfolio</title>
+        <meta name="description" content="Get in touch with Aamir Saleem Lone for collaborations, jobs, or feedback." />
+      </HelmetWrapper>
+
+      {/* Background Soft Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-accent/5 rounded-full blur-3xl -z-10 animate-pulse-glow" />
+
+      <SectionTitle 
+        subtitle="Get In Touch" 
+        title="Contact" 
+        highlight="Me" 
+        description="Have a question or want to work together? Drop me a line."
+      />
+
+      {formContent}
+    </SectionWrapper>
   );
 }
 
 export default ContactUs;
+

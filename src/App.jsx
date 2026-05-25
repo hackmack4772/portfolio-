@@ -5,24 +5,20 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+import Lenis from "lenis";
 import { useLoading } from "./Context/LoadingContext";
 import { useDarkMode } from "./Context/DarkModeContext";
 import Preloader from "./components/Preloader/Preloader";
-import Particle from "./components/Particle";
-import { Container, Row } from "react-bootstrap";
-import Admin from "./admin/Admin.jsx";
 import Login from "./admin/Login.jsx";
 import Dashboard from "./admin/Dashboard.jsx";
 import { onAuthStateChanged } from 'firebase/auth';
-import './admin/styles/admin-styles.css';
 import { auth } from "./admin/utils/firebase";
+import MainLayout from "./components/ui/MainLayout";
 
 // Lazy load components
 const Navbar = lazy(() => import("./components/Navbar/Navbar"));
-const Menu = lazy(() => import("./pages/Menu/Menu"));
 const LandingPage = lazy(() => import("./pages/LandingPage/LandingPage"));
 const Footer = lazy(() => import("./components/Footer/Footer"));
-const ScrollToTop = lazy(() => import("./components/ScrollToTop"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 const About = lazy(() => import("./pages/About/About"));
 const Projects = lazy(() => import("./pages/Projects/Projects"));
@@ -37,6 +33,26 @@ function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Initialize Lenis scroll
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -45,7 +61,6 @@ function App() {
 
     return () => unsubscribe();
   }, []);
-
 
   useEffect(() => {
     handleLoading(true);
@@ -61,12 +76,11 @@ function App() {
       clearTimeout(minLoaderTime);
       clearTimeout(stopLoader);
     };
-  }, []);
+  }, [handleLoading]);
 
   const { isDarkMode } = useDarkMode();
   const isChatRoute =
     location.pathname === "/login" ||
-    // location.pathname === "/" ||
     location.pathname === "/users" ||
     location.pathname === "/not-found" ||
     location.pathname.startsWith("/chat") ||
@@ -74,7 +88,6 @@ function App() {
 
   return (
     <div className={isDarkMode ? "App" : "App light-mode"}>
-
       <Router>
         {showLoader || !contentReady ? (
           <Preloader isLoading={true} />
@@ -83,55 +96,34 @@ function App() {
             {!isChatRoute && <Navbar />}
 
             <Suspense fallback={<Preloader isLoading={true} />}>
-              <div
-                id="main-content"
-                style={{
-                  opacity: contentReady ? 1 : 0,
-                  transition: "opacity 0.5s ease-in-out",
-                }}
-              >
-                <Particle />
-                <ScrollToTop />
+              <MainLayout>
                 <Routes>
                   <Route
                     path="/admin"
                     element={
-                      user ? <Navigate to="/admin/dashboard" /> : <div className="admin-app">
-                        <Login /></div>
+                      user ? <Navigate to="/admin/dashboard" /> : <div className="admin-app"><Login /></div>
                     }
                   />
                   <Route
                     path="/admin/dashboard/*"
-                    element={user ? <div className="admin-app">
-                      <Dashboard /></div> : <Navigate to="/admin" />}
+                    element={
+                      user ? <div className="admin-app"><Dashboard /></div> : <Navigate to="/admin" />
+                    }
                   />
                   <Route path="/" element={<LandingPage />} />
-                  {/* <Route path="/" element={<Menu />} /> */}
                   <Route path="/home" element={<LandingPage />} />
                   <Route path="/not-found" element={<NotFound />} />
                   <Route path="/education" element={<Education />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/projects" element={<Projects />} />
                   <Route path="/resume" element={<Resume />} />
-                  <Route
-                    path="/contact"
-                    element={
-                      <section className="landing-page">
-                        <Container className="home-content">
-                          <Row>
-                            <ContactUs />
-                          </Row>
-                        </Container>
-                      </section>
-                    }
-                  />
+                  <Route path="/contact" element={<ContactUs />} />
                   <Route path="*" element={<Navigate to="/not-found" />} />
                 </Routes>
                 {!isChatRoute && <Footer />}
-              </div>
+              </MainLayout>
             </Suspense>
           </>
-
         )}
       </Router>
     </div>

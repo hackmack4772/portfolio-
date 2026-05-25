@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import { Helmet } from 'react-helmet';
+import React from 'react';
 
 /**
- * HelmetWrapper - A wrapper for React Helmet to avoid the UNSAFE_componentWillMount warning
- * This component uses useEffect instead of componentWillMount
+ * HelmetWrapper - Simplified for React 19.
+ * React 19 natively supports hoisting document metadata tags (<title>, <meta>, <link>) 
+ * to the document <head>, making external libraries like react-helmet obsolete.
  */
 const HelmetWrapper = ({ children }) => {
-  return <Helmet>{children}</Helmet>;
+  return <>{children}</>;
 };
 
-export default HelmetWrapper; 
+export default HelmetWrapper;

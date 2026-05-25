@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { Palette, Eye, Save, Sparkles, CheckCircle2, AlertCircle } from 'lucide-react';
 import ColorPicker from './ColorPicker';
-import '../styles/admin-styles.css';
 
 const ColorSchemeSection = () => {
   const [colors, setColors] = useState({
@@ -87,10 +87,10 @@ const ColorSchemeSection = () => {
       // Update CSS variables directly
       applyColorsToCSS(colors);
       
-      setMessage({ text: 'Colors saved successfully!', type: 'success' });
+      setMessage({ text: 'Theme colors successfully saved & synchronized!', type: 'success' });
     } catch (error) {
       console.error("Error saving colors:", error);
-      setMessage({ text: 'Failed to save colors', type: 'error' });
+      setMessage({ text: 'Failed to save color settings.', type: 'error' });
     } finally {
       setSaving(false);
     }
@@ -98,10 +98,8 @@ const ColorSchemeSection = () => {
 
   const togglePreview = () => {
     if (previewActive) {
-      // Restore original colors from Firebase
       fetchAndApplyOriginalColors();
     } else {
-      // Apply preview colors
       applyColorsToCSS(colors);
     }
     setPreviewActive(!previewActive);
@@ -111,7 +109,6 @@ const ColorSchemeSection = () => {
     try {
       const docRef = doc(db, "settings", "colors");
       const docSnap = await getDoc(docRef);
-      
       if (docSnap.exists()) {
         applyColorsToCSS(docSnap.data());
       }
@@ -121,137 +118,132 @@ const ColorSchemeSection = () => {
   };
 
   const applyColorsToCSS = (colorValues) => {
-    document.documentElement.style.setProperty('--primary-color', colorValues.primaryColor);
-    document.documentElement.style.setProperty('--primary-hover', colorValues.primaryHover);
-    document.documentElement.style.setProperty('--secondary-color', colorValues.secondaryColor);
-    document.documentElement.style.setProperty('--accent-color', colorValues.accentColor);
-    document.documentElement.style.setProperty('--text-color', colorValues.textColor);
-    document.documentElement.style.setProperty('--text-secondary', colorValues.textSecondary);
-    document.documentElement.style.setProperty('--bg-color', colorValues.bgColor);
-    document.documentElement.style.setProperty('--card-bg', colorValues.cardBg);
-    document.documentElement.style.setProperty('--border-color', colorValues.borderColor);
-    document.documentElement.style.setProperty('--shadow', colorValues.shadow);
-    
-    // Light theme
-    document.documentElement.style.setProperty('--light-bg', colorValues.lightBg);
-    document.documentElement.style.setProperty('--light-bg-secondary', colorValues.lightBgSecondary);
-    document.documentElement.style.setProperty('--light-text', colorValues.lightText);
-    document.documentElement.style.setProperty('--light-text-secondary', colorValues.lightTextSecondary);
-    document.documentElement.style.setProperty('--light-border', colorValues.lightBorder);
-    document.documentElement.style.setProperty('--light-card-bg', colorValues.lightCardBg);
-    document.documentElement.style.setProperty('--light-shadow', colorValues.lightShadow);
-    document.documentElement.style.setProperty('--light-navbar', colorValues.lightNavbar);
-    
-    // Dark theme
-    document.documentElement.style.setProperty('--dark-bg', colorValues.darkBg);
-    document.documentElement.style.setProperty('--dark-bg-secondary', colorValues.darkBgSecondary);
-    document.documentElement.style.setProperty('--dark-text', colorValues.darkText);
-    document.documentElement.style.setProperty('--dark-text-secondary', colorValues.darkTextSecondary);
-    document.documentElement.style.setProperty('--dark-border', colorValues.darkBorder);
-    document.documentElement.style.setProperty('--dark-card-bg', colorValues.darkCardBg);
-    document.documentElement.style.setProperty('--dark-shadow', colorValues.darkShadow);
-    document.documentElement.style.setProperty('--dark-navbar', colorValues.darkNavbar);
-    
-    // System colors
-    document.documentElement.style.setProperty('--success-color', colorValues.successColor);
-    document.documentElement.style.setProperty('--error-color', colorValues.errorColor);
-    document.documentElement.style.setProperty('--warning-color', colorValues.warningColor);
-    document.documentElement.style.setProperty('--info-color', colorValues.infoColor);
+    const root = document.documentElement;
+    Object.entries(colorValues).forEach(([key, val]) => {
+      // Convert key to css variable syntax (primaryColor -> --primary-color)
+      const cssVarName = `--${key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}`;
+      root.style.setProperty(cssVarName, val);
+    });
   };
 
   if (loading) {
-    return <div className="admin-loading">Loading color settings...</div>;
+    return (
+      <div className="flex flex-col items-center justify-center py-20 gap-3">
+        <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+        <p className="text-xs font-mono uppercase tracking-widest text-text-muted animate-pulse">Loading Color Scheme...</p>
+      </div>
+    );
   }
 
   const colorGroups = [
     {
-      title: 'Main Theme Colors',
+      title: 'Main Dynamic Branding',
       colors: [
-        { key: 'primaryColor', label: 'Primary Color', value: colors.primaryColor },
-        { key: 'primaryHover', label: 'Primary Hover', value: colors.primaryHover },
-        { key: 'secondaryColor', label: 'Secondary Color', value: colors.secondaryColor },
-        { key: 'accentColor', label: 'Accent Color', value: colors.accentColor },
+        { key: 'primaryColor', label: 'Primary Brand Color', value: colors.primaryColor },
+        { key: 'primaryHover', label: 'Primary Hover Accent', value: colors.primaryHover },
+        { key: 'secondaryColor', label: 'Secondary Theme Hue', value: colors.secondaryColor },
+        { key: 'accentColor', label: 'Interface Accent/Highlight', value: colors.accentColor },
       ]
     },
     {
-      title: 'Text & Background',
+      title: 'Custom Light Theme Details',
       colors: [
-        { key: 'textColor', label: 'Text Color', value: colors.textColor },
-        { key: 'textSecondary', label: 'Secondary Text', value: colors.textSecondary },
-        { key: 'bgColor', label: 'Background Color', value: colors.bgColor },
-        { key: 'cardBg', label: 'Card Background', value: colors.cardBg },
-        { key: 'borderColor', label: 'Border Color', value: colors.borderColor },
-        { key: 'shadow', label: 'Shadow Color', value: colors.shadow },
-      ]
-    },
-    {
-      title: 'Light Theme',
-      colors: [
-        { key: 'lightBg', label: 'Light Background', value: colors.lightBg },
-        { key: 'lightBgSecondary', label: 'Light Background Secondary', value: colors.lightBgSecondary },
-        { key: 'lightText', label: 'Light Text', value: colors.lightText },
-        { key: 'lightTextSecondary', label: 'Light Text Secondary', value: colors.lightTextSecondary },
-        { key: 'lightBorder', label: 'Light Border', value: colors.lightBorder },
+        { key: 'lightBg', label: 'Theme Base background', value: colors.lightBg },
+        { key: 'lightBgSecondary', label: 'Theme Secondary background', value: colors.lightBgSecondary },
+        { key: 'lightText', label: 'Light Base Text', value: colors.lightText },
+        { key: 'lightTextSecondary', label: 'Light Secondary Text', value: colors.lightTextSecondary },
+        { key: 'lightBorder', label: 'Light Card Borders', value: colors.lightBorder },
         { key: 'lightCardBg', label: 'Light Card Background', value: colors.lightCardBg },
       ]
     },
     {
-      title: 'Dark Theme',
+      title: 'Custom Dark Theme Details',
       colors: [
-        { key: 'darkBg', label: 'Dark Background', value: colors.darkBg },
-        { key: 'darkBgSecondary', label: 'Dark Background Secondary', value: colors.darkBgSecondary },
-        { key: 'darkText', label: 'Dark Text', value: colors.darkText },
-        { key: 'darkTextSecondary', label: 'Dark Text Secondary', value: colors.darkTextSecondary },
-        { key: 'darkBorder', label: 'Dark Border', value: colors.darkBorder },
+        { key: 'darkBg', label: 'Dark Base background', value: colors.darkBg },
+        { key: 'darkBgSecondary', label: 'Dark Secondary background', value: colors.darkBgSecondary },
+        { key: 'darkText', label: 'Dark Base Text', value: colors.darkText },
+        { key: 'darkTextSecondary', label: 'Dark Secondary Text', value: colors.darkTextSecondary },
+        { key: 'darkBorder', label: 'Dark Card Borders', value: colors.darkBorder },
         { key: 'darkCardBg', label: 'Dark Card Background', value: colors.darkCardBg },
       ]
     },
     {
-      title: 'System Colors',
+      title: 'System Alerts & Utilities',
       colors: [
-        { key: 'successColor', label: 'Success Color', value: colors.successColor },
-        { key: 'errorColor', label: 'Error Color', value: colors.errorColor },
-        { key: 'warningColor', label: 'Warning Color', value: colors.warningColor },
-        { key: 'infoColor', label: 'Info Color', value: colors.infoColor },
+        { key: 'successColor', label: 'Validation Success Color', value: colors.successColor },
+        { key: 'errorColor', label: 'Validation Error Color', value: colors.errorColor },
+        { key: 'warningColor', label: 'System Warnings Color', value: colors.warningColor },
+        { key: 'infoColor', label: 'System Notice/Info Color', value: colors.infoColor },
       ]
     }
   ];
   
   return (
-    <div className="admin-section">
-      <div className="admin-section-header">
-        <h2>Color Scheme Settings</h2>
-        <div className="admin-section-actions">
+    <div className="flex flex-col gap-6">
+      
+      {/* Sub Heading */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 className="text-xl font-bold text-text-base flex items-center gap-2">
+            <Palette className="w-5 h-5 text-primary" />
+            <span>Theme Color Schemes</span>
+          </h2>
+          <p className="text-xs text-text-muted mt-1">Modify colors dynamically. Updates are pushed globally.</p>
+        </div>
+
+        <div className="flex items-center gap-3 shrink-0">
           <button 
-            className={`admin-btn ${previewActive ? 'admin-btn-warning' : 'admin-btn-secondary'}`}
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider border cursor-pointer transition-all duration-300 ${
+              previewActive 
+                ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/30 shadow-[0_0_12px_rgba(234,179,8,0.15)] font-bold' 
+                : 'border-border-base text-text-muted hover:text-text-base hover:border-text-muted'
+            }`}
             onClick={togglePreview}
           >
-            {previewActive ? 'Exit Preview' : 'Preview Changes'}
+            <Eye className="w-3.5 h-3.5" />
+            <span>{previewActive ? 'Exit Preview' : 'Preview'}</span>
           </button>
           <button 
-            className="admin-btn admin-btn-primary" 
+            className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_12px_rgba(12,251,255,0.25)] transition-all cursor-pointer"
             onClick={saveColors}
             disabled={saving}
           >
-            {saving ? 'Saving...' : 'Save Changes'}
+            <Save className="w-3.5 h-3.5" />
+            <span>{saving ? 'Syncing...' : 'Save Theme'}</span>
           </button>
         </div>
       </div>
       
+      {/* Messages */}
       {message.text && (
-        <div className={`admin-alert admin-alert-${message.type === 'success' ? 'success' : 'danger'}`}>
-          {message.text}
+        <div className={`flex items-center gap-2 p-4 rounded-xl border ${
+          message.type === 'success' 
+            ? 'border-green-500/30 bg-green-500/10 text-green-500' 
+            : 'border-red-500/30 bg-red-500/10 text-red-500'
+        }`}>
+          {message.type === 'success' ? <CheckCircle2 className="w-4.5 h-4.5 shrink-0" /> : <AlertCircle className="w-4.5 h-4.5 shrink-0" />}
+          <span className="text-xs font-medium">{message.text}</span>
         </div>
       )}
       
-      <div className="admin-color-scheme-container">
+      {/* Editor Groups */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {colorGroups.map((group, groupIndex) => (
-          <div key={groupIndex} className="admin-color-group">
-            <h3 className="admin-color-group-title">{group.title}</h3>
-            <div className="admin-color-grid">
+          <div 
+            key={groupIndex} 
+            className="glass-panel p-6 rounded-3xl border border-border-base/50 shadow-md flex flex-col gap-4 relative overflow-hidden group"
+          >
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-primary to-accent opacity-30" />
+            
+            <h3 className="text-xs font-mono uppercase tracking-widest text-text-base border-b border-border-base/40 pb-2 flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" />
+              <span>{group.title}</span>
+            </h3>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
               {group.colors.map((color) => (
-                <div key={color.key} className="admin-color-item">
-                  <label>{color.label}</label>
+                <div key={color.key} className="flex flex-col gap-1.5">
+                  <label className="text-[10px] font-mono text-text-muted uppercase tracking-wider">{color.label}</label>
                   <ColorPicker 
                     color={color.value} 
                     onChange={(value) => handleColorChange(color.key, value)} 
@@ -263,17 +255,20 @@ const ColorSchemeSection = () => {
         ))}
       </div>
       
-      <div className="admin-section-footer">
+      {/* Footer controls */}
+      <div className="flex justify-end mt-4 border-t border-border-base/40 pt-6">
         <button 
-          className="admin-btn admin-btn-primary" 
+          className="flex items-center gap-1.5 px-6 py-3 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_15px_rgba(12,251,255,0.35)] transition-all cursor-pointer"
           onClick={saveColors}
           disabled={saving}
         >
-          {saving ? 'Saving...' : 'Save Changes'}
+          <Save className="w-4 h-4" />
+          <span>{saving ? 'Syncing...' : 'Save Theme Config'}</span>
         </button>
       </div>
+      
     </div>
   );
 };
 
-export default ColorSchemeSection; 
+export default ColorSchemeSection;

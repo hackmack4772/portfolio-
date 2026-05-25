@@ -7,7 +7,6 @@ import ProjectsSection from './components/ProjectsSection';
 import SkillsSection from './components/SkillsSection';
 import ContactSection from './components/ContactSection';
 import ColorSchemeSection from './components/ColorSchemeSection';
-import './styles/admin-styles.css';
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState('about');
@@ -54,32 +53,49 @@ const Dashboard = () => {
   };
 
   if (!user) {
-    return <div className="admin-loading">Loading...</div>;
+    return (
+      <div className="w-full min-h-screen bg-bg-base text-text-base flex flex-col items-center justify-center gap-3">
+        <div className="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin" />
+        <p className="text-xs font-mono uppercase tracking-widest text-text-muted animate-pulse">Decrypting Workspace...</p>
+      </div>
+    );
   }
 
   return (
-    <div className="admin-dashboard">
+    <div className="w-full min-h-screen bg-bg-base text-text-base flex flex-col md:flex-row">
       <Sidebar 
         activeSection={activeSection} 
         setActiveSection={setActiveSection} 
         onLogout={handleLogout}
       />
-      <main className="admin-main-content">
-        <header className="admin-header">
-          <h1>Portfolio Admin</h1>
-          <div className="admin-user-info">
-            <span>{user.email}</span>
-            <button onClick={handleLogout} className="admin-btn admin-btn-outline">
-              Logout
-            </button>
+      
+      {/* Content Area */}
+      <main className="flex-1 md:ml-64 p-6 md:p-10 flex flex-col gap-8 min-w-0">
+        
+        {/* Header */}
+        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-base/40 pb-6 mt-12 md:mt-0">
+          <div>
+            <h1 className="text-2xl md:text-3xl font-black text-text-base select-none">
+              PORTFOLIO <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">MANAGER</span>
+            </h1>
+            <p className="text-xs text-text-muted font-mono mt-1">Logged in as {user.email}</p>
           </div>
+          <button 
+            onClick={handleLogout} 
+            className="self-start sm:self-center px-4 py-2 rounded-full text-xs font-mono uppercase border border-border-base hover:border-red-500/50 hover:bg-red-500/10 transition-colors cursor-pointer"
+          >
+            Log Out
+          </button>
         </header>
-        <div className="admin-content-container">
+        
+        {/* Active Section container */}
+        <div className="w-full flex-1">
           {renderActiveSection()}
         </div>
+
       </main>
     </div>
   );
 };
 
-export default Dashboard; 
+export default Dashboard;
