@@ -302,93 +302,109 @@ function LandingPage() {
 
       {/* Social & Contact Section */}
       <SectionWrapper id="contact" showTicks={true}>
-        <div className="mx-auto mb-16 flex w-full max-w-2xl flex-col items-center">
+        <div className="mx-auto mb-16 flex w-full max-w-4xl flex-col items-center">
           {/* Cyberpunk Outer Card */}
           <div className="relative group w-full">
             {/* Outer Glow */}
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-2xl blur-md opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/10 via-secondary/15 to-accent/15 rounded-2xl blur-md opacity-40 group-hover:opacity-75 transition-opacity duration-500" />
             
-            <div className="relative rounded-2xl border border-border-base/40 bg-bg-base/90 shadow-2xl overflow-hidden flex flex-col font-mono text-xs text-text-muted">
+            <div className="relative rounded-2xl border border-white/[0.08] bg-bg-base/90 shadow-2xl overflow-hidden flex flex-col font-mono text-xs text-text-muted">
               {/* Terminal Title Bar */}
-              <div className="flex items-center justify-between px-4 py-3 bg-bg-sub/60 border-b border-border-base/30 select-none">
+              <div className="flex items-center justify-between px-5 py-3.5 bg-white/[0.015] border-b border-white/[0.06] select-none">
                 <div className="flex items-center gap-1.5 shrink-0">
                   <div className="w-2.5 h-2.5 rounded-full bg-[#ef4444] opacity-80" />
                   <div className="w-2.5 h-2.5 rounded-full bg-[#f59e0b] opacity-80" />
                   <div className="w-2.5 h-2.5 rounded-full bg-[#10b981] opacity-80" />
                 </div>
-                <div className="text-[10px] tracking-wider uppercase text-text-muted flex items-center gap-1.5">
+                <div className="text-[10px] tracking-wider uppercase text-text-muted/65 flex items-center gap-1.5 font-mono">
                   <span className="text-accent">&gt;</span> SOCIAL_CONNECTIVITY.sh
                 </div>
-                <div className="w-10 flex justify-end">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                <div className="w-12 flex justify-end">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-[0_0_8px_rgba(12,251,255,0.8)]" />
                 </div>
               </div>
               
-              {/* Terminal Content */}
-              <div className="p-6 flex flex-col gap-5 text-left">
-                {/* Diagnostic Terminal View */}
-                <div className="bg-bg-base/70 rounded-lg border border-border-base/20 p-4 font-mono text-[11px] leading-relaxed text-text-muted/90 min-h-[90px] flex flex-col justify-between">
-                  <div className="flex flex-col gap-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-secondary font-bold">$</span>
-                      <span className="text-text-base">{diagnostic.cmd}</span>
+              {/* Terminal Body */}
+              <div className="p-6 md:p-8">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+                  {/* Left Column: Diagnostics Screen & Headers */}
+                  <div className="md:col-span-5 flex flex-col gap-5 justify-between min-h-[170px]">
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 text-accent font-semibold tracking-widest text-[9px] uppercase bg-accent/5 px-2.5 py-1 rounded w-fit select-none">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
+                        transmitting_nodes
+                      </div>
+                      <div className="space-y-1">
+                        <h2 className="text-xl font-bold tracking-[0.15em] text-white uppercase font-mono">
+                          FIND_ME_ON
+                        </h2>
+                        <p className="text-[10px] text-text-muted/80 uppercase tracking-wider font-mono">
+                          I'd love to <span className="text-accent font-semibold">connect</span> with you!
+                        </p>
+                      </div>
                     </div>
-                    <div className="text-text-muted/60 pl-3">{diagnostic.line1}</div>
-                    <div className="text-text-muted/60 pl-3">{diagnostic.line2}</div>
-                  </div>
-                  <div className="flex items-center justify-between border-t border-border-base/10 pt-2 mt-2">
-                    <span className="text-[10px] text-text-muted/40 uppercase">STATUS_FEED</span>
-                    <span className="text-[10px] font-bold text-accent tracking-widest">{diagnostic.status}</span>
-                  </div>
-                </div>
 
-                <div className="text-center py-1">
-                  <h2 className="text-lg md:text-xl font-bold tracking-[0.2em] text-text-base uppercase font-mono">
-                    FIND_ME_ON
-                  </h2>
-                  <p className="text-[10px] text-text-muted uppercase tracking-wider font-mono mt-1">
-                    I'd love to <span className="text-accent font-semibold">connect</span> with you!
-                  </p>
-                </div>
-
-                {/* Highly Interactive Social Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
-                  {socialNodes.map((link, idx) => {
-                    const Icon = link.icon;
-                    return (
-                      <motion.a
-                        key={idx}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onMouseEnter={() => setHoveredNode(link.label)}
-                        onMouseLeave={() => setHoveredNode(null)}
-                        whileHover={{ scale: 1.02, y: -2 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="relative group/btn flex items-center gap-3 px-4 py-3 rounded-xl border border-border-base/30 bg-bg-sub/20 hover:bg-bg-sub/55 hover:border-accent/40 transition-all duration-300 select-none cursor-pointer"
-                        aria-label={link.label}
-                      >
-                        {/* Interactive inner shadow */}
-                        <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover/btn:opacity-100 rounded-xl blur transition-opacity duration-300" />
-                        
-                        <div className="p-1.5 rounded-lg bg-bg-base/60 border border-border-base/20 group-hover/btn:border-accent/40 group-hover/btn:bg-accent/10 transition-all duration-300">
-                          <Icon className="w-4 h-4 text-text-muted group-hover/btn:text-accent transition-colors duration-300" />
+                    {/* Diagnostic Monitor Box */}
+                    <div className="bg-black/45 rounded-xl border border-white/[0.05] p-4.5 font-mono text-[10px] leading-relaxed text-text-muted/80 flex-grow flex flex-col justify-between min-h-[105px]">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-secondary font-bold">$</span>
+                          <span className="text-text-base font-semibold">{diagnostic.cmd}</span>
                         </div>
-                        
-                        <div className="flex flex-col text-left min-w-0">
-                          <span className="text-[10px] font-bold text-text-base group-hover/btn:text-accent tracking-wider uppercase transition-colors duration-300 truncate">
-                            {link.label}
-                          </span>
-                          <span className="text-[8px] font-mono text-text-muted/40 group-hover/btn:text-accent/50 transition-colors duration-300">
-                            PORT // {link.port}
-                          </span>
-                        </div>
+                        <div className="text-text-muted/50 pl-2.5 truncate">{diagnostic.line1}</div>
+                        <div className="text-text-muted/50 pl-2.5 truncate">{diagnostic.line2}</div>
+                      </div>
+                      <div className="flex items-center justify-between border-t border-white/[0.04] pt-2 mt-3 text-[8px] tracking-wider uppercase text-text-muted/40">
+                        <span>NODE_FEED</span>
+                        <span className="text-accent font-bold tracking-widest">{diagnostic.status}</span>
+                      </div>
+                    </div>
+                  </div>
 
-                        {/* Hover bar indicator */}
-                        <div className="absolute bottom-0 left-4 right-4 h-[2px] bg-accent scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-300 origin-center shadow-[0_0_8px_rgba(12,251,255,0.8)]" />
-                      </motion.a>
-                    );
-                  })}
+                  {/* Divider (visible only on desktop) */}
+                  <div className="hidden md:block md:col-span-1 w-px bg-white/[0.05] mx-auto" />
+
+                  {/* Right Column: Highly Interactive Social Grid */}
+                  <div className="md:col-span-6 flex flex-col justify-center">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full">
+                      {socialNodes.map((link, idx) => {
+                        const Icon = link.icon;
+                        return (
+                          <motion.a
+                            key={idx}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onMouseEnter={() => setHoveredNode(link.label)}
+                            onMouseLeave={() => setHoveredNode(null)}
+                            whileHover={{ scale: 1.02, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="relative group/btn flex items-center gap-3.5 px-4.5 py-4 rounded-xl border border-white/[0.06] bg-white/[0.015] hover:bg-white/[0.04] hover:border-accent/40 transition-all duration-300 select-none cursor-pointer"
+                            aria-label={link.label}
+                          >
+                            {/* Interactive inner glow */}
+                            <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover/btn:opacity-100 rounded-xl blur transition-opacity duration-300 pointer-events-none" />
+                            
+                            <div className="p-2 rounded-lg bg-bg-base/70 border border-white/[0.04] group-hover/btn:border-accent/30 group-hover/btn:bg-accent/5 transition-all duration-300">
+                              <Icon className="w-4.5 h-4.5 text-text-muted group-hover/btn:text-accent transition-colors duration-300" />
+                            </div>
+                            
+                            <div className="flex flex-col text-left min-w-0">
+                              <span className="text-[11px] font-bold text-white group-hover/btn:text-accent tracking-wider uppercase transition-colors duration-300 truncate">
+                                {link.label}
+                              </span>
+                              <span className="text-[8px] font-mono text-text-muted/40 group-hover/btn:text-accent/50 transition-colors duration-300">
+                                PORT // {link.port}
+                              </span>
+                            </div>
+
+                            {/* Hover accent bar */}
+                            <div className="absolute bottom-0 left-4 right-4 h-[2px] bg-accent scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-300 origin-center shadow-[0_0_8px_rgba(12,251,255,0.8)]" />
+                          </motion.a>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
