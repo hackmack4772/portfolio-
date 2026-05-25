@@ -85,7 +85,7 @@ function Preloader({ isLoading }) {
               transition={{ delay: 0.8 }}
               className="mt-5 text-[10px] font-mono tracking-[0.25em] text-text-muted uppercase relative z-10"
             >
-              Entering Anti-Gravity System
+              INITIALIZING SECURE PORTAL // ESTABLISHING CONNECTION
             </motion.p>
           </div>
         </motion.div>
