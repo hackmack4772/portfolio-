@@ -23,6 +23,7 @@ import SectionWrapper from "../../components/ui/SectionWrapper";
 import SectionTitle from "../../components/ui/SectionTitle";
 import GlowCard from "../../components/ui/GlowCard";
 import TechPill from "../../components/ui/TechPill";
+import avatarHacker from "../../Assets/avatar_hacker.png";
 
 function About() {
   const [aboutData, setAboutData] = useState({
@@ -31,7 +32,7 @@ function About() {
     skills: [],
     education: [],
     experience: [],
-    photoURL: "https://i.postimg.cc/DfWp1PwJ/avatar.png"
+    photoURL: avatarHacker
   });
 
   const [contactData, setContactData] = useState({
@@ -123,7 +124,7 @@ function About() {
             
             <div className="w-64 h-64 md:w-72 md:h-72 rounded-2xl overflow-hidden relative">
               <img
-                src={aboutData.photoURL || aboutData.image || "https://i.postimg.cc/DfWp1PwJ/avatar.png"}
+                src={aboutData.photoURL || aboutData.image || avatarHacker}
                 alt="Aamir Saleem Lone Avatar"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out scale-100 group-hover:scale-105 select-none pointer-events-none"
               />

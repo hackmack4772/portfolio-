@@ -12,7 +12,7 @@ import ActionButton from "../../components/ui/ActionButton";
 import FloatingBadge from "../../components/ui/FloatingBadge";
 import GridOverlay from "../../components/ui/GridOverlay";
 import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
-import homeBg from "../../Assets/home-bg.png";
+import homeBg from "../../Assets/home_bg_hacker.png";
 
 function HeroTerminal() {
   return (
