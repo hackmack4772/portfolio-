@@ -153,7 +153,7 @@ function ContactUs({ hideHeader = false }) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="glass-panel p-8 rounded-3xl border border-primary/30 max-w-lg mx-auto flex flex-col items-center justify-center text-center gap-4 shadow-2xl relative overflow-hidden"
+            className="glass-premium-dark p-8 rounded-3xl border border-white/[0.08] max-w-lg mx-auto flex flex-col items-center justify-center text-center gap-4 shadow-2xl relative overflow-hidden"
           >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent" />
             <motion.div
@@ -197,7 +197,7 @@ function ContactUs({ hideHeader = false }) {
                       hoverGlow={true}
                       className="p-5 flex gap-4 items-center"
                     >
-                      <div className={`w-10 h-10 rounded-xl bg-bg-sub/80 border border-border-base/40 flex items-center justify-center shrink-0 ${info.color}`}>
+                      <div className={`w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center shrink-0 ${info.color}`}>
                         <InfoIcon className="w-5 h-5" />
                       </div>
                       <div className="space-y-0.5">

@@ -19,7 +19,7 @@ export default function SocialDock({ socialLinks, className = "" }) {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-10 h-10 flex items-center justify-center rounded-full glass-panel border border-border-base/60 text-text-muted hover:text-accent hover:border-accent hover:shadow-[0_0_15px_rgba(12,251,255,0.25)] transition-all duration-300 cursor-pointer"
+            className="w-10 h-10 flex items-center justify-center rounded-full glass-premium border border-white/[0.08] text-text-muted hover:text-accent hover:border-accent hover:shadow-[0_0_15px_rgba(12,251,255,0.25)] transition-all duration-300 cursor-pointer"
             aria-label={link.label}
           >
             <Icon className="w-4 h-4" />

@@ -107,7 +107,7 @@ function Projects() {
       />
 
       {/* Filter Controls Panel */}
-      <div className="glass-panel p-5 rounded-2xl border border-border-base/40 mb-10 shadow-lg space-y-4 text-left">
+      <div className="glass-premium p-5 rounded-2xl border border-white/[0.08] mb-10 shadow-lg space-y-4 text-left">
         <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
           
           {/* Category Select Toggles */}
@@ -256,7 +256,7 @@ function Projects() {
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-1.5 flex-grow px-3 py-2 rounded-full text-[10px] font-mono uppercase tracking-wider text-text-base glass-panel border border-border-base/70 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 cursor-pointer"
+                          className="flex items-center justify-center gap-1.5 flex-grow px-3 py-2 rounded-full text-[10px] font-mono uppercase tracking-wider text-text-base glass-premium border border-white/[0.08] hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 cursor-pointer"
                         >
                           <Github className="w-3.5 h-3.5 text-primary" />
                           <span>Code</span>
@@ -271,7 +271,7 @@ function Projects() {
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="flex flex-col items-center justify-center py-20 text-center glass-panel rounded-3xl border border-border-base/50 shadow-md max-w-md mx-auto gap-4"
+              className="flex flex-col items-center justify-center py-20 text-center glass-premium-dark rounded-3xl border border-white/[0.08] shadow-md max-w-md mx-auto gap-4"
             >
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent">
                 <Terminal className="w-5 h-5 animate-pulse" />
@@ -299,7 +299,7 @@ function Projects() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-20 p-6 md:p-8 glass-panel rounded-3xl border border-primary/30 relative overflow-hidden shadow-xl text-center md:text-left"
+          className="mt-20 p-6 md:p-8 glass-premium-dark rounded-3xl border border-white/[0.08] relative overflow-hidden shadow-xl text-center md:text-left"
         >
           <div className="absolute right-0 bottom-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">

@@ -34,17 +34,17 @@ export default function TimelineItem({ title, institution, year, score, idx }) {
             </div>
           </div>
           
-          <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border-base/20">
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-bg-sub/80 border border-border-base/40 text-[10px] font-mono text-text-muted uppercase">
-              <Calendar className="w-3 h-3 text-accent" />
-              <span>{year}</span>
+            <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/[0.06]">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-[10px] font-mono text-text-muted uppercase">
+                <Calendar className="w-3.5 h-3.5 text-accent" />
+                <span>{year}</span>
+              </div>
+              {score && (
+                <span className="text-[10px] font-mono font-bold text-accent bg-accent/10 px-2.5 py-1 rounded-md border border-accent/20 shadow-[0_0_10px_rgba(12,251,255,0.05)]">
+                  {score}
+                </span>
+              )}
             </div>
-            {score && (
-              <span className="text-[10px] font-mono font-bold text-accent bg-accent/10 px-2 py-1 rounded-md border border-accent/20">
-                {score}
-              </span>
-            )}
-          </div>
         </div>
       </GlowCard>
     </div>

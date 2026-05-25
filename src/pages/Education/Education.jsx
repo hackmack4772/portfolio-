@@ -106,9 +106,9 @@ function Education() {
           
           {/* Left Column: Academic Summary Stats Card */}
           <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-32 w-full text-left">
-            <GlowCard glowColor="secondary" hoverGlow={false}>
+            <GlowCard glowColor="secondary" hoverGlow={false} variant="dark">
               <div className="space-y-4">
-                <div className="flex items-center justify-between border-b border-border-base/20 pb-3">
+                <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
                   <span className="text-[10px] font-mono text-text-muted uppercase tracking-wider">Academic Profile</span>
                   <FloatingBadge label="verified" color="secondary" />
                 </div>
@@ -154,7 +154,7 @@ function Education() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 0.8 }}
               viewport={{ once: true }}
-              className="flex flex-col gap-3 p-5 rounded-2xl border border-border-base/30 bg-bg-sub/10 font-mono text-[10px] sm:text-xs text-text-muted select-none text-center"
+              className="flex flex-col gap-3 p-5 rounded-2xl border border-white/[0.06] glass-premium font-mono text-[10px] sm:text-xs text-text-muted select-none text-center"
             >
               <div className="flex justify-center text-secondary">
                 <Award className="w-5 h-5 animate-pulse" />
@@ -169,9 +169,9 @@ function Education() {
           </div>
 
           {/* Right Column: Timeline nodes */}
-          <div className="lg:col-span-8 relative border-l border-border-base/50 ml-2 sm:ml-4 pl-4 sm:pl-6 space-y-8 w-full text-left">
+          <div className="lg:col-span-8 relative ml-2 sm:ml-4 pl-4 sm:pl-6 space-y-8 w-full text-left">
             {/* Timeline center line graphic */}
-            <div className="absolute left-0 top-0 bottom-0 w-[1.5px] bg-gradient-to-b from-primary via-secondary to-accent opacity-30" />
+            <div className="absolute left-0 top-0 bottom-0 w-[1.5px] bg-gradient-to-b from-primary via-secondary to-accent opacity-35" />
 
             {educationData.map((item, index) => (
               <TimelineItem
