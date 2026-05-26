@@ -9,12 +9,15 @@ import SectionTitle from "../../components/ui/SectionTitle";
 import ActionButton from "../../components/ui/ActionButton";
 import GlowCard from "../../components/ui/GlowCard";
 import FloatingBadge from "../../components/ui/FloatingBadge";
+import { calculateExperience } from "../../utils/experience";
 
 function ResumeNew() {
   const { about, contact, skills } = usePortfolio();
   const [isMobile, setIsMobile] = useState(false);
   const [activeTab, setActiveTab] = useState("experience");
   const [showPdfPreview, setShowPdfPreview] = useState(false);
+
+  const { displayYears } = calculateExperience();
 
   const resumeUrl = contact?.resumeURL && contact.resumeURL.trim().startsWith("http")
     ? contact.resumeURL.trim()
@@ -61,7 +64,7 @@ function ResumeNew() {
           {/* Experience Stat */}
           <GlowCard glowColor="primary" hoverGlow={false} variant="dark" className="p-5 flex flex-col gap-1.5">
             <span className="text-[10px] font-mono text-primary uppercase tracking-wider">Professional Stand</span>
-            <h4 className="text-3xl font-black font-mono text-text-base">3+ Years</h4>
+            <h4 className="text-3xl font-black font-mono text-text-base">{displayYears} Years</h4>
             <p className="text-xs text-text-muted">Specialized in enterprise MERN, Laravel, and reward SaaS systems.</p>
           </GlowCard>
 

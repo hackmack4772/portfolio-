@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect, useContext, useRef } from "react";
 import { doc, getDoc, collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../config/firebase";
-import avatarHacker from "../Assets/avatar_hacker.png";
+import homeBgHacker from "../Assets/home_bg_hacker.png";
+import { makeTextDynamic } from "../utils/experience";
 
 const PortfolioDataContext = createContext();
 
@@ -9,8 +10,8 @@ const fallbackAbout = {
   name: "Aamir Saleem Lone",
   title: "Full-Stack Engineer",
   tagline: "Full-Stack Engineer | Building Scalable Web & Reward Platforms",
-  description: "I am Aamir Saleem Lone, a passionate Full-Stack Developer with nearly 3 years of hands-on experience in building scalable, secure, and performance-driven web applications. Currently working at Mahindra Comviva on the Mobilytix Rewards platform, I specialize in developing enterprise-grade solutions using React, Node.js, TypeScript, and modern backend systems. Previously, I worked at Shine Dezign Infonet, where I contributed to healthcare, CRM, and real-time streaming applications. I hold a Master’s degree in Computer Applications (MCA) and enjoy building reliable systems that solve real-world problems.",
-  photoURL: avatarHacker,
+  description: makeTextDynamic("I am Aamir Saleem Lone, a passionate Full-Stack Developer with nearly 3 years of hands-on experience in building scalable, secure, and performance-driven web applications. Currently working at Mahindra Comviva on the Mobilytix Rewards platform, I specialize in developing enterprise-grade solutions using React, Node.js, TypeScript, and modern backend systems. Previously, I worked at Shine Dezign Infonet, where I contributed to healthcare, CRM, and real-time streaming applications. I hold a Master’s degree in Computer Applications (MCA) and enjoy building reliable systems that solve real-world problems."),
+  photoURL: homeBgHacker,
   skills: ["React", "Node.js", "JavaScript", "TypeScript", "Laravel", "MongoDB", "Git", "Docker", "WebRTC"],
   experience: [
     {
@@ -75,7 +76,7 @@ const fallbackHome = {
 
 const fallbackHome2 = {
   heading: "My Journey",
-  introduction: "I have spent the last few years developing software that is robust, scalable, and intuitive. From building healthcare portals to high-throughput rewards systems, my engineering path has centered on backend performance and frontend user engagement.",
+  introduction: makeTextDynamic("I have spent the last few years developing software that is robust, scalable, and intuitive. From building healthcare portals to high-throughput rewards systems, my engineering path has centered on backend performance and frontend user engagement."),
   skills: "Node.js, React, Express, MySQL, MongoDB, Redis, Docker, Git, Laravel",
   hobbies: "Coding, exploring system architectures, cybersecurity",
   imageUrl: ""
@@ -297,6 +298,14 @@ export const PortfolioDataProvider = ({ children }) => {
       addLog(7, "OK");
 
       if (active) {
+        // Apply dynamic experience formatting to loaded values
+        if (fetchResults.about && fetchResults.about.description) {
+          fetchResults.about.description = makeTextDynamic(fetchResults.about.description);
+        }
+        if (fetchResults.home2 && fetchResults.home2.introduction) {
+          fetchResults.home2.introduction = makeTextDynamic(fetchResults.home2.introduction);
+        }
+        
         setData(fetchResults);
         dataFetchedRef.current = true;
         // Let it display 100% and BOOT COMPLETE briefly for satisfaction

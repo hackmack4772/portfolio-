@@ -11,8 +11,11 @@ import FloatingBadge from "../../components/ui/FloatingBadge";
 import GridOverlay from "../../components/ui/GridOverlay";
 import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
 import homeBg from "../../Assets/home_bg_hacker.png";
+import { calculateExperience } from "../../utils/experience";
 
 function HeroTerminal() {
+  const { displayYears } = calculateExperience();
+  
   return (
     <div className="relative group w-full max-w-md select-none">
       {/* Premium Apple-style drop glow under terminal */}
@@ -44,13 +47,13 @@ function HeroTerminal() {
               <span className="text-text-muted/30">// INITIALIZE CORE NODE</span>{"\n"}
               <span className="text-accent font-semibold">import</span> {"{"} <span className="text-secondary font-bold">Engineer</span> {"}"} <span className="text-accent font-semibold">from</span> <span className="text-primary font-bold">"@core"</span>;{"\n\n"}
               <span className="text-accent font-semibold">const</span> <span className="text-text-base">dev</span> = <span className="text-accent font-semibold">new</span> <span className="text-secondary font-bold">Engineer</span>({"{\n"}
-              {"  "}name: <span className="text-code-green">"Aamir Saleem Lone"</span>,{"\n"}
-              {"  "}role: <span className="text-code-green">"Full-Stack Engineer"</span>,{"\n"}
-              {"  "}experience: <span className="text-code-yellow">"3+ Years"</span>,{"\n"}
-              {"  "}tech: [<span className="text-code-blue">"React"</span>, <span className="text-code-blue">"Node"</span>, <span className="text-code-blue">"TS"</span>, <span className="text-code-blue">"SQL"</span>]{"\n"}
+              {"  "}name: <span className="text-[#34d399]">"Aamir Saleem Lone"</span>,{"\n"}
+              {"  "}role: <span className="text-[#34d399]">"Full-Stack Engineer"</span>,{"\n"}
+              {"  "}experience: <span className="text-[#eab308]">"{displayYears} Years"</span>,{"\n"}
+              {"  "}tech: [<span className="text-[#38bdf8]">"React"</span>, <span className="text-[#38bdf8]">"Node"</span>, <span className="text-[#38bdf8]">"TS"</span>, <span className="text-[#38bdf8]">"SQL"</span>]{"\n"}
               {"}"});{"\n\n"}
               <span className="text-text-muted/30">// RUN PORTFOLIO APPS</span>{"\n"}
-              <span className="text-text-base">dev</span>.<span className="text-code-blue">bootDeployment</span>();
+              <span className="text-text-base">dev</span>.<span className="text-[#38bdf8]">bootDeployment</span>();
             </code>
           </pre>
         </div>
@@ -181,9 +184,9 @@ function LandingPage() {
                 initial={{ y: 15, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6 }}
-                className="text-4xl font-light leading-tight tracking-tight text-text-base/90 md:text-5xl lg:text-6.5xl font-sans"
+                className="text-4xl font-light leading-tight tracking-tight text-white/90 md:text-5xl lg:text-6.5xl font-sans"
               >
-                Hi There, <span className="font-extrabold bg-gradient-to-r from-text-base via-text-base to-text-base/70 bg-clip-text text-transparent">I'm</span>{" "}
+                Hi There, <span className="font-extrabold bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">I'm</span>{" "}
                 <span className="inline-block animate-[wave-animation_2.1s_infinite]" aria-hidden="true">
                   👋🏻
                 </span>
@@ -270,7 +273,7 @@ function LandingPage() {
                   <span className="text-accent">&gt;</span> SOCIAL_CONNECTIVITY.sh
                 </div>
                 <div className="w-12 flex justify-end">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-[0_0_8px_var(--accent-color)]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-[0_0_8px_rgba(12,251,255,0.8)]" />
                 </div>
               </div>
               
@@ -285,7 +288,7 @@ function LandingPage() {
                         transmitting_nodes
                       </div>
                       <div className="space-y-1">
-                        <h2 className="text-xl font-bold tracking-[0.15em] text-text-base uppercase font-mono">
+                        <h2 className="text-xl font-bold tracking-[0.15em] text-white uppercase font-mono">
                           FIND_ME_ON
                         </h2>
                         <p className="text-[10px] text-text-muted/80 uppercase tracking-wider font-mono">
@@ -340,7 +343,7 @@ function LandingPage() {
                             </div>
                             
                             <div className="flex flex-col text-left min-w-0">
-                              <span className="text-[11px] font-bold text-text-base group-hover/btn:text-accent tracking-wider uppercase transition-colors duration-300 truncate">
+                              <span className="text-[11px] font-bold text-white group-hover/btn:text-accent tracking-wider uppercase transition-colors duration-300 truncate">
                                 {link.label}
                               </span>
                               <span className="text-[8px] font-mono text-text-muted/40 group-hover/btn:text-accent/50 transition-colors duration-300">
@@ -349,7 +352,7 @@ function LandingPage() {
                             </div>
 
                             {/* Hover accent bar */}
-                            <div className="absolute bottom-0 left-4 right-4 h-[2px] bg-accent scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-300 origin-center shadow-[0_0_8px_var(--accent-color)]" />
+                            <div className="absolute bottom-0 left-4 right-4 h-[2px] bg-accent scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-300 origin-center shadow-[0_0_8px_rgba(12,251,255,0.8)]" />
                           </motion.a>
                         );
                       })}

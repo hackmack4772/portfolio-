@@ -21,7 +21,8 @@ import SectionWrapper from "../../components/ui/SectionWrapper";
 import SectionTitle from "../../components/ui/SectionTitle";
 import GlowCard from "../../components/ui/GlowCard";
 import TechPill from "../../components/ui/TechPill";
-import avatarHacker from "../../Assets/avatar_hacker.png";
+import homeBgHacker from "../../Assets/home_bg_hacker.png";
+import { makeTextDynamic } from "../../utils/experience";
 
 function About() {
   const [activeTab, setActiveTab] = useState("personal");
@@ -29,11 +30,11 @@ function About() {
 
   const aboutData = {
     tagline: "Full-Stack Engineer | Building Scalable Web & Reward Platforms",
-    biography: "I am Aamir Saleem Lone, a passionate Full-Stack Developer with nearly 3 years of hands-on experience in building scalable, secure, and performance-driven web applications. Currently working at Mahindra Comviva on the Mobilytix Rewards platform, I specialize in developing enterprise-grade solutions using React, Node.js, TypeScript, and modern backend systems. Previously, I worked at Shine Dezign Infonet, where I contributed to healthcare, CRM, and real-time streaming applications. I hold a Master’s degree in Computer Applications (MCA) and enjoy building reliable systems that solve real-world problems.",
+    biography: makeTextDynamic("I am Aamir Saleem Lone, a passionate Full-Stack Developer with nearly 3 years of hands-on experience in building scalable, secure, and performance-driven web applications. Currently working at Mahindra Comviva on the Mobilytix Rewards platform, I specialize in developing enterprise-grade solutions using React, Node.js, TypeScript, and modern backend systems. Previously, I worked at Shine Dezign Infonet, where I contributed to healthcare, CRM, and real-time streaming applications. I hold a Master’s degree in Computer Applications (MCA) and enjoy building reliable systems that solve real-world problems."),
     skills: [],
     education: [],
     experience: [],
-    photoURL: avatarHacker,
+    photoURL: homeBgHacker,
     ...about
   };
 
@@ -86,7 +87,7 @@ function About() {
             
             <div className="w-64 h-64 md:w-72 md:h-72 rounded-2xl overflow-hidden relative">
               <img
-                src={avatarHacker}
+                src={homeBgHacker || aboutData.photoURL  }
                 alt="Aamir Saleem Lone Avatar"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out scale-100 group-hover:scale-105 select-none pointer-events-none"
               />

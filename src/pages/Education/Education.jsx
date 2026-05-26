@@ -10,7 +10,7 @@ import GlowCard from "../../components/ui/GlowCard";
 import FloatingBadge from "../../components/ui/FloatingBadge";
 
 function Education() {
-  const { about, education } = usePortfolio();
+  const { about, education,loading } = usePortfolio();
 
   let educationData = [];
   if (about?.education && about.education.length > 0) {

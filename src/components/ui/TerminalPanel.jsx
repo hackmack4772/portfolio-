@@ -2,7 +2,7 @@ import React from "react";
 
 export default function TerminalPanel({ title = "bash", children, className = "" }) {
   return (
-    <div className={`w-full rounded-2xl glass-premium-dark elevate-l1 relative overflow-hidden flex flex-col font-mono text-xs text-text-muted ${className}`}>
+    <div className={`w-full rounded-2xl glass-premium-dark relative overflow-hidden flex flex-col font-mono text-xs text-text-muted ${className}`}>
       {/* Terminal Title Bar */}
       <div className="flex items-center justify-between px-5 py-3.5 bg-white/[0.015] border-b border-white/[0.06] select-none">
         {/* Left Window Control dots (macOS styling) */}
@@ -19,7 +19,7 @@ export default function TerminalPanel({ title = "bash", children, className = ""
         
         {/* Right status indicator */}
         <div className="w-12 flex justify-end">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-[0_0_8px_var(--accent-color)]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-[0_0_8px_rgba(12,251,255,0.8)]" />
         </div>
       </div>
       

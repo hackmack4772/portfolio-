@@ -1,7 +1,10 @@
 import React from "react";
 import { Sparkles } from "lucide-react";
+import { calculateExperience } from "../utils/experience";
 
 function AboutCard() {
+  const { floorYears } = calculateExperience();
+  
   const activities = [
     "Listening to Music & Podcasts",
     "Exploring Emerging Tech (AI, WebRTC)",
@@ -21,7 +24,7 @@ function AboutCard() {
             <span className="text-secondary font-bold">Jammu and Kashmir, India.</span>
           </p>
           <p className="text-sm md:text-base leading-relaxed text-text-muted text-justify">
-            I am currently working as a MERN + Laravel developer with 2+ years of professional experience in building enterprise-grade products.
+            I am currently working as a MERN + Laravel developer with {floorYears}+ years of professional experience in building enterprise-grade products.
           </p>
           <p className="text-sm md:text-base leading-relaxed text-text-muted text-justify">
             I hold a Master's degree in Computer Applications (MCA) from Swami Vivekanand Institute of Engineering & Technology (SVIET).

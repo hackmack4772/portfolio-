@@ -162,7 +162,7 @@ function CanvasParticles() {
       ref={canvasRef}
       id="canvas-particles"
       className="fixed inset-0 -z-50 pointer-events-none block"
-      style={{ mixBlendMode: isDarkMode ? "screen" : "normal" }}
+      style={{ mixBlendMode: "screen" }}
     />
   );
 }
