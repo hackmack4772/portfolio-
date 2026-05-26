@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import MyJourney from "../MyJourney/MyJourney";
 import ContactUs from "../ContactUs/ContactUs";
@@ -9,7 +9,10 @@ import TerminalPanel from "../../components/ui/TerminalPanel";
 import ActionButton from "../../components/ui/ActionButton";
 import FloatingBadge from "../../components/ui/FloatingBadge";
 import GridOverlay from "../../components/ui/GridOverlay";
-import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
+import ThreeBackground from "../../components/ui/ThreeBackground";
+import TelemetryDashboard from "../../components/ui/TelemetryDashboard";
+import ConsoleCLI from "../../components/ui/ConsoleCLI";
+import { Github, Twitter, Linkedin, Instagram, Terminal as TerminalIcon } from "lucide-react";
 import homeBg from "../../Assets/home_bg_hacker.png";
 import { calculateExperience } from "../../utils/experience";
 
@@ -64,7 +67,20 @@ function HeroTerminal() {
 
 function LandingPage() {
   const [hoveredNode, setHoveredNode] = useState(null);
+  const [isCliOpen, setIsCliOpen] = useState(false);
   const { homeData, contact } = usePortfolio();
+
+  // Listen for global shortcut keys
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "`" || (e.ctrlKey && e.key === "k")) {
+        e.preventDefault();
+        setIsCliOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const personalData = {
     name: homeData?.name || "Aamir Saleem Lone",
@@ -139,7 +155,23 @@ function LandingPage() {
   const diagnostic = getDiagnosticText();
 
   return (
-    <div className="w-full bg-bg-base text-text-base">
+    <div className="w-full bg-bg-base text-text-base relative">
+      {/* 3D WebGL Background Particles Mesh */}
+      <ThreeBackground />
+
+      {/* Global Interactive Console CLI Overlay */}
+      <ConsoleCLI isOpen={isCliOpen} onClose={() => setIsCliOpen(false)} />
+
+      {/* Floating CLI Toggle Action Button */}
+      <button
+        onClick={() => setIsCliOpen(true)}
+        className="fixed bottom-6 right-6 w-12 h-12 rounded-full glass-premium border border-primary/30 flex items-center justify-center text-primary hover:text-accent hover:border-accent hover:shadow-[0_0_15px_rgba(12,251,255,0.35)] transition-all duration-300 z-40 cursor-pointer shadow-lg animate-float-slow"
+        aria-label="Open Interactive CLI Console"
+        title="Open Terminal (Ctrl + K or `)"
+      >
+        <TerminalIcon className="w-5 h-5" />
+      </button>
+
       {/* Hero Section */}
       <SectionWrapper
         id="home"
@@ -153,7 +185,7 @@ function LandingPage() {
         {/* Artistic background image blending (home-bg.png) */}
         <div className="absolute inset-0 select-none pointer-events-none overflow-hidden -z-10">
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.18] lg:opacity-[0.24] mix-blend-luminosity scale-105"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.08] lg:opacity-[0.12] mix-blend-luminosity scale-105"
             style={{ 
               backgroundImage: `url(${homeBg})`,
               maskImage: 'radial-gradient(circle at 75% 50%, black 30%, transparent 70%)',
@@ -195,7 +227,7 @@ function LandingPage() {
               <motion.h2
                 initial={{ y: 15, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                transition={{ duration: 0.6, delay: 0.15 }}
                 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent md:text-5xl lg:text-6xl font-sans"
               >
                 {personalData.name}
@@ -230,8 +262,8 @@ function LandingPage() {
                 Discover Journey
               </ActionButton>
 
-              <ActionButton href="#contact" variant="primary" className="w-full sm:w-auto bg-accent text-bg-base hover:bg-accent/80 shadow-[0_0_25px_rgba(12,251,255,0.25)] transition-all">
-                Get in Touch
+              <ActionButton href="#telemetry" variant="primary" className="w-full sm:w-auto bg-accent text-bg-base hover:bg-accent/80 shadow-[0_0_25px_rgba(12,251,255,0.25)] transition-all">
+                Inspect Infrastructure
               </ActionButton>
             </motion.div>
           </div>
@@ -251,6 +283,11 @@ function LandingPage() {
       {/* Journey Section */}
       <SectionWrapper id="about" variant="sub" showTicks={true}>
         <MyJourney />
+      </SectionWrapper>
+
+      {/* Telemetry Dashboard Section */}
+      <SectionWrapper id="telemetry" showTicks={true}>
+        <TelemetryDashboard />
       </SectionWrapper>
 
       {/* Social & Contact Section */}
