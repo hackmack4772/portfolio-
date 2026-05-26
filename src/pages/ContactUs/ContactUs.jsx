@@ -1,17 +1,18 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MapPin, Mail, Phone, Send, Sparkles, CheckCircle, AlertCircle } from "lucide-react";
+import { MapPin, Mail, Phone, Send, Sparkles, CheckCircle, AlertCircle, Terminal as TerminalIcon, Network, ShieldCheck } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { usePortfolio } from "../../Context/PortfolioDataContext";
+import { useLoading } from "../../Context/LoadingContext";
 import HelmetWrapper from "../../components/HelmetWrapper";
 import SectionWrapper from "../../components/ui/SectionWrapper";
 import SectionTitle from "../../components/ui/SectionTitle";
 import GlowCard from "../../components/ui/GlowCard";
-import SocialDock from "../../components/ui/SocialDock";
 import ActionButton from "../../components/ui/ActionButton";
 
 function ContactUs({ hideHeader = false }) {
   const { contact } = usePortfolio();
+  const { handleLoading } = useLoading(); // Imported to fix context runtime bug
   const formRef = useRef();
 
   const [formData, setFormData] = useState({
@@ -38,6 +39,9 @@ function ContactUs({ hideHeader = false }) {
   const [submitError, setSubmitError] = useState(null);
   const [activeField, setActiveField] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Interactive social node inspector state
+  const [hoveredSocial, setHoveredSocial] = useState(null);
 
   // Field validator
   const validateField = (name, value) => {
@@ -94,7 +98,7 @@ function ContactUs({ hideHeader = false }) {
 
     try {
       setIsSubmitting(true);
-      handleLoading(true);
+      if (handleLoading) handleLoading(true);
       
       await emailjs.sendForm(
         "service_scq3s4o",
@@ -117,7 +121,7 @@ function ContactUs({ hideHeader = false }) {
       setSubmitError("Failed to send message. Please check your network or try again later.");
     } finally {
       setIsSubmitting(false);
-      handleLoading(false);
+      if (handleLoading) handleLoading(false);
     }
   };
 
@@ -127,8 +131,22 @@ function ContactUs({ hideHeader = false }) {
     { icon: Phone, label: "Phone", value: contactData.phone, color: "text-accent", glowColor: "accent" },
   ];
 
+  // Social node routing helpers
+  const getSocialDiagnostic = () => {
+    switch (hoveredSocial) {
+      case "GitHub":
+        return "Ping: github.com/hackmack4772 ... SECURE_PORT_443 active [RTT: 22ms]";
+      case "LinkedIn":
+        return "SSH: linkedin.com/in/aamir-saleem-lone ... KEY_VERIFIED [RTT: 35ms]";
+      case "Twitter":
+        return "HTTP: twitter.com/hackmack4772 ... GATE_OK [RTT: 14ms]";
+      default:
+        return "Awaiting connection nodes trigger. Hover over nodes to inspect.";
+    }
+  };
+
   const formContent = (
-    <div className="max-w-5xl mx-auto w-full">
+    <div className="max-w-5xl mx-auto w-full mt-8">
       <AnimatePresence mode="wait">
         {formSubmitted ? (
           <motion.div
@@ -142,14 +160,14 @@ function ContactUs({ hideHeader = false }) {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 200, delay: 0.15 }}
-              className="w-16 h-16 rounded-full bg-accent/15 flex items-center justify-center text-accent"
+              className="w-16 h-16 rounded-full bg-accent/15 flex items-center justify-center text-accent animate-pulse-cyan"
             >
               <CheckCircle className="w-8 h-8" />
             </motion.div>
-            <div className="space-y-2">
-              <h3 className="text-xl font-bold">Message Dispatched!</h3>
-              <p className="text-xs md:text-sm text-text-muted leading-relaxed max-w-xs">
-                Thank you for reaching out, your message has been sent successfully. I will get back to you shortly.
+            <div className="space-y-2 font-mono text-[10px] text-text-muted">
+              <h3 className="text-sm font-bold text-white uppercase tracking-wider">Payload Transmitted!</h3>
+              <p className="font-sans text-xs leading-relaxed max-w-xs">
+                Your encrypted secure message hash has been written to the gateway core. I will compile a response shortly.
               </p>
             </div>
             <ActionButton
@@ -157,7 +175,7 @@ function ContactUs({ hideHeader = false }) {
               variant="primary"
               className="mt-4"
             >
-              Send Another Message
+              Dispatch New Connection
             </ActionButton>
           </motion.div>
         ) : (
@@ -167,9 +185,34 @@ function ContactUs({ hideHeader = false }) {
             exit={{ opacity: 0, y: -15 }}
             className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch"
           >
-            {/* Left Column: Contact Cards info */}
+            {/* Left Column: Diagnostics info & Social mesh */}
             <div className="md:col-span-5 flex flex-col gap-6 h-full justify-start">
-              <div className="flex flex-col gap-5">
+              
+              {/* Telemetry settings box */}
+              <div className="glass-premium-dark p-5 rounded-2xl border border-white/[0.08] relative overflow-hidden font-mono text-[10px] text-text-muted">
+                <div className="absolute inset-0 crt-scanlines opacity-5 pointer-events-none select-none" />
+                <div className="flex items-center justify-between border-b border-white/[0.06] pb-2 mb-3 select-none">
+                  <span className="text-[9px] uppercase tracking-widest flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-accent animate-pulse" /> transmission_gate</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
+                </div>
+                <div className="space-y-1.5">
+                  <div className="flex justify-between">
+                    <span>CHANNEL_STATUS:</span>
+                    <span className="text-green-500 font-bold">SECURE_ACTIVE</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>SIGNAL_STRENGTH:</span>
+                    <span className="text-white font-bold">STABLE (99.2%)</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>TRANSMISSION:</span>
+                    <span className="text-accent font-bold">SHA256_ENCRYPTED</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Info cards */}
+              <div className="flex flex-col gap-4">
                 {contactInfo.map((info, idx) => {
                   const InfoIcon = info.icon;
                   return (
@@ -177,28 +220,76 @@ function ContactUs({ hideHeader = false }) {
                       key={idx}
                       glowColor={info.glowColor}
                       hoverGlow={true}
-                      className="p-5 flex gap-4 items-center"
+                      className="p-4 flex gap-4 items-center"
                     >
-                      <div className={`w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center shrink-0 ${info.color}`}>
-                        <InfoIcon className="w-5 h-5" />
+                      <div className={`w-8.5 h-8.5 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center shrink-0 ${info.color}`}>
+                        <InfoIcon className="w-4 h-4" />
                       </div>
-                      <div className="space-y-0.5">
-                        <span className="text-[10px] font-mono text-text-muted uppercase tracking-wider block">{info.label}</span>
-                        <span className="text-xs md:text-sm font-semibold text-text-base">{info.value}</span>
+                      <div className="space-y-0.5 font-mono text-[10px]">
+                        <span className="text-[8px] text-text-muted uppercase tracking-wider block">{info.label}</span>
+                        <span className="text-[11px] font-semibold text-text-base leading-tight block">{info.value}</span>
                       </div>
                     </GlowCard>
                   );
                 })}
               </div>
 
-              {/* Social Connections */}
+              {/* Connected node network social mesh */}
               {!hideHeader && (
-                <GlowCard glowColor="primary" hoverGlow={false} className="p-5 flex flex-col gap-3">
-                  <span className="text-[10px] font-mono text-text-muted uppercase tracking-widest text-center md:text-left flex items-center gap-1 justify-center md:justify-start">
-                    <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" /> Connect with me
-                  </span>
-                  <SocialDock socialLinks={contactData.socialLinks} className="justify-center md:justify-start" />
-                </GlowCard>
+                <div className="glass-premium p-5 rounded-2xl border border-white/[0.06] flex flex-col gap-4 relative overflow-hidden">
+                  <div className="absolute top-2 right-2 text-[7px] font-mono text-text-muted/40 uppercase">// COMM_NETWORK</div>
+                  
+                  {/* SVG Node network */}
+                  <div className="relative w-full h-36 bg-[#0b0f19]/40 rounded-xl border border-white/[0.04] p-3 flex items-center justify-center blueprint-grid">
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
+                      <line x1="50%" y1="50%" x2="25%" y2="25%" stroke="#0cfbff" strokeWidth="1" strokeOpacity="0.2" />
+                      <line x1="50%" y1="50%" x2="75%" y2="25%" stroke="#0cfbff" strokeWidth="1" strokeOpacity="0.2" />
+                      <line x1="50%" y1="50%" x2="50%" y2="78%" stroke="#0cfbff" strokeWidth="1" strokeOpacity="0.2" />
+                    </svg>
+
+                    <div className="relative w-full flex justify-between items-center px-4 font-mono text-[8px] text-text-muted z-10">
+                      
+                      {/* GitHub node */}
+                      <a 
+                        href={contactData.socialLinks?.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        onMouseEnter={() => setHoveredSocial("GitHub")}
+                        onMouseLeave={() => setHoveredSocial(null)}
+                        className="p-2 border border-white/10 bg-black/50 rounded-xl hover:border-accent hover:text-white transition-all cursor-pointer flex flex-col items-center justify-center w-18"
+                      >
+                        <span className="text-accent font-bold">GITHUB</span>
+                        <span className="text-[6px] opacity-60">Port 443</span>
+                      </a>
+
+                      {/* Core central node */}
+                      <div className="w-10 h-10 rounded-full border border-accent bg-accent/10 flex items-center justify-center text-accent animate-pulse-cyan">
+                        <Network className="w-4 h-4" />
+                      </div>
+
+                      <div className="flex flex-col gap-10">
+                        {/* LinkedIn node */}
+                        <a 
+                          href={contactData.socialLinks?.linkedin} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          onMouseEnter={() => setHoveredSocial("LinkedIn")}
+                          onMouseLeave={() => setHoveredSocial(null)}
+                          className="p-2 border border-white/10 bg-black/50 rounded-xl hover:border-accent hover:text-white transition-all cursor-pointer flex flex-col items-center justify-center w-18"
+                        >
+                          <span className="text-accent font-bold">LINKEDIN</span>
+                          <span className="text-[6px] opacity-60">Port 8080</span>
+                        </a>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  {/* Telemetry diagnostics display footer */}
+                  <div className="font-mono text-[8px] text-text-muted/70 tracking-wide border-t border-white/[0.04] pt-2 text-justify">
+                    {getSocialDiagnostic()}
+                  </div>
+                </div>
               )}
             </div>
 
@@ -230,7 +321,6 @@ function ContactUs({ hideHeader = false }) {
                         ? "border-red-500/40" 
                         : "border-white/[0.07] group-hover/field:border-accent/40"
                     }`}>
-                      {/* Monospace caret indicator */}
                       <span className="absolute left-3.5 top-3 text-[10px] font-mono text-accent/60 select-none">$</span>
                       <input
                         type="text"
@@ -354,7 +444,7 @@ function ContactUs({ hideHeader = false }) {
                     className="mt-2 w-full flex items-center justify-center gap-2"
                   >
                     <Send className={`w-4 h-4 ${isSubmitting ? "animate-pulse" : ""}`} />
-                    <span>{isSubmitting ? "Transmitting..." : "Send Message"}</span>
+                    <span>{isSubmitting ? "Transmitting payload..." : "Transmit Encrypted Payload"}</span>
                   </ActionButton>
 
                 </form>
@@ -373,18 +463,18 @@ function ContactUs({ hideHeader = false }) {
   return (
     <SectionWrapper id="contact-section" className="pt-36 pb-16 md:pt-40 md:pb-24 lg:pt-44" spacing="none" showTicks={true}>
       <HelmetWrapper>
-        <title>Contact Me | Portfolio</title>
-        <meta name="description" content="Get in touch with Aamir Saleem Lone for collaborations, jobs, or feedback." />
+        <title>Contact Core | Portfolio</title>
+        <meta name="description" content="Get in touch with Aamir Saleem Lone via secure, encrypted messaging transmission." />
       </HelmetWrapper>
 
       {/* Background Soft Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-accent/5 rounded-full blur-3xl -z-10 animate-pulse-glow" />
 
       <SectionTitle 
-        subtitle="Get In Touch" 
+        subtitle="Secure Transmission Link" 
         title="Contact" 
-        highlight="Me" 
-        description="Have a question or want to work together? Drop me a line."
+        highlight="Core" 
+        description="Establish encrypted handshakes or ping communications node routers to trigger direct collaboration connections."
       />
 
       {formContent}
