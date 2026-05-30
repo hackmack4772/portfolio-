@@ -99,7 +99,9 @@ function ResumeNew() {
     let currentIndex = 0;
     const interval = setInterval(() => {
       if (currentIndex < logs.length) {
-        setTransferLogs(prev => [...prev, logs[currentIndex]]);
+        const newLog = logs[currentIndex];
+        if(!newLog) return;
+        setTransferLogs(prev => [...prev, newLog]);
         setTransferProgress(Math.floor(((currentIndex + 1) / logs.length) * 100));
         currentIndex++;
       } else {
@@ -163,6 +165,7 @@ function ResumeNew() {
               {/* Terminal log panel */}
               <div className="h-48 bg-black/50 border border-white/[0.05] rounded-xl p-4 overflow-y-auto space-y-1.5 no-scrollbar text-text-muted text-[10px]">
                 {transferLogs.map((log, idx) => {
+                  console.log(log);
                   const isSuccess = log.includes("[SUCCESS]");
                   return (
                     <div key={idx} className={isSuccess ? "text-green-400 font-bold" : ""}>
