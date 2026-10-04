@@ -194,7 +194,7 @@ const AboutSection = () => {
           <p className="text-xs text-text-muted mt-1">Configure your personal presentation, profile avatar, and core details.</p>
         </div>
         <button 
-          className="flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_12px_rgba(12,251,255,0.25)] transition-all cursor-pointer shrink-0 self-start sm:self-center"
+          className="flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_12px_rgba(12,251,255,0.25)] transition cursor-pointer shrink-0 self-start sm:self-center"
           onClick={saveAboutData}
           disabled={saving}
         >
@@ -282,7 +282,7 @@ const AboutSection = () => {
                 className="absolute inset-0 opacity-0 w-full cursor-pointer h-full z-10"
                 id="profile-photo"
               />
-              <div className="w-full flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-border-base/60 text-xs font-mono uppercase hover:border-primary/50 hover:bg-primary/10 transition-all cursor-pointer">
+              <div className="w-full flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-border-base/60 text-xs font-mono uppercase hover:border-primary/50 hover:bg-primary/10 transition cursor-pointer">
                 <ImageIcon className="w-4 h-4 text-primary" />
                 <span>Upload New Avatar</span>
               </div>
@@ -332,7 +332,7 @@ const AboutSection = () => {
             onKeyDown={(e) => { if(e.key === 'Enter') { e.preventDefault(); addSkill(); } }}
           />
           <button 
-            className="flex items-center gap-1 px-4 py-2.5 rounded-xl border border-border-base text-xs font-mono uppercase hover:border-accent/50 hover:bg-accent/10 transition-all cursor-pointer shrink-0"
+            className="flex items-center gap-1 px-4 py-2.5 rounded-xl border border-border-base text-xs font-mono uppercase hover:border-accent/50 hover:bg-accent/10 transition cursor-pointer shrink-0"
             onClick={addSkill}
           >
             <Plus className="w-4 h-4" />
@@ -523,7 +523,7 @@ const AboutSection = () => {
       {/* Bottom controls */}
       <div className="flex justify-end border-t border-border-base/40 pt-6">
         <button 
-          className="flex items-center gap-1.5 px-6 py-3 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_15px_rgba(12,251,255,0.35)] transition-all cursor-pointer"
+          className="flex items-center gap-1.5 px-6 py-3 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_15px_rgba(12,251,255,0.35)] transition cursor-pointer"
           onClick={saveAboutData}
           disabled={saving}
         >

@@ -141,7 +141,7 @@ export default function Github() {
             href="https://github.com/hackmack4772"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider text-text-base glass-panel border border-border-base hover:border-primary/50 hover:shadow-[0_0_15px_rgba(143,16,183,0.15)] transition-all duration-300 cursor-pointer"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider text-text-base glass-panel border border-border-base hover:border-primary/50 hover:shadow-[0_0_15px_rgba(143,16,183,0.15)] transition duration-300 cursor-pointer"
           >
             <GitIcon className="w-4 h-4 text-primary" />
             <span>Visit my GitHub Profile</span>

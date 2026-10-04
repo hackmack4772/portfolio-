@@ -196,7 +196,7 @@ const ColorSchemeSection = () => {
 
         <div className="flex items-center gap-3 shrink-0">
           <button 
-            className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider border cursor-pointer transition-all duration-300 ${
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider border cursor-pointer transition duration-300 ${
               previewActive 
                 ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/30 shadow-[0_0_12px_rgba(234,179,8,0.15)] font-bold' 
                 : 'border-border-base text-text-muted hover:text-text-base hover:border-text-muted'
@@ -207,7 +207,7 @@ const ColorSchemeSection = () => {
             <span>{previewActive ? 'Exit Preview' : 'Preview'}</span>
           </button>
           <button 
-            className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_12px_rgba(12,251,255,0.25)] transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_12px_rgba(12,251,255,0.25)] transition cursor-pointer"
             onClick={saveColors}
             disabled={saving}
           >
@@ -261,7 +261,7 @@ const ColorSchemeSection = () => {
       {/* Footer controls */}
       <div className="flex justify-end mt-4 border-t border-border-base/40 pt-6">
         <button 
-          className="flex items-center gap-1.5 px-6 py-3 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_15px_rgba(12,251,255,0.35)] transition-all cursor-pointer"
+          className="flex items-center gap-1.5 px-6 py-3 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_15px_rgba(12,251,255,0.35)] transition cursor-pointer"
           onClick={saveColors}
           disabled={saving}
         >

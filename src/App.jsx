@@ -118,23 +118,50 @@ function App() {
     importLandingPage();
   }, []);
 
-  // Initialize Lenis scroll
+  // Smooth scroll, desktop only.
+  //
+  // Lenis replaces the browser's native scrolling with a JS rAF loop. On a
+  // phone that is a downgrade in both directions: it throws away the OS
+  // momentum curve users expect, and it adds a third always-on rAF loop
+  // alongside the two background canvases. Touch devices keep native
+  // scrolling; reduced-motion users keep it too.
   useEffect(() => {
+    const touch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (touch || reduced) return;
+
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      // Slightly shorter and on an expo-out curve, matching
+      // --ease-out-quint in the stylesheet so wheel scrolling and UI
+      // transitions decelerate with the same character.
+      duration: 1.05,
+      easing: (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      syncTouch: false,
     });
 
     let frameId;
-    function raf(time) {
+    const raf = (time) => {
       lenis.raf(time);
       frameId = requestAnimationFrame(raf);
-    }
-
+    };
     frameId = requestAnimationFrame(raf);
 
+    // Lenis owns the scroll position, so in-page anchors must go through it
+    // or the browser and Lenis fight over the same scroll.
+    const onAnchorClick = (e) => {
+      const link = e.target.closest?.('a[href^="#"]');
+      const id = link?.getAttribute("href");
+      if (!id || id === "#") return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, { offset: -112 });
+    };
+    document.addEventListener("click", onAnchorClick);
+
     return () => {
+      document.removeEventListener("click", onAnchorClick);
       cancelAnimationFrame(frameId);
       lenis.destroy();
     };

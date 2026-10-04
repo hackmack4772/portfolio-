@@ -301,7 +301,7 @@ function Projects() {
                       href={selectedProject.githubUrl} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="flex items-center gap-1.5 px-4.5 py-2.5 rounded-full text-[10px] font-mono uppercase tracking-wider text-text-base glass-premium border border-white/[0.08] hover:border-primary/50 hover:bg-primary/10 transition-all cursor-pointer font-bold"
+                      className="flex items-center gap-1.5 px-4.5 py-2.5 rounded-full text-[10px] font-mono uppercase tracking-wider text-text-base glass-premium border border-white/[0.08] hover:border-primary/50 hover:bg-primary/10 transition cursor-pointer font-bold"
                     >
                       <Github className="w-3.5 h-3.5 text-primary" />
                       <span>Code Archive</span>
@@ -312,7 +312,7 @@ function Projects() {
                       href={selectedProject.demoUrl} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="flex items-center gap-1.5 px-4.5 py-2.5 rounded-full text-[10px] font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_12px_rgba(12,251,255,0.25)] transition-all cursor-pointer"
+                      className="flex items-center gap-1.5 px-4.5 py-2.5 rounded-full text-[10px] font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_12px_rgba(12,251,255,0.25)] transition cursor-pointer"
                     >
                       <Eye className="w-3.5 h-3.5" />
                       <span>Live Demo</span>
@@ -333,7 +333,7 @@ function Projects() {
           <div className="flex items-center gap-2 overflow-x-auto w-full no-scrollbar pb-1 lg:pb-0">
             <button
               onClick={() => setActiveCategory("all")}
-              className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-[10px] font-mono uppercase tracking-wider border cursor-pointer transition-all duration-300 ${
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-[10px] font-mono uppercase tracking-wider border cursor-pointer transition duration-300 ${
                 activeCategory === "all"
                   ? "bg-accent text-bg-base border-accent font-bold"
                   : "border-border-base/50 text-text-muted hover:text-text-base hover:border-text-muted"
@@ -347,7 +347,7 @@ function Projects() {
               <button
                 key={index}
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-full text-[10px] font-mono uppercase tracking-wider border cursor-pointer transition-all duration-300 ${
+                className={`px-4 py-2 rounded-full text-[10px] font-mono uppercase tracking-wider border cursor-pointer transition duration-300 ${
                   activeCategory === category
                     ? "bg-primary text-text-base border-primary font-bold shadow-[0_0_12px_rgba(143,16,183,0.3)]"
                     : "border-border-base/50 text-text-muted hover:text-text-base hover:border-text-muted"
@@ -412,7 +412,7 @@ function Projects() {
                   <div
                     key={project.id}
                     onClick={() => setSelectedProject(project)}
-                    className="group relative flex flex-col items-center justify-center p-6 rounded-2xl glass-premium text-text-muted hover:text-text-base border border-white/[0.08] transition-all duration-500 hover:-translate-y-2 select-none cursor-pointer hover:border-accent hover:shadow-[0_0_15px_rgba(12,251,255,0.15)] col-span-3 sm:col-span-2 md:col-span-2 text-center"
+                    className="group relative flex flex-col items-center justify-center p-6 rounded-2xl glass-premium text-text-muted hover:text-text-base border border-white/[0.08] transition duration-500 hover:-translate-y-2 select-none cursor-pointer hover:border-accent hover:shadow-[0_0_15px_rgba(12,251,255,0.15)] col-span-3 sm:col-span-2 md:col-span-2 text-center"
                     aria-label={project.title}
                   >
                     {/* SVG Blueprint indicator icon */}

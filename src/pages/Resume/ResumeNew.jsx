@@ -259,7 +259,7 @@ function ResumeNew() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setActiveTab("experience")}
-                  className={`px-4 py-2 text-xs font-mono rounded-t-lg transition-all duration-200 cursor-pointer ${
+                  className={`px-4 py-2 text-xs font-mono rounded-t-lg transition duration-200 cursor-pointer ${
                     activeTab === "experience"
                       ? "bg-white/[0.04] text-accent border-b-2 border-b-accent font-bold"
                       : "bg-transparent text-text-muted hover:text-text-base hover:bg-white/[0.01]"
@@ -269,7 +269,7 @@ function ResumeNew() {
                 </button>
                 <button
                   onClick={() => setActiveTab("skills")}
-                  className={`px-4 py-2 text-xs font-mono rounded-t-lg transition-all duration-200 cursor-pointer ${
+                  className={`px-4 py-2 text-xs font-mono rounded-t-lg transition duration-200 cursor-pointer ${
                     activeTab === "skills"
                       ? "bg-white/[0.04] text-accent border-b-2 border-b-accent font-bold"
                       : "bg-transparent text-text-muted hover:text-text-base hover:bg-white/[0.01]"
@@ -299,7 +299,7 @@ function ResumeNew() {
                     <div className="space-y-6">
                       {aboutData.experience && aboutData.experience.length > 0 ? (
                         aboutData.experience.map((exp, index) => (
-                          <div key={index} className="flex gap-4 p-5 rounded-xl glass-premium border border-white/[0.06] hover:border-accent/40 relative overflow-hidden group transition-all duration-300">
+                          <div key={index} className="flex gap-4 p-5 rounded-xl glass-premium border border-white/[0.06] hover:border-accent/40 relative overflow-hidden group transition duration-300">
                             <div className="absolute top-0 left-0 w-[2px] h-full bg-gradient-to-b from-primary to-accent opacity-45" />
                             <div className="w-8 h-8 rounded-lg bg-accent/10 text-accent flex items-center justify-center shrink-0">
                               <Layers className="w-4 h-4" />

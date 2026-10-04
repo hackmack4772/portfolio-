@@ -96,7 +96,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="mt-2 w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_15px_rgba(12,251,255,0.25)] transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none"
+            className="mt-2 w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_15px_rgba(12,251,255,0.25)] transition duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none"
           >
             <KeyRound className="w-4 h-4" />
             <span>{loading ? "Decrypting..." : "Access Dashboard"}</span>

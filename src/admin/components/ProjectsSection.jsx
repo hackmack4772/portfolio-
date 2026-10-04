@@ -409,7 +409,7 @@ const ProjectsSection = () => {
                     className="absolute inset-0 opacity-0 w-full cursor-pointer h-full z-10"
                     id="project-image"
                   />
-                  <div className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-border-base text-xs font-mono uppercase hover:border-primary/50 hover:bg-primary/10 transition-all cursor-pointer">
+                  <div className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-border-base text-xs font-mono uppercase hover:border-primary/50 hover:bg-primary/10 transition cursor-pointer">
                     <ImageIcon className="w-3.5 h-3.5 text-primary" />
                     <span>Upload Screen</span>
                   </div>
@@ -433,7 +433,7 @@ const ProjectsSection = () => {
               <button 
                 type="submit"
                 disabled={saving}
-                className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_12px_rgba(12,251,255,0.25)] transition-all cursor-pointer select-none"
+                className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_12px_rgba(12,251,255,0.25)] transition cursor-pointer select-none"
               >
                 {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
                 <span>{saving ? 'Syncing...' : editingProject ? 'Update' : 'Publish'}</span>
@@ -455,7 +455,7 @@ const ProjectsSection = () => {
               {projects.map((project) => (
                 <div 
                   key={project.id}
-                  className="glass-panel rounded-2xl overflow-hidden border border-border-base/50 shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between"
+                  className="glass-panel rounded-2xl overflow-hidden border border-border-base/50 shadow-md hover:border-primary/30 transition duration-300 flex flex-col justify-between"
                 >
                   <div className="relative h-28 bg-bg-sub/20 overflow-hidden flex items-center justify-center border-b border-border-base/30">
                     {project.imageUrl ? (

@@ -196,7 +196,7 @@ function About() {
               <img
                 src={homeBgHacker || aboutData.photoURL }
                 alt="Aamir Saleem Lone Profile"
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out scale-100 group-hover:scale-105 select-none pointer-events-none"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700 ease-in-out scale-100 group-hover:scale-105 select-none pointer-events-none"
               />
               <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-xl glass-premium border border-accent/30 text-[10px] font-mono font-bold text-accent flex items-center gap-1.5 shadow-lg">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
@@ -328,7 +328,7 @@ function About() {
                 {/* Gateway Node */}
                 <button 
                   onClick={() => setSelectedSandbox("gateway")}
-                  className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                  className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                     selectedSandbox === "gateway"
                       ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                       : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
@@ -343,7 +343,7 @@ function About() {
                 <div className="flex flex-col gap-10">
                   <button 
                     onClick={() => setSelectedSandbox("cache")}
-                    className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                    className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                       selectedSandbox === "cache"
                         ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                         : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
@@ -356,7 +356,7 @@ function About() {
 
                   <button 
                     onClick={() => setSelectedSandbox("engine")}
-                    className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                    className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                       selectedSandbox === "engine"
                         ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                         : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
@@ -371,7 +371,7 @@ function About() {
                 {/* Database Node */}
                 <button 
                   onClick={() => setSelectedSandbox("persistence")}
-                  className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                  className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                     selectedSandbox === "persistence"
                       ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                       : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
@@ -510,7 +510,7 @@ function About() {
                     <button 
                       key={idx}
                       onClick={() => setFocusedCommit(item)}
-                      className={`relative z-10 flex gap-4 items-start p-4 rounded-xl border text-left cursor-pointer transition-all ${
+                      className={`relative z-10 flex gap-4 items-start p-4 rounded-xl border text-left cursor-pointer transition ${
                         isFocused 
                           ? "bg-white/[0.04] border-accent shadow-[0_0_12px_rgba(12,251,255,0.15)] scale-102" 
                           : "bg-white/[0.01] border-white/[0.06] hover:border-accent/40"
@@ -518,7 +518,7 @@ function About() {
                     >
                       {/* Commit dot selector */}
                       <div className="absolute -left-10 md:-left-14 top-1/2 -translate-y-1/2 flex items-center justify-center">
-                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all ${
+                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition ${
                           isFocused 
                             ? "bg-accent border-accent scale-110 shadow-[0_0_8px_rgba(12,251,255,0.6)] animate-pulse-cyan" 
                             : "bg-bg-base border-white/30 hover:border-accent"

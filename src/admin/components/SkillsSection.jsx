@@ -356,7 +356,7 @@ const SkillsSection = () => {
 
             <button 
               onClick={editingSkill ? handleUpdateSkill : handleAddSkill}
-              className="mt-3 w-full flex items-center justify-center gap-1.5 py-3.5 rounded-xl text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_15px_rgba(12,251,255,0.25)] transition-all cursor-pointer select-none"
+              className="mt-3 w-full flex items-center justify-center gap-1.5 py-3.5 rounded-xl text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_15px_rgba(12,251,255,0.25)] transition cursor-pointer select-none"
             >
               {editingSkill ? <Save className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
               <span>{editingSkill ? 'Update Skill Record' : 'Create Skill Record'}</span>
@@ -389,7 +389,7 @@ const SkillsSection = () => {
                     .map(skill => (
                       <div 
                         key={skill.id} 
-                        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-2xl bg-bg-sub/30 border border-border-base/40 hover:border-primary/20 transition-all duration-300"
+                        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-2xl bg-bg-sub/30 border border-border-base/40 hover:border-primary/20 transition duration-300"
                       >
                         <div className="flex-1 space-y-2.5 w-full">
                           <div className="flex justify-between items-center text-xs">

@@ -18,6 +18,20 @@
   --font-mono: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   --font-sans: "Outfit", "Space Grotesk", "Inter", sans-serif;
   
+  /* Motion system ------------------------------------------------------
+     Tailwind's stock curve is cubic-bezier(.4, 0, .2, 1) - symmetric, so it
+     eases IN as well as out and a hover appears to start late. UI feedback
+     should leave immediately and settle gently, which is what an ease-out
+     curve does. Overriding the two --default-* variables re-times every
+     transition utility in the app at once. */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease-in-out-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --default-transition-timing-function: var(--ease-out-quint);
+  --default-transition-duration: 200ms;
+
   --animate-float: float 6s ease-in-out infinite;
   --animate-float-slow: float 9s ease-in-out infinite;
   --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
@@ -41,11 +55,11 @@
 @keyframes pulse-glow {
   0%, 100% {
     opacity: 0.4;
-    filter: blur(40px) scale(1);
+    transform: scale(1);
   }
   50% {
     opacity: 0.7;
-    filter: blur(60px) scale(1.1);
+    transform: scale(1.08);
   }
 }
 
@@ -304,3 +318,54 @@ body {
 
 
 
+
+/* ---------------------------------------------------------------------------
+   Motion polish
+   --------------------------------------------------------------------------- */
+
+/* Anchor targets were landing at y=0, underneath the fixed navbar, so
+   "Discover Journey" scrolled #about half out of sight. The navbar is
+   ~88-104px depending on scroll state; this clears it plus breathing room. */
+html {
+  scroll-padding-top: 7rem;
+}
+
+section[id] {
+  scroll-margin-top: 7rem;
+}
+
+/* Touch devices never fire :hover, so every hover affordance in the app is
+   dead weight there and taps feel unacknowledged. Give them a real press
+   state instead - transform only, so it stays on the compositor. */
+@media (hover: none) {
+  a:active,
+  button:active,
+  [role="button"]:active {
+    transform: scale(0.97);
+    transition-duration: 80ms;
+  }
+}
+
+/* Respect the OS setting. Anything purely decorative stops; nothing is
+   hidden, because no content in this app depends on an animation finishing
+   to become visible. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  /* These are ambient loops with no informational content. */
+  .animate-pulse-glow,
+  .animate-float,
+  .animate-float-slow {
+    animation: none !important;
+  }
+}

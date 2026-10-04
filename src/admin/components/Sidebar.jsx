@@ -63,7 +63,7 @@ const Sidebar = ({ activeSection, setActiveSection, onLogout }) => {
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 text-xs font-mono uppercase tracking-wider rounded-xl transition-all duration-300 cursor-pointer select-none ${
+                  className={`w-full flex items-center gap-3 px-4 py-3 text-xs font-mono uppercase tracking-wider rounded-xl transition duration-300 cursor-pointer select-none ${
                     isActive 
                       ? "text-accent bg-primary/10 border border-primary/20 shadow-[0_0_10px_rgba(143,16,183,0.1)]" 
                       : "text-text-muted hover:text-text-base hover:bg-bg-sub/50 border border-transparent"
@@ -81,7 +81,7 @@ const Sidebar = ({ activeSection, setActiveSection, onLogout }) => {
         <div className="flex flex-col gap-3 pt-6 border-t border-border-base/40">
           <a 
             href="/" 
-            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-mono uppercase tracking-wider text-text-base glass-panel border border-border-base hover:border-primary/50 hover:bg-primary/10 transition-all cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-mono uppercase tracking-wider text-text-base glass-panel border border-border-base hover:border-primary/50 hover:bg-primary/10 transition cursor-pointer"
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -170,7 +170,7 @@ function LandingPage() {
       {/* Floating CLI Toggle Action Button */}
       <button
         onClick={() => setIsCliOpen(true)}
-        className="fixed bottom-6 right-6 w-12 h-12 rounded-full glass-premium border border-primary/30 flex items-center justify-center text-primary hover:text-accent hover:border-accent hover:shadow-[0_0_15px_rgba(12,251,255,0.35)] transition-all duration-300 z-40 cursor-pointer shadow-lg animate-float-slow"
+        className="fixed bottom-6 right-6 w-12 h-12 rounded-full glass-premium border border-primary/30 flex items-center justify-center text-primary hover:text-accent hover:border-accent hover:shadow-[0_0_15px_rgba(12,251,255,0.35)] transition duration-300 z-40 cursor-pointer shadow-lg animate-float-slow"
         aria-label="Open Interactive CLI Console"
         title="Open Terminal (Ctrl + K or `)"
       >
@@ -263,11 +263,11 @@ function LandingPage() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex w-full flex-col items-stretch gap-4 pt-3 sm:w-auto sm:flex-row sm:items-center sm:justify-start"
             >
-              <ActionButton href="#about" variant="secondary" className="w-full sm:w-auto glass-premium hover:bg-white/[0.04] transition-all">
+              <ActionButton href="#about" variant="secondary" className="w-full sm:w-auto glass-premium hover:bg-white/[0.04] transition">
                 Discover Journey
               </ActionButton>
 
-              <ActionButton href="#telemetry" variant="primary" className="w-full sm:w-auto bg-accent text-bg-base hover:bg-accent/80 shadow-[0_0_25px_rgba(12,251,255,0.25)] transition-all">
+              <ActionButton href="#telemetry" variant="primary" className="w-full sm:w-auto bg-accent text-bg-base hover:bg-accent/80 shadow-[0_0_25px_rgba(12,251,255,0.25)] transition">
                 Inspect Infrastructure
               </ActionButton>
             </motion.div>
@@ -374,13 +374,13 @@ function LandingPage() {
                             onMouseLeave={() => setHoveredNode(null)}
                             whileHover={{ scale: 1.02, y: -2 }}
                             whileTap={{ scale: 0.98 }}
-                            className="relative group/btn flex items-center gap-3.5 px-4.5 py-4 rounded-xl border border-white/[0.06] bg-white/[0.015] hover:bg-white/[0.04] hover:border-accent/40 transition-all duration-300 select-none cursor-pointer"
+                            className="relative group/btn flex items-center gap-3.5 px-4.5 py-4 rounded-xl border border-white/[0.06] bg-white/[0.015] hover:bg-white/[0.04] hover:border-accent/40 transition duration-300 select-none cursor-pointer"
                             aria-label={link.label}
                           >
                             {/* Interactive inner glow */}
                             <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover/btn:opacity-100 rounded-xl blur transition-opacity duration-300 pointer-events-none" />
                             
-                            <div className="p-2 rounded-lg bg-bg-base/70 border border-white/[0.04] group-hover/btn:border-accent/30 group-hover/btn:bg-accent/5 transition-all duration-300">
+                            <div className="p-2 rounded-lg bg-bg-base/70 border border-white/[0.04] group-hover/btn:border-accent/30 group-hover/btn:bg-accent/5 transition duration-300">
                               <Icon className="w-4.5 h-4.5 text-text-muted group-hover/btn:text-accent transition-colors duration-300" />
                             </div>
                             

@@ -131,7 +131,7 @@ const ContactSection = () => {
         </div>
         
         <button 
-          className="flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_12px_rgba(12,251,255,0.25)] transition-all cursor-pointer shrink-0 self-start sm:self-center"
+          className="flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_12px_rgba(12,251,255,0.25)] transition cursor-pointer shrink-0 self-start sm:self-center"
           onClick={saveContactData}
           disabled={saving}
         >
@@ -270,7 +270,7 @@ const ContactSection = () => {
       {/* Footer controls */}
       <div className="flex justify-end border-t border-border-base/40 pt-6">
         <button 
-          className="flex items-center gap-1.5 px-6 py-3 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_15px_rgba(12,251,255,0.35)] transition-all cursor-pointer"
+          className="flex items-center gap-1.5 px-6 py-3 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_15px_rgba(12,251,255,0.35)] transition cursor-pointer"
           onClick={saveContactData}
           disabled={saving}
         >

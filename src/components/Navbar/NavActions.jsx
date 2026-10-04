@@ -19,7 +19,7 @@ export default function NavActions({ githubUrl }) {
           rel="noopener noreferrer"
           whileHover={{ scale: 1.02, y: -1 }}
           whileTap={{ scale: 0.98 }}
-          className="relative hidden xl:flex items-center gap-2.5 px-4 py-2 rounded-lg font-mono text-[10px] uppercase tracking-widest text-text-base border border-border-base/40 bg-bg-sub/10 hover:border-accent/40 hover:bg-accent/5 hover:shadow-[0_0_15px_rgba(12,251,255,0.12)] transition-all duration-300 cursor-pointer"
+          className="relative hidden xl:flex items-center gap-2.5 px-4 py-2 rounded-lg font-mono text-[10px] uppercase tracking-widest text-text-base border border-border-base/40 bg-bg-sub/10 hover:border-accent/40 hover:bg-accent/5 hover:shadow-[0_0_15px_rgba(12,251,255,0.12)] transition duration-300 cursor-pointer"
         >
           {/* Tech Scan Line Indicator */}
           <span className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 group-hover:opacity-100 tech-scan-line" />

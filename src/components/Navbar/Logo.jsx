@@ -6,7 +6,7 @@ export default function Logo() {
   return (
     <Link to="/" className="group flex items-center select-none relative focus:outline-none">
       <motion.div
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border-base/10 bg-bg-sub/5 backdrop-blur-sm transition-all duration-300 group-hover:border-accent/30 group-hover:bg-accent/5 group-hover:shadow-[0_0_15px_rgba(12,251,255,0.08)]"
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border-base/10 bg-bg-sub/5 backdrop-blur-sm transition duration-300 group-hover:border-accent/30 group-hover:bg-accent/5 group-hover:shadow-[0_0_15px_rgba(12,251,255,0.08)]"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >
@@ -23,7 +23,7 @@ export default function Logo() {
         {/* Main Logo Text */}
         <span className="text-sm font-black tracking-[0.18em] font-mono text-text-base uppercase">
           HACK
-          <span className="text-primary group-hover:text-accent group-hover:text-glow transition-all duration-300">
+          <span className="text-primary group-hover:text-accent group-hover:text-glow transition duration-300">
             MACK
           </span>
         </span>

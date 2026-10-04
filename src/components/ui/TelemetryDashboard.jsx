@@ -296,7 +296,7 @@ function TelemetryDashboard() {
               </button>
               <button 
                 onClick={toggleLatencyInjection}
-                className={`px-2.5 py-1 text-[9px] font-mono uppercase tracking-wider rounded border transition-all cursor-pointer ${
+                className={`px-2.5 py-1 text-[9px] font-mono uppercase tracking-wider rounded border transition cursor-pointer ${
                   isLatencyInjected 
                     ? "bg-red-500 border-red-500 text-bg-base font-bold shadow-[0_0_10px_rgba(239,68,68,0.3)]" 
                     : "border-white/[0.08] hover:border-red-500/40 hover:text-red-500 bg-white/[0.02]"
@@ -334,7 +334,7 @@ function TelemetryDashboard() {
               {/* 1. API Gateway Node */}
               <button 
                 onClick={() => setSelectedNode("gateway")}
-                className={`relative flex flex-col items-center justify-center p-3 rounded-2xl border transition-all cursor-pointer ${
+                className={`relative flex flex-col items-center justify-center p-3 rounded-2xl border transition cursor-pointer ${
                   selectedNode === "gateway" 
                     ? "bg-green-500/10 border-green-500 scale-105 shadow-[0_0_15px_rgba(34,197,94,0.25)]" 
                     : "bg-white/[0.02] border-white/[0.08] hover:border-green-500/40"
@@ -349,7 +349,7 @@ function TelemetryDashboard() {
                 {/* 2. Redis Cache Node */}
                 <button 
                   onClick={() => setSelectedNode("cache")}
-                  className={`relative flex flex-col items-center justify-center p-3 rounded-2xl border transition-all cursor-pointer ${
+                  className={`relative flex flex-col items-center justify-center p-3 rounded-2xl border transition cursor-pointer ${
                     selectedNode === "cache" 
                       ? "bg-blue-500/10 border-blue-500 scale-105 shadow-[0_0_15px_rgba(59,130,246,0.25)]" 
                       : "bg-white/[0.02] border-white/[0.08] hover:border-blue-500/40"
@@ -365,7 +365,7 @@ function TelemetryDashboard() {
                 {/* 3. Kafka Queue Node */}
                 <button 
                   onClick={() => setSelectedNode("broker")}
-                  className={`relative flex flex-col items-center justify-center p-3 rounded-2xl border transition-all cursor-pointer ${
+                  className={`relative flex flex-col items-center justify-center p-3 rounded-2xl border transition cursor-pointer ${
                     selectedNode === "broker" 
                       ? "bg-purple-500/10 border-purple-500 scale-105 shadow-[0_0_15px_rgba(168,85,247,0.25)]" 
                       : "bg-white/[0.02] border-white/[0.08] hover:border-purple-500/40"
@@ -380,7 +380,7 @@ function TelemetryDashboard() {
               {/* 4. Rewards Core Calculation Node */}
               <button 
                 onClick={() => setSelectedNode("engine")}
-                className={`relative flex flex-col items-center justify-center p-3 rounded-2xl border transition-all cursor-pointer ${
+                className={`relative flex flex-col items-center justify-center p-3 rounded-2xl border transition cursor-pointer ${
                   selectedNode === "engine" 
                     ? "bg-cyan-500/10 border-cyan-500 scale-105 shadow-[0_0_15px_rgba(6,182,212,0.25)]" 
                     : "bg-white/[0.02] border-white/[0.08] hover:border-cyan-500/40"
@@ -396,7 +396,7 @@ function TelemetryDashboard() {
               {/* 5. Persistent DB Node */}
               <button 
                 onClick={() => setSelectedNode("database")}
-                className={`relative flex flex-col items-center justify-center p-3 rounded-2xl border transition-all cursor-pointer ${
+                className={`relative flex flex-col items-center justify-center p-3 rounded-2xl border transition cursor-pointer ${
                   selectedNode === "database" 
                     ? "bg-pink-500/10 border-pink-500 scale-105 shadow-[0_0_15px_rgba(236,72,153,0.25)]" 
                     : "bg-white/[0.02] border-white/[0.08] hover:border-pink-500/40"
@@ -440,7 +440,7 @@ function TelemetryDashboard() {
                 <span className="text-lg font-bold font-mono text-text-base">{currentNodeMetrics.cpu}%</span>
                 <div className="w-full h-1 bg-black/40 rounded-full overflow-hidden mt-1.5">
                   <div 
-                    className="h-full bg-accent transition-all duration-500" 
+                    className="h-full bg-accent transition duration-500" 
                     style={{ width: `${currentNodeMetrics.cpu}%` }}
                   />
                 </div>
@@ -501,7 +501,7 @@ function TelemetryDashboard() {
                 return (
                   <div 
                     key={index} 
-                    className={`transition-all duration-300 ${
+                    className={`transition duration-300 ${
                       isError 
                         ? "text-red-400 font-bold border-l-2 border-red-500 pl-1.5 bg-red-500/5 py-0.5 rounded" 
                         : isDiag

@@ -24,7 +24,7 @@ const ColorPicker = ({ color, onChange }) => {
   return (
     <div className="relative w-full" ref={colorPickerRef}>
       <div 
-        className="flex items-center gap-3 p-2.5 rounded-xl border border-border-base/50 bg-bg-sub/30 hover:border-primary/40 hover:bg-bg-sub/50 transition-all duration-300 cursor-pointer select-none"
+        className="flex items-center gap-3 p-2.5 rounded-xl border border-border-base/50 bg-bg-sub/30 hover:border-primary/40 hover:bg-bg-sub/50 transition duration-300 cursor-pointer select-none"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div 

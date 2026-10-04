@@ -110,7 +110,7 @@ export default function MobileDrawer({ isOpen, onClose, navItems, isActivePath, 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={onClose}
-            className="p-2.5 rounded-lg border border-border-base/30 text-text-base hover:text-accent hover:border-accent/40 bg-bg-sub/10 transition-all cursor-pointer focus:outline-none"
+            className="p-2.5 rounded-lg border border-border-base/30 text-text-base hover:text-accent hover:border-accent/40 bg-bg-sub/10 transition cursor-pointer focus:outline-none"
             aria-label="Close menu"
           >
             <X className="w-4 h-4" />
@@ -129,7 +129,7 @@ export default function MobileDrawer({ isOpen, onClose, navItems, isActivePath, 
                 <Link
                   to={item.path}
                   onClick={onClose}
-                  className={`flex items-center justify-between px-4 py-3.5 w-full rounded-lg border font-mono text-xs uppercase tracking-widest transition-all min-h-[48px] ${
+                  className={`flex items-center justify-between px-4 py-3.5 w-full rounded-lg border font-mono text-xs uppercase tracking-widest transition min-h-[48px] ${
                     isActive
                       ? "text-accent bg-accent/5 border-accent/30 shadow-[0_0_15px_rgba(12,251,255,0.06)]"
                       : "text-text-muted hover:text-text-base border-border-base/10 hover:border-primary/25 hover:bg-primary/5 bg-bg-sub/5"
@@ -156,7 +156,7 @@ export default function MobileDrawer({ isOpen, onClose, navItems, isActivePath, 
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={onClose}
-                className="flex items-center justify-between px-4 py-3.5 rounded-lg text-xs font-mono tracking-widest uppercase text-text-base bg-primary/10 border border-primary/40 hover:bg-primary/15 transition-all min-h-[48px] shadow-[0_0_15px_rgba(143,16,183,0.05)] cursor-pointer"
+                className="flex items-center justify-between px-4 py-3.5 rounded-lg text-xs font-mono tracking-widest uppercase text-text-base bg-primary/10 border border-primary/40 hover:bg-primary/15 transition min-h-[48px] shadow-[0_0_15px_rgba(143,16,183,0.05)] cursor-pointer"
               >
                 <div className="flex items-center gap-3">
                   <GitFork className="w-4 h-4 text-primary" />

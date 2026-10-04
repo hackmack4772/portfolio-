@@ -51,7 +51,7 @@ function NotFound() {
         >
           <Link
             to="/"
-            className="flex items-center gap-2 px-6 py-3 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_20px_rgba(12,251,255,0.3)] transition-all cursor-pointer"
+            className="flex items-center gap-2 px-6 py-3 rounded-full text-xs font-mono uppercase tracking-wider text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_20px_rgba(12,251,255,0.3)] transition cursor-pointer"
           >
             <Home className="w-4 h-4" />
             <span>Go Home</span>

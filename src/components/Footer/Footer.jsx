@@ -50,7 +50,7 @@ function Footer() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8.5 h-8.5 flex items-center justify-center rounded-full glass-panel border border-border-base/50 text-text-muted hover:text-accent hover:border-accent hover:shadow-[0_0_10px_rgba(12,251,255,0.2)] transition-all duration-300 cursor-pointer"
+                className="w-8.5 h-8.5 flex items-center justify-center rounded-full glass-panel border border-border-base/50 text-text-muted hover:text-accent hover:border-accent hover:shadow-[0_0_10px_rgba(12,251,255,0.2)] transition duration-300 cursor-pointer"
                 aria-label={social.label}
               >
                 <Icon className="w-3.5 h-3.5" />

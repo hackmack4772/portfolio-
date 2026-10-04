@@ -88,7 +88,7 @@ function NavBar() {
           
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2.5 rounded-lg border border-border-base/40 text-text-base hover:text-accent hover:border-accent/40 bg-bg-sub/10 transition-all duration-300 focus:outline-none cursor-pointer"
+            className="p-2.5 rounded-lg border border-border-base/40 text-text-base hover:text-accent hover:border-accent/40 bg-bg-sub/10 transition duration-300 focus:outline-none cursor-pointer"
             aria-label={isOpen ? "Close menu" : "Open menu"}
           >
             {isOpen ? <X className="w-4 h-4" /> : <MenuIcon className="w-4 h-4" />}

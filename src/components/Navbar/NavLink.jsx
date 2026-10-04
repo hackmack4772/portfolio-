@@ -9,7 +9,7 @@ export default function NavLink({ to, label, index, isActive }) {
   return (
     <Link
       to={to}
-      className={`relative flex items-center gap-1.5 px-4 py-2 font-mono text-[10px] sm:text-[11px] uppercase tracking-widest transition-all duration-300 focus:outline-none select-none group ${
+      className={`relative flex items-center gap-1.5 px-4 py-2 font-mono text-[10px] sm:text-[11px] uppercase tracking-widest transition duration-300 focus:outline-none select-none group ${
         isActive 
           ? "text-accent text-glow" 
           : "text-text-muted hover:text-text-base"

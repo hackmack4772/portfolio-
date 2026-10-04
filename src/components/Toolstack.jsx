@@ -36,7 +36,7 @@ function Toolstack() {
         return (
           <div
             key={tool.id || tool.name}
-            className={`group relative flex flex-col items-center justify-center p-6 rounded-2xl glass-premium text-text-muted hover:text-text-base border border-white/[0.08] transition-all duration-500 hover:-translate-y-2 select-none cursor-pointer ${glowClass}`}
+            className={`group relative flex flex-col items-center justify-center p-6 rounded-2xl glass-premium text-text-muted hover:text-text-base border border-white/[0.08] transition duration-500 hover:-translate-y-2 select-none cursor-pointer ${glowClass}`}
             aria-label={tool.name}
             title={tool.name}
           >

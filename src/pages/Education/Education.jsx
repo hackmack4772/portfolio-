@@ -234,7 +234,7 @@ function Education() {
                   ].map((flow, index) => (
                     <div 
                       key={index} 
-                      className="group relative p-3 rounded-xl border border-white/[0.05] bg-white/[0.01] hover:border-accent/40 hover:bg-white/[0.03] transition-all flex flex-col items-center justify-center gap-1.5"
+                      className="group relative p-3 rounded-xl border border-white/[0.05] bg-white/[0.01] hover:border-accent/40 hover:bg-white/[0.03] transition flex flex-col items-center justify-center gap-1.5"
                     >
                       <span className="text-[7px] font-mono text-accent">{flow.step}_{flow.key}</span>
                       <h4 className="text-[11px] font-bold text-white leading-tight font-mono">{flow.name}</h4>
@@ -292,7 +292,7 @@ function Education() {
                     {/* MERN Core Node */}
                     <button 
                       onClick={() => setSelectedDomain("mern")}
-                      className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                      className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                         selectedDomain === "mern"
                           ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                           : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
@@ -307,7 +307,7 @@ function Education() {
                     <div className="flex flex-col gap-12 justify-center">
                       <button 
                         onClick={() => setSelectedDomain("caching")}
-                        className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                        className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                           selectedDomain === "caching"
                             ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                             : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
@@ -320,7 +320,7 @@ function Education() {
 
                       <button 
                         onClick={() => setSelectedDomain("databases")}
-                        className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                        className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                           selectedDomain === "databases"
                             ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                             : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
@@ -336,7 +336,7 @@ function Education() {
                     <div className="flex flex-col gap-12 justify-center">
                       <button 
                         onClick={() => setSelectedDomain("realtime")}
-                        className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                        className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                           selectedDomain === "realtime"
                             ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                             : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
@@ -349,7 +349,7 @@ function Education() {
 
                       <button 
                         onClick={() => setSelectedDomain("infrastructure")}
-                        className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                        className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                           selectedDomain === "infrastructure"
                             ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                             : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
@@ -435,7 +435,7 @@ function Education() {
                 return (
                   <div 
                     key={era.id} 
-                    className={`rounded-2xl border transition-all overflow-hidden ${
+                    className={`rounded-2xl border transition overflow-hidden ${
                       isExpanded 
                         ? "bg-white/[0.03] border-accent/60 shadow-[0_0_15px_rgba(12,251,255,0.08)]" 
                         : "bg-white/[0.01] border-white/[0.06] hover:border-accent/30"

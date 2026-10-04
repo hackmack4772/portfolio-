@@ -13,7 +13,7 @@ function AboutCard() {
   ];
 
   return (
-    <div className="glass-panel p-6 md:p-8 rounded-2xl relative overflow-hidden transition-all duration-300 hover:border-primary/50 shadow-xl group">
+    <div className="glass-panel p-6 md:p-8 rounded-2xl relative overflow-hidden transition duration-300 hover:border-primary/50 shadow-xl group">
       {/* Background glow effects */}
       <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-accent/5 rounded-full blur-2xl group-hover:bg-accent/10 transition-colors duration-500" />
       

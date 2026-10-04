@@ -256,7 +256,7 @@ function ContactUs({ hideHeader = false }) {
                         rel="noopener noreferrer"
                         onMouseEnter={() => setHoveredSocial("GitHub")}
                         onMouseLeave={() => setHoveredSocial(null)}
-                        className="p-2 border border-white/10 bg-black/50 rounded-xl hover:border-accent hover:text-white transition-all cursor-pointer flex flex-col items-center justify-center w-18"
+                        className="p-2 border border-white/10 bg-black/50 rounded-xl hover:border-accent hover:text-white transition cursor-pointer flex flex-col items-center justify-center w-18"
                       >
                         <span className="text-accent font-bold">GITHUB</span>
                         <span className="text-[6px] opacity-60">Port 443</span>
@@ -275,7 +275,7 @@ function ContactUs({ hideHeader = false }) {
                           rel="noopener noreferrer"
                           onMouseEnter={() => setHoveredSocial("LinkedIn")}
                           onMouseLeave={() => setHoveredSocial(null)}
-                          className="p-2 border border-white/10 bg-black/50 rounded-xl hover:border-accent hover:text-white transition-all cursor-pointer flex flex-col items-center justify-center w-18"
+                          className="p-2 border border-white/10 bg-black/50 rounded-xl hover:border-accent hover:text-white transition cursor-pointer flex flex-col items-center justify-center w-18"
                         >
                           <span className="text-accent font-bold">LINKEDIN</span>
                           <span className="text-[6px] opacity-60">Port 8080</span>
@@ -314,7 +314,7 @@ function ContactUs({ hideHeader = false }) {
                       <span>_user_identity</span>
                       <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
                     </div>
-                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition-all duration-300 ${
+                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition duration-300 ${
                       activeField === "user_name" 
                         ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.12)]" 
                         : errors.user_name 
@@ -330,7 +330,7 @@ function ContactUs({ hideHeader = false }) {
                         onChange={handleChange}
                         onFocus={() => handleFocus("user_name")}
                         onBlur={handleBlur}
-                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none transition-all duration-300"
+                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none transition duration-300"
                       />
                     </div>
                     {errors.user_name && (
@@ -346,7 +346,7 @@ function ContactUs({ hideHeader = false }) {
                       <span>_delivery_node</span>
                       <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
                     </div>
-                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition-all duration-300 ${
+                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition duration-300 ${
                       activeField === "user_email" 
                         ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.12)]" 
                         : errors.user_email 
@@ -362,7 +362,7 @@ function ContactUs({ hideHeader = false }) {
                         onChange={handleChange}
                         onFocus={() => handleFocus("user_email")}
                         onBlur={handleBlur}
-                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none transition-all duration-300"
+                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none transition duration-300"
                       />
                     </div>
                     {errors.user_email && (
@@ -378,7 +378,7 @@ function ContactUs({ hideHeader = false }) {
                       <span>_transmission_header</span>
                       <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
                     </div>
-                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition-all duration-300 ${
+                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition duration-300 ${
                       activeField === "subject" 
                         ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.12)]" 
                         : errors.subject 
@@ -394,7 +394,7 @@ function ContactUs({ hideHeader = false }) {
                         onChange={handleChange}
                         onFocus={() => handleFocus("subject")}
                         onBlur={handleBlur}
-                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none transition-all duration-300"
+                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none transition duration-300"
                       />
                     </div>
                     {errors.subject && (
@@ -410,7 +410,7 @@ function ContactUs({ hideHeader = false }) {
                       <span>_payload_body</span>
                       <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
                     </div>
-                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition-all duration-300 ${
+                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition duration-300 ${
                       activeField === "message" 
                         ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.12)]" 
                         : errors.message 
@@ -426,7 +426,7 @@ function ContactUs({ hideHeader = false }) {
                         onChange={handleChange}
                         onFocus={() => handleFocus("message")}
                         onBlur={handleBlur}
-                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none resize-none transition-all duration-300"
+                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none resize-none transition duration-300"
                       />
                     </div>
                     {errors.message && (
