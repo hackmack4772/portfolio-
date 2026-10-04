@@ -212,7 +212,7 @@ const about = {
   title: "Software Engineer",
   tagline: "Software Engineer · Backend & Full-Stack · Node.js / React / TypeScript",
   description: SUMMARY,
-  photoURL: existingAbout.photoURL || "",   // preserved
+  photoURL: existingAbout.photoURL || "/home_bg_hacker.png",   // preserved
   skills: ["Node.js", "React.js", "TypeScript", "GraphQL", "PostgreSQL", "Apache Kafka", "Redis", "Docker", "AWS"],
   experience: EXPERIENCE,
   education: EDUCATION.map(({ note, ...e }) => e),
@@ -248,7 +248,7 @@ const home2 = {
   hobbies: "System architecture, performance tuning, cybersecurity",
   // Preserved, never reset. An earlier run of this script wrote "" here and
   // the journey card rendered IMAGE_NULL until it was noticed.
-  imageUrl: (await getDoc(doc(db, "home", "home2"))).data()?.imageUrl || "/avatar_hacker.png",
+  imageUrl: (await getDoc(doc(db, "home", "home2"))).data()?.imageUrl || "/home_bg_hacker.png",
 };
 
 if (WRITE) {

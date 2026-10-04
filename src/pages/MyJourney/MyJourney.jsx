@@ -110,7 +110,7 @@ function MyJourney() {
             <div className="absolute inset-0 bg-bg-base rounded-2xl overflow-hidden flex items-center justify-center">
               <SmartImage
                 src={home2Data.imageUrl}
-                fallback="avatar"
+                fallback="heroBg"
                 alt="Aamir Saleem Lone"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />

@@ -13,7 +13,6 @@ import ThreeBackground from "../../components/ui/ThreeBackground";
 import TelemetryDashboard from "../../components/ui/TelemetryDashboard";
 import ConsoleCLI from "../../components/ui/ConsoleCLI";
 import { Github, Twitter, Linkedin, Instagram, Terminal as TerminalIcon } from "lucide-react";
-import homeBg from "../../Assets/home_bg_hacker.png";
 import { calculateExperience } from "../../utils/experience";
 import { countRender } from "../../utils/debugBus";
 
@@ -192,7 +191,9 @@ function LandingPage() {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.08] lg:opacity-[0.12] mix-blend-luminosity scale-105"
             style={{ 
-              backgroundImage: `url(${homeBg})`,
+              // Stable public path, so this is not emitted a second time as a
+                // content-hashed copy of the identical file in public/.
+                backgroundImage: "url(/home_bg_hacker.png)",
               maskImage: 'radial-gradient(circle at 75% 50%, black 30%, transparent 70%)',
               WebkitMaskImage: 'radial-gradient(circle at 75% 50%, black 30%, transparent 70%)'
             }}

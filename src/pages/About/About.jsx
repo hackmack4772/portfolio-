@@ -27,7 +27,6 @@ import { usePortfolio } from "../../Context/PortfolioDataContext";
 import SectionWrapper from "../../components/ui/SectionWrapper";
 import SectionTitle from "../../components/ui/SectionTitle";
 import GlowCard from "../../components/ui/GlowCard";
-import homeBgHacker from "../../Assets/home_bg_hacker.png";
 import { makeTextDynamic } from "../../utils/experience";
 import SmartImage from "../../components/ui/SmartImage";
 
@@ -149,7 +148,7 @@ function About() {
   const aboutData = {
     tagline: "Full-Stack Engineer | Building Scalable Web & Reward Platforms",
     biography: makeTextDynamic("I am Aamir Saleem Lone, a passionate Full-Stack Developer with nearly 3 years of hands-on experience in building scalable, secure, and performance-driven web applications. Currently working at Mahindra Comviva on the Mobilytix Rewards platform, I specialize in developing enterprise-grade solutions using React, Node.js, TypeScript, and modern backend systems. Previously, I worked at Shine Dezign Infonet, where I contributed to healthcare, CRM, and real-time streaming applications. I hold a Master’s degree in Computer Applications (MCA) and enjoy building reliable systems that solve real-world problems."),
-    photoURL: homeBgHacker,
+    photoURL: "/home_bg_hacker.png",
     ...about
   };
 

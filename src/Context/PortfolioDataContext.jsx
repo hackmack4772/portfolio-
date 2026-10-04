@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect, useContext, useRef } from "react";
 import { doc, getDoc, collection, getDocs, query, orderBy } from "firebase/firestore/lite";
 import { db } from "../config/firebase";
-import homeBgHacker from "../Assets/home_bg_hacker.png";
 import { makeTextDynamic } from "../utils/experience";
 import { readCache, writeCache, clearCache, pruneOldVersions } from "../utils/portfolioCache";
 import { clearApiCache } from "../utils/apiCache";
@@ -13,7 +12,7 @@ const fallbackAbout = {
   title: "Software Engineer",
   tagline: "Software Engineer · Backend & Full-Stack · Node.js / React / TypeScript",
   description: makeTextDynamic("Software Engineer with 3+ years building enterprise-scale web applications and distributed systems. Currently engineering a loyalty platform at Comviva serving 1M+ users across 15-20 microservices (Node.js, TypeScript, GraphQL, PostgreSQL, Kafka, Redis, Camunda BPM). Designed enterprise RBAC covering ~90 APIs with automated authorization validation; modernized a legacy frontend to React 19 + Vite. Previously shipped CRM, healthcare, survey, and real-time streaming products end to end."),
-  photoURL: homeBgHacker,
+  photoURL: "/home_bg_hacker.png",
   skills: ["Node.js", "React.js", "TypeScript", "GraphQL", "PostgreSQL", "Apache Kafka", "Redis", "Docker", "AWS"],
   experience: [
     {
