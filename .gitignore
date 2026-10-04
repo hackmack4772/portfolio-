@@ -9,11 +9,10 @@ lerna-debug.log*
 
 node_modules
 
-# Build output. Vercel runs the build itself - the hash of the live entry
-# chunk has never once appeared in this repo's history - so committing dist
-# only added ~5 MB of churn per commit and made stale hashes look authoritative
-# while debugging.
-dist
+# NOTE: dist/ is committed on purpose. The Vercel project has its Root
+# Directory set to "dist", so the deployment serves these files directly -
+# removing them from git fails the build with "The specified Root Directory
+# dist does not exist". See the note in README before changing this.
 dist-ssr
 *.local
 
