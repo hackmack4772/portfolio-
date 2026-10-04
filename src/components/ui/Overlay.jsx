@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
+import { pauseBackgrounds, resumeBackgrounds } from "../../utils/backgroundAnimation";
 
 /**
  * Full-screen modal backdrop, rendered through a portal into document.body.
@@ -25,6 +26,13 @@ export default function Overlay({ children, className = "", lockScroll = true })
   // A full-screen modal that lets the page scroll underneath also means the
   // backdrop-filter above it has to re-resolve on every scroll frame, which
   // is the same compositing trap that froze the mobile drawer.
+  useEffect(() => {
+    // The background canvases are fully covered by this overlay, so keep
+    // their rAF loops suspended for as long as it is up.
+    pauseBackgrounds();
+    return resumeBackgrounds;
+  }, []);
+
   useEffect(() => {
     if (!lockScroll) return;
 

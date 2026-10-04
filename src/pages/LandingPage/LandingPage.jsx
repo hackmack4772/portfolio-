@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import MyJourney from "../MyJourney/MyJourney";
 import ContactUs from "../ContactUs/ContactUs";
@@ -68,6 +68,9 @@ function HeroTerminal() {
 function LandingPage() {
   const [hoveredNode, setHoveredNode] = useState(null);
   const [isCliOpen, setIsCliOpen] = useState(false);
+  // Stable identity: ConsoleCLI memoises its command registry against this,
+  // so an inline arrow here rebuilt the whole registry on every render.
+  const closeCli = useCallback(() => setIsCliOpen(false), []);
   const { homeData, contact } = usePortfolio();
 
   // Listen for global shortcut keys
@@ -160,7 +163,7 @@ function LandingPage() {
       <ThreeBackground />
 
       {/* Global Interactive Console CLI Overlay */}
-      <ConsoleCLI isOpen={isCliOpen} onClose={() => setIsCliOpen(false)} />
+      <ConsoleCLI isOpen={isCliOpen} onClose={closeCli} />
 
       {/* Floating CLI Toggle Action Button */}
       <button

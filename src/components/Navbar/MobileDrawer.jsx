@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { X, GitFork, Star, Terminal, Radio, Shield, HardDrive } from "lucide-react";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import { pauseBackgrounds, resumeBackgrounds } from "../../utils/backgroundAnimation";
 
 // NOTE: neither the backdrop nor the panel may use backdrop-filter.
 //
@@ -17,6 +18,22 @@ import ThemeToggle from "../ThemeToggle/ThemeToggle";
 // beneath it. On Android that locked the compositor up for the whole 350ms
 // close. The panel is opaque and the backdrop is a flat tint instead.
 export default function MobileDrawer({ isOpen, onClose, navItems, isActivePath, githubUrl }) {
+  // Home is the only route running two full-viewport rAF loops at once
+  // (WebGL + particle canvas). Both sit entirely behind this drawer, so
+  // rendering them while it is open is wasted work that starves the main
+  // thread of the idle frames the slide transition needs. This component is
+  // only mounted while the drawer is open, so mount/unmount is the window.
+  useEffect(() => {
+    pauseBackgrounds();
+    const { body } = document;
+    const previousOverflow = body.style.overflow;
+    body.style.overflow = "hidden";
+    return () => {
+      resumeBackgrounds();
+      body.style.overflow = previousOverflow;
+    };
+  }, []);
+
   const containerVariants = {
     hidden: { x: "100%", opacity: 0.95 },
     visible: { 

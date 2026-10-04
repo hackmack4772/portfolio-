@@ -143,7 +143,7 @@ function TelemetryDashboard() {
       });
 
       // Stream live mock logs based on state
-      if (liveLogs.length > 0) {
+      {
         let newLog = "";
         const timestamp = new Date().toISOString().split("T")[1].slice(0, 8);
         if (isLatencyInjected) {
@@ -184,7 +184,11 @@ function TelemetryDashboard() {
     }, 1800);
 
     return () => clearInterval(interval);
-  }, [isLatencyInjected, isSelfTesting, liveLogs.length, selectedNode]);
+    // `liveLogs.length` used to be a dependency while the interval body
+    // appends to liveLogs, so the interval was torn down and rebuilt on
+    // every single tick until the log hit its 30-line cap. The append is a
+    // functional update, so the length is not needed here.
+  }, [isLatencyInjected, isSelfTesting]);
 
   // Auto-scroll logs
   useEffect(() => {

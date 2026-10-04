@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useDarkMode } from "../../Context/DarkModeContext";
+import { backgroundsPaused, onBackgroundPauseChange } from "../../utils/backgroundAnimation";
 
 function CanvasParticles() {
   const canvasRef = useRef(null);
@@ -139,8 +140,16 @@ function CanvasParticles() {
       mouse.y = null;
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeave);
+
+    // Suspend while hidden behind an overlay or a backgrounded tab.
+    const stop = () => { if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; } };
+    const start = () => { if (!animationFrameId && !document.hidden && !backgroundsPaused()) animate(); };
+    const sync = () => (document.hidden || backgroundsPaused() ? stop() : start());
+
+    const unsubscribePause = onBackgroundPauseChange(sync);
+    document.addEventListener("visibilitychange", sync);
 
     // Initial setup
     canvas.width = window.innerWidth;
@@ -152,8 +161,11 @@ function CanvasParticles() {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("visibilitychange", sync);
+      unsubscribePause();
       clearTimeout(resizeTimeout);
       cancelAnimationFrame(animationFrameId);
+      particles = [];
     };
   }, []); // Run exactly once on mount!
 

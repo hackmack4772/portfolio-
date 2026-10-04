@@ -392,9 +392,16 @@ function ConsoleCLI({ isOpen, onClose }) {
     [projects, skills]
   );
 
+  // Greet once per session, tracked by a ref rather than by history.length.
+  // Keying it off the length meant `clear` emptied the screen, the effect
+  // immediately saw length 0 and reprinted the banner - so clear could never
+  // actually clear.
+  const greeted = useRef(false);
   useEffect(() => {
-    if (isOpen && history.length === 0) setHistory(welcome());
-  }, [isOpen, history.length, welcome]);
+    if (!isOpen || greeted.current) return;
+    greeted.current = true;
+    setHistory(welcome());
+  }, [isOpen, welcome]);
 
   useEffect(() => {
     if (!isOpen) return;
