@@ -493,7 +493,7 @@ function TelemetryDashboard() {
 
             <div 
               ref={logContainerRef}
-              className="flex-grow overflow-y-auto font-mono text-[9px] leading-relaxed text-text-muted/90 space-y-1.5 pt-3 pr-2 h-44 no-scrollbar"
+              className="min-h-0 flex-grow overflow-y-auto overscroll-contain font-mono text-[9px] leading-relaxed text-text-muted/90 space-y-1.5 pt-3 pr-2 h-44 no-scrollbar"
             >
               {liveLogs.map((log, index) => {
                 const isError = log.includes("[ALERT]") || log.includes("[CRITICAL]") || log.includes("[WARN]");

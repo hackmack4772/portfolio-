@@ -177,7 +177,7 @@ function Projects() {
                 </div>
 
                 {/* Body split view */}
-                <div className="flex-grow p-6 overflow-y-auto no-scrollbar grid grid-cols-1 lg:grid-cols-12 gap-8 items-start text-left">
+                <div className="min-h-0 flex-grow p-6 overflow-y-auto no-scrollbar grid grid-cols-1 lg:grid-cols-12 gap-8 items-start text-left">
                   
                   {/* Left Column: SVGs Network blueprint */}
                   <div className="lg:col-span-6 flex flex-col gap-6 h-full justify-between">

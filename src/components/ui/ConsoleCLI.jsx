@@ -411,8 +411,19 @@ function ConsoleCLI({ isOpen, onClose }) {
     return () => clearTimeout(t);
   }, [isOpen]);
 
+  // Stick to the bottom only while the user is already there. Unconditionally
+  // jumping to scrollHeight on every history change meant scrolling up to
+  // re-read earlier output was immediately undone by the next command.
+  const pinnedRef = useRef(true);
+  const handleScroll = () => {
+    const el = containerRef.current;
+    if (!el) return;
+    pinnedRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < 48;
+  };
+
   useEffect(() => {
-    if (containerRef.current) containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    const el = containerRef.current;
+    if (el && pinnedRef.current) el.scrollTop = el.scrollHeight;
   }, [history]);
 
   useEffect(() => () => clearTimeout(glitchTimer.current), []);
@@ -557,8 +568,9 @@ function ConsoleCLI({ isOpen, onClose }) {
 
         <div
           ref={containerRef}
+          onScroll={handleScroll}
           onClick={() => inputRef.current?.focus()}
-          className="flex-grow p-4 sm:p-6 overflow-y-auto overscroll-contain font-mono text-[11px] sm:text-xs text-text-muted/95 selection:bg-accent selection:text-bg-base"
+          className="min-h-0 flex-grow p-4 sm:p-6 overflow-y-auto overscroll-contain font-mono text-[11px] sm:text-xs text-text-muted/95 selection:bg-accent selection:text-bg-base"
         >
           {history.map((entry, i) => (
             <div
