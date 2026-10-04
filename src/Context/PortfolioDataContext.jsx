@@ -8,51 +8,47 @@ const PortfolioDataContext = createContext();
 
 const fallbackAbout = {
   name: "Aamir Saleem Lone",
-  title: "Full-Stack Engineer",
-  tagline: "Full-Stack Engineer | Building Scalable Web & Reward Platforms",
-  description: makeTextDynamic("I am Aamir Saleem Lone, a passionate Full-Stack Developer with nearly 3 years of hands-on experience in building scalable, secure, and performance-driven web applications. Currently working at Mahindra Comviva on the Mobilytix Rewards platform, I specialize in developing enterprise-grade solutions using React, Node.js, TypeScript, and modern backend systems. Previously, I worked at Shine Dezign Infonet, where I contributed to healthcare, CRM, and real-time streaming applications. I hold a Master’s degree in Computer Applications (MCA) and enjoy building reliable systems that solve real-world problems."),
+  title: "Software Engineer",
+  tagline: "Software Engineer · Backend & Full-Stack · Node.js / React / TypeScript",
+  description: makeTextDynamic("Software Engineer with 3+ years building enterprise-scale web applications and distributed systems. Currently engineering a loyalty platform at Comviva serving 1M+ users across 15-20 microservices (Node.js, TypeScript, GraphQL, PostgreSQL, Kafka, Redis, Camunda BPM). Designed enterprise RBAC covering ~90 APIs with automated authorization validation; modernized a legacy frontend to React 19 + Vite. Previously shipped CRM, healthcare, survey, and real-time streaming products end to end."),
   photoURL: homeBgHacker,
-  skills: ["React", "Node.js", "JavaScript", "TypeScript", "Laravel", "MongoDB", "Git", "Docker", "WebRTC"],
+  skills: ["Node.js", "React.js", "TypeScript", "GraphQL", "PostgreSQL", "Apache Kafka", "Redis", "Docker", "AWS"],
   experience: [
     {
-      company: "Mahindra Comviva",
-      position: "Full-Stack Developer",
-      period: "Oct 2023 - Present",
-      description: "Developing Mobilytix Rewards platform, an enterprise-grade reward solution handling high load transactions. Using React, Node.js, TypeScript, and MySQL/Redis optimizations."
+      company: "Comviva",
+      position: "Software Engineer",
+      period: "Oct 2025 - Present",
+      location: "Bengaluru",
+      description: "Enterprise loyalty platform serving 1M+ users across 15-20 microservices. Designed enterprise RBAC across ~90 APIs with automated authorization validation, engineer campaigns, tiers, milestones and Kafka-driven notification personalization, and modernized the enterprise PWA to React 19 + Vite."
     },
     {
       company: "Shine Dezign Infonet",
-      position: "Software Engineer",
-      period: "Jun 2022 - Oct 2023",
-      description: "Contributed to healthcare software, custom CRM solutions, and real-time video/audio streaming platforms using MERN stack and Laravel frameworks."
+      position: "Full Stack Developer",
+      period: "Sep 2022 - Sep 2025",
+      location: "Mohali",
+      description: "CRM, healthcare, education, survey and real-time streaming products. Production REST APIs and microservices on Node.js, Express, Laravel and Lumen over MongoDB and MySQL, plus Zoom SDK meetings and an Nginx RTMP to HLS streaming platform."
     }
   ],
   education: [
     {
-      institution: "Swami Vivekanand Institute of Engineering & Technology, Rajpura, Punjab",
-      degree: "Master of Computer Application (MCA)",
+      institution: "Swami Vivekanand Institute of Engineering & Technology",
+      degree: "Master of Computer Applications (MCA)",
       year: "2023 - 2025",
-      score: "8 CGPA"
+      score: "CGPA: 7.89/10"
     },
     {
-      institution: "RIMT University, Mandi Gobindgarh, Punjab",
-      degree: "Bachelors of Computer Application (BCA)",
+      institution: "RIMT University",
+      degree: "Bachelor of Computer Applications (BCA)",
       year: "2019 - 2022",
-      score: "CGPA: 9.08"
-    },
-    {
-      institution: "Government Higher Secondary School, Handwara",
-      degree: "12th Standard",
-      year: "2017 - 2018",
-      score: "Percentage: 80.4%"
+      score: "CGPA: 9.08/10"
     }
   ]
 };
 
 const fallbackContact = {
   email: "loneaamir6@gmail.com",
-  phone: "+91-9596581274",
-  address: "Handwara, Jammu and Kashmir, India",
+  phone: "+91 95965 81274",
+  address: "Bengaluru, India",
   socialLinks: {
     github: "https://github.com/hackmack4772",
     linkedin: "https://www.linkedin.com/in/aamir-saleem-lone/",
@@ -64,13 +60,14 @@ const fallbackContact = {
 
 const fallbackHome = {
   name: "Aamir Saleem Lone",
-  description: "Passionate Full-Stack Engineer focused on building high-performance web products, scalable enterprise services, and robust engineering solutions.",
-  tagline: "Full-Stack Engineer | Building Scalable Web & Reward Platforms",
+  description: "Software Engineer building enterprise-scale web applications and distributed systems - loyalty platforms, real-time streaming and high-throughput APIs.",
+  tagline: "Software Engineer · Backend & Full-Stack · Node.js / React / TypeScript",
   socialLinks: fallbackContact.socialLinks,
   typewriterStrings: [
-    "Full-Stack Engineer",
-    "MERN Stack Developer",
-    "Backend Specialist",
+    "Software Engineer",
+    "Backend Engineer",
+    "Full-Stack Developer",
+    "Node.js / TypeScript",
   ]
 };
 

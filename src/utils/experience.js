@@ -2,11 +2,10 @@
  * Utility functions for calculating and formatting experience dynamically
  */
 
-// First professional role: Software Engineer at Shine Dezign Infonet,
-// Jun 2022 (see the experience entries in PortfolioDataContext). This was
-// previously 2023-01-01, which silently understated the total by ~7 months
-// and made the whole site read "3+ years" instead of "4+".
-export const START_DATE = "2022-06-01";
+// First professional role: Full Stack Developer at Shine Dezign Infonet,
+// Sep 2022, per the CV. Every "N+ years" on the site derives from this one
+// constant, so it has to match the first entry in the experience list.
+export const START_DATE = "2022-09-01";
 
 /**
  * Calculates experience details since the specified start date
