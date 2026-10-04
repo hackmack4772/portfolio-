@@ -118,7 +118,11 @@ html, body {
   font-family: var(--font-sans);
   background-color: var(--bg-color);
   color: var(--text-color);
-  overflow-x: hidden;
+  /* clip, not hidden: `hidden` turns this into a scroll container, which
+     makes every position:sticky descendant stick to it instead of the
+     viewport. `clip` does the same visual clipping with no scroll container,
+     so the stacked sections below actually work. */
+  overflow-x: clip;
   scroll-behavior: smooth;
   min-height: 100vh;
 }
@@ -508,4 +512,63 @@ p, li {
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================================================================
+   STACKED SECTIONS
+   Each section pins just under the navbar, and the next one scrolls up over
+   the top of it, so the page builds into a pile of cards rather than sliding
+   past. Everything here is CSS - position: sticky for the pinning, and a
+   scroll-driven animation for the scale-and-dim as a card gets covered. No
+   observer, no rAF loop, no library.
+   =========================================================================== */
+
+.stack {
+  /* Each card needs its own scroll distance to travel before the next one
+     arrives, so the parent must not clip or create a new scroll context. */
+  position: relative;
+}
+
+.stack > .stack-card {
+  position: sticky;
+  /* Offset grows per card so the stack fans out slightly and you can see
+     the edge of every layer underneath. --i is set per section. */
+  top: calc(5.5rem + (var(--i, 0) * 0.9rem));
+  border-radius: var(--radius-card);
+  /* Its own paint layer, otherwise the cards underneath bleed through at
+     the rounded corners while they are being covered. */
+  background-color: var(--bg-color);
+  will-change: transform;
+}
+
+/* The card shrinks and dims as the following one slides over it. Scroll
+   driven, so it tracks the scroll position exactly rather than easing on a
+   timer. Behind @supports: without it the cards still stack, they just do
+   not scale. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .stack > .stack-card {
+      animation: stack-recede linear both;
+      animation-timeline: view();
+      animation-range: exit -12% exit 88%;
+    }
+  }
+}
+
+@keyframes stack-recede {
+  to {
+    transform: scale(0.945);
+    filter: brightness(0.62);
+  }
+}
+
+/* Stacking is a desktop-height affordance. On a short viewport the cards
+   have nowhere to pile up and it just feels like the page is stuck. */
+@media (max-width: 1023px), (max-height: 700px) {
+  .stack > .stack-card {
+    position: static;
+    animation: none;
+    transform: none;
+    filter: none;
+  }
 }

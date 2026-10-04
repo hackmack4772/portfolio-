@@ -244,26 +244,31 @@ function LandingPage() {
 
       {/* Selected Work - three real projects, ahead of everything else.
           The page used to surface none of the eight in the database. */}
-      <SectionWrapper id="work" variant="sub" showTicks={true}>
-        <FeaturedWork />
-      </SectionWrapper>
+      {/* Stacked scroll: each section pins under the navbar and the next
+          slides up over it. position: sticky plus a scroll-driven scale,
+          no observer and no rAF loop. */}
+      <div className="stack">
+        <SectionWrapper id="work" variant="sub" showTicks={true} className="stack-card" style={{ "--i": 0 }}>
+          <FeaturedWork />
+        </SectionWrapper>
 
-      {/* Technical register */}
-      <SectionWrapper id="stack" showTicks={true}>
-        <StackSection />
-      </SectionWrapper>
+        {/* Technical register */}
+        <SectionWrapper id="stack" showTicks={true} className="stack-card" style={{ "--i": 1 }}>
+          <StackSection />
+        </SectionWrapper>
 
-      {/* Employment history. Replaces the simulated telemetry dashboard that
-          sat here: 526 lines of hardcoded nodes and Math.random() metrics,
-          which read as padding next to the real version of the same story. */}
-      <SectionWrapper id="experience" variant="sub" showTicks={true}>
-        <ExperienceSection />
-      </SectionWrapper>
+        {/* Employment history. Replaces the simulated telemetry dashboard that
+            sat here: 526 lines of hardcoded nodes and Math.random() metrics,
+            which read as padding next to the real version of the same story. */}
+        <SectionWrapper id="experience" variant="sub" showTicks={true} className="stack-card" style={{ "--i": 2 }}>
+          <ExperienceSection />
+        </SectionWrapper>
 
-      {/* Journey Section */}
-      <SectionWrapper id="about" showTicks={true}>
-        <MyJourney />
-      </SectionWrapper>
+        {/* Journey Section */}
+        <SectionWrapper id="about" showTicks={true} className="stack-card" style={{ "--i": 3 }}>
+          <MyJourney />
+        </SectionWrapper>
+      </div>
 
       {/* Social & Contact Section */}
       <SectionWrapper id="contact" variant="sub" showTicks={true}>

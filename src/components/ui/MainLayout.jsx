@@ -5,7 +5,7 @@ import DebugHUD from "./DebugHUD";
 
 export default function MainLayout({ children }) {
   return (
-    <div className="relative isolate flex min-h-screen w-full flex-col overflow-x-hidden bg-bg-base font-sans text-text-base antialiased selection:bg-primary selection:text-white">
+    <div className="relative isolate flex min-h-screen w-full flex-col [overflow-x:clip] bg-bg-base font-sans text-text-base antialiased selection:bg-primary selection:text-white">
       {/* Dynamic Background Grid Overlay */}
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none -z-10" />
       

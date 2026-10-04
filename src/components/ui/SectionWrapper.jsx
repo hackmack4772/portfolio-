@@ -7,7 +7,8 @@ export default function SectionWrapper({
   containerClassName = "",
   spacing = "default",
   variant = "default",
-  showTicks = true 
+  showTicks = true,
+  style,            // needed so callers can pass CSS custom properties
 }) {
   const bgClasses = {
     default: "bg-transparent",
@@ -24,7 +25,8 @@ export default function SectionWrapper({
   return (
     <section 
       id={id} 
-      className={`relative isolate w-full overflow-hidden px-6 sm:px-8 md:px-12 lg:px-20 xl:px-24 ${spacingClasses[spacing]} ${bgClasses[variant]} ${className}`}
+      style={style}
+      className={`relative isolate w-full [overflow:clip] px-6 sm:px-8 md:px-12 lg:px-20 xl:px-24 ${spacingClasses[spacing]} ${bgClasses[variant]} ${className}`}
     >
       {/* Corner Ticks (+ marks for futuristic engineering details) */}
       {showTicks && (
