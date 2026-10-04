@@ -12,6 +12,34 @@ import { useDarkMode } from "./Context/DarkModeContext";
 import Preloader from "./components/Preloader/Preloader";
 import MainLayout from "./components/ui/MainLayout";
 
+/**
+ * Wraps a lazy import so a deploy that lands while the tab is open does not
+ * break navigation.
+ *
+ * Chunk filenames are content-hashed. After a deploy the old hashes are gone,
+ * so an already-loaded page asking for Education-<oldhash>.js gets a 404 and
+ * React throws "Failed to fetch dynamically imported module". Reloading picks
+ * up the new index.html and the matching chunk names. sessionStorage gates it
+ * to one attempt per chunk so a genuinely missing file cannot cause a reload
+ * loop.
+ */
+const lazyChunk = (factory, key) =>
+  lazy(() =>
+    factory().catch((err) => {
+      const flag = `chunk-retry:${key}`;
+      let alreadyTried = true;
+      try {
+        alreadyTried = sessionStorage.getItem(flag) === "1";
+        if (!alreadyTried) sessionStorage.setItem(flag, "1");
+      } catch {
+        alreadyTried = true; // storage blocked - do not risk a reload loop
+      }
+      if (alreadyTried) throw err;
+      window.location.reload();
+      return new Promise(() => {}); // hold Suspense while the page reloads
+    })
+  );
+
 // Lazy load components.
 // Navbar and LandingPage are also prefetched during the boot screen (see
 // below), so dismissing it does not then wait on another network round trip.
@@ -19,14 +47,14 @@ const importNavbar = () => import("./components/Navbar/Navbar");
 const importLandingPage = () => import("./pages/LandingPage/LandingPage");
 
 const Navbar = lazy(importNavbar);
-const LandingPage = lazy(importLandingPage);
-const Footer = lazy(() => import("./components/Footer/Footer"));
-const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
-const About = lazy(() => import("./pages/About/About"));
-const Projects = lazy(() => import("./pages/Projects/Projects"));
-const Resume = lazy(() => import("./pages/Resume/ResumeNew"));
-const Education = lazy(() => import("./pages/Education/Education"));
-const ContactUs = lazy(() => import("./pages/ContactUs/ContactUs"));
+const LandingPage = lazyChunk(importLandingPage, "landing");
+const Footer = lazyChunk(() => import("./components/Footer/Footer"), "footer");
+const NotFound = lazyChunk(() => import("./pages/NotFound/NotFound"), "notfound");
+const About = lazyChunk(() => import("./pages/About/About"), "about");
+const Projects = lazyChunk(() => import("./pages/Projects/Projects"), "projects");
+const Resume = lazyChunk(() => import("./pages/Resume/ResumeNew"), "resume");
+const Education = lazyChunk(() => import("./pages/Education/Education"), "education");
+const ContactUs = lazyChunk(() => import("./pages/ContactUs/ContactUs"), "contact");
 
 // The admin panel was statically imported, so every visitor downloaded it -
 // along with firebase/auth and firebase/storage - before the home page could

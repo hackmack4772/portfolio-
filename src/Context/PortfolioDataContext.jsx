@@ -3,6 +3,7 @@ import { doc, getDoc, collection, getDocs, query, orderBy } from "firebase/fires
 import { db } from "../config/firebase";
 import homeBgHacker from "../Assets/home_bg_hacker.png";
 import { makeTextDynamic } from "../utils/experience";
+import { readCache, writeCache, clearCache, pruneOldVersions } from "../utils/portfolioCache";
 
 const PortfolioDataContext = createContext();
 
@@ -115,22 +116,40 @@ export const PortfolioDataProvider = ({ children }) => {
 
   const refreshData = () => {
     dataFetchedRef.current = false;
+    clearCache();                       // an explicit refresh must hit the network
     setRefetchTrigger(prev => prev + 1);
   };
 
   useEffect(() => {
     let active = true;
-    setLoading(true);
-    setBootProgress(0);
-    setBootLogs([]);
+    pruneOldVersions();
+
+    // Cache hit: render from disk immediately. The boot screen is skipped
+    // entirely, because there is nothing to wait for.
+    const cached = refetchTrigger === 0 ? readCache() : null;
+    if (cached) {
+      setData(cached.data);
+      dataFetchedRef.current = true;
+      setLoading(false);
+
+      // Fresh enough that re-reading eight documents would be pure cost.
+      if (cached.fresh) return () => { active = false; };
+    }
+
+    const revalidating = Boolean(cached);
+    if (!revalidating) {
+      setLoading(true);
+      setBootProgress(0);
+      setBootLogs([]);
+    }
 
     // Hard ceiling on the boot screen. Every section already renders from the
     // fallback data this provider starts with, and the live values swap in as
     // soon as Firestore answers, so there is never a reason to sit here for
     // tens of seconds on a bad connection.
-    const watchdog = setTimeout(() => {
-      if (active) setLoading(false);
-    }, BOOT_SCREEN_MAX_MS);
+    const watchdog = revalidating
+      ? null
+      : setTimeout(() => { if (active) setLoading(false); }, BOOT_SCREEN_MAX_MS);
 
     // Step-by-step preloader simulator coordinator
     const logsToPrint = [];
@@ -152,6 +171,7 @@ export const PortfolioDataProvider = ({ children }) => {
         return `${prefix} ${step.message}`;
       });
       
+      if (revalidating) return;        // nothing is on screen to narrate
       setBootLogs(outputLines);
       setBootProgress(Math.floor(((index + 1) / currentSteps.length) * 100));
     };
@@ -269,6 +289,7 @@ export const PortfolioDataProvider = ({ children }) => {
         fetchResults.home2.introduction = makeTextDynamic(fetchResults.home2.introduction);
       }
 
+      writeCache(fetchResults);
       setData(fetchResults);
       dataFetchedRef.current = true;
       clearTimeout(watchdog);
