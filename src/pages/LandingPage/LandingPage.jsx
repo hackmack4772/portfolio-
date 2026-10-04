@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import MyJourney from "../MyJourney/MyJourney";
-import ContactUs from "../ContactUs/ContactUs";
+import FeaturedWork from "../../components/home/FeaturedWork";
+import StackSection from "../../components/home/StackSection";
+import ExperienceSection from "../../components/home/ExperienceSection";
 import { usePortfolio } from "../../Context/PortfolioDataContext";
 import Type from "../../components/Type";
 import SectionWrapper from "../../components/ui/SectionWrapper";
@@ -10,9 +13,8 @@ import ActionButton from "../../components/ui/ActionButton";
 import FloatingBadge from "../../components/ui/FloatingBadge";
 import GridOverlay from "../../components/ui/GridOverlay";
 import ThreeBackground from "../../components/ui/ThreeBackground";
-import TelemetryDashboard from "../../components/ui/TelemetryDashboard";
 import ConsoleCLI from "../../components/ui/ConsoleCLI";
-import { Github, Twitter, Linkedin, Instagram, Terminal as TerminalIcon } from "lucide-react";
+import { Github, Twitter, Linkedin, Instagram, Terminal as TerminalIcon, ArrowUpRight } from "lucide-react";
 import { calculateExperience } from "../../utils/experience";
 import { countRender } from "../../utils/debugBus";
 
@@ -116,47 +118,19 @@ function LandingPage() {
     { icon: Instagram, href: personalData.socialLinks?.instagram || "https://www.instagram.com/aamir-saleem-lone", label: "Instagram", port: "8443" },
   ].filter(link => link.href);
 
-  const getDiagnosticText = () => {
-    switch (hoveredNode) {
-      case "GitHub":
-        return {
-          cmd: "curl -I https://github.com/hackmack4772",
-          line1: "HTTP/2 200 OK",
-          line2: "server: GitHub.com | connection: keep-alive",
-          status: "ESTABLISHED // SECURE_PORT_443"
-        };
-      case "Twitter":
-        return {
-          cmd: "ping -c 1 twitter.com",
-          line1: "64 bytes from 104.244.42.1: icmp_seq=1 ttl=56 time=14.2 ms",
-          line2: "--- twitter.com ping statistics --- 1 packets transmitted, 1 received",
-          status: "ROUTE_ACTIVE // SECURE_PORT_80"
-        };
-      case "LinkedIn":
-        return {
-          cmd: "ssh -T git@linkedin.com",
-          line1: "Welcome aamir-saleem-lone! Shell access is restricted.",
-          line2: "Authorized keys verified. Protocol version 2.0 active.",
-          status: "HANDSHAKE_GRANTED // PORT_8080"
-        };
-      case "Instagram":
-        return {
-          cmd: "traceroute instagram.com",
-          line1: "1  gateway (192.168.1.1)  0.315 ms",
-          line2: "2  edge-star-shv (157.240.23.174)  22.450 ms",
-          status: "LINK_ESTABLISHED // PORT_8443"
-        };
-      default:
-        return {
-          cmd: "ssh-connect -t social_ports --user=guest",
-          line1: "Initializing encrypted connection to external domains...",
-          line2: "✓ Handshake successful: Node coordinates resolved.",
-          status: "SYSTEM_READY // WAITING_FOR_PORTAL_SELECTION"
-        };
-    }
-  };
-
-  const diagnostic = getDiagnosticText();
+  // This used to print invented ping times, traceroute hops and HTTP
+  // responses on hover ("64 bytes from 104.244.42.1 ... time=14.2 ms").
+  // Fabricated output on an engineer's portfolio is a liability, so the
+  // panel now just states where a link goes.
+  const diagnostic = hoveredNode
+    ? {
+        label: hoveredNode.toUpperCase(),
+        line: socialNodes.find((n) => n.label === hoveredNode)?.href || "",
+      }
+    : {
+        label: "AWAITING SELECTION",
+        line: "Hover a channel to see where it goes.",
+      };
 
   return (
     <div className="w-full bg-bg-base text-text-base relative">
@@ -265,11 +239,11 @@ function LandingPage() {
               className="flex w-full flex-col items-stretch gap-4 pt-3 sm:w-auto sm:flex-row sm:items-center sm:justify-start"
             >
               <ActionButton href="#about" variant="secondary" className="w-full sm:w-auto glass-premium hover:bg-white/[0.04] transition">
-                Discover Journey
+                Read My Story
               </ActionButton>
 
-              <ActionButton href="#telemetry" variant="primary" className="w-full sm:w-auto bg-accent text-bg-base hover:bg-accent/80 shadow-[0_0_25px_rgba(12,251,255,0.25)] transition">
-                Inspect Infrastructure
+              <ActionButton href="#work" variant="primary" className="w-full sm:w-auto bg-accent text-bg-base hover:bg-accent/80 shadow-[0_0_25px_rgba(12,251,255,0.25)] transition">
+                View Selected Work
               </ActionButton>
             </motion.div>
           </div>
@@ -286,14 +260,27 @@ function LandingPage() {
         </div>
       </SectionWrapper>
 
-      {/* Journey Section */}
-      <SectionWrapper id="about" variant="sub" showTicks={true}>
-        <MyJourney />
+      {/* Selected Work - three real projects, ahead of everything else.
+          The page used to surface none of the eight in the database. */}
+      <SectionWrapper id="work" variant="sub" showTicks={true}>
+        <FeaturedWork />
       </SectionWrapper>
 
-      {/* Telemetry Dashboard Section */}
-      <SectionWrapper id="telemetry" showTicks={true}>
-        <TelemetryDashboard />
+      {/* Technical register */}
+      <SectionWrapper id="stack" showTicks={true}>
+        <StackSection />
+      </SectionWrapper>
+
+      {/* Employment history. Replaces the simulated telemetry dashboard that
+          sat here: 526 lines of hardcoded nodes and Math.random() metrics,
+          which read as padding next to the real version of the same story. */}
+      <SectionWrapper id="experience" variant="sub" showTicks={true}>
+        <ExperienceSection />
+      </SectionWrapper>
+
+      {/* Journey Section */}
+      <SectionWrapper id="about" showTicks={true}>
+        <MyJourney />
       </SectionWrapper>
 
       {/* Social & Contact Section */}
@@ -345,14 +332,13 @@ function LandingPage() {
                       <div className="space-y-1">
                         <div className="flex items-center gap-1.5">
                           <span className="text-secondary font-bold">$</span>
-                          <span className="text-text-base font-semibold">{diagnostic.cmd}</span>
+                          <span className="text-text-base font-semibold">open {diagnostic.label.toLowerCase()}</span>
                         </div>
-                        <div className="text-text-muted/50 pl-2.5 truncate">{diagnostic.line1}</div>
-                        <div className="text-text-muted/50 pl-2.5 truncate">{diagnostic.line2}</div>
+                        <div className="text-text-muted/50 pl-2.5 break-all">{diagnostic.line}</div>
                       </div>
                       <div className="flex items-center justify-between border-t border-white/[0.04] pt-2 mt-3 text-[8px] tracking-wider uppercase text-text-muted/40">
-                        <span>NODE_FEED</span>
-                        <span className="text-accent font-bold tracking-widest">{diagnostic.status}</span>
+                        <span>CHANNEL</span>
+                        <span className="text-accent font-bold tracking-widest">{diagnostic.label}</span>
                       </div>
                     </div>
                   </div>
@@ -407,7 +393,27 @@ function LandingPage() {
           </div>
         </div>
 
-        <ContactUs hideHeader={true} />
+        {/* The full form lives on /contact. Rendering all 485 lines of it a
+            second time here only lengthened the page and duplicated the
+            social links for a third time. */}
+        <div className="flex flex-col items-center gap-4">
+          <p className="max-w-md text-center text-xs leading-relaxed text-text-muted/80">
+            Open to interesting backend and full-stack problems. The quickest route is
+            email, or send a message from the contact page.
+          </p>
+          <div className="flex flex-col items-center gap-3 sm:flex-row">
+            <ActionButton href={`mailto:${contact?.email || "loneaamir6@gmail.com"}`} variant="primary" className="bg-accent text-bg-base hover:bg-accent/80">
+              {contact?.email || "loneaamir6@gmail.com"}
+            </ActionButton>
+            <Link
+              to="/contact"
+              className="group inline-flex items-center gap-2 rounded-full border border-white/[0.1] px-6 py-2.5 font-mono text-[11px] uppercase tracking-wider text-text-base transition hover:border-accent/50 hover:text-accent"
+            >
+              Send a message
+              <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
+          </div>
+        </div>
       </SectionWrapper>
     </div>
   );
