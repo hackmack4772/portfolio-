@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { X, GitFork, Star, Terminal, Radio, Shield, HardDrive } from "lucide-react";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import { pauseBackgrounds, resumeBackgrounds } from "../../utils/backgroundAnimation";
+import { lockScroll, unlockScroll } from "../../utils/scrollLock";
+import { bumpDebug } from "../../utils/debugBus";
 
 // NOTE: neither the backdrop nor the panel may use backdrop-filter.
 //
@@ -24,13 +26,18 @@ export default function MobileDrawer({ isOpen, onClose, navItems, isActivePath, 
   // thread of the idle frames the slide transition needs. This component is
   // only mounted while the drawer is open, so mount/unmount is the window.
   useEffect(() => {
+    // Both background rAF loops sit entirely behind this drawer, so keep
+    // them suspended while it is open. The scroll lock is refcounted in
+    // utils/scrollLock: capturing body.style.overflow here directly meant a
+    // drawer reopened during its own exit animation captured "hidden" and
+    // restored it on unmount, leaving the page permanently unscrollable.
     pauseBackgrounds();
-    const { body } = document;
-    const previousOverflow = body.style.overflow;
-    body.style.overflow = "hidden";
+    lockScroll();
+    bumpDebug("drawersMounted");
     return () => {
       resumeBackgrounds();
-      body.style.overflow = previousOverflow;
+      unlockScroll();
+      bumpDebug("drawersMounted", -1);
     };
   }, []);
 

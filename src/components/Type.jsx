@@ -1,6 +1,8 @@
 import React, { useMemo, useState, useEffect } from "react";
+import { countRender } from "../utils/debugBus";
 
 function Type({ typewriterStrings = ["Full-Stack Engineer", "MERN Developer"] }) {
+  countRender("Type");
   const [currentStringIndex, setCurrentStringIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);

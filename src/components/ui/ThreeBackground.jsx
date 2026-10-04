@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { backgroundsPaused, onBackgroundPauseChange } from "../../utils/backgroundAnimation";
+import { setDebug } from "../../utils/debugBus";
 
 function ThreeBackground() {
   const containerRef = useRef(null);
@@ -210,13 +211,15 @@ function ThreeBackground() {
     };
 
     animate();
+    setDebug("threeRunning", true);
 
     // --- Suspend while hidden behind an overlay or a backgrounded tab ---
-    const stop = () => { if (animId) { cancelAnimationFrame(animId); animId = null; } };
+    const stop = () => { if (animId) { cancelAnimationFrame(animId); animId = null; } setDebug("threeRunning", false); };
     const start = () => {
       if (animId || document.hidden || backgroundsPaused()) return;
       clock.getDelta(); // discard the elapsed pause so nothing jumps
       animate();
+      setDebug("threeRunning", true);
     };
     const sync = () => (document.hidden || backgroundsPaused() ? stop() : start());
 
@@ -240,6 +243,7 @@ function ThreeBackground() {
     // --- Cleanup ---
     return () => {
       cancelAnimationFrame(animId);
+      setDebug("threeRunning", false);
       unsubscribePause();
       document.removeEventListener("visibilitychange", sync);
       window.removeEventListener("scroll", handleScroll);

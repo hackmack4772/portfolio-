@@ -1,6 +1,7 @@
 import React from "react";
 import Particle from "../Particle";
 import ScrollToTop from "../ScrollToTop";
+import DebugHUD from "./DebugHUD";
 
 export default function MainLayout({ children }) {
   return (
@@ -14,6 +15,8 @@ export default function MainLayout({ children }) {
 
       <Particle />
       <ScrollToTop />
+      {/* Renders nothing unless ?debug=1 or Ctrl+Shift+D. */}
+      <DebugHUD />
       
       {/* Main Content Area */}
       <main className="flex min-w-0 flex-1 flex-col">

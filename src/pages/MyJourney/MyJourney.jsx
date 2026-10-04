@@ -2,6 +2,7 @@ import React from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { usePortfolio } from "../../Context/PortfolioDataContext";
 import SectionTitle from "../../components/ui/SectionTitle";
+import { countRender } from "../../utils/debugBus";
 
 function TiltContainer({ children }) {
   const x = useMotionValue(150);
@@ -42,6 +43,7 @@ function TiltContainer({ children }) {
 }
 
 function MyJourney() {
+  countRender("MyJourney");
   const { home2 } = usePortfolio();
   const home2Data = home2 || {
     heading: "My Journey",

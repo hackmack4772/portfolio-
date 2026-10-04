@@ -17,11 +17,14 @@
  * plus console, say) cannot resume the loops early.
  */
 
+import { setDebug } from "./debugBus";
+
 let pauseCount = 0;
 const listeners = new Set();
 
 const notify = () => {
   const paused = pauseCount > 0;
+  setDebug("bgPauseCount", pauseCount);
   listeners.forEach((fn) => {
     try {
       fn(paused);

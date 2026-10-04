@@ -15,6 +15,7 @@ import ConsoleCLI from "../../components/ui/ConsoleCLI";
 import { Github, Twitter, Linkedin, Instagram, Terminal as TerminalIcon } from "lucide-react";
 import homeBg from "../../Assets/home_bg_hacker.png";
 import { calculateExperience } from "../../utils/experience";
+import { countRender } from "../../utils/debugBus";
 
 function HeroTerminal() {
   const { displayYears } = calculateExperience();
@@ -66,6 +67,7 @@ function HeroTerminal() {
 }
 
 function LandingPage() {
+  countRender("LandingPage");
   const [hoveredNode, setHoveredNode] = useState(null);
   const [isCliOpen, setIsCliOpen] = useState(false);
   // Stable identity: ConsoleCLI memoises its command registry against this,

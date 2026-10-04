@@ -19,6 +19,7 @@ import NavLink from "./NavLink";
 import NavActions from "./NavActions";
 import MobileDrawer from "./MobileDrawer";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import { countRender } from "../../utils/debugBus";
 
 const navItems = [
   { path: "/home", label: "Home", icon: Home },
@@ -30,6 +31,7 @@ const navItems = [
 ];
 
 function NavBar() {
+  countRender("Navbar");
   const { contact } = usePortfolio();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);

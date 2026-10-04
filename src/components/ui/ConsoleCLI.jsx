@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Overlay from "./Overlay";
 import { usePortfolio } from "../../Context/PortfolioDataContext";
 import { calculateExperience } from "../../utils/experience";
+import { countRender } from "../../utils/debugBus";
 
 // String.raw so the backslashes in the figlet art stay literal.
 // The previous banner spelled "Mackmack" - its first glyph was an M.
@@ -66,6 +67,7 @@ const distance = (a, b) => {
 };
 
 function ConsoleCLI({ isOpen, onClose }) {
+  countRender("ConsoleCLI");
   const navigate = useNavigate();
   const { about, contact, skills, projects, education } = usePortfolio();
 

@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionTitle from "./SectionTitle";
+import { countRender } from "../../utils/debugBus";
 
 const NODES_DATA = {
   gateway: {
@@ -98,6 +99,7 @@ const NODES_DATA = {
 };
 
 function TelemetryDashboard() {
+  countRender("Telemetry");
   const [selectedNode, setSelectedNode] = useState("gateway");
   const [isLatencyInjected, setIsLatencyInjected] = useState(false);
   const [isSelfTesting, setIsSelfTesting] = useState(false);

@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { pauseBackgrounds, resumeBackgrounds } from "../../utils/backgroundAnimation";
+import { lockScroll, unlockScroll } from "../../utils/scrollLock";
+import { bumpDebug } from "../../utils/debugBus";
 
 /**
  * Full-screen modal backdrop, rendered through a portal into document.body.
@@ -22,7 +24,7 @@ import { pauseBackgrounds, resumeBackgrounds } from "../../utils/backgroundAnima
 // boot Preloader (z-[999999]).
 const Z_INDEX = 120;
 
-export default function Overlay({ children, className = "", lockScroll = true }) {
+export default function Overlay({ children, className = "", lockScroll: lockScroll_enabled = true }) {
   // A full-screen modal that lets the page scroll underneath also means the
   // backdrop-filter above it has to re-resolve on every scroll frame, which
   // is the same compositing trap that froze the mobile drawer.
@@ -30,19 +32,19 @@ export default function Overlay({ children, className = "", lockScroll = true })
     // The background canvases are fully covered by this overlay, so keep
     // their rAF loops suspended for as long as it is up.
     pauseBackgrounds();
-    return resumeBackgrounds;
+    bumpDebug("overlaysMounted");
+    return () => {
+      resumeBackgrounds();
+      bumpDebug("overlaysMounted", -1);
+    };
   }, []);
 
   useEffect(() => {
-    if (!lockScroll) return;
-
-    const { body } = document;
-    const previous = body.style.overflow;
-    body.style.overflow = "hidden";
-    return () => {
-      body.style.overflow = previous;
-    };
-  }, [lockScroll]);
+    // Refcounted so overlapping overlays cannot strand the lock.
+    if (!lockScroll_enabled) return;
+    lockScroll();
+    return unlockScroll;
+  }, [lockScroll_enabled]);
 
   if (typeof document === "undefined") return null;
 
