@@ -485,3 +485,27 @@ p, li {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* ---------------------------------------------------------------------------
+   HERO ENTRANCE
+   A CSS animation, not a JS one. The browser drives it regardless of what the
+   main thread is doing, so a busy first render cannot leave the hero stranded
+   at opacity 0 - which is exactly what happened when these were framer-motion
+   fades. `backwards` holds the start frame during the delay so nothing flashes
+   in before its turn.
+   --------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise-in 620ms var(--ease-out-quint) backwards;
+  }
+  .rise-1 { animation-delay: 80ms; }
+  .rise-2 { animation-delay: 160ms; }
+  .rise-3 { animation-delay: 240ms; }
+  .rise-4 { animation-delay: 320ms; }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

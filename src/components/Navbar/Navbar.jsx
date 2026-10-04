@@ -65,7 +65,7 @@ function NavBar() {
         <Logo />
 
         {/* Desktop Navbar Navigation Items */}
-        <nav className="hidden md:flex items-center gap-1 lg:gap-2.5">
+        <nav className="hidden items-center gap-0.5 md:flex" aria-label="Primary">
           {navItems.map((item, index) => (
             <NavLink
               key={item.path}
@@ -78,7 +78,7 @@ function NavBar() {
         </nav>
 
         {/* Right-Side Dashboard Actions (Theme Toggle & Star Repo) */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden items-center md:flex">
           <NavActions githubUrl={githubUrl} />
         </div>
 

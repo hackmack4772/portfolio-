@@ -163,13 +163,13 @@ function LandingPage() {
         {/* Artistic background image blending (home-bg.png) */}
         <div className="absolute inset-0 select-none pointer-events-none overflow-hidden -z-10">
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.08] lg:opacity-[0.12] mix-blend-luminosity scale-105"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.05] lg:opacity-[0.07] mix-blend-luminosity scale-105"
             style={{ 
               // Stable public path, so this is not emitted a second time as a
                 // content-hashed copy of the identical file in public/.
                 backgroundImage: "url(/home_bg_hacker.png)",
-              maskImage: 'radial-gradient(circle at 75% 50%, black 30%, transparent 70%)',
-              WebkitMaskImage: 'radial-gradient(circle at 75% 50%, black 30%, transparent 70%)'
+              maskImage: 'radial-gradient(circle at 82% 45%, black 18%, transparent 62%)',
+              WebkitMaskImage: 'radial-gradient(circle at 82% 45%, black 18%, transparent 62%)'
             }}
           />
           {/* Subtle grid lines overlaid on the image for technical depth */}
@@ -193,10 +193,7 @@ function LandingPage() {
 
             <div className="flex flex-col gap-2">
               <motion.h1
-                initial={{ y: 15, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6 }}
-                className="text-4xl font-light leading-tight tracking-tight text-white/90 md:text-5xl lg:text-6.5xl font-sans"
+                className="rise text-xl font-light leading-tight tracking-tight text-white/70 sm:text-2xl lg:text-3xl font-sans"
               >
                 Hi There, <span className="font-extrabold bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">I'm</span>{" "}
                 <span className="inline-block animate-[wave-animation_2.1s_infinite]" aria-hidden="true">
@@ -205,55 +202,40 @@ function LandingPage() {
               </motion.h1>
 
               <motion.h2
-                initial={{ y: 15, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.15 }}
-                className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent md:text-5xl lg:text-6xl font-sans"
+                className="rise rise-1 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-sans font-extrabold leading-[1.05] tracking-tight text-[clamp(2.1rem,7.5vw,4.25rem)]"
               >
                 {personalData.name}
               </motion.h2>
             </div>
 
             <motion.div
-              initial={{ y: 15, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="flex w-full justify-center lg:justify-start font-mono text-sm tracking-widest text-accent/80 uppercase"
+              className="rise rise-2 flex w-full justify-center lg:justify-start font-mono text-sm tracking-widest text-accent/80 uppercase"
             >
               <Type typewriterStrings={personalData.typewriterStrings} />
             </motion.div>
 
             <motion.p
-              initial={{ y: 15, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="max-w-xl text-xs sm:text-sm leading-relaxed text-text-muted/90 text-center lg:text-left font-sans"
+              className="rise rise-3 max-w-xl text-sm sm:text-base leading-relaxed text-text-muted/85 text-center lg:text-left font-sans"
             >
               {displayTagline}
             </motion.p>
 
             <motion.div
-              initial={{ y: 15, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex w-full flex-col items-stretch gap-4 pt-3 sm:w-auto sm:flex-row sm:items-center sm:justify-start"
+              className="rise rise-4 flex w-full flex-col items-stretch gap-4 pt-3 sm:w-auto sm:flex-row sm:items-center sm:justify-start"
             >
               <ActionButton href="#about" variant="secondary" className="w-full sm:w-auto glass-premium hover:bg-white/[0.04] transition">
                 Read My Story
               </ActionButton>
 
               <ActionButton href="#work" variant="primary" className="w-full sm:w-auto bg-accent text-bg-base hover:bg-accent/80 shadow-[0_0_25px_rgba(12,251,255,0.25)] transition">
-                View Selected Work
+                View My Work
               </ActionButton>
             </motion.div>
           </div>
 
           {/* Hero Right Content */}
           <motion.div
-            initial={{ scale: 0.96, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.25 }}
-            className="flex w-full justify-center lg:justify-end"
+            className="rise rise-3 flex w-full justify-center lg:justify-end"
           >
             <HeroTerminal />
           </motion.div>

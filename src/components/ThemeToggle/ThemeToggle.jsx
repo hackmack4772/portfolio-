@@ -3,48 +3,49 @@ import { useDarkMode } from "../../Context/DarkModeContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
 
+/**
+ * The word "Dark" / "Light" used to sit beside this button. A sun or moon
+ * icon already says which mode you are in, so the label was spending a word
+ * of horizontal space in an already crowded bar to repeat it. It lives on as
+ * the aria-label, where it is actually useful.
+ */
 const ThemeToggle = () => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   return (
-    <div className="flex items-center gap-3">
-      <span className="text-xs font-mono uppercase tracking-wider text-text-muted select-none">
-        {isDarkMode ? "Dark" : "Light"}
-      </span>
-      <motion.button
-        onClick={toggleDarkMode}
-        className="relative h-10 w-10 flex items-center justify-center rounded-full glass-panel cursor-pointer shadow-[0_0_15px_rgba(143,16,183,0.1)] hover:shadow-[0_0_20px_rgba(12,251,255,0.2)] focus:outline-none transition duration-300 overflow-hidden"
-        whileTap={{ scale: 0.9 }}
-        whileHover={{ scale: 1.05 }}
-        aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-      >
-        <AnimatePresence mode="wait" initial={false}>
-          {isDarkMode ? (
-            <motion.div
-              key="moon"
-              initial={{ y: 20, rotate: 45, opacity: 0 }}
-              animate={{ y: 0, rotate: 0, opacity: 1 }}
-              exit={{ y: -20, rotate: -45, opacity: 0 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              className="text-accent"
-            >
-              <Moon className="w-5 h-5 fill-current" />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="sun"
-              initial={{ y: 20, rotate: -45, opacity: 0 }}
-              animate={{ y: 0, rotate: 0, opacity: 1 }}
-              exit={{ y: -20, rotate: 45, opacity: 0 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              className="text-primary"
-            >
-              <Sun className="w-5 h-5 fill-current" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.button>
-    </div>
+    <motion.button
+      onClick={toggleDarkMode}
+      whileTap={{ scale: 0.92 }}
+      className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg border border-[var(--edge-1)] text-text-muted transition hover:border-accent/40 hover:bg-accent/[0.06] hover:text-accent focus:outline-none"
+      aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+      title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        {isDarkMode ? (
+          <motion.span
+            key="moon"
+            initial={{ y: 14, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -14, opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            className="flex"
+          >
+            <Moon className="h-4 w-4" />
+          </motion.span>
+        ) : (
+          <motion.span
+            key="sun"
+            initial={{ y: 14, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -14, opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            className="flex"
+          >
+            <Sun className="h-4 w-4" />
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </motion.button>
   );
 };
 

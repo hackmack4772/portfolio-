@@ -12,8 +12,8 @@ export default function Header({ children, isScrolled }) {
       <div
         className={`mx-auto w-full max-w-7xl glass-navbar-premium rounded-2xl flex items-center justify-between px-6 md:px-10 pointer-events-auto transition duration-300 relative overflow-hidden ${
           isScrolled 
-            ? "py-4 bg-bg-base/90 shadow-2xl scale-[0.99] border-primary/30" 
-            : "py-6 bg-bg-base/75 shadow-lg border-border-base/40"
+            ? "py-3 bg-bg-base/92 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.8)] border-[var(--edge-2)]" 
+            : "py-4 bg-bg-base/70 shadow-lg border-[var(--edge-1)]"
         }`}
       >
         {/* Futuristic background elements */}
