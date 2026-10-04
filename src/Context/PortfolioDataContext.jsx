@@ -4,6 +4,7 @@ import { db } from "../config/firebase";
 import homeBgHacker from "../Assets/home_bg_hacker.png";
 import { makeTextDynamic } from "../utils/experience";
 import { readCache, writeCache, clearCache, pruneOldVersions } from "../utils/portfolioCache";
+import { clearApiCache } from "../utils/apiCache";
 
 const PortfolioDataContext = createContext();
 
@@ -117,6 +118,7 @@ export const PortfolioDataProvider = ({ children }) => {
   const refreshData = () => {
     dataFetchedRef.current = false;
     clearCache();                       // an explicit refresh must hit the network
+    clearApiCache();
     setRefetchTrigger(prev => prev + 1);
   };
 

@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import GitHubCalendar from "react-github-calendar";
 import { useDarkMode } from "../Context/DarkModeContext";
 import { Github as GitIcon, BarChart2, Code2 } from "lucide-react";
+import { installApiCache } from "../utils/apiCache";
+
+// Must run before react-github-calendar fetches. Module scope is evaluated
+// when this chunk loads, which is ahead of the first render.
+installApiCache();
 
 export default function Github() {
   const { isDarkMode } = useDarkMode();
@@ -109,6 +114,7 @@ export default function Github() {
                 alt="GitHub Stats"
                 className="max-w-full h-auto rounded-lg select-none"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -129,6 +135,7 @@ export default function Github() {
                 alt="Top Languages"
                 className="max-w-full h-auto rounded-lg select-none"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
