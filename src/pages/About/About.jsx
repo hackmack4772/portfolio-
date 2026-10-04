@@ -29,6 +29,7 @@ import SectionTitle from "../../components/ui/SectionTitle";
 import GlowCard from "../../components/ui/GlowCard";
 import homeBgHacker from "../../Assets/home_bg_hacker.png";
 import { makeTextDynamic } from "../../utils/experience";
+import SmartImage from "../../components/ui/SmartImage";
 
 // Static Engineering Philosophy Data
 const PHILOSOPHY_DATA = [
@@ -193,8 +194,12 @@ function About() {
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-accent/10 opacity-30 pointer-events-none" />
 
             <div className="w-full h-72 md:h-80 rounded-2xl overflow-hidden relative">
-              <img
-                src={homeBgHacker || aboutData.photoURL }
+              {/* The operands used to be the wrong way round: homeBgHacker is
+                  an import and therefore always truthy, so the photoURL stored
+                  in the database was never once used. */}
+              <SmartImage
+                src={aboutData.photoURL}
+                fallback="photo"
                 alt="Aamir Saleem Lone Profile"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700 ease-in-out scale-100 group-hover:scale-105 select-none pointer-events-none"
               />

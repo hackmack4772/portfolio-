@@ -3,6 +3,7 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 import { usePortfolio } from "../../Context/PortfolioDataContext";
 import SectionTitle from "../../components/ui/SectionTitle";
 import { countRender } from "../../utils/debugBus";
+import SmartImage from "../../components/ui/SmartImage";
 
 function TiltContainer({ children }) {
   const x = useMotionValue(150);
@@ -107,17 +108,12 @@ function MyJourney() {
 
             {/* Inner Image Frame with glass overlay */}
             <div className="absolute inset-0 bg-bg-base rounded-2xl overflow-hidden flex items-center justify-center">
-              {home2Data.imageUrl ? (
-                <img
-                  src={home2Data.imageUrl}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  alt="Aamir Saleem Lone Avatar"
-                />
-              ) : (
-                <div className="w-full h-full bg-gradient-to-br from-card-base to-bg-sub flex items-center justify-center">
-                  <span className="text-[10px] font-mono tracking-widest text-text-muted">IMAGE_NULL</span>
-                </div>
-              )}
+              <SmartImage
+                src={home2Data.imageUrl}
+                fallback="avatar"
+                alt="Aamir Saleem Lone"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
               
               {/* Sci-fi Overlay Scanline Effect */}
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent pointer-events-none group-hover:opacity-40 transition-opacity" />

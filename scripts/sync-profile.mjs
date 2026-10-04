@@ -246,7 +246,9 @@ const home2 = {
     "survey and real-time streaming products end to end.",
   skills: "Node.js, TypeScript, React, GraphQL, PostgreSQL, Kafka, Redis, Docker, AWS",
   hobbies: "System architecture, performance tuning, cybersecurity",
-  imageUrl: "",
+  // Preserved, never reset. An earlier run of this script wrote "" here and
+  // the journey card rendered IMAGE_NULL until it was noticed.
+  imageUrl: (await getDoc(doc(db, "home", "home2"))).data()?.imageUrl || "/avatar_hacker.png",
 };
 
 if (WRITE) {
