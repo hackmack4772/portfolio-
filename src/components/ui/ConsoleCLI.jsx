@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { X, Terminal as TerminalIcon, ShieldAlert } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Overlay from "./Overlay";
 
 function ConsoleCLI({ isOpen, onClose }) {
   const [history, setHistory] = useState([
@@ -156,7 +157,7 @@ function ConsoleCLI({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 w-full h-full bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <Overlay className="bg-black/90 backdrop-blur-md">
       {/* Glitch Overlay Effect */}
       {glitchActive && (
         <div className="absolute inset-0 bg-red-500/10 pointer-events-none z-30 animate-pulse flex items-center justify-center border-4 border-red-500">
@@ -241,7 +242,7 @@ function ConsoleCLI({ isOpen, onClose }) {
           />
         </div>
       </motion.div>
-    </div>
+    </Overlay>
   );
 }
 

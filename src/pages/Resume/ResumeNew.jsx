@@ -20,6 +20,7 @@ import pdfFallback from "../../Assets/resume.pdf";
 import { usePortfolio } from "../../Context/PortfolioDataContext";
 import HelmetWrapper from "../../components/HelmetWrapper";
 import SectionWrapper from "../../components/ui/SectionWrapper";
+import Overlay from "../../components/ui/Overlay";
 import SectionTitle from "../../components/ui/SectionTitle";
 import ActionButton from "../../components/ui/ActionButton";
 import GlowCard from "../../components/ui/GlowCard";
@@ -145,7 +146,7 @@ function ResumeNew() {
       {/* Secure Transfer Modal overlay */}
       <AnimatePresence>
         {isTransferring && (
-          <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 select-none">
+          <Overlay className="bg-black/85 backdrop-blur-md select-none">
             <motion.div 
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -176,7 +177,7 @@ function ResumeNew() {
                 <div ref={logEndRef} />
               </div>
             </motion.div>
-          </div>
+          </Overlay>
         )}
       </AnimatePresence>
 
