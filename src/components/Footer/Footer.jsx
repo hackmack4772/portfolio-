@@ -35,7 +35,7 @@ function Footer() {
         {/* Copyright */}
         <div className="text-center">
           <p className="text-xs text-text-muted font-mono tracking-wide">
-            © {year} Hackmack. All rights reserved.
+            © {year} Hackmack · {personalName}. All rights reserved.
           </p>
         </div>
         
