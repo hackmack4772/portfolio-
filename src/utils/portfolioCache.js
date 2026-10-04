@@ -16,10 +16,18 @@
  * the code no longer understands.
  */
 
-const VERSION = 1;
+// Bumped to 2: every client was holding a 6-hour-fresh copy from before the
+// image fields were corrected, so the fix was invisible to anyone who had
+// loaded the site recently. Raising this drops every existing cache entry.
+const VERSION = 2;
 const KEY = `hackmack:portfolio:v${VERSION}`;
 
-export const FRESH_MS = 6 * 60 * 60 * 1000;      // 6 hours
+// Short on purpose. The first version skipped the network entirely for six
+// hours, which meant a content edit could not reach a returning visitor for
+// six hours - there is no push channel to tell them otherwise. Ten minutes
+// still collapses a burst of navigation into a single read, while keeping
+// edits visible on roughly the next page load.
+export const FRESH_MS = 10 * 60 * 1000;         // 10 minutes
 export const MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
 export const readCache = () => {

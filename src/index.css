@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* dist/ is committed (Vercel's Root Directory points at it), so it is not
+   gitignored and Tailwind v4 therefore scans it for class names. That is
+   both wasted work - it is our own minified output - and a source of dev
+   server crashes: deleting dist for a rebuild while the server is running
+   makes the scan fail on files that have just vanished. */
+@source not "../dist";
+
 @theme {
   --color-primary: var(--primary-color, #8f10b7);
   --color-primary-hover: var(--primary-hover, #7a0d9b);
