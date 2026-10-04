@@ -4,6 +4,18 @@ import { motion } from "framer-motion";
 import { X, GitFork, Star, Terminal, Radio, Shield, HardDrive } from "lucide-react";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
+// NOTE: neither the backdrop nor the panel may use backdrop-filter.
+//
+// Both of these elements animate (the backdrop fades, the panel slides), and
+// a backdrop-filter that moves or fades cannot be cached - its backdrop
+// region changes every frame, so the blur is recomputed from scratch. What
+// they had to resample is the entire page, which contains 18 further
+// backdrop-filter surfaces (each needing its own backdrop resolved first), a
+// WebGL canvas and a 2D particle canvas, both full-viewport, both running at
+// 60fps and neither pausing while the drawer is open - plus mix-blend-mode:
+// screen on the particle canvas, which defeats layer caching for everything
+// beneath it. On Android that locked the compositor up for the whole 350ms
+// close. The panel is opaque and the backdrop is a flat tint instead.
 export default function MobileDrawer({ isOpen, onClose, navItems, isActivePath, githubUrl }) {
   const containerVariants = {
     hidden: { x: "100%", opacity: 0.95 },
@@ -42,7 +54,7 @@ export default function MobileDrawer({ isOpen, onClose, navItems, isActivePath, 
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
-        className="fixed inset-0 z-45 bg-bg-base/60 backdrop-blur-md md:hidden"
+        className="fixed inset-0 z-45 bg-black/75 md:hidden"
       />
 
       {/* Drawer Container Panel */}
@@ -51,7 +63,7 @@ export default function MobileDrawer({ isOpen, onClose, navItems, isActivePath, 
         initial="hidden"
         animate="visible"
         exit="exit"
-        className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-sm bg-bg-base/95 border-l border-border-base/30 glass-navbar shadow-2xl flex flex-col p-6 overflow-y-auto no-scrollbar md:hidden"
+        className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-sm bg-bg-base border-l border-border-base/30 shadow-2xl flex flex-col p-6 overflow-y-auto no-scrollbar md:hidden"
       >
         {/* Cyber grid overlays */}
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none -z-10" />
