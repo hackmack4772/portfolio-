@@ -376,3 +376,112 @@ section[id] {
     animation: none !important;
   }
 }
+
+/* ===========================================================================
+   SURFACE SYSTEM
+   Six different border opacities, five surface fills and five corner radii
+   were in use across the home page, none derived from anything. Cards drifted
+   a few percent apart, which reads as "slightly misaligned" without being
+   obviously wrong. These are the single source of truth.
+   =========================================================================== */
+
+:root {
+  --surface-1: rgb(255 255 255 / 0.014);
+  --surface-2: rgb(255 255 255 / 0.03);
+  --surface-3: rgb(255 255 255 / 0.05);
+
+  --edge-1: rgb(255 255 255 / 0.07);
+  --edge-2: rgb(255 255 255 / 0.11);
+
+  --radius-card: 1rem;
+  --radius-inner: 0.625rem;
+}
+
+/* Base card. Everything that is a "panel" on the home page uses this. */
+.surface {
+  background: var(--surface-1);
+  border: 1px solid var(--edge-1);
+  border-radius: var(--radius-card);
+}
+
+/* Interactive version: lifts on hover, and the edge picks up the accent.
+   color-mix keeps the hover edge derived from the live accent token, so a
+   theme change through the console carries through automatically. */
+.surface-interactive {
+  background: var(--surface-1);
+  border: 1px solid var(--edge-1);
+  border-radius: var(--radius-card);
+  transition-property: background-color, border-color, box-shadow, transform;
+  transition-duration: 250ms;
+  transition-timing-function: var(--ease-out-quint);
+}
+
+.surface-interactive:hover {
+  background: var(--surface-2);
+  border-color: color-mix(in srgb, var(--accent-color) 38%, transparent);
+  box-shadow: 0 1px 0 0 color-mix(in srgb, var(--accent-color) 10%, transparent) inset;
+}
+
+@media (hover: hover) {
+  .surface-interactive:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   TYPOGRAPHY
+   --------------------------------------------------------------------------- */
+
+/* Stops headings breaking with a single orphaned word, which was happening
+   on every section title at tablet widths. */
+h1, h2, h3,
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Evens out the last line of body copy. */
+p, li {
+  text-wrap: pretty;
+}
+
+/* ---------------------------------------------------------------------------
+   SCROLL-DRIVEN REVEALS
+   CSS scroll-driven animations, so there is no observer, no rAF loop and no
+   React state behind this - it runs on the compositor.
+   The whole block sits behind @supports: where it is unavailable the element
+   simply renders at its natural state, so content can never be stranded
+   invisible the way a JS-driven fade can.
+   --------------------------------------------------------------------------- */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 42%;
+    }
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   FOCUS
+   There was no focus-visible styling anywhere, so keyboard users had only the
+   browser default against a near-black background.
+   --------------------------------------------------------------------------- */
+
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

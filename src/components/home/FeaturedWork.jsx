@@ -39,7 +39,7 @@ export default function FeaturedWork() {
         {featured.map((p) => (
           <article
             key={p.id || p.title}
-            className="group relative flex flex-col gap-4 rounded-2xl border border-white/[0.07] bg-white/[0.012] p-6 transition hover:border-accent/30 hover:bg-white/[0.03]"
+            className="surface-interactive reveal group relative flex flex-col gap-4 p-6"
           >
             <div className="flex items-start justify-between gap-3">
               <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/70">
@@ -62,7 +62,7 @@ export default function FeaturedWork() {
               </div>
             )}
 
-            <div className="mt-auto flex items-center gap-4 border-t border-white/[0.05] pt-4 font-mono text-[10px] uppercase tracking-wider">
+            <div className="mt-auto flex items-center gap-4 border-t border-[var(--edge-1)] pt-4 font-mono text-[10px] uppercase tracking-wider">
               {p.githubUrl ? (
                 <a
                   href={p.githubUrl}
@@ -94,7 +94,7 @@ export default function FeaturedWork() {
       <div className="mt-10 flex justify-center">
         <Link
           to="/projects"
-          className="group inline-flex items-center gap-2 rounded-full border border-white/[0.1] px-6 py-2.5 font-mono text-[11px] uppercase tracking-wider text-text-base transition hover:border-accent/50 hover:text-accent"
+          className="group inline-flex items-center gap-2 rounded-full border border-[var(--edge-2)] px-6 py-2.5 font-mono text-[11px] uppercase tracking-wider text-text-base transition hover:border-accent/50 hover:text-accent"
         >
           All {list.length} projects
           <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

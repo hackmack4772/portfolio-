@@ -39,13 +39,13 @@ export default function StackSection() {
         description={`${list.length} technologies I work with day to day, grouped by where they sit in a system.`}
       />
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {categories.map((cat) => (
           <div
             key={cat}
-            className="rounded-2xl border border-white/[0.07] bg-white/[0.012] p-5 transition hover:border-accent/25"
+            className="surface-interactive reveal p-5"
           >
-            <div className="mb-4 flex items-center gap-2 border-b border-white/[0.06] pb-3">
+            <div className="mb-4 flex items-center gap-2 border-b border-[var(--edge-1)] pb-3">
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
               <h3 className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-accent">
                 {cat}

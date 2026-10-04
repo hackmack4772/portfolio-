@@ -284,7 +284,7 @@ function LandingPage() {
       </SectionWrapper>
 
       {/* Social & Contact Section */}
-      <SectionWrapper id="contact" showTicks={true}>
+      <SectionWrapper id="contact" variant="sub" showTicks={true}>
         <div className="mx-auto mb-16 flex w-full max-w-4xl flex-col items-center">
           {/* Cyberpunk Outer Card */}
           <div className="relative group w-full">
@@ -361,7 +361,7 @@ function LandingPage() {
                             onMouseLeave={() => setHoveredNode(null)}
                             whileHover={{ scale: 1.02, y: -2 }}
                             whileTap={{ scale: 0.98 }}
-                            className="relative group/btn flex items-center gap-3.5 px-4.5 py-4 rounded-xl border border-white/[0.06] bg-white/[0.015] hover:bg-white/[0.04] hover:border-accent/40 transition duration-300 select-none cursor-pointer"
+                            className="surface-interactive relative group/btn flex items-center gap-3.5 px-4.5 py-4 select-none cursor-pointer"
                             aria-label={link.label}
                           >
                             {/* Interactive inner glow */}
@@ -407,7 +407,7 @@ function LandingPage() {
             </ActionButton>
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-2 rounded-full border border-white/[0.1] px-6 py-2.5 font-mono text-[11px] uppercase tracking-wider text-text-base transition hover:border-accent/50 hover:text-accent"
+              className="group inline-flex items-center gap-2 rounded-full border border-[var(--edge-2)] px-6 py-2.5 font-mono text-[11px] uppercase tracking-wider text-text-base transition hover:border-accent/50 hover:text-accent"
             >
               Send a message
               <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

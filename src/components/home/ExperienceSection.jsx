@@ -37,7 +37,7 @@ export default function ExperienceSection() {
         />
 
         {roles.map((role, i) => (
-          <li key={`${role.company}-${i}`} className="relative pl-10 pb-10 last:pb-0">
+          <li key={`${role.company}-${i}`} className="reveal relative pl-10 pb-10 last:pb-0">
             <span
               aria-hidden="true"
               className={`absolute left-0 top-1.5 h-[15px] w-[15px] rounded-full border-2 ${
@@ -73,7 +73,7 @@ export default function ExperienceSection() {
       <div className="mt-10 flex justify-center">
         <Link
           to="/resume"
-          className="group inline-flex items-center gap-2 rounded-full border border-white/[0.1] px-6 py-2.5 font-mono text-[11px] uppercase tracking-wider text-text-base transition hover:border-accent/50 hover:text-accent"
+          className="group inline-flex items-center gap-2 rounded-full border border-[var(--edge-2)] px-6 py-2.5 font-mono text-[11px] uppercase tracking-wider text-text-base transition hover:border-accent/50 hover:text-accent"
         >
           Full CV
           <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
