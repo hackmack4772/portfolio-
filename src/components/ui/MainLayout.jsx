@@ -13,6 +13,10 @@ export default function MainLayout({ children }) {
       <div className="hidden xl:block absolute left-8 top-0 bottom-0 w-[1px] bg-border-base/10 pointer-events-none -z-10" />
       <div className="hidden xl:block absolute right-8 top-0 bottom-0 w-[1px] bg-border-base/10 pointer-events-none -z-10" />
 
+      {/* Reading progress. Driven by animation-timeline: scroll(), so there
+          is no scroll listener behind it. */}
+      <div className="scroll-progress" aria-hidden="true" />
+
       <Particle />
       <ScrollToTop />
       {/* Renders nothing unless ?debug=1 or Ctrl+Shift+D. */}

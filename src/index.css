@@ -516,59 +516,151 @@ p, li {
 
 /* ===========================================================================
    STACKED SECTIONS
-   Each section pins just under the navbar, and the next one scrolls up over
-   the top of it, so the page builds into a pile of cards rather than sliding
-   past. Everything here is CSS - position: sticky for the pinning, and a
-   scroll-driven animation for the scale-and-dim as a card gets covered. No
-   observer, no rAF loop, no library.
+   Each section pins under the navbar and the next scrolls up over it, so the
+   page builds into a pile rather than sliding past. position: sticky does the
+   pinning; the recede is a scroll-driven animation, so it tracks scroll
+   position exactly instead of easing on a timer. No observer, no rAF loop,
+   no library.
    =========================================================================== */
 
 .stack {
-  /* Each card needs its own scroll distance to travel before the next one
-     arrives, so the parent must not clip or create a new scroll context. */
   position: relative;
 }
 
 .stack > .stack-card {
   position: sticky;
-  /* Offset grows per card so the stack fans out slightly and you can see
-     the edge of every layer underneath. --i is set per section. */
-  top: calc(5.5rem + (var(--i, 0) * 0.9rem));
+  /* Offset grows per card so the pile fans out and the edge of every layer
+     underneath stays visible. --i is set per section. */
+  top: calc(5.25rem + (var(--i, 0) * 0.85rem));
   border-radius: var(--radius-card);
-  /* Its own paint layer, otherwise the cards underneath bleed through at
-     the rounded corners while they are being covered. */
+  /* Opaque, or the cards underneath show through the rounded corners while
+     they are being covered. */
   background-color: var(--bg-color);
-  will-change: transform;
+  /* Scale toward the pinned edge. With the default centre origin the card
+     shrinks away from the top it is pinned to, which breaks the illusion. */
+  transform-origin: center top;
 }
 
-/* The card shrinks and dims as the following one slides over it. Scroll
-   driven, so it tracks the scroll position exactly rather than easing on a
-   timer. Behind @supports: without it the cards still stack, they just do
-   not scale. */
+/* Dimming as a composited overlay rather than filter: brightness().
+   A filter on a full-width section repaints that whole layer on every frame
+   it changes; an overlay's opacity is handled by the compositor. */
+.stack > .stack-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  border-radius: inherit;
+  background: rgb(3 5 10 / 0.72);
+  opacity: 0;
+}
+
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .stack > .stack-card {
       animation: stack-recede linear both;
       animation-timeline: view();
-      animation-range: exit -12% exit 88%;
+      animation-range: exit -10% exit 90%;
+      /* Scoped to the property that actually moves, and only while the
+         cards are in play - not parked on four full-viewport layers for
+         the whole session. */
+      will-change: transform;
+    }
+
+    .stack > .stack-card::after {
+      animation: stack-dim linear both;
+      animation-timeline: view();
+      animation-range: exit -10% exit 90%;
     }
   }
 }
 
 @keyframes stack-recede {
   to {
-    transform: scale(0.945);
-    filter: brightness(0.62);
+    transform: scale(0.94) translateY(-0.5rem);
+    /* Depth cue: the covered card sinks and picks up a shadow, which is
+       what makes the pile read as layered rather than as one flat page. */
+    box-shadow: 0 -18px 40px -16px rgb(0 0 0 / 0.85);
   }
 }
 
-/* Stacking is a desktop-height affordance. On a short viewport the cards
-   have nowhere to pile up and it just feels like the page is stuck. */
+@keyframes stack-dim {
+  to { opacity: 1; }
+}
+
+/* Stacking needs vertical room. On a short or narrow viewport the cards have
+   nowhere to pile up and the pinning just reads as the page being stuck. */
 @media (max-width: 1023px), (max-height: 700px) {
   .stack > .stack-card {
     position: static;
     animation: none;
     transform: none;
-    filter: none;
+    will-change: auto;
   }
+  .stack > .stack-card::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   SCROLL PROGRESS
+   A two-pixel reading indicator across the top. animation-timeline: scroll()
+   means the browser drives it from the scroll position itself - no listener,
+   no state, nothing on the main thread.
+   Defaults to scaleX(0), so where scroll-driven animations are unsupported it
+   simply stays invisible rather than showing a permanently full bar.
+   --------------------------------------------------------------------------- */
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  z-index: 60;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: scroll-progress linear;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes scroll-progress {
+  to { transform: scaleX(1); }
+}
+
+/* ---------------------------------------------------------------------------
+   CARD EDGE HIGHLIGHT
+   A light source running along the top edge on hover. Pure gradient on a
+   pseudo-element, so it costs one composited layer and only while hovered.
+   --------------------------------------------------------------------------- */
+
+.surface-interactive {
+  position: relative;
+}
+
+.surface-interactive::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--accent-color) 70%, transparent),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 280ms var(--ease-out-quint);
+  pointer-events: none;
+}
+
+.surface-interactive:hover::before {
+  opacity: 1;
 }
