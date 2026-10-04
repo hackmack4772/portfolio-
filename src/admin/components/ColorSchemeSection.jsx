@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore/lite';
 import { usePortfolio } from '../../Context/PortfolioDataContext';
 import { Palette, Eye, Save, Sparkles, CheckCircle2, AlertCircle } from 'lucide-react';
 import ColorPicker from './ColorPicker';

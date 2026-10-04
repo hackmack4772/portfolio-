@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore/lite';
 import { usePortfolio } from '../../Context/PortfolioDataContext';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { 

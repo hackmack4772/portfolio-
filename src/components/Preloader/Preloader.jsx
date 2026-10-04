@@ -1,19 +1,20 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePortfolio } from "../../Context/PortfolioDataContext";
 
 function Preloader() {
   const { loading, bootLogs, bootProgress } = usePortfolio();
-  const [visible, setVisible] = useState(loading);
   const consoleEndRef = useRef(null);
 
-  useEffect(() => {
-    if (!loading) {
-      const timer = setTimeout(() => setVisible(false), 600); // Transition buffer
-      return () => clearTimeout(timer);
-    }
-    setVisible(true);
-  }, [loading]);
+  // This component is rendered in two places: as the boot screen, and as the
+  // <Suspense> fallback for route chunks. It therefore has to paint something
+  // whenever it is mounted.
+  //
+  // It used to seed a `visible` flag from `loading` and clear it 600 ms later.
+  // That was invisible while `loading` gated everything, but once the boot
+  // screen is dismissed early, mounting this as a Suspense fallback rendered
+  // null - a blank screen for however long the chunk took to arrive. Whoever
+  // mounts it decides when it goes away.
 
   // Scroll to bottom of terminal when logs update
   useEffect(() => {
@@ -32,7 +33,7 @@ function Preloader() {
 
   return (
     <AnimatePresence>
-      {visible && (
+      {(
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}

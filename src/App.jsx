@@ -10,15 +10,16 @@ import Lenis from "lenis";
 import { usePortfolio } from "./Context/PortfolioDataContext";
 import { useDarkMode } from "./Context/DarkModeContext";
 import Preloader from "./components/Preloader/Preloader";
-import Login from "./admin/Login.jsx";
-import Dashboard from "./admin/Dashboard.jsx";
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from "./admin/utils/firebase";
 import MainLayout from "./components/ui/MainLayout";
 
-// Lazy load components
-const Navbar = lazy(() => import("./components/Navbar/Navbar"));
-const LandingPage = lazy(() => import("./pages/LandingPage/LandingPage"));
+// Lazy load components.
+// Navbar and LandingPage are also prefetched during the boot screen (see
+// below), so dismissing it does not then wait on another network round trip.
+const importNavbar = () => import("./components/Navbar/Navbar");
+const importLandingPage = () => import("./pages/LandingPage/LandingPage");
+
+const Navbar = lazy(importNavbar);
+const LandingPage = lazy(importLandingPage);
 const Footer = lazy(() => import("./components/Footer/Footer"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 const About = lazy(() => import("./pages/About/About"));
@@ -27,7 +28,52 @@ const Resume = lazy(() => import("./pages/Resume/ResumeNew"));
 const Education = lazy(() => import("./pages/Education/Education"));
 const ContactUs = lazy(() => import("./pages/ContactUs/ContactUs"));
 
-function AppContent({ user }) {
+// The admin panel was statically imported, so every visitor downloaded it -
+// along with firebase/auth and firebase/storage - before the home page could
+// paint. It is now its own chunk, loaded only when /admin is opened.
+const Login = lazy(() => import("./admin/Login.jsx"));
+const Dashboard = lazy(() => import("./admin/Dashboard.jsx"));
+
+/**
+ * Subscribes to Firebase auth, but only once an /admin route is actually
+ * visited. The public site used to block its first paint on this round trip
+ * even though nothing outside /admin reads the result.
+ */
+function AdminGate({ view }) {
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+
+  useEffect(() => {
+    let unsubscribe = () => {};
+    let cancelled = false;
+
+    (async () => {
+      const [{ onAuthStateChanged }, { auth }] = await Promise.all([
+        import("firebase/auth"),
+        import("./admin/utils/firebase"),
+      ]);
+      if (cancelled) return;
+      unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+        setAuthLoading(false);
+      });
+    })();
+
+    return () => {
+      cancelled = true;
+      unsubscribe();
+    };
+  }, []);
+
+  if (authLoading) return <Preloader />;
+
+  if (view === "login") {
+    return user ? <Navigate to="/admin/dashboard" /> : <div className="admin-app"><Login /></div>;
+  }
+  return user ? <div className="admin-app"><Dashboard /></div> : <Navigate to="/admin" />;
+}
+
+function AppContent() {
   const location = useLocation();
   const isChatRoute =
     location.pathname === "/login" ||
@@ -43,18 +89,8 @@ function AppContent({ user }) {
       <Suspense fallback={<Preloader />}>
         <MainLayout>
           <Routes>
-            <Route
-              path="/admin"
-              element={
-                user ? <Navigate to="/admin/dashboard" /> : <div className="admin-app"><Login /></div>
-              }
-            />
-            <Route
-              path="/admin/dashboard/*"
-              element={
-                user ? <div className="admin-app"><Dashboard /></div> : <Navigate to="/admin" />
-              }
-            />
+            <Route path="/admin" element={<AdminGate view="login" />} />
+            <Route path="/admin/dashboard/*" element={<AdminGate view="dashboard" />} />
             <Route path="/" element={<LandingPage />} />
             <Route path="/home" element={<LandingPage />} />
             <Route path="/not-found" element={<NotFound />} />
@@ -74,8 +110,13 @@ function AppContent({ user }) {
 
 function App() {
   const { loading: portfolioLoading } = usePortfolio();
-  const [user, setUser] = useState(null);
-  const [authLoading, setAuthLoading] = useState(true);
+
+  // Warm the chunks the first screen needs while the boot screen is still up,
+  // so dismissing it does not hand the user a second wait.
+  useEffect(() => {
+    importNavbar();
+    importLandingPage();
+  }, []);
 
   // Initialize Lenis scroll
   useEffect(() => {
@@ -99,24 +140,15 @@ function App() {
     };
   }, []);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setAuthLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
   const { isDarkMode } = useDarkMode();
 
   return (
     <div className={isDarkMode ? "App" : "App light-mode"}>
-      {portfolioLoading || authLoading ? (
+      {portfolioLoading ? (
         <Preloader />
       ) : (
         <Router>
-          <AppContent user={user} />
+          <AppContent />
         </Router>
       )}
     </div>

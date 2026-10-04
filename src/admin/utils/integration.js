@@ -67,7 +67,7 @@
  * To connect your website to the data from Firebase:
  * 
  * 1. Import Firebase in your components:
- *    import { getFirestore, doc, getDoc } from 'firebase/firestore';
+ *    import { getFirestore, doc, getDoc } from 'firebase/firestore/lite';
  * 
  * 2. Initialize Firestore:
  *    const db = getFirestore();
@@ -104,7 +104,7 @@
  * You'll need to create the initial data structure in Firebase Firestore.
  * Here's an example script you can run to set up the initial data:
  * 
- * import { getFirestore, doc, setDoc } from 'firebase/firestore';
+ * import { getFirestore, doc, setDoc } from 'firebase/firestore/lite';
  * import { app } from './firebase'; // Your Firebase config
  * 
  * const db = getFirestore(app);

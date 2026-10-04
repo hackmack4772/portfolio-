@@ -7,7 +7,7 @@ import {
   addDoc, 
   updateDoc, 
   deleteDoc 
-} from 'firebase/firestore';
+} from 'firebase/firestore/lite';
 import { usePortfolio } from '../../Context/PortfolioDataContext';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { 
