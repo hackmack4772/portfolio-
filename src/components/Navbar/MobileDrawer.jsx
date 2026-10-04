@@ -87,7 +87,8 @@ export default function MobileDrawer({ isOpen, onClose, navItems, isActivePath, 
         initial="hidden"
         animate="visible"
         exit="exit"
-        className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-sm bg-bg-base border-l border-border-base/30 shadow-2xl flex flex-col p-6 overflow-y-auto no-scrollbar md:hidden"
+        className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-sm bg-bg-base border-l border-border-base/30 shadow-2xl flex flex-col p-6 overflow-y-auto overscroll-contain no-scrollbar md:hidden"
+        style={{ WebkitOverflowScrolling: "touch" }}
       >
         {/* Cyber grid overlays */}
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none -z-10" />

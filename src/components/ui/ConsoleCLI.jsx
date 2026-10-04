@@ -558,7 +558,7 @@ function ConsoleCLI({ isOpen, onClose }) {
         <div
           ref={containerRef}
           onClick={() => inputRef.current?.focus()}
-          className="flex-grow p-4 sm:p-6 overflow-y-auto font-mono text-[11px] sm:text-xs text-text-muted/95 selection:bg-accent selection:text-bg-base"
+          className="flex-grow p-4 sm:p-6 overflow-y-auto overscroll-contain font-mono text-[11px] sm:text-xs text-text-muted/95 selection:bg-accent selection:text-bg-base"
         >
           {history.map((entry, i) => (
             <div

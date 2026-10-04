@@ -51,7 +51,7 @@ export default function Overlay({ children, className = "", lockScroll: lockScro
   return createPortal(
     <div
       style={{ zIndex: Z_INDEX }}
-      className={`fixed inset-0 w-full h-full flex items-center justify-center p-4 ${className}`}
+      className={`fixed inset-0 w-full h-full flex items-center justify-center overscroll-contain p-4 ${className}`}
     >
       {children}
     </div>,
