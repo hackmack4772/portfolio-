@@ -166,30 +166,30 @@ function Education() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full">
             
             {/* Left Column: Learning Telemetry Cockpit */}
-            <div className="lg:col-span-4 flex flex-col justify-between glass-premium-dark border border-white/[0.08] p-6 rounded-3xl shadow-2xl relative overflow-hidden">
+            <div className="lg:col-span-4 flex flex-col justify-between glass-premium-dark border border-[var(--edge-2)] p-6 rounded-3xl shadow-2xl relative overflow-hidden">
               <div className="absolute inset-0 crt-scanlines opacity-5 pointer-events-none select-none" />
               
               <div className="space-y-4 w-full">
-                <div className="flex items-center justify-between border-b border-white/[0.06] pb-3 select-none">
+                <div className="flex items-center justify-between border-b border-[var(--edge-1)] pb-3 select-none">
                   <span className="text-[10px] font-mono text-text-muted uppercase tracking-wider">Learning Core Registers</span>
                   <FloatingBadge label="ACTIVE" color="accent" />
                 </div>
 
                 {/* monospaced diagnostics statistics */}
                 <div className="space-y-3 pt-2 font-mono text-[10px] text-text-muted">
-                  <div className="flex justify-between border-b border-white/[0.03] pb-1.5">
+                  <div className="flex justify-between border-b border-[var(--edge-1)] pb-1.5">
                     <span>LEARNING_MODE:</span>
                     <span className="text-accent font-bold">ACTIVE // AUTODIDACT</span>
                   </div>
-                  <div className="flex justify-between border-b border-white/[0.03] pb-1.5">
+                  <div className="flex justify-between border-b border-[var(--edge-1)] pb-1.5">
                     <span>DOMAINS_EXPLORED:</span>
                     <span className="text-white font-bold">25+ Technical Cores</span>
                   </div>
-                  <div className="flex justify-between border-b border-white/[0.03] pb-1.5">
+                  <div className="flex justify-between border-b border-[var(--edge-1)] pb-1.5">
                     <span>ACADEMIC_PEAK:</span>
                     <span className="text-white font-bold">9.08 CGPA (BCA)</span>
                   </div>
-                  <div className="flex justify-between border-b border-white/[0.03] pb-1.5">
+                  <div className="flex justify-between border-b border-[var(--edge-1)] pb-1.5">
                     <span>SYSTEMS_BUILT:</span>
                     <span className="text-white font-bold">Multiple Production</span>
                   </div>
@@ -201,7 +201,7 @@ function Education() {
               </div>
 
               {/* Quote card */}
-              <div className="mt-8 pt-4 border-t border-white/[0.06] flex items-start gap-3 select-none">
+              <div className="mt-8 pt-4 border-t border-[var(--edge-1)] flex items-start gap-3 select-none">
                 <div className="w-8 h-8 rounded-lg bg-accent/10 text-accent flex items-center justify-center shrink-0">
                   <Terminal className="w-4 h-4" />
                 </div>
@@ -216,9 +216,9 @@ function Education() {
             </div>
 
             {/* Right Column: Stack Evolution Flowchart */}
-            <div className="lg:col-span-8 flex flex-col justify-between glass-premium border border-white/[0.08] p-6 rounded-3xl shadow-2xl relative overflow-hidden">
+            <div className="lg:col-span-8 flex flex-col justify-between glass-premium border border-[var(--edge-2)] p-6 rounded-3xl shadow-2xl relative overflow-hidden">
               <div className="space-y-4 w-full">
-                <div className="text-[10px] font-mono text-text-muted uppercase border-b border-white/[0.06] pb-3 select-none">
+                <div className="text-[10px] font-mono text-text-muted uppercase border-b border-[var(--edge-1)] pb-3 select-none">
                   Technology Stack Evolution Pipeline
                 </div>
 
@@ -234,7 +234,7 @@ function Education() {
                   ].map((flow, index) => (
                     <div 
                       key={index} 
-                      className="group relative p-3 rounded-xl border border-white/[0.05] bg-white/[0.01] hover:border-accent/40 hover:bg-white/[0.03] transition flex flex-col items-center justify-center gap-1.5"
+                      className="reveal group relative p-3 surface-interactive flex flex-col items-center justify-center gap-1.5"
                     >
                       <span className="text-[7px] font-mono text-accent">{flow.step}_{flow.key}</span>
                       <h4 className="text-[11px] font-bold text-white leading-tight font-mono">{flow.name}</h4>
@@ -252,7 +252,7 @@ function Education() {
               </div>
 
               {/* Detail narrative text below pipeline */}
-              <div className="mt-8 pt-4 border-t border-white/[0.06] text-[10px] font-sans text-text-muted leading-relaxed text-justify">
+              <div className="mt-8 pt-4 border-t border-[var(--edge-1)] text-[10px] font-sans text-text-muted leading-relaxed text-justify">
                 <strong>Trajectory Summary:</strong> Starting with basic UI markup, I advanced into scripting logic and relational databases. Moving through MVC frame modeling (Laravel), I transitioned to fully asynchronous distributed architectures (MERN Stack, TypeScript). Today, my focus targets real-time communications pipelines (WebSockets) and production telemetry scaling (Redis cache eviction models).
               </div>
             </div>
@@ -371,9 +371,9 @@ function Education() {
               </div>
 
               {/* Node detail inspector panel */}
-              <div className="lg:col-span-5 flex flex-col justify-between glass-premium-dark border border-white/[0.08] p-6 rounded-3xl shadow-2xl min-h-[360px]">
+              <div className="lg:col-span-5 flex flex-col justify-between glass-premium-dark border border-[var(--edge-2)] p-6 rounded-3xl shadow-2xl min-h-[360px]">
                 <div className="space-y-4">
-                  <div className="flex items-center gap-2 border-b border-white/[0.06] pb-2 font-mono text-[9px] text-text-muted select-none">
+                  <div className="flex items-center gap-2 border-b border-[var(--edge-1)] pb-2 font-mono text-[9px] text-text-muted select-none">
                     <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
                     <span>Domain Inspection Portal</span>
                   </div>
@@ -388,14 +388,14 @@ function Education() {
                   </div>
                 </div>
 
-                <div className="space-y-4 pt-6 border-t border-white/[0.06]">
+                <div className="space-y-4 pt-6 border-t border-[var(--edge-1)]">
                   {/* Mastery bar */}
                   <div className="space-y-1">
                     <div className="flex justify-between items-center text-[10px] font-mono">
                       <span>MASTERY METRIC:</span>
                       <span className="text-accent font-bold">{KNOWLEDGE_DOMAINS[selectedDomain].mastery}%</span>
                     </div>
-                    <div className="w-full h-1.5 bg-black/40 rounded-full overflow-hidden border border-white/[0.05]">
+                    <div className="w-full h-1.5 bg-black/40 rounded-full overflow-hidden border border-[var(--edge-1)]">
                       <div className="h-full bg-accent rounded-full" style={{ width: `${KNOWLEDGE_DOMAINS[selectedDomain].mastery}%` }} />
                     </div>
                   </div>
@@ -405,7 +405,7 @@ function Education() {
                     <span className="text-text-muted uppercase text-[8px] tracking-wider block">Conquered Sub-systems:</span>
                     <div className="flex flex-wrap gap-1.5">
                       {KNOWLEDGE_DOMAINS[selectedDomain].details.map((t, idx) => (
-                        <span key={idx} className="px-2 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-[8px] text-white">
+                        <span key={idx} className="px-2 py-0.5 rounded bg-[var(--surface-2)] border border-[var(--edge-1)] text-[8px] text-white">
                           {t}
                         </span>
                       ))}
@@ -435,10 +435,10 @@ function Education() {
                 return (
                   <div 
                     key={era.id} 
-                    className={`rounded-2xl border transition overflow-hidden ${
+                    className={`reveal rounded-2xl border transition overflow-hidden ${
                       isExpanded 
-                        ? "bg-white/[0.03] border-accent/60 shadow-[0_0_15px_rgba(12,251,255,0.08)]" 
-                        : "bg-white/[0.01] border-white/[0.06] hover:border-accent/30"
+                        ? "bg-[var(--surface-2)] border-accent/60 shadow-[0_0_15px_rgba(12,251,255,0.08)]" 
+                        : "bg-[var(--surface-1)] border-[var(--edge-1)] hover:border-accent/30"
                     }`}
                   >
                     {/* Header trigger */}
@@ -450,7 +450,7 @@ function Education() {
                         <span className="text-[8px] text-accent uppercase font-bold tracking-widest">{era.tag}</span>
                         <h4 className="text-xs font-bold text-white">{era.title}</h4>
                       </div>
-                      <span className="text-[10px] text-text-muted shrink-0 ml-4 bg-white/[0.05] px-2 py-0.5 rounded border border-white/[0.08]">
+                      <span className="text-[10px] text-text-muted shrink-0 ml-4 bg-[var(--surface-2)] px-2 py-0.5 rounded border border-[var(--edge-2)]">
                         {era.period}
                       </span>
                     </button>
@@ -463,7 +463,7 @@ function Education() {
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.2 }}
-                          className="border-t border-white/[0.06]"
+                          className="border-t border-[var(--edge-1)]"
                         >
                           <div className="p-5 font-sans text-xs md:text-sm text-text-muted leading-relaxed space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-[10px]">
@@ -482,7 +482,7 @@ function Education() {
                               <p className="text-justify font-sans text-[11px] md:text-xs leading-relaxed">{era.outcome}</p>
                             </div>
 
-                            <div className="space-y-1 pt-2 border-t border-white/[0.03]">
+                            <div className="space-y-1 pt-2 border-t border-[var(--edge-1)]">
                               <span className="text-[9px] font-mono text-green-500 uppercase tracking-widest block">System Transformation</span>
                               <p className="text-justify font-sans text-[11px] md:text-xs leading-relaxed italic text-green-500/80">"{era.transformation}"</p>
                             </div>
@@ -506,7 +506,7 @@ function Education() {
                 {MILESTONE_REGISTRY.map((mile) => (
                   <div 
                     key={mile.id} 
-                    className="p-4 rounded-xl border border-white/[0.06] glass-premium hover:border-accent/40 transition-colors flex gap-4 items-start relative overflow-hidden group"
+                    className="p-4 surface-interactive reveal flex gap-4 items-start relative overflow-hidden group"
                   >
                     <div className="absolute top-0 left-0 w-[2px] h-full bg-accent opacity-45" />
                     
@@ -517,7 +517,7 @@ function Education() {
                     <div className="space-y-1 font-mono text-[10px]">
                       <div className="flex justify-between items-center w-full">
                         <h4 className="text-[11px] font-bold text-white leading-tight">{mile.title}</h4>
-                        <span className="text-[8px] text-text-muted bg-white/[0.04] px-1.5 py-0.5 rounded border border-white/[0.08] ml-2">
+                        <span className="text-[8px] text-text-muted bg-[var(--surface-2)] px-1.5 py-0.5 rounded border border-[var(--edge-2)] ml-2">
                           {mile.year}
                         </span>
                       </div>
