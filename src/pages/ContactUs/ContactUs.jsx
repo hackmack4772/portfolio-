@@ -165,7 +165,7 @@ function ContactUs({ hideHeader = false }) {
               <CheckCircle className="w-8 h-8" />
             </motion.div>
             <div className="space-y-2 font-mono text-[10px] text-text-muted">
-              <h3 className="text-sm font-bold text-white uppercase tracking-wider">Payload Transmitted!</h3>
+              <h3 className="text-sm font-bold text-text-base uppercase tracking-wider">Payload Transmitted!</h3>
               <p className="font-sans text-xs leading-relaxed max-w-xs">
                 Your encrypted secure message hash has been written to the gateway core. I will compile a response shortly.
               </p>
@@ -202,7 +202,7 @@ function ContactUs({ hideHeader = false }) {
                   </div>
                   <div className="flex justify-between">
                     <span>SIGNAL_STRENGTH:</span>
-                    <span className="text-white font-bold">STABLE (99.2%)</span>
+                    <span className="text-text-base font-bold">STABLE (99.2%)</span>
                   </div>
                   <div className="flex justify-between">
                     <span>TRANSMISSION:</span>
@@ -240,7 +240,7 @@ function ContactUs({ hideHeader = false }) {
                   <div className="absolute top-2 right-2 text-[9px] font-mono text-text-muted/70 uppercase">// COMM_NETWORK</div>
                   
                   {/* SVG Node network */}
-                  <div className="relative w-full h-36 bg-[#0b0f19]/40 rounded-xl border border-[var(--edge-1)] p-3 flex items-center justify-center blueprint-grid">
+                  <div className="relative w-full h-36 panel-dark rounded-xl border border-[var(--edge-1)] p-3 flex items-center justify-center blueprint-grid">
                     <svg className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
                       <line x1="50%" y1="50%" x2="25%" y2="25%" stroke="#0cfbff" strokeWidth="1" strokeOpacity="0.2" />
                       <line x1="50%" y1="50%" x2="75%" y2="25%" stroke="#0cfbff" strokeWidth="1" strokeOpacity="0.2" />
@@ -256,7 +256,7 @@ function ContactUs({ hideHeader = false }) {
                         rel="noopener noreferrer"
                         onMouseEnter={() => setHoveredSocial("GitHub")}
                         onMouseLeave={() => setHoveredSocial(null)}
-                        className="p-2 border border-[var(--edge-2)] bg-[var(--well)] rounded-xl hover:border-accent hover:text-white transition cursor-pointer flex flex-col items-center justify-center w-18"
+                        className="p-2 border border-[var(--edge-2)] bg-[var(--well)] rounded-xl hover:border-accent hover:text-text-base transition cursor-pointer flex flex-col items-center justify-center w-18"
                       >
                         <span className="text-accent font-bold">GITHUB</span>
                         <span className="text-[9px] opacity-60">Port 443</span>
@@ -275,7 +275,7 @@ function ContactUs({ hideHeader = false }) {
                           rel="noopener noreferrer"
                           onMouseEnter={() => setHoveredSocial("LinkedIn")}
                           onMouseLeave={() => setHoveredSocial(null)}
-                          className="p-2 border border-[var(--edge-2)] bg-[var(--well)] rounded-xl hover:border-accent hover:text-white transition cursor-pointer flex flex-col items-center justify-center w-18"
+                          className="p-2 border border-[var(--edge-2)] bg-[var(--well)] rounded-xl hover:border-accent hover:text-text-base transition cursor-pointer flex flex-col items-center justify-center w-18"
                         >
                           <span className="text-accent font-bold">LINKEDIN</span>
                           <span className="text-[9px] opacity-60">Port 8080</span>

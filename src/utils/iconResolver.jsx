@@ -178,8 +178,8 @@ export const getSkillGlowClass = (name) => {
     ["git", "hover:border-orange-500 hover:text-orange-500"],
     ["jwt", "hover:border-fuchsia-400 hover:text-fuchsia-400"],
     ["zoom", "hover:border-blue-400 hover:text-blue-400"],
-    ["next", "hover:border-white hover:text-white"],
-    ["vercel", "hover:border-white hover:text-white"],
+    ["next", "hover:border-white hover:text-text-base"],
+    ["vercel", "hover:border-white hover:text-text-base"],
   ];
   for (const [token, cls] of TINTS) if (key.includes(token)) return cls;
   return "hover:border-accent/60 hover:text-accent";

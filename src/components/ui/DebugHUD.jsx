@@ -65,7 +65,7 @@ export default function DebugHUD() {
 
   const Row = ({ label, value, warn }) => (
     <div className="flex justify-between gap-3">
-      <span className="text-white/45">{label}</span>
+      <span className="text-text-base/45">{label}</span>
       <span className={warn ? "text-red-400 font-bold" : "text-[#4ade80]"}>{String(value)}</span>
     </div>
   );
@@ -73,13 +73,13 @@ export default function DebugHUD() {
   return createPortal(
     <div
       style={{ zIndex: 2147483000 }}
-      className="fixed bottom-2 left-2 w-[232px] rounded-lg border border-white/15 bg-black/90 p-2.5 font-mono text-[10px] leading-relaxed text-white/80 shadow-2xl"
+      className="panel-dark fixed bottom-2 left-2 w-[232px] rounded-lg border border-white/15 bg-black/90 p-2.5 font-mono text-[10px] leading-relaxed text-text-base/80 shadow-2xl"
     >
       <div className="mb-1.5 flex items-center justify-between border-b border-white/10 pb-1">
         <span className="font-bold tracking-wider text-[#0cfbff]">DEBUG</span>
         <button
           onClick={() => { setDebugEnabled(false); setOn(false); }}
-          className="text-white/40 hover:text-white"
+          className="text-text-base/40 hover:text-text-base"
           aria-label="Close debug panel"
         >
           ×
@@ -96,7 +96,7 @@ export default function DebugHUD() {
       <Row label="rAF particles" value={debugState.particlesRunning ? "running" : "paused"} />
 
       <div className="mt-1.5 border-t border-white/10 pt-1">
-        <div className="mb-0.5 text-white/35">renders</div>
+        <div className="mb-0.5 text-text-base/35">renders</div>
         {Object.entries(debugState.renders)
           .sort((a, b) => b[1] - a[1])
           .slice(0, 6)
@@ -117,7 +117,7 @@ export default function DebugHUD() {
         </div>
       )}
 
-      <div className="mt-1.5 text-[9px] text-white/25">ctrl+shift+D toggles</div>
+      <div className="mt-1.5 text-[9px] text-text-base/25">ctrl+shift+D toggles</div>
     </div>,
     document.body
   );

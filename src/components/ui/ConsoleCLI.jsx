@@ -531,7 +531,7 @@ function ConsoleCLI({ isOpen, onClose }) {
 
   const styleFor = (type) =>
     ({
-      command: "text-white font-bold",
+      command: "text-text-base font-bold",
       success: "text-green-400",
       info: "text-accent font-bold",
       error: "text-red-400 font-bold",
@@ -571,7 +571,7 @@ function ConsoleCLI({ isOpen, onClose }) {
             <TerminalIcon className="w-3.5 h-3.5 text-accent" />
             <span>guest@hackmack-os: ~</span>
           </div>
-          <button onClick={onClose} aria-label="Close console" className="text-text-muted hover:text-white cursor-pointer">
+          <button onClick={onClose} aria-label="Close console" className="text-text-muted hover:text-text-base cursor-pointer">
             <X className="w-4.5 h-4.5" />
           </button>
         </div>
@@ -610,7 +610,7 @@ function ConsoleCLI({ isOpen, onClose }) {
             autoCorrect="off"
             autoCapitalize="off"
             spellCheck="false"
-            className="terminal-input min-w-0 flex-grow border-none bg-transparent font-mono text-[11px] text-white selection:bg-accent sm:text-xs"
+            className="terminal-input min-w-0 flex-grow border-none bg-transparent font-mono text-[11px] text-text-base selection:bg-accent sm:text-xs"
             placeholder="help, whoami, projects, skills..."
           />
         </div>

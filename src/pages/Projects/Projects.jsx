@@ -171,7 +171,7 @@ function Projects() {
                     <Terminal className="w-3.5 h-3.5 text-accent" />
                     <span>system_specs: /project/{selectedProject.title.toLowerCase().replace(/\s+/g, "_")}</span>
                   </span>
-                  <button onClick={() => setSelectedProject(null)} className="text-text-muted hover:text-white cursor-pointer">
+                  <button onClick={() => setSelectedProject(null)} className="text-text-muted hover:text-text-base cursor-pointer">
                     <X className="w-4.5 h-4.5" />
                   </button>
                 </div>
@@ -183,7 +183,7 @@ function Projects() {
                   <div className="lg:col-span-6 flex flex-col gap-6 h-full justify-between">
                     
                     {/* SVG Topology Box */}
-                    <div className="bg-[#0b0f19] blueprint-grid border border-[#0cfbff]/15 rounded-2xl p-5 relative overflow-hidden min-h-[220px] flex flex-col justify-between shadow-[inset_0_0_20px_rgba(12,251,255,0.02)]">
+                    <div className="panel-dark blueprint-grid border border-[#0cfbff]/15 rounded-2xl p-5 relative overflow-hidden min-h-[220px] flex flex-col justify-between shadow-[inset_0_0_20px_rgba(12,251,255,0.02)]">
                       <span className="text-[9px] font-mono text-[#0cfbff]/60 uppercase select-none">// SYSTEM_FLOW_TOPOLOGY</span>
                       
                       <div className="flex-grow flex items-center justify-center py-6">
@@ -193,7 +193,7 @@ function Projects() {
                             return (
                               <div key={node.id} className="flex flex-col items-center justify-center p-2.5 border border-[var(--edge-2)] bg-[var(--well)] rounded-xl relative">
                                 <NodeIcon className="w-4 h-4 text-accent mb-0.5" />
-                                <span className="font-bold text-white">{node.label}</span>
+                                <span className="font-bold text-text-base">{node.label}</span>
                                 
                                 {/* Right arrow separator */}
                                 {nIdx < bp.nodes.length - 1 && (
@@ -221,7 +221,7 @@ function Projects() {
                       </div>
                       <div className="flex justify-between border-b border-[var(--edge-1)] pb-1">
                         <span>SYSTEM_STATUS:</span>
-                        <span className="text-white font-semibold uppercase">{bp.telemetry.status}</span>
+                        <span className="text-text-base font-semibold uppercase">{bp.telemetry.status}</span>
                       </div>
                       <div className="flex justify-between border-b border-[var(--edge-1)] pb-1">
                         <span>API_HEALTH:</span>
@@ -229,11 +229,11 @@ function Projects() {
                       </div>
                       <div className="flex justify-between border-b border-[var(--edge-1)] pb-1">
                         <span>CACHE_EVIC_LAYER:</span>
-                        <span className="text-white font-semibold uppercase">{bp.telemetry.cache}</span>
+                        <span className="text-text-base font-semibold uppercase">{bp.telemetry.cache}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>WEBSOCKET_TUNNEL:</span>
-                        <span className="text-white font-semibold uppercase">{bp.telemetry.websocket}</span>
+                        <span className="text-text-base font-semibold uppercase">{bp.telemetry.websocket}</span>
                       </div>
                     </div>
 
@@ -242,7 +242,7 @@ function Projects() {
                   {/* Right Column: Case study specs narrative */}
                   <div className="lg:col-span-6 flex flex-col gap-6">
                     <div className="space-y-1 font-mono">
-                      <h3 className="text-base font-bold text-white leading-tight">{selectedProject.title}</h3>
+                      <h3 className="text-base font-bold text-text-base leading-tight">{selectedProject.title}</h3>
                       <span className="text-[9px] text-accent uppercase tracking-wider block">{selectedProject.category || "Project Case Study"}</span>
                     </div>
 
@@ -420,7 +420,7 @@ function Projects() {
                       <FolderOpen className={`w-12 h-12 ${textCol}`} />
                     </div>
                     
-                    <h3 className="text-xs font-mono uppercase tracking-wider font-bold text-white line-clamp-1 mt-2">
+                    <h3 className="text-xs font-mono uppercase tracking-wider font-bold text-text-base line-clamp-1 mt-2">
                       {project.title}
                     </h3>
                     <span className="text-[9px] font-mono text-text-muted mt-1 uppercase tracking-widest">

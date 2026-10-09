@@ -183,15 +183,15 @@ function Education() {
                   </div>
                   <div className="flex justify-between border-b border-[var(--edge-1)] pb-1.5">
                     <span>DOMAINS_EXPLORED:</span>
-                    <span className="text-white font-bold">25+ Technical Cores</span>
+                    <span className="text-text-base font-bold">25+ Technical Cores</span>
                   </div>
                   <div className="flex justify-between border-b border-[var(--edge-1)] pb-1.5">
                     <span>ACADEMIC_PEAK:</span>
-                    <span className="text-white font-bold">9.08 CGPA (BCA)</span>
+                    <span className="text-text-base font-bold">9.08 CGPA (BCA)</span>
                   </div>
                   <div className="flex justify-between border-b border-[var(--edge-1)] pb-1.5">
                     <span>SYSTEMS_BUILT:</span>
-                    <span className="text-white font-bold">Multiple Production</span>
+                    <span className="text-text-base font-bold">Multiple Production</span>
                   </div>
                   <div className="flex justify-between">
                     <span>RUNTIME_STATUS:</span>
@@ -237,7 +237,7 @@ function Education() {
                       className="reveal group relative p-3 surface-interactive flex flex-col items-center justify-center gap-1.5"
                     >
                       <span className="text-[9px] font-mono text-accent">{flow.step}_{flow.key}</span>
-                      <h4 className="text-[11px] font-bold text-white leading-tight font-mono">{flow.name}</h4>
+                      <h4 className="text-[11px] font-bold text-text-base leading-tight font-mono">{flow.name}</h4>
                       <span className="text-[9px] font-mono text-text-muted">{flow.details}</span>
 
                       {/* Direction flow indicators (except last item) */}
@@ -272,7 +272,7 @@ function Education() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
               
               {/* Connected node network layout (blueprint-styled) */}
-              <div className="lg:col-span-7 bg-[#0b0f19] blueprint-grid border-2 border-accent/20 rounded-3xl p-6 relative overflow-hidden flex flex-col justify-between min-h-[360px] shadow-[inset_0_0_30px_rgba(12,251,255,0.02)]">
+              <div className="lg:col-span-7 panel-dark blueprint-grid border-2 border-accent/20 rounded-3xl p-6 relative overflow-hidden flex flex-col justify-between min-h-[360px] shadow-[inset_0_0_30px_rgba(12,251,255,0.02)]">
                 <div className="absolute top-3 left-3 text-[9px] font-mono text-[#0cfbff]/60 uppercase tracking-widest select-none">
                   // KNOWLEDGE_NODE_SYSTEM_MESH
                 </div>
@@ -294,7 +294,7 @@ function Education() {
                       onClick={() => setSelectedDomain("mern")}
                       className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                         selectedDomain === "mern"
-                          ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
+                          ? "border-accent bg-accent/15 text-text-base scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                           : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                       }`}
                     >
@@ -309,7 +309,7 @@ function Education() {
                         onClick={() => setSelectedDomain("caching")}
                         className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                           selectedDomain === "caching"
-                            ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
+                            ? "border-accent bg-accent/15 text-text-base scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                             : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                         }`}
                       >
@@ -322,7 +322,7 @@ function Education() {
                         onClick={() => setSelectedDomain("databases")}
                         className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                           selectedDomain === "databases"
-                            ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
+                            ? "border-accent bg-accent/15 text-text-base scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                             : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                         }`}
                       >
@@ -338,7 +338,7 @@ function Education() {
                         onClick={() => setSelectedDomain("realtime")}
                         className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                           selectedDomain === "realtime"
-                            ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
+                            ? "border-accent bg-accent/15 text-text-base scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                             : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                         }`}
                       >
@@ -351,7 +351,7 @@ function Education() {
                         onClick={() => setSelectedDomain("infrastructure")}
                         className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                           selectedDomain === "infrastructure"
-                            ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
+                            ? "border-accent bg-accent/15 text-text-base scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                             : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                         }`}
                       >
@@ -405,7 +405,7 @@ function Education() {
                     <span className="text-text-muted uppercase text-[9px] tracking-wider block">Conquered Sub-systems:</span>
                     <div className="flex flex-wrap gap-1.5">
                       {KNOWLEDGE_DOMAINS[selectedDomain].details.map((t, idx) => (
-                        <span key={idx} className="px-2 py-0.5 rounded bg-[var(--surface-2)] border border-[var(--edge-1)] text-[9px] text-white">
+                        <span key={idx} className="px-2 py-0.5 rounded bg-[var(--surface-2)] border border-[var(--edge-1)] text-[9px] text-text-base">
                           {t}
                         </span>
                       ))}
@@ -448,7 +448,7 @@ function Education() {
                     >
                       <div className="space-y-1">
                         <span className="text-[9px] text-accent uppercase font-bold tracking-widest">{era.tag}</span>
-                        <h4 className="text-xs font-bold text-white">{era.title}</h4>
+                        <h4 className="text-xs font-bold text-text-base">{era.title}</h4>
                       </div>
                       <span className="text-[10px] text-text-muted shrink-0 ml-4 bg-[var(--surface-2)] px-2 py-0.5 rounded border border-[var(--edge-2)]">
                         {era.period}
@@ -469,11 +469,11 @@ function Education() {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-[10px]">
                               <div>
                                 <span className="text-text-muted uppercase text-[9px] tracking-wider block">Degree Awarded</span>
-                                <span className="text-white font-semibold block mt-0.5">{era.degree}</span>
+                                <span className="text-text-base font-semibold block mt-0.5">{era.degree}</span>
                               </div>
                               <div>
                                 <span className="text-text-muted uppercase text-[9px] tracking-wider block">Institution</span>
-                                <span className="text-white font-semibold block mt-0.5">{era.institution}</span>
+                                <span className="text-text-base font-semibold block mt-0.5">{era.institution}</span>
                               </div>
                             </div>
 
@@ -516,7 +516,7 @@ function Education() {
 
                     <div className="space-y-1 font-mono text-[10px]">
                       <div className="flex justify-between items-center w-full">
-                        <h4 className="text-[11px] font-bold text-white leading-tight">{mile.title}</h4>
+                        <h4 className="text-[11px] font-bold text-text-base leading-tight">{mile.title}</h4>
                         <span className="text-[9px] text-text-muted bg-[var(--surface-2)] px-1.5 py-0.5 rounded border border-[var(--edge-2)] ml-2">
                           {mile.year}
                         </span>

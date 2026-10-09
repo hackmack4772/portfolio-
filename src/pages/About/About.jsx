@@ -271,11 +271,11 @@ function About() {
             <div className="mt-4 pt-3 border-t border-[var(--edge-1)] font-mono text-[10px] space-y-1.5 text-text-muted">
               <div className="flex justify-between">
                 <span>PROFILE:</span>
-                <span className="text-white font-bold">ENGINEER_PROFILE.sys</span>
+                <span className="text-text-base font-bold">ENGINEER_PROFILE.sys</span>
               </div>
               <div className="flex justify-between">
                 <span>ROLE:</span>
-                <span className="text-white font-bold">Full Stack Engineer</span>
+                <span className="text-text-base font-bold">Full Stack Engineer</span>
               </div>
               <div className="flex justify-between">
                 <span>LOC:</span>
@@ -349,7 +349,7 @@ function About() {
                     <span className="text-[9px] font-mono text-text-muted uppercase">0{i+1}_core</span>
                   </div>
                   <div className="space-y-1 mt-1">
-                    <h4 className="text-[11px] font-mono font-bold text-white leading-tight">{p.title}</h4>
+                    <h4 className="text-[11px] font-mono font-bold text-text-base leading-tight">{p.title}</h4>
                     <span className="text-[9px] font-mono text-accent block">{p.subtitle}</span>
                   </div>
                   <p className="text-[10px] text-text-muted leading-relaxed font-sans text-justify mt-1">
@@ -379,7 +379,7 @@ function About() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mt-12">
           
           {/* Blueprint SVG Layout Panel */}
-          <div className="lg:col-span-7 bg-[#0b0f19] blueprint-grid border-2 border-[#0cfbff]/20 rounded-3xl p-6 relative overflow-hidden flex flex-col justify-between min-h-[380px] shadow-[inset_0_0_30px_rgba(12,251,255,0.02)]">
+          <div className="lg:col-span-7 panel-dark blueprint-grid border-2 border-[#0cfbff]/20 rounded-3xl p-6 relative overflow-hidden flex flex-col justify-between min-h-[380px] shadow-[inset_0_0_30px_rgba(12,251,255,0.02)]">
             <div className="absolute top-3 left-3 text-[9px] font-mono text-[#0cfbff]/60 uppercase tracking-widest select-none">
               // ARCHITECTURE_BLUEPRINT_SCHEMATIC
             </div>
@@ -393,7 +393,7 @@ function About() {
                   onClick={() => setSelectedSandbox("gateway")}
                   className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                     selectedSandbox === "gateway"
-                      ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
+                      ? "border-accent bg-accent/15 text-text-base scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                       : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                   }`}
                 >
@@ -408,7 +408,7 @@ function About() {
                     onClick={() => setSelectedSandbox("cache")}
                     className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                       selectedSandbox === "cache"
-                        ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
+                        ? "border-accent bg-accent/15 text-text-base scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                         : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                     }`}
                   >
@@ -421,7 +421,7 @@ function About() {
                     onClick={() => setSelectedSandbox("engine")}
                     className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                       selectedSandbox === "engine"
-                        ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
+                        ? "border-accent bg-accent/15 text-text-base scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                         : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                     }`}
                   >
@@ -436,7 +436,7 @@ function About() {
                   onClick={() => setSelectedSandbox("persistence")}
                   className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                     selectedSandbox === "persistence"
-                      ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
+                      ? "border-accent bg-accent/15 text-text-base scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
                       : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                   }`}
                 >
@@ -478,14 +478,14 @@ function About() {
             <div className="space-y-3 pt-6 border-t border-[var(--edge-1)]">
               <div className="flex flex-col gap-1 font-mono text-[10px]">
                 <span className="text-text-muted uppercase text-[9px] tracking-wider">Benchmark KPIs:</span>
-                <span className="text-white font-semibold">{SYSTEM_SANDBOX[selectedSandbox].kpis}</span>
+                <span className="text-text-base font-semibold">{SYSTEM_SANDBOX[selectedSandbox].kpis}</span>
               </div>
 
               <div className="flex flex-col gap-1.5">
                 <span className="text-text-muted uppercase text-[9px] tracking-wider font-mono">Integrated Stacks:</span>
                 <div className="flex flex-wrap gap-1.5">
                   {SYSTEM_SANDBOX[selectedSandbox].techs.map((t, idx) => (
-                    <span key={idx} className="px-2.5 py-1 rounded bg-[var(--surface-2)] border border-[var(--edge-1)] text-[9px] font-mono text-white font-medium">
+                    <span key={idx} className="px-2.5 py-1 rounded bg-[var(--surface-2)] border border-[var(--edge-1)] text-[9px] font-mono text-text-base font-medium">
                       {t}
                     </span>
                   ))}
@@ -520,7 +520,7 @@ function About() {
               </div>
 
               <div className="space-y-1.5">
-                <h4 className="text-base font-bold text-white leading-tight font-mono">{focusedCommit.title}</h4>
+                <h4 className="text-base font-bold text-text-base leading-tight font-mono">{focusedCommit.title}</h4>
                 <p className="text-xs text-accent font-semibold font-mono">{focusedCommit.company} // {focusedCommit.date}</p>
                 <p className="text-xs text-text-muted leading-relaxed pt-3 text-justify font-sans">
                   {focusedCommit.impact}
@@ -597,7 +597,7 @@ function About() {
                           </span>
                           <span className="text-[9px] text-text-muted">{item.date}</span>
                         </div>
-                        <h4 className="text-xs font-bold text-white pt-1">{item.title}</h4>
+                        <h4 className="text-xs font-bold text-text-base pt-1">{item.title}</h4>
                         <p className="text-[9px] text-text-muted uppercase leading-none mt-1">{item.company}</p>
                       </div>
                     </button>
@@ -641,7 +641,7 @@ function About() {
                 <span className="w-1.5 h-1.5 rounded-full bg-accent/45" />
               </div>
               <div className="space-y-1 pt-1">
-                <h4 className="font-bold text-white uppercase text-[11px] leading-tight">{item.title}</h4>
+                <h4 className="font-bold text-text-base uppercase text-[11px] leading-tight">{item.title}</h4>
                 <span className="text-[9px] text-accent block uppercase">Gate: {item.tech}</span>
               </div>
               <p className="text-[10px] text-text-muted leading-relaxed font-sans text-justify mt-1.5">
