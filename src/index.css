@@ -786,6 +786,14 @@ p, li {
    so it comes down and uses multiply, which keeps the darks and lets the page
    show through the lights. */
 .light-mode .hero-portrait {
-  opacity: 0.16;
+  opacity: 0.14;
   mix-blend-mode: multiply;
+}
+
+/* The source is 1024x1024 and the hero is roughly 1485 wide, so bg-cover
+   upscales it about 1.45x. Letting the browser sharpen the interpolation
+   recovers some of the detail that costs; it is not a substitute for a
+   wider source, but it is free. */
+.hero-portrait {
+  image-rendering: -webkit-optimize-contrast;
 }

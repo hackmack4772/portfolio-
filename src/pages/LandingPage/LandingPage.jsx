@@ -171,15 +171,15 @@ function LandingPage() {
         {/* Artistic background image blending (home-bg.png) */}
         <div className="absolute inset-0 select-none pointer-events-none overflow-hidden -z-10">
           <div 
-            className="hero-portrait absolute inset-0 bg-no-repeat opacity-[0.22] lg:opacity-[0.30]"
+            className="hero-portrait absolute inset-0 bg-no-repeat opacity-[0.26] lg:opacity-[0.34]"
             style={{ 
               // Stable public path, so this is not emitted a second time as a
                 // content-hashed copy of the identical file in public/.
                 backgroundImage: "url(/home_bg_hacker.png)",
-                backgroundSize: "auto 118%",
-                backgroundPosition: "right 2% center",
-              maskImage: 'radial-gradient(circle at 78% 48%, black 42%, transparent 82%)',
-              WebkitMaskImage: 'radial-gradient(circle at 78% 48%, black 42%, transparent 82%)'
+                backgroundSize: "cover",
+                backgroundPosition: "center 28%",
+              maskImage: 'linear-gradient(to right, rgb(0 0 0 / 0.30) 0%, rgb(0 0 0 / 0.55) 26%, black 58%, black 100%)',
+              WebkitMaskImage: 'linear-gradient(to right, rgb(0 0 0 / 0.30) 0%, rgb(0 0 0 / 0.55) 26%, black 58%, black 100%)'
             }}
           />
           {/* Subtle grid lines overlaid on the image for technical depth */}
