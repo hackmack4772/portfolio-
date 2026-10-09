@@ -46,7 +46,7 @@ export default function ExperienceSection() {
             />
 
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <h3 className="font-sans text-base font-bold text-white">{role.position}</h3>
+              <h3 className="font-sans text-base font-bold text-text-base">{role.position}</h3>
               <span className="flex items-center gap-1.5 font-mono text-[11px] text-accent">
                 <Building2 className="h-3 w-3" />
                 {role.company}

@@ -48,7 +48,7 @@ export default function FeaturedWork() {
               <FolderGit2 className="h-4 w-4 shrink-0 text-text-muted/70 transition group-hover:text-accent" />
             </div>
 
-            <h3 className="font-sans text-base font-bold leading-snug text-white">{p.title}</h3>
+            <h3 className="font-sans text-base font-bold leading-snug text-text-base">{p.title}</h3>
 
             <p className="line-clamp-4 flex-grow text-xs leading-relaxed text-text-muted/85">
               {p.description}

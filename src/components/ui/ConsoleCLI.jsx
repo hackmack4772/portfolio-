@@ -555,7 +555,7 @@ function ConsoleCLI({ isOpen, onClose }) {
         initial={{ scale: 0.97, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.18 }}
-        className="w-full max-w-4xl h-[85vh] bg-[#030712] border border-white/[0.08] rounded-2xl flex flex-col overflow-hidden shadow-2xl relative"
+        className="w-full max-w-4xl h-[85vh] panel-dark border border-white/[0.08] rounded-2xl flex flex-col overflow-hidden shadow-2xl relative"
       >
         <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.08] bg-white/[0.015] select-none shrink-0">
           <div className="flex items-center gap-1.5">

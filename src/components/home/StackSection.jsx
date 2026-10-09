@@ -59,7 +59,7 @@ export default function StackSection() {
               {grouped[cat].map((s) => (
                 <li
                   key={s.id || s.name}
-                  className="font-mono text-[11px] text-text-muted/90 transition hover:text-white"
+                  className="font-mono text-[11px] text-text-muted/90 transition hover:text-text-base"
                 >
                   {s.name}
                 </li>

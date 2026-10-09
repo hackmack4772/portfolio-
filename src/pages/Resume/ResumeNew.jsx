@@ -151,7 +151,7 @@ function ResumeNew() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-lg bg-[#030712] border border-accent/25 rounded-2xl overflow-hidden shadow-2xl p-6 relative flex flex-col gap-4 font-mono text-xs"
+              className="w-full max-w-lg panel-dark border border-accent/25 rounded-2xl overflow-hidden shadow-2xl p-6 relative flex flex-col gap-4 font-mono text-xs"
             >
               <div className="flex items-center justify-between border-b border-[var(--edge-2)] pb-3 text-[10px] text-text-muted">
                 <span className="flex items-center gap-1.5"><FileDown className="w-3.5 h-3.5 text-accent" /> SECURE_PAYLOAD_TRANSFER</span>

@@ -201,7 +201,7 @@ function LandingPage() {
 
             <div className="flex flex-col gap-2">
               <motion.h1
-                className="rise text-xl font-light leading-tight tracking-tight text-white/70 sm:text-2xl lg:text-3xl font-sans"
+                className="rise text-xl font-light leading-tight tracking-tight text-text-base/80 sm:text-2xl lg:text-3xl font-sans"
               >
                 Hi There, <span className="font-extrabold bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">I'm</span>{" "}
                 <span className="inline-block animate-[wave-animation_2.1s_infinite]" aria-hidden="true">
@@ -313,7 +313,7 @@ function LandingPage() {
                         transmitting_nodes
                       </div>
                       <div className="space-y-1">
-                        <h2 className="text-xl font-bold tracking-[0.15em] text-white uppercase font-mono">
+                        <h2 className="text-xl font-bold tracking-[0.15em] text-text-base uppercase font-mono">
                           FIND_ME_ON
                         </h2>
                         <p className="text-[10px] text-text-muted/80 uppercase tracking-wider font-mono">
@@ -367,7 +367,7 @@ function LandingPage() {
                             </div>
                             
                             <div className="flex flex-col text-left min-w-0">
-                              <span className="text-[11px] font-bold text-white group-hover/btn:text-accent tracking-wider uppercase transition-colors duration-300 truncate">
+                              <span className="text-[11px] font-bold text-text-base group-hover/btn:text-accent tracking-wider uppercase transition-colors duration-300 truncate">
                                 {link.label}
                               </span>
                               <span className="text-[9px] font-mono text-text-muted/70 group-hover/btn:text-accent/50 transition-colors duration-300">

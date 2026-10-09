@@ -158,7 +158,7 @@ function Projects() {
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
-                className="w-full max-w-4xl h-[85vh] bg-[#030712] border border-[var(--edge-2)] rounded-2xl flex flex-col overflow-hidden shadow-2xl relative"
+                className="w-full max-w-4xl h-[85vh] panel-dark border border-[var(--edge-2)] rounded-2xl flex flex-col overflow-hidden shadow-2xl relative"
               >
                 {/* Header */}
                 <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--edge-2)] bg-[var(--surface-1)] select-none shrink-0 font-mono text-xs">

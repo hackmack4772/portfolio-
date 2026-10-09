@@ -93,19 +93,36 @@
 
 /* Light Mode Variables */
 .light-mode, [data-theme="light"] {
-  --bg-color: #f8f9fa;
-  --bg-secondary: #edf0f5;
-  --text-color: #1e2530;
-  --text-secondary: #4a5568;
-  --border-color: rgba(3, 163, 165, 0.2);
-  --card-bg: rgba(255, 255, 255, 0.7);
-  --shadow: rgba(0, 0, 0, 0.08);
-  --navbar-bg: rgba(248, 249, 250, 0.85);
-  
-  --primary-color: #03a3a5;
-  --primary-hover: #028284;
-  --secondary-color: #8f10b7;
-  --accent-color: #7a0d9b;
+  /* A soft cool grey rather than pure white, so white cards lift off it. */
+  --bg-color: #f4f6f9;
+  --bg-secondary: #e9edf3;
+  --text-color: #0f172a;        /* 16.49:1 */
+  /* Darker than it looks like it needs to be, deliberately. Muted text is
+     used at /70 opacity across the site, and slate-600 at 70% over white is
+     only 3.59:1. This clears 4.5:1 even after that fade. */
+  --text-secondary: #2d3b4f;    /* 11.35:1 solid, 4.60:1 at /70 */
+  --border-color: rgb(15 23 42 / 0.12);
+  --card-bg: #ffffff;
+  --shadow: rgb(15 23 42 / 0.08);
+  --navbar-bg: rgb(244 246 249 / 0.85);
+
+  /* The same purple -> teal -> accent relationship as dark mode, darkened
+     until each one passes on a light background. The dark palette's cyan
+     (#0cfbff) is 1.3:1 here, which is why it cannot simply carry over. */
+  --primary-color: #7b1fa2;     /* 7.58:1 */
+  --primary-hover: #68198a;
+  --secondary-color: #0f766e;   /* 5.06:1 */
+  --accent-color: #0369a1;      /* 5.48:1 */
+
+  /* Cards are solid white with a real border, not a white film. */
+  --surface-1: #ffffff;
+  --surface-2: #ffffff;
+  --surface-3: #f8fafc;
+
+  --edge-1: rgb(15 23 42 / 0.10);
+  --edge-2: rgb(15 23 42 / 0.16);
+
+  --stack-dim: rgb(15 23 42 / 0.10);
 }
 
 /* Global resets and typography */
@@ -390,12 +407,19 @@ section[id] {
    =========================================================================== */
 
 :root {
+  /* Dark theme values. Light mode overrides all six below - they were
+     hardcoded white-alpha, which computes to 1.00:1 contrast on a light
+     background, so every card border and fill on every page was invisible
+     the moment you switched themes. */
   --surface-1: rgb(255 255 255 / 0.014);
   --surface-2: rgb(255 255 255 / 0.03);
   --surface-3: rgb(255 255 255 / 0.05);
 
   --edge-1: rgb(255 255 255 / 0.07);
   --edge-2: rgb(255 255 255 / 0.11);
+
+  /* Dim overlay used by the stacked sections. */
+  --stack-dim: rgb(3 5 10 / 0.72);
 
   --radius-card: 1rem;
   --radius-inner: 0.625rem;
@@ -551,7 +575,7 @@ p, li {
   z-index: 50;
   pointer-events: none;
   border-radius: inherit;
-  background: rgb(3 5 10 / 0.72);
+  background: var(--stack-dim);
   opacity: 0;
 }
 
@@ -695,4 +719,55 @@ p, li {
 .terminal-prompt:has(.terminal-input:focus) {
   border-top-color: color-mix(in srgb, var(--accent-color) 30%, transparent);
   background-color: color-mix(in srgb, var(--accent-color) 4%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   ALWAYS-DARK PANELS
+   The console, the project case-study modal and the resume transfer modal are
+   terminals. A terminal stays dark whatever the page theme is - but their
+   contents were using the theme tokens, so in light mode they rendered
+   --text-color #0f172a on a #030712 panel: 1.13:1, invisible.
+   Pinning the tokens locally keeps the panel dark and its text light, without
+   every child needing to know which theme is active.
+   --------------------------------------------------------------------------- */
+
+.panel-dark {
+  --bg-color: #030712;
+  --bg-secondary: #0c111d;
+  --text-color: #f5f5f5;
+  --text-secondary: #a3adbe;
+  --surface-1: rgb(255 255 255 / 0.02);
+  --surface-2: rgb(255 255 255 / 0.04);
+  --edge-1: rgb(255 255 255 / 0.08);
+  --edge-2: rgb(255 255 255 / 0.14);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Light mode needs real elevation. On a dark background a card separates by
+   being slightly lighter than its surroundings; on a light one a white card
+   on a grey page is only 1.08:1, so it needs a shadow to read as a surface
+   at all. */
+.light-mode .surface,
+.light-mode .surface-interactive {
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 1px 3px rgb(15 23 42 / 0.06);
+}
+
+.light-mode .surface-interactive:hover {
+  box-shadow: 0 4px 12px rgb(15 23 42 / 0.08), 0 2px 4px rgb(15 23 42 / 0.06);
+}
+
+/* The glass panels were built for a dark page: a white film plus a blur over
+   dark content. Over light content the same film is invisible. */
+.light-mode .glass-premium,
+.light-mode .glass-premium-dark,
+.light-mode .glass-panel {
+  background: rgb(255 255 255 / 0.72);
+  border-color: var(--edge-1);
+}
+
+/* Ambient glow orbs are tuned for a dark canvas; at light-mode luminance they
+   read as muddy smears rather than light. */
+.light-mode .animate-pulse-glow {
+  opacity: 0.18;
 }
