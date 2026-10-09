@@ -111,7 +111,7 @@ export default function MobileDrawer({ isOpen, onClose, navItems, isActivePath, 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={onClose}
-            className="p-2.5 rounded-lg border border-border-base/30 text-text-base hover:text-accent hover:border-accent/40 bg-bg-sub/10 transition cursor-pointer focus:outline-none"
+            className="p-2.5 rounded-lg border border-border-base/30 text-text-base hover:text-accent hover:border-accent/40 bg-bg-sub/10 transition cursor-pointer"
             aria-label="Close menu"
           >
             <X className="w-4 h-4" />

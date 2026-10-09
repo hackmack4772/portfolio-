@@ -16,7 +16,7 @@ const ThemeToggle = () => {
     <motion.button
       onClick={toggleDarkMode}
       whileTap={{ scale: 0.92 }}
-      className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg border border-[var(--edge-1)] text-text-muted transition hover:border-accent/40 hover:bg-accent/[0.06] hover:text-accent focus:outline-none"
+      className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg border border-[var(--edge-1)] text-text-muted transition hover:border-accent/40 hover:bg-accent/[0.06] hover:text-accent"
       aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
       title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
     >

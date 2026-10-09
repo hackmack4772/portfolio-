@@ -9,7 +9,7 @@ export default function ActionButton({
   className = "",
   ...props
 }) {
-  const baseClasses = "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 text-xs font-mono uppercase tracking-wider transition duration-300 select-none cursor-pointer focus:outline-none";
+  const baseClasses = "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 text-xs font-mono uppercase tracking-wider transition duration-300 select-none cursor-pointer";
   
   const variants = {
     primary: "text-bg-base bg-accent font-bold hover:bg-accent/80 hover:shadow-[0_0_20px_rgba(12,251,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed",

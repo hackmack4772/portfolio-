@@ -330,7 +330,7 @@ function ContactUs({ hideHeader = false }) {
                         onChange={handleChange}
                         onFocus={() => handleFocus("user_name")}
                         onBlur={handleBlur}
-                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none transition duration-300"
+                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/70 transition duration-300"
                       />
                     </div>
                     {errors.user_name && (
@@ -362,7 +362,7 @@ function ContactUs({ hideHeader = false }) {
                         onChange={handleChange}
                         onFocus={() => handleFocus("user_email")}
                         onBlur={handleBlur}
-                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none transition duration-300"
+                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/70 transition duration-300"
                       />
                     </div>
                     {errors.user_email && (
@@ -394,7 +394,7 @@ function ContactUs({ hideHeader = false }) {
                         onChange={handleChange}
                         onFocus={() => handleFocus("subject")}
                         onBlur={handleBlur}
-                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none transition duration-300"
+                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/70 transition duration-300"
                       />
                     </div>
                     {errors.subject && (
@@ -426,7 +426,7 @@ function ContactUs({ hideHeader = false }) {
                         onChange={handleChange}
                         onFocus={() => handleFocus("message")}
                         onBlur={handleBlur}
-                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/30 focus:outline-none resize-none transition duration-300"
+                        className="w-full pl-7 pr-4 py-2.5 bg-transparent rounded-xl font-mono text-xs text-text-base placeholder-text-muted/70 resize-none transition duration-300"
                       />
                     </div>
                     {errors.message && (

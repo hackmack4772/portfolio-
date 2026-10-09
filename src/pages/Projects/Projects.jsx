@@ -369,7 +369,7 @@ function Projects() {
                 placeholder="Search projects..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-bg-sub/50 border border-border-base/30 rounded-full text-xs font-mono placeholder-text-muted/50 text-text-base focus:outline-none focus:border-accent hover:border-border-base/70 transition-colors"
+                className="w-full pl-10 pr-4 py-2 bg-bg-sub/50 border border-border-base/30 rounded-full text-xs font-mono placeholder-text-muted/70 text-text-base focus:border-accent hover:border-border-base/70 transition-colors"
               />
             </div>
 
@@ -378,7 +378,7 @@ function Projects() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="w-full sm:w-auto appearance-none pl-4 pr-10 py-2 bg-bg-sub/50 border border-border-base/30 rounded-full text-xs font-mono text-text-muted hover:text-text-base hover:border-border-base/70 transition-colors cursor-pointer focus:outline-none"
+                className="w-full sm:w-auto appearance-none pl-4 pr-10 py-2 bg-bg-sub/50 border border-border-base/30 rounded-full text-xs font-mono text-text-muted hover:text-text-base hover:border-border-base/70 transition-colors cursor-pointer"
               >
                 <option value="date">Latest First</option>
                 <option value="title">Alphabetical</option>

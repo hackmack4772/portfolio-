@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Logo() {
   return (
-    <Link to="/" className="group flex items-center select-none relative focus:outline-none">
+    <Link to="/" className="group flex items-center select-none relative">
       <motion.div
         className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border-base/10 bg-bg-sub/5 backdrop-blur-sm transition duration-300 group-hover:border-accent/30 group-hover:bg-accent/5 group-hover:shadow-[0_0_15px_rgba(12,251,255,0.08)]"
         whileHover={{ scale: 1.02 }}

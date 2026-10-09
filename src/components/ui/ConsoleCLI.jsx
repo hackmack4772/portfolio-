@@ -407,7 +407,7 @@ function ConsoleCLI({ isOpen, onClose }) {
 
   useEffect(() => {
     if (!isOpen) return;
-    const t = setTimeout(() => inputRef.current?.focus(), 120);
+    const t = setTimeout(() => inputRef.current?.focus({ preventScroll: true }), 120);
     return () => clearTimeout(t);
   }, [isOpen]);
 
@@ -415,6 +415,16 @@ function ConsoleCLI({ isOpen, onClose }) {
   // jumping to scrollHeight on every history change meant scrolling up to
   // re-read earlier output was immediately undone by the next command.
   const pinnedRef = useRef(true);
+  // Clicking the log should put the caret back in the prompt, but not at the
+  // cost of the two things above: preventScroll stops focus() moving the
+  // panel underneath the pointer, and a live text selection means the user
+  // is copying output, so leave them alone.
+  const handleLogClick = () => {
+    const selection = window.getSelection?.();
+    if (selection && String(selection).length > 0) return;
+    inputRef.current?.focus({ preventScroll: true });
+  };
+
   const handleScroll = () => {
     const el = containerRef.current;
     if (!el) return;
@@ -569,7 +579,8 @@ function ConsoleCLI({ isOpen, onClose }) {
         <div
           ref={containerRef}
           onScroll={handleScroll}
-          onClick={() => inputRef.current?.focus()}
+          onClick={handleLogClick}
+          style={{ WebkitOverflowScrolling: "touch" }}
           className="min-h-0 flex-grow p-4 sm:p-6 overflow-y-auto overscroll-contain font-mono text-[11px] sm:text-xs text-text-muted/95 selection:bg-accent selection:text-bg-base"
         >
           {history.map((entry, i) => (
@@ -585,7 +596,7 @@ function ConsoleCLI({ isOpen, onClose }) {
           ))}
         </div>
 
-        <div className="p-4 border-t border-white/[0.08] bg-white/[0.01] flex items-center gap-2 shrink-0">
+        <div className="terminal-prompt flex shrink-0 items-center gap-2 p-4">
           <span className="font-mono text-[11px] sm:text-xs text-accent font-bold select-none shrink-0">
             guest@hackmack-os:~$
           </span>
@@ -599,7 +610,7 @@ function ConsoleCLI({ isOpen, onClose }) {
             autoCorrect="off"
             autoCapitalize="off"
             spellCheck="false"
-            className="flex-grow min-w-0 bg-transparent border-none outline-none font-mono text-[11px] sm:text-xs text-white selection:bg-accent focus:ring-0"
+            className="terminal-input min-w-0 flex-grow border-none bg-transparent font-mono text-[11px] text-white selection:bg-accent sm:text-xs"
             placeholder="help, whoami, projects, skills..."
           />
         </div>

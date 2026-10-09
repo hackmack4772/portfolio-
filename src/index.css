@@ -664,3 +664,35 @@ p, li {
 .surface-interactive:hover::before {
   opacity: 1;
 }
+
+/* ---------------------------------------------------------------------------
+   TERMINAL PROMPT
+   The global focus-visible ring is right for forms and wrong here. The
+   console input is the full width of the prompt bar and is focused almost
+   permanently - it autofocuses on open, and clicking anywhere in the log
+   refocuses it - so a 2px box around it was drawn nearly the whole time.
+   A terminal shows focus through its caret, so that is what this does: the
+   ring is suppressed and the caret takes the accent colour, while the prompt
+   row itself lifts slightly to confirm it is live.
+   --------------------------------------------------------------------------- */
+
+.terminal-input {
+  caret-color: var(--accent-color);
+}
+
+.terminal-input:focus,
+.terminal-input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.terminal-prompt {
+  border-top: 1px solid var(--edge-1);
+  transition: background-color 220ms var(--ease-out-quint),
+              border-color 220ms var(--ease-out-quint);
+}
+
+.terminal-prompt:has(.terminal-input:focus) {
+  border-top-color: color-mix(in srgb, var(--accent-color) 30%, transparent);
+  background-color: color-mix(in srgb, var(--accent-color) 4%, transparent);
+}
