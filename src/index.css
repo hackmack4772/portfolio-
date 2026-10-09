@@ -779,10 +779,13 @@ p, li {
   opacity: 0.18;
 }
 
-/* The hero portrait is blended with mix-blend-mode: luminosity, which is
-   tuned for a dark canvas. At the same opacity over a light page it turns
-   into a grey smudge, so light mode takes it down and drops the blend. */
+/* The hero portrait carries no blend mode now - luminosity was stripping its
+   colour and flattening it into a grey ghost, which is what made it read as
+   soft no matter how far the opacity went up. Light mode still needs its own
+   value: a dark-keyed image at 30% over a near-white page looks like a stain,
+   so it comes down and uses multiply, which keeps the darks and lets the page
+   show through the lights. */
 .light-mode .hero-portrait {
-  opacity: 0.10;
+  opacity: 0.16;
   mix-blend-mode: multiply;
 }
