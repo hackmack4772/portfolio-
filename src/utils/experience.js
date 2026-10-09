@@ -2,10 +2,10 @@
  * Utility functions for calculating and formatting experience dynamically
  */
 
-// First professional role: Full Stack Developer at Shine Dezign Infonet,
-// Sep 2022, per the CV. Every "N+ years" on the site derives from this one
-// constant, so it has to match the first entry in the experience list.
-export const START_DATE = "2022-09-01";
+// Career start: 25 September 2022, at Shine Dezign Infonet. Every "N+ years"
+// on the site, and the eight-decimal ticker on /about, derive from this one
+// constant - so the exact day matters, not just the month.
+export const START_DATE = "2022-09-25";
 
 /**
  * Calculates experience details since the specified start date
