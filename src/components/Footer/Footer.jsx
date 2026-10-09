@@ -22,7 +22,7 @@ function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-bg-sub/10 border-t border-border-base/10 py-8 mt-auto relative z-20">
+    <footer className="relative z-20 mt-auto w-full border-t border-[var(--edge-2)] bg-bg-sub py-10">
       <div className="max-w-7xl mx-auto px-6 md:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         
         {/* Designer/Developer Profile */}
@@ -50,7 +50,7 @@ function Footer() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8.5 h-8.5 flex items-center justify-center rounded-full glass-panel border border-border-base/50 text-text-muted hover:text-accent hover:border-accent hover:shadow-[0_0_10px_rgba(12,251,255,0.2)] transition duration-300 cursor-pointer"
+                className="surface-interactive flex h-9 w-9 items-center justify-center rounded-full text-text-muted hover:text-accent"
                 aria-label={social.label}
               >
                 <Icon className="w-3.5 h-3.5" />
