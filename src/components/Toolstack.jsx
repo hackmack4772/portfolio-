@@ -15,7 +15,7 @@ function Toolstack() {
 
   if (toolSkills.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center p-8 rounded-2xl glass-premium border border-white/[0.08] text-center gap-3 py-12 select-none max-w-lg mx-auto">
+      <div className="flex flex-col items-center justify-center p-8 rounded-2xl glass-premium border border-[var(--edge-2)] text-center gap-3 py-12 select-none max-w-lg mx-auto">
         <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent animate-pulse">
           <Terminal className="w-5 h-5" />
         </div>
@@ -36,15 +36,15 @@ function Toolstack() {
         return (
           <div
             key={tool.id || tool.name}
-            className={`group relative flex flex-col items-center justify-center p-6 rounded-2xl glass-premium text-text-muted hover:text-text-base border border-white/[0.08] transition duration-500 hover:-translate-y-2 select-none cursor-pointer ${glowClass}`}
+            className={`surface-interactive reveal group relative flex flex-col items-center justify-center gap-1 p-4 text-text-muted select-none ${glowClass}`}
             aria-label={tool.name}
             title={tool.name}
           >
             {/* Dynamic Icon */}
-            <div className="text-4.5xl md:text-5xl transition-transform duration-300 group-hover:scale-110">
+            <div className="text-3xl md:text-4xl transition-transform duration-300 group-hover:scale-110">
               {getSkillIcon(tool.icon, tool.name)}
             </div>
-            <span className="text-[10px] md:text-xs font-mono uppercase tracking-widest mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span className="mt-3 text-center font-mono text-[10px] uppercase leading-tight tracking-wide text-text-muted/80 transition-colors group-hover:text-current">
               {tool.name}
             </span>
           </div>
