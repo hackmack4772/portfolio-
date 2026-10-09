@@ -231,7 +231,7 @@ function LandingPage() {
             <motion.div
               className="rise rise-4 flex w-full flex-col items-stretch gap-4 pt-3 sm:w-auto sm:flex-row sm:items-center sm:justify-start"
             >
-              <ActionButton href="#about" variant="secondary" className="w-full sm:w-auto glass-premium hover:bg-white/[0.04] transition">
+              <ActionButton href="#about" variant="secondary" className="w-full sm:w-auto glass-premium hover:bg-[var(--surface-2)] transition">
                 Read My Story
               </ActionButton>
 
@@ -286,9 +286,9 @@ function LandingPage() {
             {/* Outer Glow */}
             <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/10 via-secondary/15 to-accent/15 rounded-2xl blur-md opacity-40 group-hover:opacity-75 transition-opacity duration-500" />
             
-            <div className="relative rounded-2xl border border-white/[0.08] bg-bg-base/90 shadow-2xl overflow-hidden flex flex-col font-mono text-xs text-text-muted">
+            <div className="relative rounded-2xl border border-[var(--edge-2)] bg-bg-base/90 shadow-2xl overflow-hidden flex flex-col font-mono text-xs text-text-muted">
               {/* Terminal Title Bar */}
-              <div className="flex items-center justify-between px-5 py-3.5 bg-white/[0.015] border-b border-white/[0.06] select-none">
+              <div className="flex items-center justify-between px-5 py-3.5 bg-[var(--surface-1)] border-b border-[var(--edge-1)] select-none">
                 <div className="flex items-center gap-1.5 shrink-0">
                   <div className="w-2.5 h-2.5 rounded-full bg-[#ef4444] opacity-80" />
                   <div className="w-2.5 h-2.5 rounded-full bg-[#f59e0b] opacity-80" />
@@ -323,7 +323,7 @@ function LandingPage() {
                     </div>
 
                     {/* Diagnostic Monitor Box */}
-                    <div className="bg-black/45 rounded-xl border border-white/[0.05] p-4.5 font-mono text-[10px] leading-relaxed text-text-muted/80 flex-grow flex flex-col justify-between min-h-[105px]">
+                    <div className="bg-black/45 rounded-xl border border-[var(--edge-1)] p-4.5 font-mono text-[10px] leading-relaxed text-text-muted/80 flex-grow flex flex-col justify-between min-h-[105px]">
                       <div className="space-y-1">
                         <div className="flex items-center gap-1.5">
                           <span className="text-secondary font-bold">$</span>
@@ -331,7 +331,7 @@ function LandingPage() {
                         </div>
                         <div className="text-text-muted/70 pl-2.5 break-all">{diagnostic.line}</div>
                       </div>
-                      <div className="flex items-center justify-between border-t border-white/[0.04] pt-2 mt-3 text-[9px] tracking-wider uppercase text-text-muted/70">
+                      <div className="flex items-center justify-between border-t border-[var(--edge-1)] pt-2 mt-3 text-[9px] tracking-wider uppercase text-text-muted/70">
                         <span>CHANNEL</span>
                         <span className="text-accent font-bold tracking-widest">{diagnostic.label}</span>
                       </div>
@@ -339,7 +339,7 @@ function LandingPage() {
                   </div>
 
                   {/* Divider (visible only on desktop) */}
-                  <div className="hidden md:block md:col-span-1 w-px bg-white/[0.05] mx-auto" />
+                  <div className="hidden md:block md:col-span-1 w-px bg-[var(--surface-2)] mx-auto" />
 
                   {/* Right Column: Highly Interactive Social Grid */}
                   <div className="md:col-span-6 flex flex-col justify-center">
@@ -362,7 +362,7 @@ function LandingPage() {
                             {/* Interactive inner glow */}
                             <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover/btn:opacity-100 rounded-xl blur transition-opacity duration-300 pointer-events-none" />
                             
-                            <div className="p-2 rounded-lg bg-bg-base/70 border border-white/[0.04] group-hover/btn:border-accent/30 group-hover/btn:bg-accent/5 transition duration-300">
+                            <div className="p-2 rounded-lg bg-bg-base/70 border border-[var(--edge-1)] group-hover/btn:border-accent/30 group-hover/btn:bg-accent/5 transition duration-300">
                               <Icon className="w-4.5 h-4.5 text-text-muted group-hover/btn:text-accent transition-colors duration-300" />
                             </div>
                             

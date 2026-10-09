@@ -158,10 +158,10 @@ function Projects() {
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
-                className="w-full max-w-4xl h-[85vh] bg-[#030712] border border-white/[0.08] rounded-2xl flex flex-col overflow-hidden shadow-2xl relative"
+                className="w-full max-w-4xl h-[85vh] bg-[#030712] border border-[var(--edge-2)] rounded-2xl flex flex-col overflow-hidden shadow-2xl relative"
               >
                 {/* Header */}
-                <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.08] bg-white/[0.015] select-none shrink-0 font-mono text-xs">
+                <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--edge-2)] bg-[var(--surface-1)] select-none shrink-0 font-mono text-xs">
                   <div className="flex items-center gap-1.5">
                     <div className="w-2.5 h-2.5 rounded-full bg-[#ef4444] opacity-80 cursor-pointer" onClick={() => setSelectedProject(null)} />
                     <div className="w-2.5 h-2.5 rounded-full bg-[#f59e0b] opacity-80" />
@@ -214,20 +214,20 @@ function Projects() {
                     </div>
 
                     {/* Telemetry diagnostics box */}
-                    <div className="glass-premium p-5 rounded-2xl border border-white/[0.06] font-mono text-[10px] space-y-2">
-                      <div className="flex items-center justify-between border-b border-white/[0.06] pb-1.5 select-none">
+                    <div className="glass-premium p-5 rounded-2xl border border-[var(--edge-1)] font-mono text-[10px] space-y-2">
+                      <div className="flex items-center justify-between border-b border-[var(--edge-1)] pb-1.5 select-none">
                         <span className="text-accent uppercase tracking-widest text-[9px] flex items-center gap-1"><Activity className="w-3 h-3 animate-pulse" /> runtime_telemetry</span>
                         <span className="text-[9px] text-green-500">SYSTEM_NOMINAL</span>
                       </div>
-                      <div className="flex justify-between border-b border-white/[0.03] pb-1">
+                      <div className="flex justify-between border-b border-[var(--edge-1)] pb-1">
                         <span>SYSTEM_STATUS:</span>
                         <span className="text-white font-semibold uppercase">{bp.telemetry.status}</span>
                       </div>
-                      <div className="flex justify-between border-b border-white/[0.03] pb-1">
+                      <div className="flex justify-between border-b border-[var(--edge-1)] pb-1">
                         <span>API_HEALTH:</span>
                         <span className="text-green-500 font-semibold">{bp.telemetry.health}</span>
                       </div>
-                      <div className="flex justify-between border-b border-white/[0.03] pb-1">
+                      <div className="flex justify-between border-b border-[var(--edge-1)] pb-1">
                         <span>CACHE_EVIC_LAYER:</span>
                         <span className="text-white font-semibold uppercase">{bp.telemetry.cache}</span>
                       </div>
@@ -256,7 +256,7 @@ function Projects() {
                       </div>
 
                       {/* Section 2: Case study branch payload mock items to tell the real engineering story */}
-                      <div className="space-y-3 pt-3 border-t border-white/[0.06] font-mono text-[10px]">
+                      <div className="space-y-3 pt-3 border-t border-[var(--edge-1)] font-mono text-[10px]">
                         <div className="space-y-1">
                           <span className="text-red-400 font-bold uppercase text-[9px] tracking-wider block select-none">[CHALLENGE]</span>
                           <p className="font-sans text-text-muted text-[11px] leading-relaxed text-justify">
@@ -281,7 +281,7 @@ function Projects() {
 
                       {/* Tech stack pills */}
                       {selectedProject.technologies && selectedProject.technologies.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/[0.06]">
+                        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[var(--edge-1)]">
                           {selectedProject.technologies.map((t, idx) => (
                             <TechPill key={idx} label={t} />
                           ))}
@@ -295,13 +295,13 @@ function Projects() {
                 </div>
 
                 {/* Footer buttons */}
-                <div className="p-6 border-t border-white/[0.08] bg-white/[0.015] flex gap-3 select-none shrink-0 justify-end">
+                <div className="p-6 border-t border-[var(--edge-2)] bg-[var(--surface-1)] flex gap-3 select-none shrink-0 justify-end">
                   {selectedProject.githubUrl && (
                     <a 
                       href={selectedProject.githubUrl} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="flex items-center gap-1.5 px-4.5 py-2.5 rounded-full text-[10px] font-mono uppercase tracking-wider text-text-base glass-premium border border-white/[0.08] hover:border-primary/50 hover:bg-primary/10 transition cursor-pointer font-bold"
+                      className="flex items-center gap-1.5 px-4.5 py-2.5 rounded-full text-[10px] font-mono uppercase tracking-wider text-text-base glass-premium border border-[var(--edge-2)] hover:border-primary/50 hover:bg-primary/10 transition cursor-pointer font-bold"
                     >
                       <Github className="w-3.5 h-3.5 text-primary" />
                       <span>Code Archive</span>
@@ -326,7 +326,7 @@ function Projects() {
       </AnimatePresence>
 
       {/* Filter Controls Panel */}
-      <div className="glass-premium p-5 rounded-2xl border border-white/[0.08] mb-10 shadow-lg space-y-4 text-left">
+      <div className="glass-premium p-5 rounded-2xl border border-[var(--edge-2)] mb-10 shadow-lg space-y-4 text-left">
         <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
           
           {/* Category Select Toggles */}
@@ -412,7 +412,7 @@ function Projects() {
                   <div
                     key={project.id}
                     onClick={() => setSelectedProject(project)}
-                    className="group relative flex flex-col items-center justify-center p-6 rounded-2xl glass-premium text-text-muted hover:text-text-base border border-white/[0.08] transition duration-500 hover:-translate-y-2 select-none cursor-pointer hover:border-accent hover:shadow-[0_0_15px_rgba(12,251,255,0.15)] col-span-3 sm:col-span-2 md:col-span-2 text-center"
+                    className="reveal group relative flex flex-col items-center justify-center p-6 rounded-2xl glass-premium text-text-muted hover:text-text-base border border-[var(--edge-2)] transition duration-500 hover:-translate-y-2 select-none cursor-pointer hover:border-accent hover:shadow-[0_0_15px_rgba(12,251,255,0.15)] col-span-3 sm:col-span-2 md:col-span-2 text-center"
                     aria-label={project.title}
                   >
                     {/* SVG Blueprint indicator icon */}
@@ -434,7 +434,7 @@ function Projects() {
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="flex flex-col items-center justify-center py-20 text-center glass-premium-dark rounded-3xl border border-white/[0.08] shadow-md max-w-md mx-auto gap-4"
+              className="flex flex-col items-center justify-center py-20 text-center glass-premium-dark rounded-3xl border border-[var(--edge-2)] shadow-md max-w-md mx-auto gap-4"
             >
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent">
                 <Terminal className="w-5 h-5 animate-pulse" />
@@ -462,7 +462,7 @@ function Projects() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-20 p-6 md:p-8 glass-premium-dark rounded-3xl border border-white/[0.08] relative overflow-hidden shadow-xl text-center md:text-left"
+          className="mt-20 p-6 md:p-8 glass-premium-dark rounded-3xl border border-[var(--edge-2)] relative overflow-hidden shadow-xl text-center md:text-left"
         >
           <div className="absolute right-0 bottom-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">

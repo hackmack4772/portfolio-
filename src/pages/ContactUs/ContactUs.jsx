@@ -153,7 +153,7 @@ function ContactUs({ hideHeader = false }) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="glass-premium-dark p-8 rounded-3xl border border-white/[0.08] max-w-lg mx-auto flex flex-col items-center justify-center text-center gap-4 shadow-2xl relative overflow-hidden"
+            className="glass-premium-dark p-8 rounded-3xl border border-[var(--edge-2)] max-w-lg mx-auto flex flex-col items-center justify-center text-center gap-4 shadow-2xl relative overflow-hidden"
           >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent" />
             <motion.div
@@ -189,9 +189,9 @@ function ContactUs({ hideHeader = false }) {
             <div className="md:col-span-5 flex flex-col gap-6 h-full justify-start">
               
               {/* Telemetry settings box */}
-              <div className="glass-premium-dark p-5 rounded-2xl border border-white/[0.08] relative overflow-hidden font-mono text-[10px] text-text-muted">
+              <div className="glass-premium-dark p-5 rounded-2xl border border-[var(--edge-2)] relative overflow-hidden font-mono text-[10px] text-text-muted">
                 <div className="absolute inset-0 crt-scanlines opacity-5 pointer-events-none select-none" />
-                <div className="flex items-center justify-between border-b border-white/[0.06] pb-2 mb-3 select-none">
+                <div className="flex items-center justify-between border-b border-[var(--edge-1)] pb-2 mb-3 select-none">
                   <span className="text-[9px] uppercase tracking-widest flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-accent animate-pulse" /> transmission_gate</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
                 </div>
@@ -220,9 +220,9 @@ function ContactUs({ hideHeader = false }) {
                       key={idx}
                       glowColor={info.glowColor}
                       hoverGlow={true}
-                      className="p-4 flex gap-4 items-center"
+                      className="reveal p-4 flex gap-4 items-center"
                     >
-                      <div className={`w-8.5 h-8.5 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center shrink-0 ${info.color}`}>
+                      <div className={`w-8.5 h-8.5 rounded-xl bg-[var(--surface-2)] border border-[var(--edge-2)] flex items-center justify-center shrink-0 ${info.color}`}>
                         <InfoIcon className="w-4 h-4" />
                       </div>
                       <div className="space-y-0.5 font-mono text-[10px]">
@@ -236,11 +236,11 @@ function ContactUs({ hideHeader = false }) {
 
               {/* Connected node network social mesh */}
               {!hideHeader && (
-                <div className="glass-premium p-5 rounded-2xl border border-white/[0.06] flex flex-col gap-4 relative overflow-hidden">
+                <div className="glass-premium p-5 rounded-2xl border border-[var(--edge-1)] flex flex-col gap-4 relative overflow-hidden">
                   <div className="absolute top-2 right-2 text-[9px] font-mono text-text-muted/70 uppercase">// COMM_NETWORK</div>
                   
                   {/* SVG Node network */}
-                  <div className="relative w-full h-36 bg-[#0b0f19]/40 rounded-xl border border-white/[0.04] p-3 flex items-center justify-center blueprint-grid">
+                  <div className="relative w-full h-36 bg-[#0b0f19]/40 rounded-xl border border-[var(--edge-1)] p-3 flex items-center justify-center blueprint-grid">
                     <svg className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
                       <line x1="50%" y1="50%" x2="25%" y2="25%" stroke="#0cfbff" strokeWidth="1" strokeOpacity="0.2" />
                       <line x1="50%" y1="50%" x2="75%" y2="25%" stroke="#0cfbff" strokeWidth="1" strokeOpacity="0.2" />
@@ -286,7 +286,7 @@ function ContactUs({ hideHeader = false }) {
                   </div>
 
                   {/* Telemetry diagnostics display footer */}
-                  <div className="font-mono text-[9px] text-text-muted/70 tracking-wide border-t border-white/[0.04] pt-2 text-justify">
+                  <div className="font-mono text-[9px] text-text-muted/70 tracking-wide border-t border-[var(--edge-1)] pt-2 text-justify">
                     {getSocialDiagnostic()}
                   </div>
                 </div>
@@ -314,12 +314,12 @@ function ContactUs({ hideHeader = false }) {
                       <span>_user_identity</span>
                       <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
                     </div>
-                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition duration-300 ${
+                    <div className={`relative rounded-xl border bg-[var(--surface-1)] backdrop-blur-md transition duration-300 ${
                       activeField === "user_name" 
                         ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.12)]" 
                         : errors.user_name 
                         ? "border-red-500/40" 
-                        : "border-white/[0.07] group-hover/field:border-accent/40"
+                        : "border-[var(--edge-1)] group-hover/field:border-accent/40"
                     }`}>
                       <span className="absolute left-3.5 top-3 text-[10px] font-mono text-accent/60 select-none">$</span>
                       <input
@@ -346,12 +346,12 @@ function ContactUs({ hideHeader = false }) {
                       <span>_delivery_node</span>
                       <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
                     </div>
-                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition duration-300 ${
+                    <div className={`relative rounded-xl border bg-[var(--surface-1)] backdrop-blur-md transition duration-300 ${
                       activeField === "user_email" 
                         ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.12)]" 
                         : errors.user_email 
                         ? "border-red-500/40" 
-                        : "border-white/[0.07] group-hover/field:border-accent/40"
+                        : "border-[var(--edge-1)] group-hover/field:border-accent/40"
                     }`}>
                       <span className="absolute left-3.5 top-3 text-[10px] font-mono text-accent/60 select-none">$</span>
                       <input
@@ -378,12 +378,12 @@ function ContactUs({ hideHeader = false }) {
                       <span>_transmission_header</span>
                       <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
                     </div>
-                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition duration-300 ${
+                    <div className={`relative rounded-xl border bg-[var(--surface-1)] backdrop-blur-md transition duration-300 ${
                       activeField === "subject" 
                         ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.12)]" 
                         : errors.subject 
                         ? "border-red-500/40" 
-                        : "border-white/[0.07] group-hover/field:border-accent/40"
+                        : "border-[var(--edge-1)] group-hover/field:border-accent/40"
                     }`}>
                       <span className="absolute left-3.5 top-3 text-[10px] font-mono text-accent/60 select-none">$</span>
                       <input
@@ -410,12 +410,12 @@ function ContactUs({ hideHeader = false }) {
                       <span>_payload_body</span>
                       <span className="opacity-0 group-focus-within/field:opacity-100 transition-opacity text-accent">Active_</span>
                     </div>
-                    <div className={`relative rounded-xl border bg-white/[0.015] backdrop-blur-md transition duration-300 ${
+                    <div className={`relative rounded-xl border bg-[var(--surface-1)] backdrop-blur-md transition duration-300 ${
                       activeField === "message" 
                         ? "border-accent shadow-[0_0_15px_rgba(12,251,255,0.12)]" 
                         : errors.message 
                         ? "border-red-500/40" 
-                        : "border-white/[0.07] group-hover/field:border-accent/40"
+                        : "border-[var(--edge-1)] group-hover/field:border-accent/40"
                     }`}>
                       <span className="absolute left-3.5 top-3 text-[10px] font-mono text-accent/60 select-none">$</span>
                       <textarea

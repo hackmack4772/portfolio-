@@ -153,18 +153,18 @@ function ResumeNew() {
               exit={{ scale: 0.95, opacity: 0 }}
               className="w-full max-w-lg bg-[#030712] border border-accent/25 rounded-2xl overflow-hidden shadow-2xl p-6 relative flex flex-col gap-4 font-mono text-xs"
             >
-              <div className="flex items-center justify-between border-b border-white/[0.08] pb-3 text-[10px] text-text-muted">
+              <div className="flex items-center justify-between border-b border-[var(--edge-2)] pb-3 text-[10px] text-text-muted">
                 <span className="flex items-center gap-1.5"><FileDown className="w-3.5 h-3.5 text-accent" /> SECURE_PAYLOAD_TRANSFER</span>
                 <span className="text-accent animate-pulse">{transferProgress}%</span>
               </div>
 
               {/* Progress bar */}
-              <div className="w-full h-1 bg-black/40 border border-white/[0.06] rounded-full overflow-hidden">
+              <div className="w-full h-1 bg-black/40 border border-[var(--edge-1)] rounded-full overflow-hidden">
                 <div className="h-full bg-accent rounded-full" style={{ width: `${transferProgress}%` }} />
               </div>
 
               {/* Terminal log panel */}
-              <div className="h-48 bg-black/50 border border-white/[0.05] rounded-xl p-4 overflow-y-auto space-y-1.5 no-scrollbar text-text-muted text-[10px]">
+              <div className="h-48 bg-black/50 border border-[var(--edge-1)] rounded-xl p-4 overflow-y-auto space-y-1.5 no-scrollbar text-text-muted text-[10px]">
                 {transferLogs.map((log, idx) => {
                   console.log(log);
                   const isSuccess = log.includes("[SUCCESS]");
@@ -187,9 +187,9 @@ function ResumeNew() {
         <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-32 w-full text-left">
           
           {/* Hardware status panel */}
-          <div className="glass-premium-dark p-5 rounded-2xl border border-white/[0.08] flex flex-col gap-4 relative overflow-hidden">
+          <div className="glass-premium-dark p-5 rounded-2xl border border-[var(--edge-2)] flex flex-col gap-4 relative overflow-hidden">
             <div className="absolute inset-0 crt-scanlines opacity-5 pointer-events-none select-none" />
-            <div className="flex items-center justify-between border-b border-white/[0.06] pb-2 select-none">
+            <div className="flex items-center justify-between border-b border-[var(--edge-1)] pb-2 select-none">
               <span className="text-[9px] font-mono text-text-muted uppercase tracking-widest flex items-center gap-1.5">
                 <Monitor className="w-3.5 h-3.5 text-accent" />
                 <span>System Capabilities</span>
@@ -199,7 +199,7 @@ function ResumeNew() {
 
             <div className="flex flex-col gap-3">
               {CAPABILITIES.map((cap, idx) => (
-                <div key={idx} className="space-y-1 font-mono text-[10px]">
+                <div key={idx} className="reveal space-y-1 font-mono text-[10px]">
                   <div className="flex justify-between items-center">
                     <span>{cap.label}:</span>
                     <span className={`${cap.color} font-bold`}>{cap.level}</span>
@@ -246,10 +246,10 @@ function ResumeNew() {
 
         {/* Right Column: Tabbed Logs Panel */}
         <div className="lg:col-span-8 flex flex-col w-full">
-          <div className="glass-premium-dark rounded-2xl border border-white/[0.08] shadow-2xl min-h-[480px] w-full relative overflow-hidden flex flex-col">
+          <div className="glass-premium-dark rounded-2xl border border-[var(--edge-2)] shadow-2xl min-h-[480px] w-full relative overflow-hidden flex flex-col">
             
             {/* Dashboard Tab Bar */}
-            <div className="flex items-center justify-between border-b border-white/[0.08] px-4 py-3 select-none w-full bg-white/[0.01]">
+            <div className="flex items-center justify-between border-b border-[var(--edge-2)] px-4 py-3 select-none w-full bg-[var(--surface-1)]">
               <div className="flex items-center gap-1.5 shrink-0">
                 <div className="w-2.5 h-2.5 rounded-full bg-[#ef4444] opacity-80" />
                 <div className="w-2.5 h-2.5 rounded-full bg-[#f59e0b] opacity-80" />
@@ -261,8 +261,8 @@ function ResumeNew() {
                   onClick={() => setActiveTab("experience")}
                   className={`px-4 py-2 text-xs font-mono rounded-t-lg transition duration-200 cursor-pointer ${
                     activeTab === "experience"
-                      ? "bg-white/[0.04] text-accent border-b-2 border-b-accent font-bold"
-                      : "bg-transparent text-text-muted hover:text-text-base hover:bg-white/[0.01]"
+                      ? "bg-[var(--surface-2)] text-accent border-b-2 border-b-accent font-bold"
+                      : "bg-transparent text-text-muted hover:text-text-base hover:bg-[var(--surface-1)]"
                   }`}
                 >
                   mission_logs.env
@@ -271,8 +271,8 @@ function ResumeNew() {
                   onClick={() => setActiveTab("skills")}
                   className={`px-4 py-2 text-xs font-mono rounded-t-lg transition duration-200 cursor-pointer ${
                     activeTab === "skills"
-                      ? "bg-white/[0.04] text-accent border-b-2 border-b-accent font-bold"
-                      : "bg-transparent text-text-muted hover:text-text-base hover:bg-white/[0.01]"
+                      ? "bg-[var(--surface-2)] text-accent border-b-2 border-b-accent font-bold"
+                      : "bg-transparent text-text-muted hover:text-text-base hover:bg-[var(--surface-1)]"
                   }`}
                 >
                   skills_matrix.json
@@ -299,17 +299,17 @@ function ResumeNew() {
                     <div className="space-y-6">
                       {aboutData.experience && aboutData.experience.length > 0 ? (
                         aboutData.experience.map((exp, index) => (
-                          <div key={index} className="flex gap-4 p-5 rounded-xl glass-premium border border-white/[0.06] hover:border-accent/40 relative overflow-hidden group transition duration-300">
+                          <div key={index} className="reveal flex gap-4 p-5 rounded-xl glass-premium border border-[var(--edge-1)] hover:border-accent/40 relative overflow-hidden group transition duration-300">
                             <div className="absolute top-0 left-0 w-[2px] h-full bg-gradient-to-b from-primary to-accent opacity-45" />
                             <div className="w-8 h-8 rounded-lg bg-accent/10 text-accent flex items-center justify-center shrink-0">
                               <Layers className="w-4 h-4" />
                             </div>
                             <div className="space-y-2 w-full font-mono text-[10px]">
-                              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 border-b border-white/[0.03] pb-1.5 select-none">
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 border-b border-[var(--edge-1)] pb-1.5 select-none">
                                 <h4 className="text-[11px] font-bold text-text-base leading-tight">
                                   ROLE: {exp.position} <span className="text-accent">@ {exp.company}</span>
                                 </h4>
-                                <span className="text-[9px] text-text-muted bg-white/[0.05] px-2 py-0.5 rounded border border-white/[0.08] self-start sm:self-center">
+                                <span className="text-[9px] text-text-muted bg-[var(--surface-2)] px-2 py-0.5 rounded border border-[var(--edge-2)] self-start sm:self-center">
                                   {exp.period}
                                 </span>
                               </div>
@@ -325,7 +325,7 @@ function ResumeNew() {
                           </div>
                         ))
                       ) : (
-                        <div className="flex flex-col items-center justify-center p-8 rounded-xl glass-premium border border-white/[0.05] text-center gap-3 py-12 select-none">
+                        <div className="flex flex-col items-center justify-center p-8 rounded-xl glass-premium border border-[var(--edge-1)] text-center gap-3 py-12 select-none">
                           <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary animate-pulse">
                             <Layers className="w-5 h-5" />
                           </div>
@@ -344,12 +344,12 @@ function ResumeNew() {
                           const colors = ["bg-primary", "bg-secondary", "bg-accent"];
                           const barColor = colors[index % colors.length];
                           return (
-                            <div key={index} className="space-y-1.5 p-3 rounded-xl glass-premium border border-white/[0.05]">
+                            <div key={index} className="space-y-1.5 p-3 rounded-xl glass-premium border border-[var(--edge-1)]">
                               <div className="flex justify-between items-center text-xs font-mono">
                                 <span className="font-semibold text-text-base">{skill.name}</span>
                                 <span className="text-text-muted">{skill.proficiency}%</span>
                               </div>
-                              <div className="w-full h-1.5 bg-black/40 border border-white/[0.08] rounded-full overflow-hidden">
+                              <div className="w-full h-1.5 bg-black/40 border border-[var(--edge-2)] rounded-full overflow-hidden">
                                 <motion.div
                                   initial={{ width: 0 }}
                                   animate={{ width: `${skill.proficiency}%` }}
@@ -361,7 +361,7 @@ function ResumeNew() {
                           );
                         })
                       ) : (
-                        <div className="col-span-2 flex flex-col items-center justify-center p-8 rounded-xl glass-premium border border-white/[0.05] text-center gap-3 py-12 select-none">
+                        <div className="col-span-2 flex flex-col items-center justify-center p-8 rounded-xl glass-premium border border-[var(--edge-1)] text-center gap-3 py-12 select-none">
                           <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent animate-pulse">
                             <FileText className="w-5 h-5" />
                           </div>
@@ -386,7 +386,7 @@ function ResumeNew() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="w-full glass-premium-dark p-2.5 md:p-4 rounded-3xl border border-white/[0.08] shadow-2xl relative overflow-hidden mt-8"
+            className="w-full glass-premium-dark p-2.5 md:p-4 rounded-3xl border border-[var(--edge-2)] shadow-2xl relative overflow-hidden mt-8"
           >
             {isMobile ? (
               /* Mobile Fallback: Direct visual card */
@@ -413,7 +413,7 @@ function ResumeNew() {
               /* Desktop/Tablet: Native Embed */
               <iframe
                 src={resumeUrl.endsWith(".pdf") ? `${resumeUrl}#toolbar=0` : resumeUrl}
-                className="w-full h-[650px] md:h-[750px] rounded-2xl border border-white/[0.06] bg-bg-base/50"
+                className="w-full h-[650px] md:h-[750px] rounded-2xl border border-[var(--edge-1)] bg-bg-base/50"
                 title="Aamir Lone Resume Document Viewer"
               />
             )}
