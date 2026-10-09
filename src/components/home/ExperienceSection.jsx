@@ -52,13 +52,13 @@ export default function ExperienceSection() {
                 {role.company}
               </span>
               {i === 0 && (
-                <span className="rounded-full border border-accent/30 bg-accent/5 px-2 py-0.5 font-mono text-[8px] uppercase tracking-wider text-accent">
+                <span className="rounded-full border border-accent/30 bg-accent/5 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-accent">
                   current
                 </span>
               )}
             </div>
 
-            <div className="mt-1 flex flex-wrap items-center gap-x-3 font-mono text-[10px] uppercase tracking-wider text-text-muted/55">
+            <div className="mt-1 flex flex-wrap items-center gap-x-3 font-mono text-[10px] uppercase tracking-wider text-text-muted/70">
               <span>{role.period}</span>
               {role.location && <span>· {role.location}</span>}
             </div>

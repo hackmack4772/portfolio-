@@ -99,10 +99,10 @@ function MyJourney() {
             className="group relative h-64 w-64 rounded-2xl bg-gradient-to-tr from-primary to-accent p-[2px] shadow-2xl md:h-72 md:w-72"
           >
             {/* HUD Corner Ticks */}
-            <div className="absolute top-2 left-2 text-[8px] font-mono text-accent/60 group-hover:text-accent pointer-events-none select-none z-20 transition-colors">
+            <div className="absolute top-2 left-2 text-[9px] font-mono text-accent/60 group-hover:text-accent pointer-events-none select-none z-20 transition-colors">
               [ 0x01_AVATAR ]
             </div>
-            <div className="absolute bottom-2 right-2 text-[8px] font-mono text-primary/60 group-hover:text-accent pointer-events-none select-none z-20 transition-colors">
+            <div className="absolute bottom-2 right-2 text-[9px] font-mono text-primary/60 group-hover:text-accent pointer-events-none select-none z-20 transition-colors">
               // RECON: OK
             </div>
 

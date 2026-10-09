@@ -49,7 +49,7 @@ export default function SmartImage({
         role="img"
         aria-label={alt}
       >
-        <span className="font-mono text-[10px] tracking-widest text-text-muted/60">
+        <span className="font-mono text-[10px] tracking-widest text-text-muted/70">
           {(alt || "image").toUpperCase().slice(0, 18)}
         </span>
       </div>

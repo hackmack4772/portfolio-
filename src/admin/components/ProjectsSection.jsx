@@ -464,11 +464,11 @@ const ProjectsSection = () => {
                       <FolderGit2 className="w-8 h-8 text-text-muted opacity-40" />
                     )}
                     {project.featured && (
-                      <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-accent/90 border border-accent text-[8px] font-mono font-bold text-bg-base flex items-center gap-0.5 uppercase tracking-wider">
+                      <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-accent/90 border border-accent text-[9px] font-mono font-bold text-bg-base flex items-center gap-0.5 uppercase tracking-wider">
                         <Star className="w-2.5 h-2.5 fill-current" /> Highlighted
                       </div>
                     )}
-                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-bg-base/90 border border-border-base/60 text-[8px] font-mono font-bold text-text-muted uppercase tracking-wider">
+                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-bg-base/90 border border-border-base/60 text-[9px] font-mono font-bold text-text-muted uppercase tracking-wider">
                       {project.category || 'web'}
                     </div>
                   </div>

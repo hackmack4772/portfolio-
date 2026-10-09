@@ -94,7 +94,7 @@ export default function MobileDrawer({ isOpen, onClose, navItems, isActivePath, 
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none -z-10" />
 
         {/* HUD corner styling markers */}
-        <div className="absolute top-2 left-2 text-[8px] font-mono text-border-base/40 pointer-events-none select-none">
+        <div className="absolute top-2 left-2 text-[9px] font-mono text-border-base/40 pointer-events-none select-none">
           SYS_MGR_v4.7 // DRAW_PORT
         </div>
 
@@ -170,7 +170,7 @@ export default function MobileDrawer({ isOpen, onClose, navItems, isActivePath, 
         </nav>
 
         {/* Dashboard Console Telemetry Log */}
-        <div className="mt-auto pt-6 border-t border-border-base/20 flex flex-col gap-3 font-mono text-[8px] text-text-muted/60 select-none">
+        <div className="mt-auto pt-6 border-t border-border-base/20 flex flex-col gap-3 font-mono text-[9px] text-text-muted/70 select-none">
           <div className="flex items-center gap-1.5">
             <Radio className="w-3 h-3 text-accent animate-pulse" />
             <span>PORT_LINK: ACTIVE [127.0.0.1:3000]</span>

@@ -50,7 +50,7 @@ export default function StackSection() {
               <h3 className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-accent">
                 {cat}
               </h3>
-              <span className="ml-auto font-mono text-[9px] text-text-muted/40">
+              <span className="ml-auto font-mono text-[9px] text-text-muted/70">
                 {String(grouped[cat].length).padStart(2, "0")}
               </span>
             </div>

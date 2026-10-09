@@ -236,9 +236,9 @@ function Education() {
                       key={index} 
                       className="reveal group relative p-3 surface-interactive flex flex-col items-center justify-center gap-1.5"
                     >
-                      <span className="text-[7px] font-mono text-accent">{flow.step}_{flow.key}</span>
+                      <span className="text-[9px] font-mono text-accent">{flow.step}_{flow.key}</span>
                       <h4 className="text-[11px] font-bold text-white leading-tight font-mono">{flow.name}</h4>
-                      <span className="text-[7px] font-mono text-text-muted">{flow.details}</span>
+                      <span className="text-[9px] font-mono text-text-muted">{flow.details}</span>
 
                       {/* Direction flow indicators (except last item) */}
                       {index < 5 && (
@@ -300,7 +300,7 @@ function Education() {
                     >
                       <Cpu className="w-5 h-5 mb-1 text-accent" />
                       <span className="font-bold">MERN</span>
-                      <span className="text-[7px] opacity-60">Full-Stack</span>
+                      <span className="text-[9px] opacity-60">Full-Stack</span>
                     </button>
 
                     {/* Cache & DB group */}
@@ -315,7 +315,7 @@ function Education() {
                       >
                         <Zap className="w-5 h-5 mb-1 text-accent" />
                         <span className="font-bold">CACHING</span>
-                        <span className="text-[7px] opacity-60">Redis Cluster</span>
+                        <span className="text-[9px] opacity-60">Redis Cluster</span>
                       </button>
 
                       <button 
@@ -328,7 +328,7 @@ function Education() {
                       >
                         <Database className="w-5 h-5 mb-1 text-accent" />
                         <span className="font-bold">DATABASE</span>
-                        <span className="text-[7px] opacity-60">MySQL/Postgres</span>
+                        <span className="text-[9px] opacity-60">MySQL/Postgres</span>
                       </button>
                     </div>
 
@@ -344,7 +344,7 @@ function Education() {
                       >
                         <Network className="w-5 h-5 mb-1 text-accent" />
                         <span className="font-bold">REALTIME</span>
-                        <span className="text-[7px] opacity-60">Socket / RTC</span>
+                        <span className="text-[9px] opacity-60">Socket / RTC</span>
                       </button>
 
                       <button 
@@ -357,14 +357,14 @@ function Education() {
                       >
                         <Layers className="w-5 h-5 mb-1 text-accent" />
                         <span className="font-bold">DEVOPS</span>
-                        <span className="text-[7px] opacity-60">Docker / Proxy</span>
+                        <span className="text-[9px] opacity-60">Docker / Proxy</span>
                       </button>
                     </div>
 
                   </div>
                 </div>
 
-                <div className="border-t border-accent/10 pt-3 flex justify-between text-[8px] font-mono text-[#0cfbff]/60 select-none">
+                <div className="border-t border-accent/10 pt-3 flex justify-between text-[9px] font-mono text-[#0cfbff]/60 select-none">
                   <span>SPECTRUM SCALE: SYSTEM COMPREHENSIVE</span>
                   <span>SYSTEM MAPPED // NOMINAL</span>
                 </div>
@@ -402,10 +402,10 @@ function Education() {
 
                   {/* Core items tag keys */}
                   <div className="flex flex-col gap-1.5 font-mono text-[10px]">
-                    <span className="text-text-muted uppercase text-[8px] tracking-wider block">Conquered Sub-systems:</span>
+                    <span className="text-text-muted uppercase text-[9px] tracking-wider block">Conquered Sub-systems:</span>
                     <div className="flex flex-wrap gap-1.5">
                       {KNOWLEDGE_DOMAINS[selectedDomain].details.map((t, idx) => (
-                        <span key={idx} className="px-2 py-0.5 rounded bg-[var(--surface-2)] border border-[var(--edge-1)] text-[8px] text-white">
+                        <span key={idx} className="px-2 py-0.5 rounded bg-[var(--surface-2)] border border-[var(--edge-1)] text-[9px] text-white">
                           {t}
                         </span>
                       ))}
@@ -447,7 +447,7 @@ function Education() {
                       className="w-full px-5 py-4 flex items-center justify-between text-left font-mono cursor-pointer select-none"
                     >
                       <div className="space-y-1">
-                        <span className="text-[8px] text-accent uppercase font-bold tracking-widest">{era.tag}</span>
+                        <span className="text-[9px] text-accent uppercase font-bold tracking-widest">{era.tag}</span>
                         <h4 className="text-xs font-bold text-white">{era.title}</h4>
                       </div>
                       <span className="text-[10px] text-text-muted shrink-0 ml-4 bg-[var(--surface-2)] px-2 py-0.5 rounded border border-[var(--edge-2)]">
@@ -468,11 +468,11 @@ function Education() {
                           <div className="p-5 font-sans text-xs md:text-sm text-text-muted leading-relaxed space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-[10px]">
                               <div>
-                                <span className="text-text-muted uppercase text-[8px] tracking-wider block">Degree Awarded</span>
+                                <span className="text-text-muted uppercase text-[9px] tracking-wider block">Degree Awarded</span>
                                 <span className="text-white font-semibold block mt-0.5">{era.degree}</span>
                               </div>
                               <div>
-                                <span className="text-text-muted uppercase text-[8px] tracking-wider block">Institution</span>
+                                <span className="text-text-muted uppercase text-[9px] tracking-wider block">Institution</span>
                                 <span className="text-white font-semibold block mt-0.5">{era.institution}</span>
                               </div>
                             </div>
@@ -517,7 +517,7 @@ function Education() {
                     <div className="space-y-1 font-mono text-[10px]">
                       <div className="flex justify-between items-center w-full">
                         <h4 className="text-[11px] font-bold text-white leading-tight">{mile.title}</h4>
-                        <span className="text-[8px] text-text-muted bg-[var(--surface-2)] px-1.5 py-0.5 rounded border border-[var(--edge-2)] ml-2">
+                        <span className="text-[9px] text-text-muted bg-[var(--surface-2)] px-1.5 py-0.5 rounded border border-[var(--edge-2)] ml-2">
                           {mile.year}
                         </span>
                       </div>

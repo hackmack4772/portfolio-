@@ -13,6 +13,15 @@ export default function MainLayout({ children }) {
       <div className="hidden xl:block absolute left-8 top-0 bottom-0 w-[1px] bg-border-base/10 pointer-events-none -z-10" />
       <div className="hidden xl:block absolute right-8 top-0 bottom-0 w-[1px] bg-border-base/10 pointer-events-none -z-10" />
 
+      {/* Keyboard users had no way past the six nav items on every single
+          page. Visually hidden until focused. */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-lg focus:border focus:border-accent focus:bg-bg-base focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:text-accent"
+      >
+        Skip to content
+      </a>
+
       {/* Reading progress. Driven by animation-timeline: scroll(), so there
           is no scroll listener behind it. */}
       <div className="scroll-progress" aria-hidden="true" />
@@ -23,7 +32,7 @@ export default function MainLayout({ children }) {
       <DebugHUD />
       
       {/* Main Content Area */}
-      <main className="flex min-w-0 flex-1 flex-col">
+      <main id="main-content" tabIndex={-1} className="flex min-w-0 flex-1 flex-col">
         {children}
       </main>
     </div>

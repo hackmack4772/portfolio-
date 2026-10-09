@@ -71,7 +71,7 @@ function Preloader() {
 
             {/* Terminal Console Output area */}
             <div className="p-6 min-h-[260px] max-h-[340px] overflow-y-auto flex flex-col gap-2.5 text-xs text-left no-scrollbar text-[#e2e8f0]">
-              <div className="text-text-muted/60 text-[10px]">
+              <div className="text-text-muted/70 text-[10px]">
                 HACKMACK SYSTEMS INC. PORTAL CONNECTION PROTOCOL<br />
                 AUTHORIZED ACCESS ONLY // SYSTEM STABLE
               </div>

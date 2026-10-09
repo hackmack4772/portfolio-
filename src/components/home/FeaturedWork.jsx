@@ -45,7 +45,7 @@ export default function FeaturedWork() {
               <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/70">
                 {p.category || "project"}
               </span>
-              <FolderGit2 className="h-4 w-4 shrink-0 text-text-muted/40 transition group-hover:text-accent" />
+              <FolderGit2 className="h-4 w-4 shrink-0 text-text-muted/70 transition group-hover:text-accent" />
             </div>
 
             <h3 className="font-sans text-base font-bold leading-snug text-white">{p.title}</h3>
@@ -84,7 +84,7 @@ export default function FeaturedWork() {
                 </a>
               ) : null}
               {!p.githubUrl && !p.demoUrl && (
-                <span className="text-text-muted/35">private / client work</span>
+                <span className="text-text-muted/70">private / client work</span>
               )}
             </div>
           </article>

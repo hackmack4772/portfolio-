@@ -226,7 +226,7 @@ function ContactUs({ hideHeader = false }) {
                         <InfoIcon className="w-4 h-4" />
                       </div>
                       <div className="space-y-0.5 font-mono text-[10px]">
-                        <span className="text-[8px] text-text-muted uppercase tracking-wider block">{info.label}</span>
+                        <span className="text-[9px] text-text-muted uppercase tracking-wider block">{info.label}</span>
                         <span className="text-[11px] font-semibold text-text-base leading-tight block">{info.value}</span>
                       </div>
                     </GlowCard>
@@ -237,7 +237,7 @@ function ContactUs({ hideHeader = false }) {
               {/* Connected node network social mesh */}
               {!hideHeader && (
                 <div className="glass-premium p-5 rounded-2xl border border-white/[0.06] flex flex-col gap-4 relative overflow-hidden">
-                  <div className="absolute top-2 right-2 text-[7px] font-mono text-text-muted/40 uppercase">// COMM_NETWORK</div>
+                  <div className="absolute top-2 right-2 text-[9px] font-mono text-text-muted/70 uppercase">// COMM_NETWORK</div>
                   
                   {/* SVG Node network */}
                   <div className="relative w-full h-36 bg-[#0b0f19]/40 rounded-xl border border-white/[0.04] p-3 flex items-center justify-center blueprint-grid">
@@ -247,7 +247,7 @@ function ContactUs({ hideHeader = false }) {
                       <line x1="50%" y1="50%" x2="50%" y2="78%" stroke="#0cfbff" strokeWidth="1" strokeOpacity="0.2" />
                     </svg>
 
-                    <div className="relative w-full flex justify-between items-center px-4 font-mono text-[8px] text-text-muted z-10">
+                    <div className="relative w-full flex justify-between items-center px-4 font-mono text-[9px] text-text-muted z-10">
                       
                       {/* GitHub node */}
                       <a 
@@ -259,7 +259,7 @@ function ContactUs({ hideHeader = false }) {
                         className="p-2 border border-white/10 bg-black/50 rounded-xl hover:border-accent hover:text-white transition cursor-pointer flex flex-col items-center justify-center w-18"
                       >
                         <span className="text-accent font-bold">GITHUB</span>
-                        <span className="text-[6px] opacity-60">Port 443</span>
+                        <span className="text-[9px] opacity-60">Port 443</span>
                       </a>
 
                       {/* Core central node */}
@@ -278,7 +278,7 @@ function ContactUs({ hideHeader = false }) {
                           className="p-2 border border-white/10 bg-black/50 rounded-xl hover:border-accent hover:text-white transition cursor-pointer flex flex-col items-center justify-center w-18"
                         >
                           <span className="text-accent font-bold">LINKEDIN</span>
-                          <span className="text-[6px] opacity-60">Port 8080</span>
+                          <span className="text-[9px] opacity-60">Port 8080</span>
                         </a>
                       </div>
 
@@ -286,7 +286,7 @@ function ContactUs({ hideHeader = false }) {
                   </div>
 
                   {/* Telemetry diagnostics display footer */}
-                  <div className="font-mono text-[8px] text-text-muted/70 tracking-wide border-t border-white/[0.04] pt-2 text-justify">
+                  <div className="font-mono text-[9px] text-text-muted/70 tracking-wide border-t border-white/[0.04] pt-2 text-justify">
                     {getSocialDiagnostic()}
                   </div>
                 </div>

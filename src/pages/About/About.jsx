@@ -288,7 +288,7 @@ function About() {
           <GlowCard ref={clockRef} glowColor="accent" hoverGlow={false} variant="dark" className="p-5 flex flex-col gap-2 relative overflow-hidden">
             <div className="absolute top-2 right-2 flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-              <span className="text-[7px] font-mono text-accent uppercase">live_ticker</span>
+              <span className="text-[9px] font-mono text-accent uppercase">live_ticker</span>
             </div>
             <span className="text-[9px] font-mono text-text-muted uppercase tracking-wider">Computed Professional Age</span>
             <div className="text-3xl font-black font-mono text-accent tabular-nums tracking-wide">
@@ -322,7 +322,7 @@ function About() {
           
           {/* Biography Terminal */}
           <div className="glass-premium-dark rounded-2xl border border-[var(--edge-2)] p-6 shadow-2xl flex flex-col gap-4 relative overflow-hidden">
-            <div className="absolute top-2 right-3 text-[8px] font-mono text-text-muted/40 uppercase select-none">
+            <div className="absolute top-2 right-3 text-[9px] font-mono text-text-muted/70 uppercase select-none">
               &lt;bio_manifesto&gt;
             </div>
             <h3 className="text-sm font-mono font-bold text-text-base flex items-center gap-2 border-b border-[var(--edge-1)] pb-3 select-none">
@@ -346,11 +346,11 @@ function About() {
                 <div key={i} className={`reveal p-4 rounded-xl border border-[var(--edge-1)] ${p.bg} flex flex-col gap-2`}>
                   <div className="flex items-center justify-between">
                     <p.icon className={`w-5 h-5 ${p.color}`} />
-                    <span className="text-[8px] font-mono text-text-muted uppercase">0{i+1}_core</span>
+                    <span className="text-[9px] font-mono text-text-muted uppercase">0{i+1}_core</span>
                   </div>
                   <div className="space-y-1 mt-1">
                     <h4 className="text-[11px] font-mono font-bold text-white leading-tight">{p.title}</h4>
-                    <span className="text-[8px] font-mono text-accent block">{p.subtitle}</span>
+                    <span className="text-[9px] font-mono text-accent block">{p.subtitle}</span>
                   </div>
                   <p className="text-[10px] text-text-muted leading-relaxed font-sans text-justify mt-1">
                     {p.desc}
@@ -399,7 +399,7 @@ function About() {
                 >
                   <Cpu className="w-5 h-5 mb-1 text-accent" />
                   <span className="font-bold">01_GATEWAY</span>
-                  <span className="text-[7px] opacity-60">Edge Route</span>
+                  <span className="text-[9px] opacity-60">Edge Route</span>
                 </button>
 
                 {/* Staging Cache & Process Core Group */}
@@ -414,7 +414,7 @@ function About() {
                   >
                     <Zap className="w-5 h-5 mb-1 text-accent" />
                     <span className="font-bold">02_CACHE</span>
-                    <span className="text-[7px] opacity-60">Redis Staging</span>
+                    <span className="text-[9px] opacity-60">Redis Staging</span>
                   </button>
 
                   <button 
@@ -427,7 +427,7 @@ function About() {
                   >
                     <Activity className="w-5 h-5 mb-1 text-accent" />
                     <span className="font-bold">03_CORE_ENG</span>
-                    <span className="text-[7px] opacity-60">Loyalty SaaS</span>
+                    <span className="text-[9px] opacity-60">Loyalty SaaS</span>
                   </button>
                 </div>
 
@@ -442,13 +442,13 @@ function About() {
                 >
                   <Database className="w-5 h-5 mb-1 text-accent" />
                   <span className="font-bold">04_DATABASE</span>
-                  <span className="text-[7px] opacity-60">Relational DB</span>
+                  <span className="text-[9px] opacity-60">Relational DB</span>
                 </button>
 
               </div>
             </div>
 
-            <div className="border-t border-[#0cfbff]/10 pt-3 flex justify-between text-[8px] font-mono text-[#0cfbff]/60 select-none">
+            <div className="border-t border-[#0cfbff]/10 pt-3 flex justify-between text-[9px] font-mono text-[#0cfbff]/60 select-none">
               <span>SCALE FACTOR: 10x REPLICAS</span>
               <span>GRID SYSTEM CALIBRATED</span>
             </div>
@@ -477,12 +477,12 @@ function About() {
 
             <div className="space-y-3 pt-6 border-t border-[var(--edge-1)]">
               <div className="flex flex-col gap-1 font-mono text-[10px]">
-                <span className="text-text-muted uppercase text-[8px] tracking-wider">Benchmark KPIs:</span>
+                <span className="text-text-muted uppercase text-[9px] tracking-wider">Benchmark KPIs:</span>
                 <span className="text-white font-semibold">{SYSTEM_SANDBOX[selectedSandbox].kpis}</span>
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="text-text-muted uppercase text-[8px] tracking-wider font-mono">Integrated Stacks:</span>
+                <span className="text-text-muted uppercase text-[9px] tracking-wider font-mono">Integrated Stacks:</span>
                 <div className="flex flex-wrap gap-1.5">
                   {SYSTEM_SANDBOX[selectedSandbox].techs.map((t, idx) => (
                     <span key={idx} className="px-2.5 py-1 rounded bg-[var(--surface-2)] border border-[var(--edge-1)] text-[9px] font-mono text-white font-medium">
@@ -530,15 +530,15 @@ function About() {
 
             <div className="space-y-3 pt-6 border-t border-[var(--edge-1)] font-mono text-[10px]">
               <div className="flex flex-col gap-1.5">
-                <span className="text-text-muted uppercase text-[8px] tracking-wider block">Production Challenge Resolved:</span>
+                <span className="text-text-muted uppercase text-[9px] tracking-wider block">Production Challenge Resolved:</span>
                 <span className="text-red-400 font-semibold">{focusedCommit.challenges}</span>
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="text-text-muted uppercase text-[8px] tracking-wider block">Technologies Deployed:</span>
+                <span className="text-text-muted uppercase text-[9px] tracking-wider block">Technologies Deployed:</span>
                 <div className="flex flex-wrap gap-1.5">
                   {focusedCommit.techs.map((t, idx) => (
-                    <span key={idx} className="px-2 py-0.5 rounded bg-[var(--surface-2)] border border-[var(--edge-1)] text-[8px]">
+                    <span key={idx} className="px-2 py-0.5 rounded bg-[var(--surface-2)] border border-[var(--edge-1)] text-[9px]">
                       {t}
                     </span>
                   ))}
@@ -606,7 +606,7 @@ function About() {
 
               </div>
               
-              <div className="border-t border-[var(--edge-1)] pt-3 text-[8px] font-mono text-text-muted/50 select-none">
+              <div className="border-t border-[var(--edge-1)] pt-3 text-[9px] font-mono text-text-muted/70 select-none">
                 ✓ ALL COMMIT CHECKS PASSED: DEPLOYED SUCCESS
               </div>
             </div>
@@ -642,7 +642,7 @@ function About() {
               </div>
               <div className="space-y-1 pt-1">
                 <h4 className="font-bold text-white uppercase text-[11px] leading-tight">{item.title}</h4>
-                <span className="text-[8px] text-accent block uppercase">Gate: {item.tech}</span>
+                <span className="text-[9px] text-accent block uppercase">Gate: {item.tech}</span>
               </div>
               <p className="text-[10px] text-text-muted leading-relaxed font-sans text-justify mt-1.5">
                 {item.desc}

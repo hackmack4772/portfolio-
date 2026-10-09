@@ -525,7 +525,7 @@ function ConsoleCLI({ isOpen, onClose }) {
       success: "text-green-400",
       info: "text-accent font-bold",
       error: "text-red-400 font-bold",
-      muted: "text-text-muted/55 italic",
+      muted: "text-text-muted/70 italic",
       banner: "text-accent font-bold leading-none",
     }[type] || "text-text-muted");
 
@@ -557,7 +557,7 @@ function ConsoleCLI({ isOpen, onClose }) {
             <div className="w-2.5 h-2.5 rounded-full bg-[#f59e0b] opacity-80" />
             <div className="w-2.5 h-2.5 rounded-full bg-[#10b981] opacity-80" />
           </div>
-          <div className="text-[10px] font-mono tracking-wider uppercase text-text-muted/65 flex items-center gap-1.5">
+          <div className="text-[10px] font-mono tracking-wider uppercase text-text-muted/70 flex items-center gap-1.5">
             <TerminalIcon className="w-3.5 h-3.5 text-accent" />
             <span>guest@hackmack-os: ~</span>
           </div>
@@ -576,7 +576,7 @@ function ConsoleCLI({ isOpen, onClose }) {
             <div
               key={i}
               className={`${styleFor(entry.type)} ${
-                entry.type === "banner" ? "text-[7px] sm:text-[10px] overflow-x-auto no-scrollbar mb-2" : ""
+                entry.type === "banner" ? "text-[9px] sm:text-[10px] overflow-x-auto no-scrollbar mb-2" : ""
               }`}
               style={{ whiteSpace: "pre" }}
             >

@@ -279,7 +279,7 @@ function ResumeNew() {
                 </button>
               </div>
 
-              <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-mono text-text-muted/60">
+              <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-mono text-text-muted/70">
                 <span>DASHBOARD</span>
               </div>
             </div>
@@ -309,14 +309,14 @@ function ResumeNew() {
                                 <h4 className="text-[11px] font-bold text-text-base leading-tight">
                                   ROLE: {exp.position} <span className="text-accent">@ {exp.company}</span>
                                 </h4>
-                                <span className="text-[8px] text-text-muted bg-white/[0.05] px-2 py-0.5 rounded border border-white/[0.08] self-start sm:self-center">
+                                <span className="text-[9px] text-text-muted bg-white/[0.05] px-2 py-0.5 rounded border border-white/[0.08] self-start sm:self-center">
                                   {exp.period}
                                 </span>
                               </div>
                               
                               {/* Mission details */}
                               <div className="space-y-1 text-text-muted pt-1">
-                                <span className="text-[8px] text-primary font-bold uppercase tracking-widest block select-none">// Mission log</span>
+                                <span className="text-[9px] text-primary font-bold uppercase tracking-widest block select-none">// Mission log</span>
                                 <p className="font-sans text-[11px] md:text-xs leading-relaxed text-justify">
                                   {exp.description}
                                 </p>

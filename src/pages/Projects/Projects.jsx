@@ -167,7 +167,7 @@ function Projects() {
                     <div className="w-2.5 h-2.5 rounded-full bg-[#f59e0b] opacity-80" />
                     <div className="w-2.5 h-2.5 rounded-full bg-[#10b981] opacity-80" />
                   </div>
-                  <span className="text-[10px] tracking-wider uppercase text-text-muted/65 flex items-center gap-1.5">
+                  <span className="text-[10px] tracking-wider uppercase text-text-muted/70 flex items-center gap-1.5">
                     <Terminal className="w-3.5 h-3.5 text-accent" />
                     <span>system_specs: /project/{selectedProject.title.toLowerCase().replace(/\s+/g, "_")}</span>
                   </span>
@@ -184,10 +184,10 @@ function Projects() {
                     
                     {/* SVG Topology Box */}
                     <div className="bg-[#0b0f19] blueprint-grid border border-[#0cfbff]/15 rounded-2xl p-5 relative overflow-hidden min-h-[220px] flex flex-col justify-between shadow-[inset_0_0_20px_rgba(12,251,255,0.02)]">
-                      <span className="text-[8px] font-mono text-[#0cfbff]/60 uppercase select-none">// SYSTEM_FLOW_TOPOLOGY</span>
+                      <span className="text-[9px] font-mono text-[#0cfbff]/60 uppercase select-none">// SYSTEM_FLOW_TOPOLOGY</span>
                       
                       <div className="flex-grow flex items-center justify-center py-6">
-                        <div className="relative w-full flex justify-between items-center px-4 font-mono text-[8px] text-text-muted z-10">
+                        <div className="relative w-full flex justify-between items-center px-4 font-mono text-[9px] text-text-muted z-10">
                           {bp.nodes.map((node, nIdx) => {
                             const NodeIcon = node.icon;
                             return (
@@ -207,7 +207,7 @@ function Projects() {
                         </div>
                       </div>
 
-                      <div className="border-t border-[#0cfbff]/10 pt-2 flex justify-between text-[7px] font-mono text-[#0cfbff]/50 select-none">
+                      <div className="border-t border-[#0cfbff]/10 pt-2 flex justify-between text-[9px] font-mono text-[#0cfbff]/50 select-none">
                         <span>TOPOLOGY: VERIFIED</span>
                         <span>GRID SYSTEM CONNECTED</span>
                       </div>
@@ -216,8 +216,8 @@ function Projects() {
                     {/* Telemetry diagnostics box */}
                     <div className="glass-premium p-5 rounded-2xl border border-white/[0.06] font-mono text-[10px] space-y-2">
                       <div className="flex items-center justify-between border-b border-white/[0.06] pb-1.5 select-none">
-                        <span className="text-accent uppercase tracking-widest text-[8px] flex items-center gap-1"><Activity className="w-3 h-3 animate-pulse" /> runtime_telemetry</span>
-                        <span className="text-[7px] text-green-500">SYSTEM_NOMINAL</span>
+                        <span className="text-accent uppercase tracking-widest text-[9px] flex items-center gap-1"><Activity className="w-3 h-3 animate-pulse" /> runtime_telemetry</span>
+                        <span className="text-[9px] text-green-500">SYSTEM_NOMINAL</span>
                       </div>
                       <div className="flex justify-between border-b border-white/[0.03] pb-1">
                         <span>SYSTEM_STATUS:</span>
@@ -258,21 +258,21 @@ function Projects() {
                       {/* Section 2: Case study branch payload mock items to tell the real engineering story */}
                       <div className="space-y-3 pt-3 border-t border-white/[0.06] font-mono text-[10px]">
                         <div className="space-y-1">
-                          <span className="text-red-400 font-bold uppercase text-[8px] tracking-wider block select-none">[CHALLENGE]</span>
+                          <span className="text-red-400 font-bold uppercase text-[9px] tracking-wider block select-none">[CHALLENGE]</span>
                           <p className="font-sans text-text-muted text-[11px] leading-relaxed text-justify">
                             Handling lock contentions on high-concurrency requests or latency spikes during packet routing.
                           </p>
                         </div>
 
                         <div className="space-y-1">
-                          <span className="text-accent font-bold uppercase text-[8px] tracking-wider block select-none">[TRADEOFF]</span>
+                          <span className="text-accent font-bold uppercase text-[9px] tracking-wider block select-none">[TRADEOFF]</span>
                           <p className="font-sans text-text-muted text-[11px] leading-relaxed text-justify">
                             Prioritized sub-10ms query read time over strict transactional sync constraints, shifting locks to async cache nodes.
                           </p>
                         </div>
 
                         <div className="space-y-1">
-                          <span className="text-green-500 font-bold uppercase text-[8px] tracking-wider block select-none">[OPTIMIZATION]</span>
+                          <span className="text-green-500 font-bold uppercase text-[9px] tracking-wider block select-none">[OPTIMIZATION]</span>
                           <p className="font-sans text-text-muted text-[11px] leading-relaxed text-justify">
                             Tuned database query plans, configured sharded read replicas, and implemented caching indices to bypass DB loads.
                           </p>
@@ -423,7 +423,7 @@ function Projects() {
                     <h3 className="text-xs font-mono uppercase tracking-wider font-bold text-white line-clamp-1 mt-2">
                       {project.title}
                     </h3>
-                    <span className="text-[8px] font-mono text-text-muted mt-1 uppercase tracking-widest">
+                    <span className="text-[9px] font-mono text-text-muted mt-1 uppercase tracking-widest">
                       {project.category || "Case Study"}
                     </span>
                   </div>

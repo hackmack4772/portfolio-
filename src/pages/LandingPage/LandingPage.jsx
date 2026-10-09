@@ -32,7 +32,7 @@ function HeroTerminal() {
       >
         <div className="flex min-w-0 gap-4">
           {/* Editor line indices */}
-          <div className="hidden select-none text-right font-mono text-[10px] text-text-muted/20 sm:block">
+          <div className="hidden select-none text-right font-mono text-[10px] text-text-muted/70 sm:block">
             <div>01</div>
             <div>02</div>
             <div>03</div>
@@ -49,7 +49,7 @@ function HeroTerminal() {
           
           <pre className="no-scrollbar min-w-0 overflow-x-auto font-mono text-[10px] leading-relaxed text-text-muted/95 sm:text-xs">
             <code>
-              <span className="text-text-muted/30">// INITIALIZE CORE NODE</span>{"\n"}
+              <span className="text-text-muted/70">// INITIALIZE CORE NODE</span>{"\n"}
               <span className="text-accent font-semibold">import</span> {"{"} <span className="text-secondary font-bold">Engineer</span> {"}"} <span className="text-accent font-semibold">from</span> <span className="text-primary font-bold">"@core"</span>;{"\n\n"}
               <span className="text-accent font-semibold">const</span> <span className="text-text-base">dev</span> = <span className="text-accent font-semibold">new</span> <span className="text-secondary font-bold">Engineer</span>({"{\n"}
               {"  "}name: <span className="text-[#34d399]">"Aamir Saleem Lone"</span>,{"\n"}
@@ -57,7 +57,7 @@ function HeroTerminal() {
               {"  "}experience: <span className="text-[#eab308]">"{displayYears} Years"</span>,{"\n"}
               {"  "}tech: [<span className="text-[#38bdf8]">"React"</span>, <span className="text-[#38bdf8]">"Node"</span>, <span className="text-[#38bdf8]">"TS"</span>, <span className="text-[#38bdf8]">"SQL"</span>]{"\n"}
               {"}"});{"\n\n"}
-              <span className="text-text-muted/30">// RUN PORTFOLIO APPS</span>{"\n"}
+              <span className="text-text-muted/70">// RUN PORTFOLIO APPS</span>{"\n"}
               <span className="text-text-base">dev</span>.<span className="text-[#38bdf8]">bootDeployment</span>();
             </code>
           </pre>
@@ -134,6 +134,14 @@ function LandingPage() {
 
   return (
     <div className="w-full bg-bg-base text-text-base relative">
+      {/* Every other route declares its own title, so navigating back here
+          left whichever one was set last. React 19 hoists these natively. */}
+      <title>Aamir Saleem Lone — Software Engineer | Backend & Full-Stack</title>
+      <meta
+        name="description"
+        content="Software Engineer at Comviva building an enterprise loyalty platform for 1M+ users. Node.js, TypeScript, GraphQL, PostgreSQL, Kafka and Redis."
+      />
+
       {/* 3D WebGL Background Particles Mesh */}
       <ThreeBackground />
 
@@ -286,7 +294,7 @@ function LandingPage() {
                   <div className="w-2.5 h-2.5 rounded-full bg-[#f59e0b] opacity-80" />
                   <div className="w-2.5 h-2.5 rounded-full bg-[#10b981] opacity-80" />
                 </div>
-                <div className="text-[10px] tracking-wider uppercase text-text-muted/65 flex items-center gap-1.5 font-mono">
+                <div className="text-[10px] tracking-wider uppercase text-text-muted/70 flex items-center gap-1.5 font-mono">
                   <span className="text-accent">&gt;</span> SOCIAL_CONNECTIVITY.sh
                 </div>
                 <div className="w-12 flex justify-end">
@@ -321,9 +329,9 @@ function LandingPage() {
                           <span className="text-secondary font-bold">$</span>
                           <span className="text-text-base font-semibold">open {diagnostic.label.toLowerCase()}</span>
                         </div>
-                        <div className="text-text-muted/50 pl-2.5 break-all">{diagnostic.line}</div>
+                        <div className="text-text-muted/70 pl-2.5 break-all">{diagnostic.line}</div>
                       </div>
-                      <div className="flex items-center justify-between border-t border-white/[0.04] pt-2 mt-3 text-[8px] tracking-wider uppercase text-text-muted/40">
+                      <div className="flex items-center justify-between border-t border-white/[0.04] pt-2 mt-3 text-[9px] tracking-wider uppercase text-text-muted/70">
                         <span>CHANNEL</span>
                         <span className="text-accent font-bold tracking-widest">{diagnostic.label}</span>
                       </div>
@@ -362,7 +370,7 @@ function LandingPage() {
                               <span className="text-[11px] font-bold text-white group-hover/btn:text-accent tracking-wider uppercase transition-colors duration-300 truncate">
                                 {link.label}
                               </span>
-                              <span className="text-[8px] font-mono text-text-muted/40 group-hover/btn:text-accent/50 transition-colors duration-300">
+                              <span className="text-[9px] font-mono text-text-muted/70 group-hover/btn:text-accent/50 transition-colors duration-300">
                                 PORT // {link.port}
                               </span>
                             </div>
