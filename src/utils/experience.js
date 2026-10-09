@@ -2,10 +2,15 @@
  * Utility functions for calculating and formatting experience dynamically
  */
 
-// Career start: 25 September 2022, at Shine Dezign Infonet. Every "N+ years"
-// on the site, and the eight-decimal ticker on /about, derive from this one
-// constant - so the exact day matters, not just the month.
-export const START_DATE = "2022-09-25";
+// Full-time start: 1 January 2023 at Shine Dezign Infonet. The role itself
+// began 25 Sep 2022, but the first ~3 months were an internship, and the
+// years counter is a claim about full-time experience - so it counts from
+// the conversion, not the first day on site.
+//
+// The Shine Dezign entry still shows "Sep 2022" as its period, which is
+// correct for the role. These two are allowed to differ; only this one
+// drives every "N+ years" on the site and the ticker on /about.
+export const START_DATE = "2023-01-01";
 
 /**
  * Calculates experience details since the specified start date

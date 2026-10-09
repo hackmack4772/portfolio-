@@ -26,7 +26,7 @@ export default function ExperienceSection() {
         subtitle="Engineering Timeline"
         title="Where I have"
         highlight="Worked"
-        description={`${displayYears} years building production systems, from CRM and streaming products to enterprise loyalty infrastructure.`}
+        description={`${displayYears} years full-time building production systems, from CRM and streaming products to enterprise loyalty infrastructure.`}
       />
 
       <ol className="relative mx-auto max-w-4xl">

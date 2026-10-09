@@ -122,7 +122,7 @@ function ConsoleCLI({ isOpen, onClose }) {
           line("IDENTITY REGISTER", "info"),
           line(`  name       : ${about?.name || "Aamir Saleem Lone"}`),
           line(`  role       : ${about?.title || "Full-Stack Engineer"}`),
-          line(`  experience : ${exp.displayYears} years (since Sep 2022)`),
+          line(`  experience : ${exp.displayYears} years (full-time since Jan 2023)`),
           line(`  location   : ${contact?.address || "Handwara, Jammu and Kashmir, India"}`),
           line(`  status     : OPEN TO INTERESTING PROBLEMS`, "success"),
         ],
