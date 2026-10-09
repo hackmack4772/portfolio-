@@ -7,7 +7,8 @@ export default function GlowCard({
   hoverGlow = true,
   glowColor = "primary", // primary, secondary, accent
   variant = "premium", // premium, dark, panel
-  onClick 
+  onClick,
+  ref,   // React 19 passes ref as an ordinary prop to function components
 }) {
   const glowShadows = {
     primary: "hover:shadow-[0_0_30px_rgba(143,16,183,0.15)] hover:border-primary/45",
@@ -23,6 +24,7 @@ export default function GlowCard({
 
   return (
     <motion.div
+      ref={ref}
       whileHover={hoverGlow ? { y: -4 } : {}}
       transition={{ duration: 0.3 }}
       onClick={onClick}

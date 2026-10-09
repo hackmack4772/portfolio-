@@ -27,7 +27,8 @@ import { usePortfolio } from "../../Context/PortfolioDataContext";
 import SectionWrapper from "../../components/ui/SectionWrapper";
 import SectionTitle from "../../components/ui/SectionTitle";
 import GlowCard from "../../components/ui/GlowCard";
-import { makeTextDynamic } from "../../utils/experience";
+import { makeTextDynamic, START_DATE } from "../../utils/experience";
+import useActiveWhenVisible from "../../utils/useActiveWhenVisible";
 import SmartImage from "../../components/ui/SmartImage";
 
 // Static Engineering Philosophy Data
@@ -167,7 +168,9 @@ const buildTimeline = (about) => {
 
 function About() {
   const { about, contact } = usePortfolio();
-  const [expClock, setExpClock] = useState("3.00000000");
+  const elapsedYears = () =>
+    ((Date.now() - new Date(START_DATE)) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(8);
+  const [expClock, setExpClock] = useState(elapsedYears);
   const [selectedSandbox, setSelectedSandbox] = useState("gateway");
   // Derived from the database, so the dates and titles here cannot drift
   // from the ones on the home page and the CV again.
@@ -182,17 +185,24 @@ function About() {
     timeline[timeline.length - 1] ||
     EMPTY_COMMIT;
 
-  // Telemetry ticking clock calculation since Jan 1, 2023
+  // Experience ticker.
+  //
+  // Three things were wrong here. It hardcoded new Date("2023-01-01")
+  // instead of using START_DATE, so this counter read 3.76 while the home
+  // page, the CV and /resume all said 4+ - the same drift as the timeline
+  // above. It ticked every 50ms unconditionally, re-rendering this entire
+  // page twenty times a second forever, including while scrolled past or
+  // with the tab in the background. And it seeded state with the literal
+  // string "3.00000000", which flashed a wrong number before the first tick.
+  const [clockRef, clockActive] = useActiveWhenVisible();
+
   useEffect(() => {
-    const startDate = new Date("2023-01-01");
-    const interval = setInterval(() => {
-      const now = new Date();
-      const diffMs = now - startDate;
-      const years = diffMs / (1000 * 60 * 60 * 24 * 365.25);
-      setExpClock(years.toFixed(8));
-    }, 50);
+    if (!clockActive) return;
+    const tick = () => setExpClock(elapsedYears());
+    tick();
+    const interval = setInterval(tick, 100);
     return () => clearInterval(interval);
-  }, []);
+  }, [clockActive]);
 
   const aboutData = {
     tagline: "Full-Stack Engineer | Building Scalable Web & Reward Platforms",
@@ -275,7 +285,7 @@ function About() {
           </div>
 
           {/* Telemetry Clock Stats Card */}
-          <GlowCard glowColor="accent" hoverGlow={false} variant="dark" className="p-5 flex flex-col gap-2 relative overflow-hidden">
+          <GlowCard ref={clockRef} glowColor="accent" hoverGlow={false} variant="dark" className="p-5 flex flex-col gap-2 relative overflow-hidden">
             <div className="absolute top-2 right-2 flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
               <span className="text-[7px] font-mono text-accent uppercase">live_ticker</span>
