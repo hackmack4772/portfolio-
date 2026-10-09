@@ -191,7 +191,7 @@ function Projects() {
                           {bp.nodes.map((node, nIdx) => {
                             const NodeIcon = node.icon;
                             return (
-                              <div key={node.id} className="flex flex-col items-center justify-center p-2.5 border border-white/10 bg-black/40 rounded-xl relative">
+                              <div key={node.id} className="flex flex-col items-center justify-center p-2.5 border border-[var(--edge-2)] bg-[var(--well)] rounded-xl relative">
                                 <NodeIcon className="w-4 h-4 text-accent mb-0.5" />
                                 <span className="font-bold text-white">{node.label}</span>
                                 

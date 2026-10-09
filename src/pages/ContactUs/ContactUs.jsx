@@ -256,7 +256,7 @@ function ContactUs({ hideHeader = false }) {
                         rel="noopener noreferrer"
                         onMouseEnter={() => setHoveredSocial("GitHub")}
                         onMouseLeave={() => setHoveredSocial(null)}
-                        className="p-2 border border-white/10 bg-black/50 rounded-xl hover:border-accent hover:text-white transition cursor-pointer flex flex-col items-center justify-center w-18"
+                        className="p-2 border border-[var(--edge-2)] bg-[var(--well)] rounded-xl hover:border-accent hover:text-white transition cursor-pointer flex flex-col items-center justify-center w-18"
                       >
                         <span className="text-accent font-bold">GITHUB</span>
                         <span className="text-[9px] opacity-60">Port 443</span>
@@ -275,7 +275,7 @@ function ContactUs({ hideHeader = false }) {
                           rel="noopener noreferrer"
                           onMouseEnter={() => setHoveredSocial("LinkedIn")}
                           onMouseLeave={() => setHoveredSocial(null)}
-                          className="p-2 border border-white/10 bg-black/50 rounded-xl hover:border-accent hover:text-white transition cursor-pointer flex flex-col items-center justify-center w-18"
+                          className="p-2 border border-[var(--edge-2)] bg-[var(--well)] rounded-xl hover:border-accent hover:text-white transition cursor-pointer flex flex-col items-center justify-center w-18"
                         >
                           <span className="text-accent font-bold">LINKEDIN</span>
                           <span className="text-[9px] opacity-60">Port 8080</span>

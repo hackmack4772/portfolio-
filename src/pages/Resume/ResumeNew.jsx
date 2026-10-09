@@ -159,12 +159,12 @@ function ResumeNew() {
               </div>
 
               {/* Progress bar */}
-              <div className="w-full h-1 bg-black/40 border border-[var(--edge-1)] rounded-full overflow-hidden">
+              <div className="w-full h-1 bg-[var(--well)] border border-[var(--edge-1)] rounded-full overflow-hidden">
                 <div className="h-full bg-accent rounded-full" style={{ width: `${transferProgress}%` }} />
               </div>
 
               {/* Terminal log panel */}
-              <div className="h-48 bg-black/50 border border-[var(--edge-1)] rounded-xl p-4 overflow-y-auto space-y-1.5 no-scrollbar text-text-muted text-[10px]">
+              <div className="h-48 bg-[var(--well)] border border-[var(--edge-1)] rounded-xl p-4 overflow-y-auto space-y-1.5 no-scrollbar text-text-muted text-[10px]">
                 {transferLogs.map((log, idx) => {
                   console.log(log);
                   const isSuccess = log.includes("[SUCCESS]");
@@ -204,7 +204,7 @@ function ResumeNew() {
                     <span>{cap.label}:</span>
                     <span className={`${cap.color} font-bold`}>{cap.level}</span>
                   </div>
-                  <div className="w-full h-1 bg-black/40 rounded-full overflow-hidden">
+                  <div className="w-full h-1 bg-[var(--well)] rounded-full overflow-hidden">
                     <div className={`h-full rounded-full ${cap.progress}`} style={{ width: `${cap.score}%` }} />
                   </div>
                 </div>
@@ -349,7 +349,7 @@ function ResumeNew() {
                                 <span className="font-semibold text-text-base">{skill.name}</span>
                                 <span className="text-text-muted">{skill.proficiency}%</span>
                               </div>
-                              <div className="w-full h-1.5 bg-black/40 border border-[var(--edge-2)] rounded-full overflow-hidden">
+                              <div className="w-full h-1.5 bg-[var(--well)] border border-[var(--edge-2)] rounded-full overflow-hidden">
                                 <motion.div
                                   initial={{ width: 0 }}
                                   animate={{ width: `${skill.proficiency}%` }}

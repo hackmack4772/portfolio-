@@ -295,7 +295,7 @@ function Education() {
                       className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                         selectedDomain === "mern"
                           ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
-                          : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
+                          : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                       }`}
                     >
                       <Cpu className="w-5 h-5 mb-1 text-accent" />
@@ -310,7 +310,7 @@ function Education() {
                         className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                           selectedDomain === "caching"
                             ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
-                            : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
+                            : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                         }`}
                       >
                         <Zap className="w-5 h-5 mb-1 text-accent" />
@@ -323,7 +323,7 @@ function Education() {
                         className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                           selectedDomain === "databases"
                             ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
-                            : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
+                            : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                         }`}
                       >
                         <Database className="w-5 h-5 mb-1 text-accent" />
@@ -339,7 +339,7 @@ function Education() {
                         className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                           selectedDomain === "realtime"
                             ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
-                            : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
+                            : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                         }`}
                       >
                         <Network className="w-5 h-5 mb-1 text-accent" />
@@ -352,7 +352,7 @@ function Education() {
                         className={`w-24 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                           selectedDomain === "infrastructure"
                             ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
-                            : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
+                            : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                         }`}
                       >
                         <Layers className="w-5 h-5 mb-1 text-accent" />
@@ -395,7 +395,7 @@ function Education() {
                       <span>MASTERY METRIC:</span>
                       <span className="text-accent font-bold">{KNOWLEDGE_DOMAINS[selectedDomain].mastery}%</span>
                     </div>
-                    <div className="w-full h-1.5 bg-black/40 rounded-full overflow-hidden border border-[var(--edge-1)]">
+                    <div className="w-full h-1.5 bg-[var(--well)] rounded-full overflow-hidden border border-[var(--edge-1)]">
                       <div className="h-full bg-accent rounded-full" style={{ width: `${KNOWLEDGE_DOMAINS[selectedDomain].mastery}%` }} />
                     </div>
                   </div>

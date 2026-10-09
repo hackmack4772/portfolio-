@@ -123,6 +123,7 @@
   --edge-2: rgb(15 23 42 / 0.16);
 
   --stack-dim: rgb(15 23 42 / 0.10);
+  --well: rgb(15 23 42 / 0.06);
 }
 
 /* Global resets and typography */
@@ -420,6 +421,11 @@ section[id] {
 
   /* Dim overlay used by the stacked sections. */
   --stack-dim: rgb(3 5 10 / 0.72);
+
+  /* Recessed surface: progress tracks, inset wells, inactive tab states.
+     These were hardcoded bg-black/40, which reads as a grey box on a light
+     page rather than as something set into the surface. */
+  --well: rgb(0 0 0 / 0.38);
 
   --radius-card: 1rem;
   --radius-inner: 0.625rem;
@@ -740,6 +746,7 @@ p, li {
   --surface-2: rgb(255 255 255 / 0.04);
   --edge-1: rgb(255 255 255 / 0.08);
   --edge-2: rgb(255 255 255 / 0.14);
+  --well: rgb(0 0 0 / 0.45);
   background-color: var(--bg-color);
   color: var(--text-color);
 }
@@ -770,4 +777,12 @@ p, li {
    read as muddy smears rather than light. */
 .light-mode .animate-pulse-glow {
   opacity: 0.18;
+}
+
+/* The hero portrait is blended with mix-blend-mode: luminosity, which is
+   tuned for a dark canvas. At the same opacity over a light page it turns
+   into a grey smudge, so light mode takes it down and drops the blend. */
+.light-mode .hero-portrait {
+  opacity: 0.10;
+  mix-blend-mode: multiply;
 }

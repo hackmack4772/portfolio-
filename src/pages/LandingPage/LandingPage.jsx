@@ -171,13 +171,13 @@ function LandingPage() {
         {/* Artistic background image blending (home-bg.png) */}
         <div className="absolute inset-0 select-none pointer-events-none overflow-hidden -z-10">
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.05] lg:opacity-[0.07] mix-blend-luminosity scale-105"
+            className="hero-portrait absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.13] lg:opacity-[0.18] mix-blend-luminosity scale-105"
             style={{ 
               // Stable public path, so this is not emitted a second time as a
                 // content-hashed copy of the identical file in public/.
                 backgroundImage: "url(/home_bg_hacker.png)",
-              maskImage: 'radial-gradient(circle at 82% 45%, black 18%, transparent 62%)',
-              WebkitMaskImage: 'radial-gradient(circle at 82% 45%, black 18%, transparent 62%)'
+              maskImage: 'radial-gradient(circle at 80% 46%, black 30%, transparent 72%)',
+              WebkitMaskImage: 'radial-gradient(circle at 80% 46%, black 30%, transparent 72%)'
             }}
           />
           {/* Subtle grid lines overlaid on the image for technical depth */}
@@ -323,7 +323,7 @@ function LandingPage() {
                     </div>
 
                     {/* Diagnostic Monitor Box */}
-                    <div className="bg-black/45 rounded-xl border border-[var(--edge-1)] p-4.5 font-mono text-[10px] leading-relaxed text-text-muted/80 flex-grow flex flex-col justify-between min-h-[105px]">
+                    <div className="bg-[var(--well)] rounded-xl border border-[var(--edge-1)] p-4.5 font-mono text-[10px] leading-relaxed text-text-muted/80 flex-grow flex flex-col justify-between min-h-[105px]">
                       <div className="space-y-1">
                         <div className="flex items-center gap-1.5">
                           <span className="text-secondary font-bold">$</span>

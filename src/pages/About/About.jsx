@@ -394,7 +394,7 @@ function About() {
                   className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                     selectedSandbox === "gateway"
                       ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
-                      : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
+                      : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                   }`}
                 >
                   <Cpu className="w-5 h-5 mb-1 text-accent" />
@@ -409,7 +409,7 @@ function About() {
                     className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                       selectedSandbox === "cache"
                         ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
-                        : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
+                        : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                     }`}
                   >
                     <Zap className="w-5 h-5 mb-1 text-accent" />
@@ -422,7 +422,7 @@ function About() {
                     className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                       selectedSandbox === "engine"
                         ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
-                        : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
+                        : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                     }`}
                   >
                     <Activity className="w-5 h-5 mb-1 text-accent" />
@@ -437,7 +437,7 @@ function About() {
                   className={`w-28 p-3 rounded-xl border flex flex-col items-center justify-center transition cursor-pointer ${
                     selectedSandbox === "persistence"
                       ? "border-accent bg-accent/15 text-white scale-105 shadow-[0_0_15px_rgba(12,251,255,0.25)] animate-pulse-cyan"
-                      : "border-white/10 bg-black/40 text-text-muted hover:border-accent/40"
+                      : "border-[var(--edge-2)] bg-[var(--well)] text-text-muted hover:border-accent/40"
                   }`}
                 >
                   <Database className="w-5 h-5 mb-1 text-accent" />
