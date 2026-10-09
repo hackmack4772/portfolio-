@@ -1,1 +1,0 @@
-import{j as r}from"./index-BQ2L6jQ5.js";function o({label:e}){return r.jsx("span",{className:"px-2.5 py-1 rounded bg-bg-sub/60 border border-border-base/30 text-[9px] font-mono text-text-muted hover:text-accent hover:border-accent/40 transition duration-300 uppercase tracking-wide",children:e})}export{o as T};

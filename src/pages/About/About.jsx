@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   User, 
@@ -91,47 +91,96 @@ const SYSTEM_SANDBOX = {
 };
 
 // Interactive SVG Git Branch career commits
-const GIT_BRANCH_TIMELINE = [
-  {
-    branch: "education",
-    label: "research/mca-studies",
-    commit: "mca_init_0x7b",
-    title: "Master of Computer Applications",
-    company: "SVIET College, Punjab",
-    date: "2023 - 2025",
-    impact: "Acquired deep understanding of database architectures, memory allocations, and discrete algorithms. Maintained a high-standing 8 CGPA.",
-    challenges: "Balanced algorithmic theory with real-time stack implementations.",
-    techs: ["Algorithms", "Data Structures", "MySQL", "Java"]
+// Narrative only. The facts - title, employer, dates - come from the
+// database, because hardcoding them here had drifted badly: this page was
+// claiming "Full-Stack Developer, Mahindra Comviva, 2023 - Present" and
+// "Software Engineer, Shine Dezign, 2022 - 2023", with the two job titles
+// swapped between employers and both date ranges wrong. Home's experience
+// section, /resume and this page were each showing a different career.
+//
+// Keyed on a lowercase substring of the company name so a row keeps its
+// narrative even if the employer string is edited in /admin.
+const ROLE_NARRATIVE = {
+  comviva: {
+    branch: "development",
+    label: "ship/mobilytix-rewards",
+    commit: "perf_cache_0x2c",
+    challenges: "Handling concurrent transaction locks during reward calculations.",
+    techs: ["Node.js", "TypeScript", "GraphQL", "PostgreSQL", "Kafka", "Redis"],
   },
-  {
+  shine: {
     branch: "development",
     label: "ship/shine-dezign-crm",
     commit: "feat_stream_0x4f",
-    title: "Software Engineer",
-    company: "Shine Dezign Infonet",
-    date: "2022 - 2023",
-    impact: "Designed secure healthcare management modules, optimized custom CRM databases, and integrated WebRTC/RTMP audio-video streaming gateways.",
-    challenges: "Reducing visual latency drift during high-load streaming heartbeats.",
-    techs: ["React.js", "Node.js", "Laravel", "WebRTC", "Socket.io"]
+    challenges: "Delivering low-latency streaming across unreliable networks.",
+    techs: ["Node.js", "Express.js", "Laravel", "MongoDB", "WebRTC"],
   },
-  {
-    branch: "scaling",
-    label: "scale/comviva-rewards",
-    commit: "perf_cache_0x2c",
-    title: "Full-Stack Developer",
-    company: "Mahindra Comviva",
-    date: "2023 - Present",
-    impact: "Architecting the Mobilytix Rewards loyalty portal. Implemented Redis cluster staging, optimized MySQL index tables, and built interactive dashboards.",
-    challenges: "Handling concurrent transaction locks during reward calculations.",
-    techs: ["React.js", "Node.js", "TypeScript", "Redis", "MySQL", "Docker"]
+};
+
+const EDUCATION_MILESTONE = {
+  branch: "education",
+  label: "research/mca-studies",
+  commit: "mca_init_0x7b",
+  impact:
+    "Acquired deep understanding of database architectures, memory allocations, and discrete algorithms.",
+  challenges: "Balanced algorithmic theory with real-time stack implementations.",
+  techs: ["Algorithms", "Data Structures", "MySQL", "Java"],
+};
+
+/** Merge the database rows with the narrative above, newest last. */
+const buildTimeline = (about) => {
+  const roles = Array.isArray(about?.experience) ? about.experience : [];
+  const edu = (about?.education || [])[0];
+
+  const entries = roles
+    .map((r) => {
+      const key = Object.keys(ROLE_NARRATIVE).find((k) =>
+        String(r.company || "").toLowerCase().includes(k)
+      );
+      const n = ROLE_NARRATIVE[key] || {};
+      return {
+        branch: n.branch || "development",
+        label: n.label || `ship/${String(r.company || "role").toLowerCase().replace(/\s+/g, "-")}`,
+        commit: n.commit || "commit_0x00",
+        title: r.position,
+        company: r.company,
+        date: r.period,
+        impact: r.description,
+        challenges: n.challenges || "",
+        techs: n.techs || [],
+      };
+    })
+    .reverse(); // oldest first, so the newest reads as the tip of the branch
+
+  if (edu) {
+    entries.splice(1, 0, {
+      ...EDUCATION_MILESTONE,
+      title: edu.degree,
+      company: edu.institution,
+      date: edu.year,
+      impact: `${EDUCATION_MILESTONE.impact} ${edu.score || ""}`.trim(),
+    });
   }
-];
+
+  return entries;
+};
 
 function About() {
   const { about, contact } = usePortfolio();
   const [expClock, setExpClock] = useState("3.00000000");
   const [selectedSandbox, setSelectedSandbox] = useState("gateway");
-  const [focusedCommit, setFocusedCommit] = useState(GIT_BRANCH_TIMELINE[2]);
+  // Derived from the database, so the dates and titles here cannot drift
+  // from the ones on the home page and the CV again.
+  const timeline = useMemo(() => buildTimeline(about), [about]);
+  const [focusedCommitId, setFocusedCommitId] = useState(null);
+  const EMPTY_COMMIT = {
+    commit: "no_data", branch: "main", title: "No records", company: "",
+    date: "", impact: "The experience register returned no rows.", challenges: "", techs: [],
+  };
+  const focusedCommit =
+    timeline.find((t) => t.commit === focusedCommitId) ||
+    timeline[timeline.length - 1] ||
+    EMPTY_COMMIT;
 
   // Telemetry ticking clock calculation since Jan 1, 2023
   useEffect(() => {
@@ -188,7 +237,7 @@ function About() {
         <div className="lg:col-span-5 flex flex-col gap-6 lg:sticky lg:top-32">
           
           {/* Futuristic Profile Card with Scanlines */}
-          <div className="relative group p-4 glass-premium-dark rounded-3xl border border-white/[0.08] shadow-2xl overflow-hidden">
+          <div className="relative group p-4 glass-premium-dark rounded-3xl border border-[var(--edge-2)] shadow-2xl overflow-hidden">
             <div className="absolute inset-0 crt-scanlines opacity-5 pointer-events-none select-none" />
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-accent/10 opacity-30 pointer-events-none" />
 
@@ -209,7 +258,7 @@ function About() {
             </div>
 
             {/* Profile sys registers */}
-            <div className="mt-4 pt-3 border-t border-white/[0.06] font-mono text-[10px] space-y-1.5 text-text-muted">
+            <div className="mt-4 pt-3 border-t border-[var(--edge-1)] font-mono text-[10px] space-y-1.5 text-text-muted">
               <div className="flex justify-between">
                 <span>PROFILE:</span>
                 <span className="text-white font-bold">ENGINEER_PROFILE.sys</span>
@@ -262,11 +311,11 @@ function About() {
         <div className="lg:col-span-7 flex flex-col gap-8 w-full">
           
           {/* Biography Terminal */}
-          <div className="glass-premium-dark rounded-2xl border border-white/[0.08] p-6 shadow-2xl flex flex-col gap-4 relative overflow-hidden">
+          <div className="glass-premium-dark rounded-2xl border border-[var(--edge-2)] p-6 shadow-2xl flex flex-col gap-4 relative overflow-hidden">
             <div className="absolute top-2 right-3 text-[8px] font-mono text-text-muted/40 uppercase select-none">
               &lt;bio_manifesto&gt;
             </div>
-            <h3 className="text-sm font-mono font-bold text-text-base flex items-center gap-2 border-b border-white/[0.06] pb-3 select-none">
+            <h3 className="text-sm font-mono font-bold text-text-base flex items-center gap-2 border-b border-[var(--edge-1)] pb-3 select-none">
               <Terminal className="w-4 h-4 text-primary" />
               <span>Bio Manifesto</span>
             </h3>
@@ -284,7 +333,7 @@ function About() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {PHILOSOPHY_DATA.map((p, i) => (
-                <div key={i} className={`p-4 rounded-xl border border-white/[0.05] ${p.bg} flex flex-col gap-2`}>
+                <div key={i} className={`reveal p-4 rounded-xl border border-[var(--edge-1)] ${p.bg} flex flex-col gap-2`}>
                   <div className="flex items-center justify-between">
                     <p.icon className={`w-5 h-5 ${p.color}`} />
                     <span className="text-[8px] font-mono text-text-muted uppercase">0{i+1}_core</span>
@@ -396,9 +445,9 @@ function About() {
           </div>
 
           {/* Blueprint Node Details Panel */}
-          <div className="lg:col-span-5 flex flex-col justify-between glass-premium-dark border border-white/[0.08] p-6 rounded-3xl shadow-2xl min-h-[380px]">
+          <div className="lg:col-span-5 flex flex-col justify-between glass-premium-dark border border-[var(--edge-2)] p-6 rounded-3xl shadow-2xl min-h-[380px]">
             <div className="space-y-4">
-              <div className="flex items-center gap-3 border-b border-white/[0.06] pb-3 select-none">
+              <div className="flex items-center gap-3 border-b border-[var(--edge-1)] pb-3 select-none">
                 <div className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse" />
                 <span className="text-[10px] font-mono text-accent uppercase tracking-wider">Blueprint Inspector Portal</span>
               </div>
@@ -416,7 +465,7 @@ function About() {
               </div>
             </div>
 
-            <div className="space-y-3 pt-6 border-t border-white/[0.06]">
+            <div className="space-y-3 pt-6 border-t border-[var(--edge-1)]">
               <div className="flex flex-col gap-1 font-mono text-[10px]">
                 <span className="text-text-muted uppercase text-[8px] tracking-wider">Benchmark KPIs:</span>
                 <span className="text-white font-semibold">{SYSTEM_SANDBOX[selectedSandbox].kpis}</span>
@@ -426,7 +475,7 @@ function About() {
                 <span className="text-text-muted uppercase text-[8px] tracking-wider font-mono">Integrated Stacks:</span>
                 <div className="flex flex-wrap gap-1.5">
                   {SYSTEM_SANDBOX[selectedSandbox].techs.map((t, idx) => (
-                    <span key={idx} className="px-2.5 py-1 rounded bg-white/[0.03] border border-white/[0.05] text-[9px] font-mono text-white font-medium">
+                    <span key={idx} className="px-2.5 py-1 rounded bg-[var(--surface-2)] border border-[var(--edge-1)] text-[9px] font-mono text-white font-medium">
                       {t}
                     </span>
                   ))}
@@ -453,9 +502,9 @@ function About() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mt-12 w-full">
           
           {/* Timeline Node Inspector Detail Card */}
-          <div className="lg:col-span-5 flex flex-col justify-between glass-premium border border-white/[0.08] p-6 rounded-3xl shadow-2xl min-h-[380px] lg:sticky lg:top-32 order-2 lg:order-1">
+          <div className="lg:col-span-5 flex flex-col justify-between glass-premium border border-[var(--edge-2)] p-6 rounded-3xl shadow-2xl min-h-[380px] lg:sticky lg:top-32 order-2 lg:order-1">
             <div className="space-y-4">
-              <div className="flex justify-between items-center border-b border-white/[0.06] pb-3 font-mono text-[9px] text-text-muted select-none">
+              <div className="flex justify-between items-center border-b border-[var(--edge-1)] pb-3 font-mono text-[9px] text-text-muted select-none">
                 <span>COMMIT: {focusedCommit.commit}</span>
                 <span className="text-accent uppercase">[{focusedCommit.branch} branch]</span>
               </div>
@@ -469,7 +518,7 @@ function About() {
               </div>
             </div>
 
-            <div className="space-y-3 pt-6 border-t border-white/[0.06] font-mono text-[10px]">
+            <div className="space-y-3 pt-6 border-t border-[var(--edge-1)] font-mono text-[10px]">
               <div className="flex flex-col gap-1.5">
                 <span className="text-text-muted uppercase text-[8px] tracking-wider block">Production Challenge Resolved:</span>
                 <span className="text-red-400 font-semibold">{focusedCommit.challenges}</span>
@@ -479,7 +528,7 @@ function About() {
                 <span className="text-text-muted uppercase text-[8px] tracking-wider block">Technologies Deployed:</span>
                 <div className="flex flex-wrap gap-1.5">
                   {focusedCommit.techs.map((t, idx) => (
-                    <span key={idx} className="px-2 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-[8px]">
+                    <span key={idx} className="px-2 py-0.5 rounded bg-[var(--surface-2)] border border-[var(--edge-1)] text-[8px]">
                       {t}
                     </span>
                   ))}
@@ -490,8 +539,8 @@ function About() {
 
           {/* SVG Branch Graph Interactive Timeline */}
           <div className="lg:col-span-7 flex flex-col gap-5 order-1 lg:order-2">
-            <div className="glass-premium-dark rounded-3xl border border-white/[0.08] p-6 shadow-2xl relative min-h-[380px] flex flex-col justify-between">
-              <div className="text-[10px] font-mono text-text-muted uppercase border-b border-white/[0.06] pb-3 mb-4 select-none">
+            <div className="glass-premium-dark rounded-3xl border border-[var(--edge-2)] p-6 shadow-2xl relative min-h-[380px] flex flex-col justify-between">
+              <div className="text-[10px] font-mono text-text-muted uppercase border-b border-[var(--edge-1)] pb-3 mb-4 select-none">
                 System Commit Registry // select_node_to_expand_diff
               </div>
 
@@ -508,16 +557,16 @@ function About() {
                   </svg>
                 </div>
 
-                {GIT_BRANCH_TIMELINE.map((item, idx) => {
+                {timeline.map((item, idx) => {
                   const isFocused = focusedCommit.commit === item.commit;
                   return (
                     <button 
                       key={idx}
-                      onClick={() => setFocusedCommit(item)}
-                      className={`relative z-10 flex gap-4 items-start p-4 rounded-xl border text-left cursor-pointer transition ${
+                      onClick={() => setFocusedCommitId(item.commit)}
+                      className={`reveal relative z-10 flex gap-4 items-start p-4 rounded-xl border text-left cursor-pointer transition ${
                         isFocused 
-                          ? "bg-white/[0.04] border-accent shadow-[0_0_12px_rgba(12,251,255,0.15)] scale-102" 
-                          : "bg-white/[0.01] border-white/[0.06] hover:border-accent/40"
+                          ? "bg-[var(--surface-2)] border-accent shadow-[0_0_12px_rgba(12,251,255,0.15)] scale-102" 
+                          : "bg-[var(--surface-1)] border-[var(--edge-1)] hover:border-accent/40"
                       }`}
                     >
                       {/* Commit dot selector */}
@@ -533,7 +582,7 @@ function About() {
 
                       <div className="space-y-1 font-mono">
                         <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                          <span className="text-[10px] bg-white/[0.04] border border-white/[0.08] px-2 py-0.5 rounded text-accent">
+                          <span className="text-[10px] bg-[var(--surface-2)] border border-[var(--edge-2)] px-2 py-0.5 rounded text-accent">
                             {item.commit}
                           </span>
                           <span className="text-[9px] text-text-muted">{item.date}</span>
@@ -547,7 +596,7 @@ function About() {
 
               </div>
               
-              <div className="border-t border-white/[0.06] pt-3 text-[8px] font-mono text-text-muted/50 select-none">
+              <div className="border-t border-[var(--edge-1)] pt-3 text-[8px] font-mono text-text-muted/50 select-none">
                 ✓ ALL COMMIT CHECKS PASSED: DEPLOYED SUCCESS
               </div>
             </div>
@@ -575,7 +624,7 @@ function About() {
             { step: "03", title: "BENCHMARK TESTS", desc: "Mock high concurrency queries, check memory allocations under load, and verify latency bounds.", tech: "Load Testing / SLA" },
             { step: "04", title: "SCALE OPERATIONS", desc: "Deploy containers in Docker, configure health-check telemetry probes, and monitor live clusters.", tech: "Docker / Vercel" }
           ].map((item, idx) => (
-            <div key={idx} className="p-5 rounded-2xl glass-premium border border-white/[0.06] flex flex-col gap-3 relative overflow-hidden group hover:border-accent/40 transition-colors duration-300">
+            <div key={idx} className="p-5 rounded-2xl glass-premium border border-[var(--edge-1)] flex flex-col gap-3 relative overflow-hidden group hover:border-accent/40 transition-colors duration-300">
               <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-accent to-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               <div className="flex justify-between items-center">
                 <span className="text-xs font-bold text-accent">{item.step}_PROCESS</span>
